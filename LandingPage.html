@@ -16,6 +16,23 @@
 
     <title>GenAI Hub</title>
 
+    <!--Constraints
+    Generate Moodle 4.x compatible HTML.
+
+Constraints:
+
+- Bootstrap classes allowed.
+- Inline styles allowed.
+- External JS allowed
+- No `<style>` tags.
+- No custom CSS classes.
+- No `<html>`, `<head>`, or `<body>` tags.
+- Avoid empty spans/icons that may be stripped.
+- Use Unicode icons where needed.
+- Mobile responsive using Bootstrap grid only.
+- Modern SaaS-style design.
+
+-->
 
 
 <div class="container-fluid py-5">
@@ -58,9 +75,9 @@
                     </div>
 
                     <div class="col-lg-4 text-center mt-4 mt-lg-0">
-                        <div id="orb"
-     style="width:180px;height:180px;border-radius:50%;margin:auto;background:radial-gradient(circle at 30% 30%,#60a5fa,#2563eb,#0f172a);box-shadow:0 0 60px rgba(96,165,250,0.4);animation:float 6s ease-in-out infinite;">
-</div>
+                        <div id="orb-container" style="position:relative;width:240px;height:240px;margin:auto;transition:transform 0.2s ease;">
+                            <div id="core"></div>
+                        </div>
                     </div>
 
                 </div>
@@ -258,10 +275,49 @@ cards.forEach(card => observer.observe(card));
 
 const style = document.createElement('style');
 style.textContent = `
+#orb-container {
+    animation: float 6s ease-in-out infinite;
+}
+
+#core {
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:90px;
+    height:90px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:radial-gradient(circle,#dbeafe,#60a5fa,#2563eb);
+    box-shadow:0 0 40px #60a5fa,0 0 100px rgba(96,165,250,0.7),0 0 160px rgba(96,165,250,0.3);
+    animation:pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,100% {
+        transform:translate(-50%,-50%) scale(1);
+    }
+    50% {
+        transform:translate(-50%,-50%) scale(1.15);
+    }
+}
+
 @keyframes float {
-    0%,100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
-}`;
+    0%,100% { transform:translateY(0px); }
+    50% { transform:translateY(-12px); }
+}
+`;
 document.head.appendChild(style);
+
+const orb = document.getElementById('orb-container');
+
+hero.addEventListener('mousemove', e => {
+
+    const rect = hero.getBoundingClientRect();
+
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    orb.style.transform = `translate(${x * 15}px, ${y * 15}px)`;
+});
 
 </script>
