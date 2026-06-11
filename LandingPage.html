@@ -24,8 +24,8 @@
     <div class="row justify-content-center mb-5">
         <div class="col-lg-10">
 
-            <div class="p-5 rounded-4 shadow-sm"
-                 style="background:linear-gradient(135deg,#0f172a,#1e293b);color:white;">
+            <div id="hero" class="p-5 rounded-4 shadow-sm"
+                 style="background:linear-gradient(135deg,#0f172a,#1e293b);color:white;transition:all 0.2s ease;overflow:hidden;">
 
                 <div class="row align-items-center">
 
@@ -58,11 +58,9 @@
                     </div>
 
                     <div class="col-lg-4 text-center mt-4 mt-lg-0">
-
-                        <div style="font-size:90px;">
-                            🤖
-                        </div>
-
+                        <div id="orb"
+     style="width:180px;height:180px;border-radius:50%;margin:auto;background:radial-gradient(circle at 30% 30%,#60a5fa,#2563eb,#0f172a);box-shadow:0 0 60px rgba(96,165,250,0.4);animation:float 6s ease-in-out infinite;">
+</div>
                     </div>
 
                 </div>
@@ -77,7 +75,7 @@
 
         <div class="col-md-6 col-xl-3">
             <div id="learn"
-                 class="h-100 p-4 bg-white rounded-4 shadow-sm border">
+                 class="card-animate h-100 p-4 bg-white rounded-4 shadow-sm border">
 
                 <div style="font-size:40px;">📚</div>
 
@@ -98,7 +96,7 @@
 
         <div class="col-md-6 col-xl-3">
             <div id="challenges"
-                 class="h-100 p-4 bg-white rounded-4 shadow-sm border">
+                 class="card-animate h-100 p-4 bg-white rounded-4 shadow-sm border">
 
                 <div style="font-size:40px;">🏆</div>
 
@@ -118,7 +116,7 @@
         </div>
 
         <div class="col-md-6 col-xl-3">
-            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border">
+            <div class="card-animate h-100 p-4 bg-white rounded-4 shadow-sm border">
 
                 <div style="font-size:40px;">💬</div>
 
@@ -138,7 +136,7 @@
         </div>
 
         <div class="col-md-6 col-xl-3">
-            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border">
+            <div class="card-animate h-100 p-4 bg-white rounded-4 shadow-sm border">
 
                 <div style="font-size:40px;">🛡️</div>
 
@@ -207,3 +205,63 @@
 
     </div>
 </div>
+<script>
+
+const cards = document.querySelectorAll('.card-animate');
+
+cards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'all 0.6s ease';
+
+    setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+    }, index * 120);
+
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-8px)';
+        card.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = '';
+    });
+});
+
+const hero = document.getElementById('hero');
+
+hero.addEventListener('mousemove', (e) => {
+
+    const rect = hero.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    hero.style.background = `
+        radial-gradient(circle at ${x}px ${y}px,
+        rgba(255,255,255,0.12),
+        transparent 300px),
+        linear-gradient(135deg,#0f172a,#1e293b)`;
+});
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.1 });
+
+cards.forEach(card => observer.observe(card));
+
+const style = document.createElement('style');
+style.textContent = `
+@keyframes float {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+}`;
+document.head.appendChild(style);
+
+</script>
