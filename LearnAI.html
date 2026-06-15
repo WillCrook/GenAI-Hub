@@ -11,10 +11,10 @@
     <!-- Bootstrap -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-
           rel="stylesheet">
+    
 
-    <title>GenAI Hub</title>
+    <title>Learn AI</title>
 
     <!--Constraints
     Generate Moodle 4.x compatible HTML.
@@ -34,5 +34,356 @@ Constraints:
 
 -->
 
-<!-- COPY TO MOODLE BELOW -->
+<!-- COPY BELOW FOR MOODLE -->
 
+
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top"
+
+     style="backdrop-filter:blur(12px);">
+
+    <div class="container">
+
+        <!-- Brand -->
+
+        <a class="navbar-brand d-flex align-items-center gap-3 fw-bold"
+
+           href="https://moodle.bath.ac.uk/course/section.php?id=277885"
+
+           style="font-size:1.1rem;text-decoration:none;">
+
+            <div>
+
+                <div style="color:#003c71;line-height:1.1;">
+
+                    GenAI & Digital Skills Hub
+
+                </div>
+
+                <small class="text-muted fw-normal">
+
+                    University of Bath
+
+                </small>
+
+            </div>
+
+        </a>
+
+        <!-- Mobile Toggle -->
+
+        <button class="navbar-toggler"
+
+                type="button"
+
+                data-bs-toggle="collapse"
+
+                data-bs-target="#hubNav">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <!-- Navigation -->
+
+        <div class="collapse navbar-collapse" id="hubNav">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967">
+
+                        Learn AI 
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969">
+
+                        Challenges
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971">
+
+                        Community
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972">
+
+                        Using AI at Bath
+
+                    </a>
+
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<div class="container-fluid py-5">
+
+    <div class="row justify-content-center mb-5">
+
+        <div class="col-lg-10">
+
+            <div id="hero" 
+
+                class="p-5 rounded-4 shadow-sm"
+
+                style="
+                 background:linear-gradient(135deg,#0f172a,#1e293b);
+                 color:white;
+                 transition:all 0.2s ease;
+                 overflow:hidden;">
+
+
+                <div class="row align-items-center">
+
+                    <div class="col-lg-8">
+
+                        <div style="
+
+                        font-size:14px;
+
+                        letter-spacing:1px;
+
+                        text-transform:uppercase;
+
+                        opacity:0.8;
+                        margin-top: -2em;
+                        margin-bottom: 2em;">
+
+                            Learn AI
+
+                        </div>
+
+                        <h1 class="display-5 fw-bold mt-2 mb-3">
+                            Build AI skills for
+                        </h1>
+
+                        <div id="rotating-text"
+                                style="
+                                color:#ffff00;
+                                font-size:2.5rem;
+                                font-weight:700;
+                                line-height:1.1;
+                                min-height:1.2em;
+                                margin-top:-0.5em;">
+                            </div>
+
+                        <p class="lead mb-4"
+
+                           style="max-width:700px;">
+
+                            Build practical AI skills for success at Bath, in your career and beyond.
+
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-4 text-center mt-4 mt-lg-0">
+
+                        <div id="orb-container"
+
+                             style="
+
+                             position:relative;
+
+                             width:240px;
+
+                             height:240px;
+
+                             margin:auto;">
+
+                            <div id="bulb">
+                                💡
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const phrases = [
+    "my coursework.",
+    "my assignments.",
+    "revision and exam preparation.",
+    "engineering projects.",
+    "research and literature reviews.",
+    "writing reports more efficiently.",
+    "data analysis and visualisation.",
+    "improving my productivity.",
+    "creating presentations.",
+    "developing workplace skills.",
+    "job applications and CVs.",
+    "preparing for interviews.",
+    "learning new technologies.",
+    "solving complex problems.",
+    "collaborating with others.",
+    "boosting my employability.",
+    "academic success.",
+    "lifelong learning."
+];
+
+const element = document.getElementById("rotating-text");
+
+let phraseIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+function typeEffect() {
+    const currentPhrase = phrases[phraseIndex];
+
+    if (!deleting) {
+        element.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex === currentPhrase.length) {
+            deleting = true;
+            setTimeout(typeEffect, 1800);
+            return;
+        }
+
+        setTimeout(typeEffect, 60);
+    } else {
+        element.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+
+        if (charIndex === 0) {
+            deleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+
+        setTimeout(typeEffect, 30);
+    }
+}
+
+typeEffect();
+
+
+const style = document.createElement('style');
+
+style.textContent = `
+
+#bulb {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:7rem;
+
+    filter:none;
+    opacity:0.4;
+
+    animation:
+        bulbCycle 8s infinite,
+        float 6s ease-in-out infinite;
+}
+
+@keyframes bulbCycle {
+
+    0% {
+        opacity:0.15;
+        filter:none;
+    }
+
+    8% {
+        opacity:0.15;
+        filter:none;
+    }
+
+    12% {
+        opacity:1;
+        filter:
+            drop-shadow(0 0 15px rgba(255,255,0,0.8))
+            drop-shadow(0 0 40px rgba(255,255,0,0.5));
+    }
+
+    18% {
+        opacity:0.2;
+        filter:none;
+    }
+
+    24% {
+        opacity:1;
+        filter:
+            drop-shadow(0 0 20px rgba(255,255,0,0.9))
+            drop-shadow(0 0 50px rgba(255,255,0,0.6));
+    }
+
+    32% {
+        opacity:0.25;
+        filter:none;
+    }
+
+    42% {
+        opacity:1;
+        filter:
+            drop-shadow(0 0 25px rgba(255,255,0,1))
+            drop-shadow(0 0 70px rgba(255,255,0,0.7));
+    }
+
+    70% {
+        opacity:1;
+        filter:
+            drop-shadow(0 0 25px rgba(255,255,0,1))
+            drop-shadow(0 0 70px rgba(255,255,0,0.7));
+    }
+
+    85% {
+        opacity:0.3;
+        filter:none;
+    }
+
+    100% {
+        opacity:0.15;
+        filter:none;
+    }
+}
+
+@keyframes float {
+    0%,100% { transform:translate(-50%,-50%) translateY(0); }
+    50% { transform:translate(-50%,-50%) translateY(-12px); }
+}
+
+`;
+
+document.head.appendChild(style);
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
