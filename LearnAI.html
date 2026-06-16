@@ -30,12 +30,11 @@ Constraints:
 - Avoid empty spans/icons that may be stripped.
 - Use Unicode icons where needed.
 - Mobile responsive using Bootstrap grid only.
-- Modern SaaS-style design.
+- Modern style with student learning in mind.
 
 -->
 
 <!-- COPY BELOW FOR MOODLE -->
-
 
 <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top"
 
@@ -79,7 +78,7 @@ Constraints:
 
                 data-bs-target="#hubNav">
 
-            <span class="navbar-toggler-icon"></span>
+            <span style="font-size:1.5rem;line-height:1;">☰</span>
 
         </button>
 
@@ -236,17 +235,16 @@ Constraints:
     </div>
 
 </div>
-
-<div class="container mb-5">
-    <div class="row g-3">
+<div class="container mb-5" style ="margin-top: -2em;">
+    <div class="row g-4 align-items-stretch">
 
         <div class="col-md-3">
             <a href="#featured"
                class="text-decoration-none">
-                <div class="card border-0 shadow-sm h-100">
+                <div class="card border-0 shadow-lg h-100">
                     <div class="card-body text-center p-4">
                         <div style="font-size:2rem;">⭐</div>
-                        <h6 class="fw-bold mb-0">Featured Resources</h6>
+                        <h6 class="fw-bold mb-0">Popular Resources</h6>
                     </div>
                 </div>
             </a>
@@ -255,7 +253,7 @@ Constraints:
         <div class="col-md-3">
             <a href="#academic"
                class="text-decoration-none">
-                <div class="card border-0 shadow-sm h-100">
+                <div class="card border-0 shadow-lg h-100">
                     <div class="card-body text-center p-4">
                         <div style="font-size:2rem;">🎓</div>
                         <h6 class="fw-bold mb-0">Academic Skills</h6>
@@ -267,7 +265,7 @@ Constraints:
         <div class="col-md-3">
             <a href="#workplace"
                class="text-decoration-none">
-                <div class="card border-0 shadow-sm h-100">
+                <div class="card border-0 shadow-lg h-100">
                     <div class="card-body text-center p-4">
                         <div style="font-size:2rem;">💼</div>
                         <h6 class="fw-bold mb-0">Workplace Skills</h6>
@@ -279,10 +277,10 @@ Constraints:
         <div class="col-md-3">
             <a href="#lifelong"
                class="text-decoration-none">
-                <div class="card border-0 shadow-sm h-100">
+                <div class="card border-0 shadow-lg h-100">
                     <div class="card-body text-center p-4">
                         <div style="font-size:2rem;">🚀</div>
-                        <h6 class="fw-bold mb-0">Lifelong Learning</h6>
+                        <h6 class="fw-bold mb-0">Lifelong Skills</h6>
                     </div>
                 </div>
             </a>
@@ -294,7 +292,7 @@ Constraints:
 <div class="container mb-5" id="featured">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold mb-0">Featured Resources</h2>
+        <h2 class="fw-bold mb-0">Popular Resources</h2>
         <span class="text-muted">Hand-picked for Bath students</span>
     </div>
 
@@ -383,22 +381,23 @@ Constraints:
                 type="button"
                 data-bs-target="#resourceCarousel"
                 data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
+            <span style="font-size:2.5rem;line-height:1;color:white;">‹</span>
         </button>
 
         <button class="carousel-control-next"
                 type="button"
                 data-bs-target="#resourceCarousel"
                 data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
+            <span style="font-size:2.5rem;line-height:1;color:white;">›</span>
         </button>
 
     </div>
 
 </div>
 
-<div class="container pb-5">
+<!-- BENTO GRID -->
 
+<div class="container pb-5">
     <div class="text-center mb-5">
         <h2 class="fw-bold">Explore AI Skills</h2>
         <p class="text-muted">
@@ -409,87 +408,95 @@ Constraints:
     <div class="row g-3">
 
         <!-- Large feature card -->
-        <div class="col-lg-8">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body p-5">
-                    <div style="font-size:2rem;">🎓</div>
-
-                    <h3 class="fw-bold mt-3">
-                        AI for Coursework
-                    </h3>
-
-                    <p>
-                        Research, writing, revision, critical thinking
-                        and responsible AI use.
-                    </p>
-
-                    <a href="#" class="btn btn-primary rounded-pill">
-                        Start Learning
-                    </a>
+        <div class="col-12 col-lg-8">
+            <a href="#" class="text-decoration-none">
+                <div class="h-100 p-5 bg-white rounded-4 shadow-sm border" style="min-height:220px;color:#0f172a;">
+                    <div>
+                        <div style="font-size:2rem;">🎓</div>
+                        <h3 class="fw-bold mt-3">
+                            AI for Coursework
+                        </h3>
+                        <p class="text-muted mb-0">
+                            Research, writing, revision, critical thinking
+                            and responsible AI use.
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Small card -->
-        <div class="col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <div style="font-size:2rem;">✨</div>
-                    <h5 class="fw-bold">Prompting</h5>
-                    <p>Learn to write better prompts.</p>
+        <div class="col-12 col-md-6 col-lg-4">
+            <a href="#" class="text-decoration-none">
+                <div class="h-100 p-4 bg-white rounded-4 shadow-sm border" style="min-height:220px;color:#0f172a;">
+                    <div>
+                        <div style="font-size:2rem;">✨</div>
+                        <h5 class="fw-bold">Prompting</h5>
+                        <p class="text-muted mb-0">Learn to write better prompts.</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Small card -->
-        <div class="col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <div style="font-size:2rem;">📚</div>
-                    <h5 class="fw-bold">Revision</h5>
-                    <p>Use AI to test understanding.</p>
+        <div class="col-12 col-md-6 col-lg-4">
+            <a href="#" class="text-decoration-none">
+                <div class="h-100 p-4 bg-white rounded-4 shadow-sm border" style="min-height:220px;color:#0f172a;">
+                    <div>
+                        <div style="font-size:2rem;">📚</div>
+                        <h5 class="fw-bold">Revision</h5>
+                        <p class="text-muted mb-0">Use AI to test understanding.</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Wide card -->
-        <div class="col-lg-8">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <div style="font-size:2rem;">🔍</div>
-                    <h5 class="fw-bold">Research & Literature Reviews</h5>
-                    <p>
-                        Find, analyse and summarise academic sources.
-                    </p>
+        <div class="col-12 col-lg-8">
+            <a href="#" class="text-decoration-none">
+                <div class="h-100 p-4 bg-white rounded-4 shadow-sm border" style="min-height:220px;color:#0f172a;">
+                    <div>
+                        <div style="font-size:2rem;">🔍</div>
+                        <h5 class="fw-bold">Research & Literature Reviews</h5>
+                        <p class="text-muted mb-0">
+                            Find, analyse and summarise academic sources.
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
-        <div class="col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <div style="font-size:2rem;">💼</div>
-                    <h5 class="fw-bold">Placements</h5>
-                    <p>Applications, CVs and interviews.</p>
+        <div class="col-12 col-md-6 col-lg-4">
+            <a href="#" class="text-decoration-none">
+                <div class="h-100 p-4 bg-white rounded-4 shadow-sm border" style="min-height:220px;color:#0f172a;">
+                    <div>
+                        <div style="font-size:2rem;">💼</div>
+                        <h5 class="fw-bold">Placements</h5>
+                        <p class="text-muted mb-0">Applications, CVs and interviews.</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
-        <div class="col-lg-8">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <div style="font-size:2rem;">⚡</div>
-                    <h5 class="fw-bold">Productivity</h5>
-                    <p>
-                        Automate repetitive tasks and work smarter.
-                    </p>
+        <div class="col-12 col-lg-8">
+            <a href="#" class="text-decoration-none">
+                <div class="h-100 p-4 bg-white rounded-4 shadow-sm border" style="min-height:220px;color:#0f172a;">
+                    <div>
+                        <div style="font-size:2rem;">⚡</div>
+                        <h5 class="fw-bold">Productivity</h5>
+                        <p class="text-muted mb-0">
+                            Automate repetitive tasks and work smarter.
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
     </div>
 
 </div>
+
+<!-- Suggested Learning Path -->
 
 <div class="container pb-5">
 
@@ -502,46 +509,86 @@ Constraints:
          rgba(30,41,59,0.75)),
          url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee')
          center/cover;
-         min-height:380px;">
+         min-height:520px;">
 
         <div class="row h-100 align-items-center">
 
-            <div class="col-lg-6 p-5 text-white">
+            <div class="col-12 col-lg-8 mx-auto p-4 p-md-5 text-white">
+                <div id="pathContent"
+                     style="min-height:360px;display:flex;flex-direction:column;justify-content:center;">
 
-                <div class="text-uppercase mb-3"
-                     style="
-                     letter-spacing:2px;
-                     font-size:0.8rem;
-                     opacity:0.8;">
+                    <div class="text-uppercase mb-3"
+                        style="
+                        letter-spacing:2px;
+                        font-size:0.8rem;
+                        opacity:0.8;">
 
-                    Suggested Learning Path
+                        Suggested Learning Path
 
+                    </div>
+
+                    <h2 class="display-6 fw-bold mb-3">
+                        Not sure where to begin?
+                    </h2>
+
+                    <p class="lead mb-4"
+                    style="max-width:550px;">
+
+                        Answer a few quick questions and we'll recommend
+                        the best AI learning path for your goals,
+                        experience level and interests.
+
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-3">
+
+                        <button id="startPathQuiz"
+                            class="btn btn-light btn-lg px-4 rounded-pill fw-semibold">
+                            Find My Learning Path
+                        </button>
+
+                        <a href="#"
+                        class="btn btn-outline-light btn-lg px-4 rounded-pill">
+                            Browse All Resources
+                        </a>
+                    </div>
                 </div>
 
-                <h2 class="display-6 fw-bold mb-3">
-                    Not sure where to begin?
-                </h2>
+                <div id="quizContainer"
 
-                <p class="lead mb-4"
-                   style="max-width:550px;">
+                    class="text-white"
 
-                    Answer a few quick questions and we'll recommend
-                    the best AI learning path for your goals,
-                    experience level and interests.
+                    style="display:none;min-height:360px;align-items:center;justify-content:center;">
 
-                </p>
+                    <div id="pathQuiz"
 
-                <div class="d-flex flex-wrap gap-3">
+                        class="p-4 rounded-4"
 
-                    <a href="#"
-                       class="btn btn-light btn-lg px-4 rounded-pill fw-semibold">
-                        Find My Learning Path
-                    </a>
+                        style="
 
-                    <a href="#"
-                       class="btn btn-outline-light btn-lg px-4 rounded-pill">
-                        Browse All Resources
-                    </a>
+                        display:none;
+
+                        background:rgba(255,255,255,0.1);
+
+                        backdrop-filter:blur(10px);
+
+                        min-height:360px;
+
+                        width:100%;
+
+                        max-width:720px;
+
+                        margin:auto;">
+
+                        <h4 class="fw-bold mb-3">
+
+                            Find Your AI Learning Path
+
+                        </h4>
+
+                        <div id="questionContainer" style="min-height:260px;"></div>
+
+                    </div>
 
                 </div>
 
@@ -554,66 +601,106 @@ Constraints:
 </div>
 
 <script>
-const phrases = [
-    "my coursework.",
-    "my assignments.",
-    "revision and exam preparation.",
-    "engineering projects.",
-    "research and literature reviews.",
-    "writing reports more efficiently.",
-    "data analysis and visualisation.",
-    "improving my productivity.",
-    "creating presentations.",
-    "developing workplace skills.",
-    "job applications and CVs.",
-    "preparing for interviews.",
-    "learning new technologies.",
-    "solving complex problems.",
-    "collaborating with others.",
-    "boosting my employability.",
-    "academic success.",
-    "lifelong learning."
-];
+(() => {
+    const DISPLAY_BLOCK = "block";
+    const DISPLAY_NONE = "none";
+    const EMPTY_HTML = "";
 
-const element = document.getElementById("rotating-text");
+    const ids = {
+        rotatingText: "rotating-text",
+        pathContent: "pathContent",
+        quizContainer: "quizContainer",
+        pathQuiz: "pathQuiz",
+        questionContainer: "questionContainer",
+        startPathQuiz: "startPathQuiz"
+    };
 
-let phraseIndex = 0;
-let charIndex = 0;
-let deleting = false;
+    const elements = {
+        rotatingText: document.getElementById(ids.rotatingText),
+        pathContent: document.getElementById(ids.pathContent),
+        quizContainer: document.getElementById(ids.quizContainer),
+        pathQuiz: document.getElementById(ids.pathQuiz),
+        questionContainer: document.getElementById(ids.questionContainer),
+        startPathQuiz: document.getElementById(ids.startPathQuiz)
+    };
 
-function typeEffect() {
-    const currentPhrase = phrases[phraseIndex];
+    // Hero typing animation
+    const typingConfig = {
+        typeDelay: 60,
+        deleteDelay: 30,
+        completedPhraseDelay: 1800,
+        phrases: [
+            "my coursework.",
+            "my assignments.",
+            "revision and exam preparation.",
+            "engineering projects.",
+            "research and literature reviews.",
+            "writing reports more efficiently.",
+            "data analysis and visualisation.",
+            "improving my productivity.",
+            "creating presentations.",
+            "developing workplace skills.",
+            "job applications and CVs.",
+            "preparing for interviews.",
+            "learning new technologies.",
+            "solving complex problems.",
+            "collaborating with others.",
+            "boosting my employability.",
+            "academic success.",
+            "lifelong learning."
+        ]
+    };
 
-    if (!deleting) {
-        element.textContent = currentPhrase.substring(0, charIndex + 1);
-        charIndex++;
-
-        if (charIndex === currentPhrase.length) {
-            deleting = true;
-            setTimeout(typeEffect, 1800);
+    function startHeroTypingAnimation() {
+        if (!elements.rotatingText) {
             return;
         }
 
-        setTimeout(typeEffect, 60);
-    } else {
-        element.textContent = currentPhrase.substring(0, charIndex - 1);
-        charIndex--;
+        let phraseIndex = 0;
+        let characterIndex = 0;
+        let isDeleting = false;
 
-        if (charIndex === 0) {
-            deleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
+        function typeNextCharacter() {
+            const currentPhrase = typingConfig.phrases[phraseIndex];
+
+            if (isDeleting) {
+                elements.rotatingText.textContent = currentPhrase.substring(0, characterIndex - 1);
+                characterIndex--;
+
+                if (characterIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % typingConfig.phrases.length;
+                }
+
+                setTimeout(typeNextCharacter, typingConfig.deleteDelay);
+                return;
+            }
+
+            elements.rotatingText.textContent = currentPhrase.substring(0, characterIndex + 1);
+            characterIndex++;
+
+            if (characterIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(typeNextCharacter, typingConfig.completedPhraseDelay);
+                return;
+            }
+
+            setTimeout(typeNextCharacter, typingConfig.typeDelay);
         }
 
-        setTimeout(typeEffect, 30);
+        typeNextCharacter();
     }
+
+    // Lightbulb animation
+    const dynamicStyles = `
+.bento-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-typeEffect();
-
-
-const style = document.createElement('style');
-
-style.textContent = `
+.bento-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
 
 #bulb {
     position:absolute;
@@ -621,17 +708,14 @@ style.textContent = `
     left:50%;
     transform:translate(-50%,-50%);
     font-size:7rem;
-
     filter:none;
     opacity:0.4;
-
     animation:
         bulbCycle 8s infinite,
         float 6s ease-in-out infinite;
 }
 
 @keyframes bulbCycle {
-
     0% {
         opacity:0.15;
         filter:none;
@@ -695,11 +779,268 @@ style.textContent = `
     0%,100% { transform:translate(-50%,-50%) translateY(0); }
     50% { transform:translate(-50%,-50%) translateY(-12px); }
 }
-
 `;
 
-document.head.appendChild(style);
+    function addDynamicStyles() {
+        const styleElement = document.createElement("style");
+        styleElement.textContent = dynamicStyles;
+        document.head.appendChild(styleElement);
+    }
 
+    // Quiz data
+    const quizCopy = {
+        questionLabel: "Suggested Learning Path",
+        recommendationLabel: "Your Recommendation",
+        recommendedTopicsLabel: "Recommended Topics",
+        startLearningLabel: "Start Learning →"
+    };
+
+    const quizOptions = {
+        experience: {
+            newToAi: "I'm completely new to AI",
+            occasionalUser: "I've used ChatGPT a few times",
+            regularUser: "I already use AI regularly"
+        },
+        goal: {
+            studies: "Improve my studies",
+            work: "Prepare for work and placements",
+            personalProjects: "Learn AI for personal projects",
+            unsure: "I'm not sure"
+        },
+        basics: {
+            no: "No",
+            little: "A little",
+            yes: "Yes"
+        }
+    };
+
+    const quizQuestions = [
+        {
+            question: "What best describes you?",
+            options: [
+                quizOptions.experience.newToAi,
+                quizOptions.experience.occasionalUser,
+                quizOptions.experience.regularUser
+            ]
+        },
+        {
+            question: "What is your main goal right now?",
+            options: [
+                quizOptions.goal.studies,
+                quizOptions.goal.work,
+                quizOptions.goal.personalProjects,
+                quizOptions.goal.unsure
+            ]
+        },
+        {
+            question: "Have you learnt the basics of AI?",
+            options: [
+                quizOptions.basics.no,
+                quizOptions.basics.little,
+                quizOptions.basics.yes
+            ]
+        }
+    ];
+
+    const foundationSteps = [
+        "AI Foundations",
+        "Working with AI",
+        "Learning Paths"
+    ];
+
+    const recommendationPaths = {
+        academic: {
+            title: "🎓 Academic Skills Path",
+            finalStep: "Academic Learning Resources",
+            topics: [
+                "Prompting",
+                "Revision",
+                "Research & Literature Reviews"
+            ]
+        },
+        workplace: {
+            title: "💼 Workplace Skills Path",
+            finalStep: "Workplace Learning Resources",
+            topics: [
+                "CVs",
+                "Interviews",
+                "Productivity"
+            ]
+        },
+        lifelong: {
+            title: "🚀 Lifelong Learning Path",
+            finalStep: "Lifelong Learning Resources",
+            topics: [
+                "Automation",
+                "New Technologies",
+                "Creativity"
+            ]
+        }
+    };
+
+    const quizState = {
+        currentQuestionIndex: 0,
+        answers: []
+    };
+
+    // Quiz rendering
+    function setDisplay(element, displayValue) {
+        if (element) {
+            element.style.display = displayValue;
+        }
+    }
+
+    function renderCenteredPanel(label, heading, bodyHtml) {
+        return `
+        <div class="col-lg-8 mx-auto text-center">
+            <div class="text-uppercase mb-3"
+                 style="letter-spacing:2px;font-size:0.8rem;opacity:0.8;">
+                ${label}
+            </div>
+
+            <h2 class="display-6 fw-bold mb-4">
+                ${heading}
+            </h2>
+
+            ${bodyHtml}
+        </div>`;
+    }
+
+    function renderAnswerButtons(options) {
+        return `
+            <div class="d-grid gap-3">
+                ${options.map(option => `
+                    <button class="btn btn-outline-light btn-lg answerBtn">
+                        ${option}
+                    </button>
+                `).join(EMPTY_HTML)}
+            </div>`;
+    }
+
+    function renderQuestion() {
+        const currentQuestion = quizQuestions[quizState.currentQuestionIndex];
+
+        elements.questionContainer.innerHTML = renderCenteredPanel(
+            quizCopy.questionLabel,
+            currentQuestion.question,
+            renderAnswerButtons(currentQuestion.options)
+        );
+
+        elements.questionContainer.querySelectorAll(".answerBtn").forEach(button => {
+            button.addEventListener("click", () => handleAnswerSelection(button.textContent.trim()));
+        });
+    }
+
+    function renderRecommendation(recommendation) {
+        const stepsHtml = `
+            <div class="mb-4">
+                ${recommendation.steps.map((step, index) => `
+                    <div class="mb-3">
+                        ${index + 1}. ${step}
+                    </div>
+                `).join(EMPTY_HTML)}
+            </div>`;
+
+        const topicsHtml = `
+            <div class="mb-4">
+                <div class="fw-bold mb-3">
+                    ${quizCopy.recommendedTopicsLabel}
+                </div>
+
+                ${recommendation.topics.map(topic => `
+                    <div class="mb-2">
+                        • ${topic}
+                    </div>
+                `).join(EMPTY_HTML)}
+            </div>`;
+
+        const buttonHtml = `
+            <button class="btn btn-light btn-lg rounded-pill">
+                ${quizCopy.startLearningLabel}
+            </button>`;
+
+        elements.questionContainer.innerHTML = renderCenteredPanel(
+            quizCopy.recommendationLabel,
+            recommendation.title,
+            stepsHtml + topicsHtml + buttonHtml
+        );
+    }
+
+    function startQuiz() {
+        setDisplay(elements.pathContent, DISPLAY_NONE);
+        setDisplay(elements.quizContainer, "flex");
+        setDisplay(elements.pathQuiz, DISPLAY_BLOCK);
+
+        quizState.currentQuestionIndex = 0;
+        quizState.answers = [];
+
+        renderQuestion();
+    }
+
+    function handleAnswerSelection(answer) {
+        quizState.answers.push(answer);
+        quizState.currentQuestionIndex++;
+
+        if (quizState.currentQuestionIndex < quizQuestions.length) {
+            renderQuestion();
+            return;
+        }
+
+        renderRecommendation(getRecommendation(quizState.answers));
+    }
+
+    // Recommendation logic
+    function getRecommendation(answers) {
+        const experienceAnswer = answers[0];
+        const goalAnswer = answers[1];
+        const basicsAnswer = answers[2];
+        const recommendationPath = getRecommendationPath(goalAnswer);
+        const needsFoundation = (
+            experienceAnswer === quizOptions.experience.newToAi ||
+            basicsAnswer === quizOptions.basics.no
+        );
+
+        return {
+            title: recommendationPath.title,
+            steps: buildRecommendedSteps(recommendationPath.finalStep, needsFoundation),
+            topics: recommendationPath.topics
+        };
+    }
+
+    function getRecommendationPath(goalAnswer) {
+        if (goalAnswer === quizOptions.goal.studies) {
+            return recommendationPaths.academic;
+        }
+
+        if (goalAnswer === quizOptions.goal.work) {
+            return recommendationPaths.workplace;
+        }
+
+        return recommendationPaths.lifelong;
+    }
+
+    function buildRecommendedSteps(finalStep, includeFoundationSteps) {
+        if (includeFoundationSteps) {
+            return foundationSteps.concat(finalStep);
+        }
+
+        return [
+            "Learning Paths",
+            finalStep
+        ];
+    }
+
+    function initialisePage() {
+        addDynamicStyles();
+        startHeroTypingAnimation();
+
+        if (elements.startPathQuiz) {
+            elements.startPathQuiz.addEventListener("click", startQuiz);
+        }
+    }
+
+    initialisePage();
+})();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
