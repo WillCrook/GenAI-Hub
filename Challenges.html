@@ -12,9 +12,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
           rel="stylesheet">
-    
 
-    <title>Learn AI</title>
+    <title>AI Challenges</title>
 
     <!--Constraints
     Generate Moodle 4.x compatible HTML.
@@ -34,3 +33,1339 @@ Constraints:
 
 -->
 
+<!-- COPY BELOW FOR MOODLE -->
+
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top"
+
+     style="backdrop-filter:blur(12px);">
+
+    <div class="container">
+
+        <a class="navbar-brand d-flex align-items-center fw-bold"
+
+           href="https://moodle.bath.ac.uk/course/section.php?id=277885"
+
+           style="font-size:1.1rem;text-decoration:none;">
+
+            <div>
+
+                <div style="color:#003c71;line-height:1.1;">
+
+                    GenAI & Digital Skills Hub
+
+                </div>
+
+                <small class="text-muted fw-normal">
+
+                    University of Bath
+
+                </small>
+
+            </div>
+
+        </a>
+
+        <button class="navbar-toggler"
+
+                type="button"
+
+                data-bs-toggle="collapse"
+
+                data-bs-target="#hubNav">
+
+            <span style="font-size:1.5rem;line-height:1;">☰</span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="hubNav">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967">
+
+                        Learn AI
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969">
+
+                        Challenges
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971">
+
+                        Community
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972">
+
+                        Using AI at Bath
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<div class="container-fluid py-5">
+
+    <div class="row justify-content-center mb-5">
+
+        <div class="col-lg-10">
+
+            <div id="hero"
+
+                 class="p-5 rounded-4 shadow-sm"
+
+                 style="
+                 background:linear-gradient(135deg,#0f172a,#1e293b);
+                 color:white;
+                 transition:all 0.2s ease;
+                 overflow:hidden;">
+
+                <div class="row align-items-center">
+
+                    <div class="col-lg-8">
+
+                        <div style="
+                        font-size:14px;
+                        letter-spacing:1px;
+                        text-transform:uppercase;
+                        opacity:0.8;
+                        margin-top:-2em;
+                        margin-bottom:2em;">
+
+                            AI Challenges
+
+                        </div>
+
+                        <h1 class="display-5 fw-bold mt-2 mb-3">
+
+                            Test your skills with
+
+                        </h1>
+
+                        <div id="rotating-text"
+                             style="
+                             color:#ffff00;
+                             font-size:2.5rem;
+                             font-weight:700;
+                             line-height:1.1;
+                             min-height:1.2em;
+                             margin-top:-0.5em;">
+                        </div>
+
+                        <p class="lead mb-4"
+                           style="max-width:700px;">
+
+                            Take on practical AI challenges, climb the leaderboard
+                            and showcase your best work with the Bath student community.
+
+                        </p>
+
+                    </div>
+
+                    <div id="orb-column" class="col-lg-4 text-center mt-4 mt-lg-0">
+
+                        <div id="orb-container"
+
+                             style="
+                             position:relative;
+                             width:240px;
+                             height:240px;
+                             margin:auto;">
+
+                            <div id="trophy">
+                                🏆
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Quick Links -->
+
+<div class="container mb-5" style="margin-top:-2rem;">
+
+    <div class="mb-4">
+
+        <h2 class="fw-bold mb-1" style="color:#0f172a;">
+
+            Challenge Hub
+
+        </h2>
+
+        <p class="text-muted mb-0">
+
+            Jump into competitions, examples and challenge collections
+
+        </p>
+
+    </div>
+
+    <div class="row" style="row-gap:1.5rem;">
+
+        <div class="col-12 col-md-6 mb-3">
+
+            <a href="#leaderboard" class="text-decoration-none">
+
+                <div data-quick-link
+
+                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
+
+                     style="
+                     background:linear-gradient(135deg,#0f172a,#1e293b);
+                     border-radius:20px;
+                     min-height:88px;
+                     color:white;
+                     cursor:pointer;">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center"
+
+                             style="
+                             width:52px;
+                             height:52px;
+                             border-radius:50%;
+                             background:#f59e0b;
+                             font-size:1.3rem;
+                             flex-shrink:0;
+                             margin-right:18px;">
+
+                            🏆
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+
+                                Leaderboard
+
+                            </div>
+
+                            <small style="opacity:.75;">
+
+                                See the current top performers
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div style="font-size:1.5rem;opacity:.7;">
+
+                        →
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <div class="col-12 col-md-6 mb-3">
+
+            <a href="#hall-of-fame" class="text-decoration-none">
+
+                <div data-quick-link
+
+                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
+
+                     style="
+                     background:linear-gradient(135deg,#0f172a,#1e293b);
+                     border-radius:20px;
+                     min-height:88px;
+                     color:white;
+                     cursor:pointer;">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center"
+
+                             style="
+                             width:52px;
+                             height:52px;
+                             border-radius:50%;
+                             background:#2563eb;
+                             font-size:1.3rem;
+                             flex-shrink:0;
+                             margin-right:18px;">
+
+                            ⭐
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+
+                                Hall of Fame
+
+                            </div>
+
+                            <small style="opacity:.75;">
+
+                                Featured student AI work
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div style="font-size:1.5rem;opacity:.7;">
+
+                        →
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <div class="col-12 col-md-6 mb-3">
+
+            <a href="#popular" class="text-decoration-none">
+
+                <div data-quick-link
+
+                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
+
+                     style="
+                     background:linear-gradient(135deg,#0f172a,#1e293b);
+                     border-radius:20px;
+                     min-height:88px;
+                     color:white;
+                     cursor:pointer;">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center"
+
+                             style="
+                             width:52px;
+                             height:52px;
+                             border-radius:50%;
+                             background:#059669;
+                             font-size:1.3rem;
+                             flex-shrink:0;
+                             margin-right:18px;">
+
+                            🔥
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+
+                                Popular Challenges
+
+                            </div>
+
+                            <small style="opacity:.75;">
+
+                                Most active challenge briefs
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div style="font-size:1.5rem;opacity:.7;">
+
+                        →
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <div class="col-12 col-md-6 mb-3">
+
+            <a href="#learning-challenges" class="text-decoration-none">
+
+                <div data-quick-link
+
+                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
+
+                     style="
+                     background:linear-gradient(135deg,#0f172a,#1e293b);
+                     border-radius:20px;
+                     min-height:88px;
+                     color:white;
+                     cursor:pointer;">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center"
+
+                             style="
+                             width:52px;
+                             height:52px;
+                             border-radius:50%;
+                             background:#7c3aed;
+                             font-size:1.3rem;
+                             flex-shrink:0;
+                             margin-right:18px;">
+
+                            🚀
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+
+                                Learning Challenges
+
+                            </div>
+
+                            <small style="opacity:.75;">
+
+                                Academic, workplace and lifelong
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div style="font-size:1.5rem;opacity:.7;">
+
+                        →
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Popular Challenges -->
+
+<div class="container mb-5" id="popular">
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+
+        <h2 class="fw-bold mb-2 mb-md-0">Popular Challenges</h2>
+
+        <span class="text-muted">Updated as new briefs are released</span>
+
+    </div>
+
+    <div id="challengeCarousel"
+         class="carousel slide"
+         data-bs-ride="carousel">
+
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+
+                <div class="card border-0 overflow-hidden rounded-4 shadow">
+
+                    <div class="card-body p-5"
+                         style="background:linear-gradient(135deg,#2563eb,#1d4ed8);color:white;">
+
+                        <small class="text-uppercase opacity-75">
+
+                            Academic AI
+
+                        </small>
+
+                        <h2 class="fw-bold mt-2">
+
+                            Build an AI Study Coach
+
+                        </h2>
+
+                        <p class="mb-4" style="max-width:680px;">
+
+                            Design a responsible workflow that helps students revise,
+                            test understanding and reflect on feedback.
+
+                        </p>
+
+                        <a href="#academic"
+                           class="btn btn-light rounded-pill">
+
+                            Start Challenge
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="carousel-item">
+
+                <div class="card border-0 overflow-hidden rounded-4 shadow">
+
+                    <div class="card-body p-5"
+                         style="background:linear-gradient(135deg,#059669,#047857);color:white;">
+
+                        <small class="text-uppercase opacity-75">
+
+                            Workplace AI
+
+                        </small>
+
+                        <h2 class="fw-bold mt-2">
+
+                            Improve a Real Workflow
+
+                        </h2>
+
+                        <p class="mb-4" style="max-width:680px;">
+
+                            Find a repetitive task and use AI to make the process
+                            clearer, faster or easier to quality check.
+
+                        </p>
+
+                        <a href="#workplace"
+                           class="btn btn-light rounded-pill">
+
+                            Start Challenge
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="carousel-item">
+
+                <div class="card border-0 overflow-hidden rounded-4 shadow">
+
+                    <div class="card-body p-5"
+                         style="background:linear-gradient(135deg,#7c3aed,#6d28d9);color:white;">
+
+                        <small class="text-uppercase opacity-75">
+
+                            Lifelong AI
+
+                        </small>
+
+                        <h2 class="fw-bold mt-2">
+
+                            Learn a New Tool in One Week
+
+                        </h2>
+
+                        <p class="mb-4" style="max-width:680px;">
+
+                            Pick an emerging AI tool, document what it can do
+                            and create a short guide for other students.
+
+                        </p>
+
+                        <a href="#lifelong"
+                           class="btn btn-light rounded-pill">
+
+                            Start Challenge
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev"
+                type="button"
+                data-bs-target="#challengeCarousel"
+                data-bs-slide="prev">
+
+            <span style="font-size:2.5rem;line-height:1;color:white;">‹</span>
+
+        </button>
+
+        <button class="carousel-control-next"
+                type="button"
+                data-bs-target="#challengeCarousel"
+                data-bs-slide="next">
+
+            <span style="font-size:2.5rem;line-height:1;color:white;">›</span>
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- Leaderboard and Hall of Fame -->
+
+<div class="container pb-5">
+
+    <div class="row g-4">
+
+        <div id="leaderboard" class="col-12 col-lg-5 mb-4">
+
+            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border"
+                 style="color:#0f172a;">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <div>
+
+                        <h2 class="fw-bold mb-1">Leaderboard</h2>
+
+                        <p class="text-muted mb-0">Current challenge standings</p>
+
+                    </div>
+
+                    <div style="font-size:2rem;">🏆</div>
+
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between py-3 border-bottom">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center text-white fw-bold"
+                             style="width:42px;height:42px;border-radius:50%;background:#f59e0b;margin-right:14px;">
+                            1
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">Student Showcase Entry</div>
+
+                            <small class="text-muted">AI study coach prototype</small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="fw-bold">980 pts</div>
+
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between py-3 border-bottom">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center text-white fw-bold"
+                             style="width:42px;height:42px;border-radius:50%;background:#94a3b8;margin-right:14px;">
+                            2
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">Bath AI Builder</div>
+
+                            <small class="text-muted">Research workflow challenge</small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="fw-bold">920 pts</div>
+
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between py-3 border-bottom">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center text-white fw-bold"
+                             style="width:42px;height:42px;border-radius:50%;background:#b45309;margin-right:14px;">
+                            3
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">Prompt Lab Team</div>
+
+                            <small class="text-muted">Prompt improvement sprint</small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="fw-bold">875 pts</div>
+
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between pt-3">
+
+                    <div class="text-muted">
+
+                        New entries are reviewed weekly.
+
+                    </div>
+
+                    <a href="#archive"
+                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       style="background:#0f172a;border-color:#0f172a;">
+
+                        Submit Work
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="hall-of-fame" class="col-12 col-lg-7 mb-4">
+
+            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border"
+                 style="color:#0f172a;">
+
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+
+                    <div>
+
+                        <h2 class="fw-bold mb-1">Hall of Fame</h2>
+
+                        <p class="text-muted mb-0">
+
+                            Best picked students showcasing their AI work
+
+                        </p>
+
+                    </div>
+
+                    <span class="badge rounded-pill text-bg-warning px-3 py-2 mt-3 mt-md-0">
+
+                        Featured Work
+
+                    </span>
+
+                </div>
+
+                <div class="row g-3">
+
+                    <div class="col-12 col-md-6 mb-3">
+
+                        <div class="h-100 p-4 rounded-4 border"
+                             style="background:#f8fafc;">
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <div class="d-flex align-items-center justify-content-center"
+                                     style="width:52px;height:52px;border-radius:50%;background:#2563eb;color:white;font-size:1.4rem;margin-right:14px;">
+                                    🎓
+                                </div>
+
+                                <div>
+
+                                    <div class="fw-semibold">Research Review Assistant</div>
+
+                                    <small class="text-muted">Academic showcase</small>
+
+                                </div>
+
+                            </div>
+
+                            <p class="text-muted mb-0">
+
+                                A structured approach to comparing sources,
+                                checking claims and preparing literature notes.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 col-md-6 mb-3">
+
+                        <div class="h-100 p-4 rounded-4 border"
+                             style="background:#f8fafc;">
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <div class="d-flex align-items-center justify-content-center"
+                                     style="width:52px;height:52px;border-radius:50%;background:#059669;color:white;font-size:1.4rem;margin-right:14px;">
+                                    💼
+                                </div>
+
+                                <div>
+
+                                    <div class="fw-semibold">Placement Prep Toolkit</div>
+
+                                    <small class="text-muted">Workplace showcase</small>
+
+                                </div>
+
+                            </div>
+
+                            <p class="text-muted mb-0">
+
+                                A practical set of prompts and checks for CVs,
+                                interview preparation and role research.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+
+                        <div class="p-4 rounded-4 border"
+                             style="background:linear-gradient(135deg,#0f172a,#1e293b);color:white;">
+
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+
+                                <div>
+
+                                    <small class="text-uppercase opacity-75">Student spotlight</small>
+
+                                    <h4 class="fw-bold mt-2 mb-2">AI Creativity Sprint</h4>
+
+                                    <p class="mb-0" style="opacity:.82;">
+
+                                        A featured collection of images, prototypes,
+                                        lesson ideas and reflective notes from recent challenges.
+
+                                    </p>
+
+                                </div>
+
+                                <a href="#archive"
+                                   class="btn btn-light rounded-pill mt-4 mt-md-0">
+
+                                    View Showcase
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Learning Challenges -->
+
+<div class="container pb-5" id="learning-challenges">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">Learning Challenges</h2>
+
+        <p class="text-muted">
+
+            Choose a challenge route that matches your current goal.
+
+        </p>
+
+    </div>
+
+    <div class="row g-3">
+
+        <div id="academic" class="col-12 col-lg-4 mb-4">
+
+            <div class="h-100 p-5 bg-white rounded-4 shadow-sm border d-flex flex-column"
+                 style="min-height:300px;color:#0f172a;">
+
+                <div style="font-size:2rem;">🎓</div>
+
+                <h3 class="fw-bold mt-3">
+
+                    Academic Challenges
+
+                </h3>
+
+                <p class="text-muted mb-4">
+
+                    Practise responsible AI use for research, revision,
+                    coursework planning and feedback reflection.
+
+                </p>
+
+                <div class="mt-auto">
+
+                    <a href="#archive"
+                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       style="background:#2563eb;border-color:#2563eb;">
+
+                        Explore Academic
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="workplace" class="col-12 col-lg-4 mb-4">
+
+            <div class="h-100 p-5 bg-white rounded-4 shadow-sm border d-flex flex-column"
+                 style="min-height:300px;color:#0f172a;">
+
+                <div style="font-size:2rem;">💼</div>
+
+                <h3 class="fw-bold mt-3">
+
+                    Workplace Challenges
+
+                </h3>
+
+                <p class="text-muted mb-4">
+
+                    Apply AI to placement preparation, professional writing,
+                    productivity and collaborative workflows.
+
+                </p>
+
+                <div class="mt-auto">
+
+                    <a href="#archive"
+                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       style="background:#059669;border-color:#059669;">
+
+                        Explore Workplace
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="lifelong" class="col-12 col-lg-4 mb-4">
+
+            <div class="h-100 p-5 bg-white rounded-4 shadow-sm border d-flex flex-column"
+                 style="min-height:300px;color:#0f172a;">
+
+                <div style="font-size:2rem;">🚀</div>
+
+                <h3 class="fw-bold mt-3">
+
+                    Lifelong Challenges
+
+                </h3>
+
+                <p class="text-muted mb-4">
+
+                    Explore new AI tools, creative projects, automation ideas
+                    and future-focused digital skills.
+
+                </p>
+
+                <div class="mt-auto">
+
+                    <a href="#archive"
+                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       style="background:#7c3aed;border-color:#7c3aed;">
+
+                        Explore Lifelong
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Challenge Archive -->
+
+<div class="container pb-5" id="archive">
+
+    <div class="rounded-4 overflow-hidden shadow position-relative"
+         style="
+         background:
+         linear-gradient(
+         135deg,
+         rgba(15,23,42,0.88),
+         rgba(30,41,59,0.78)),
+         url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3')
+         center/cover;
+         min-height:420px;">
+
+        <div class="row h-100 align-items-center">
+
+            <div class="col-12 col-lg-8 mx-auto p-4 p-md-5 text-white">
+
+                <div style="min-height:300px;display:flex;flex-direction:column;justify-content:center;">
+
+                    <div class="text-uppercase mb-3"
+                         style="
+                         letter-spacing:2px;
+                         font-size:0.8rem;
+                         opacity:0.8;">
+
+                        Challenge Archive
+
+                    </div>
+
+                    <h2 class="display-6 fw-bold mb-3">
+
+                        Browse the full challenge archive
+
+                    </h2>
+
+                    <p class="lead mb-4"
+                       style="max-width:600px;">
+
+                        Find previous academic, workplace and lifelong learning
+                        challenges, revisit older briefs or submit completed work
+                        for future showcase consideration.
+
+                    </p>
+
+                    <div class="d-flex flex-wrap">
+
+                        <a href="#"
+                           class="btn btn-light btn-lg px-4 rounded-pill fw-semibold">
+
+                            View All Challenges
+
+                        </a>
+
+                        <a href="#leaderboard"
+                           class="btn btn-outline-light btn-lg px-4 rounded-pill">
+
+                            See Leaderboard
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+(() => {
+    const EMPTY_HTML = "";
+
+    const elements = {
+        rotatingText: document.getElementById("rotating-text")
+    };
+
+    const heroTextConfig = {
+        typeDelay: 60,
+        deleteDelay: 30,
+        completedPhraseDelay: 1800,
+        holdDelay: 3200,
+        fadeDuration: 700,
+        phrases: [
+            "weekly AI briefs.",
+            "academic challenges.",
+            "workplace scenarios.",
+            "lifelong learning tasks.",
+            "student competitions.",
+            "creative AI projects.",
+            "responsible AI workflows.",
+            "prompt improvement sprints.",
+            "research and revision tasks.",
+            "future skills challenges."
+        ]
+    };
+
+    const heroTextState = {
+        timeoutId: null,
+        intervalId: null,
+        mediaQuery: window.matchMedia("(max-width: 991.98px)")
+    };
+
+    function clearHeroTextAnimation() {
+        if (heroTextState.timeoutId) {
+            window.clearTimeout(heroTextState.timeoutId);
+            heroTextState.timeoutId = null;
+        }
+
+        if (heroTextState.intervalId) {
+            window.clearInterval(heroTextState.intervalId);
+            heroTextState.intervalId = null;
+        }
+    }
+
+    function startHeroTextAnimation() {
+        if (!elements.rotatingText) {
+            return;
+        }
+
+        clearHeroTextAnimation();
+        elements.rotatingText.textContent = EMPTY_HTML;
+
+        if (heroTextState.mediaQuery.matches) {
+            startHeroPhraseFadeAnimation();
+            return;
+        }
+
+        startHeroTypingAnimation();
+    }
+
+    function startHeroTypingAnimation() {
+        let phraseIndex = 0;
+        let characterIndex = 0;
+        let isDeleting = false;
+
+        function typeNextCharacter() {
+            const currentPhrase = heroTextConfig.phrases[phraseIndex];
+
+            if (isDeleting) {
+                elements.rotatingText.textContent = currentPhrase.substring(0, characterIndex - 1);
+                characterIndex--;
+
+                if (characterIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % heroTextConfig.phrases.length;
+                }
+
+                heroTextState.timeoutId = window.setTimeout(typeNextCharacter, heroTextConfig.deleteDelay);
+                return;
+            }
+
+            elements.rotatingText.textContent = currentPhrase.substring(0, characterIndex + 1);
+            characterIndex++;
+
+            if (characterIndex === currentPhrase.length) {
+                isDeleting = true;
+                heroTextState.timeoutId = window.setTimeout(typeNextCharacter, heroTextConfig.completedPhraseDelay);
+                return;
+            }
+
+            heroTextState.timeoutId = window.setTimeout(typeNextCharacter, heroTextConfig.typeDelay);
+        }
+
+        typeNextCharacter();
+    }
+
+    function startHeroPhraseFadeAnimation() {
+        const phraseSlots = [document.createElement("span"), document.createElement("span")];
+        let activeSlotIndex = 0;
+        let phraseIndex = 0;
+
+        phraseSlots.forEach((slot, index) => {
+            slot.setAttribute("data-rotating-phrase", "");
+            slot.textContent = index === 0 ? heroTextConfig.phrases[0] : EMPTY_HTML;
+            slot.style.opacity = index === 0 ? "1" : "0";
+            elements.rotatingText.appendChild(slot);
+        });
+
+        function showNextPhrase() {
+            const nextSlotIndex = activeSlotIndex === 0 ? 1 : 0;
+            const activeSlot = phraseSlots[activeSlotIndex];
+            const nextSlot = phraseSlots[nextSlotIndex];
+
+            phraseIndex = (phraseIndex + 1) % heroTextConfig.phrases.length;
+            nextSlot.textContent = heroTextConfig.phrases[phraseIndex];
+
+            window.requestAnimationFrame(() => {
+                activeSlot.style.opacity = "0";
+                nextSlot.style.opacity = "1";
+            });
+
+            activeSlotIndex = nextSlotIndex;
+        }
+
+        heroTextState.intervalId = window.setInterval(
+            showNextPhrase,
+            heroTextConfig.holdDelay + heroTextConfig.fadeDuration
+        );
+    }
+
+    const dynamicStyles = `
+#rotating-text {
+    height: 1.3em;
+    min-height: 1.3em;
+    position: relative;
+}
+
+#rotating-text [data-rotating-phrase] {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    transition: opacity ${heroTextConfig.fadeDuration}ms ease;
+    will-change: opacity;
+}
+
+@media (max-width: 1199.98px) {
+    #rotating-text {
+        height: 2.4em;
+        min-height: 2.4em;
+    }
+}
+
+#trophy {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:7rem;
+    filter:
+        drop-shadow(0 0 16px rgba(255,255,0,0.6))
+        drop-shadow(0 0 42px rgba(245,158,11,0.45));
+    animation:
+        trophyGlow 8s infinite,
+        float 6s ease-in-out infinite;
+}
+
+@keyframes trophyGlow {
+    0%,100% {
+        opacity:0.45;
+        filter:none;
+    }
+
+    25%,70% {
+        opacity:1;
+        filter:
+            drop-shadow(0 0 16px rgba(255,255,0,0.75))
+            drop-shadow(0 0 48px rgba(245,158,11,0.55));
+    }
+}
+
+@keyframes float {
+    0%,100% { transform:translate(-50%,-50%) translateY(0); }
+    50% { transform:translate(-50%,-50%) translateY(-12px); }
+}
+
+@media (max-width: 991.98px) {
+    #hero {
+        min-height: 430px;
+        display: flex;
+        align-items: center;
+    }
+
+    #hero > .row {
+        width: 100%;
+    }
+
+    #rotating-text {
+        height: 6em;
+        min-height: 6em;
+        overflow: visible;
+    }
+
+    #orb-column {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #rotating-text [data-rotating-phrase] {
+        transition: none;
+    }
+}
+`;
+
+    function addDynamicStyles() {
+        const styleElement = document.createElement("style");
+        styleElement.textContent = dynamicStyles;
+        document.head.appendChild(styleElement);
+    }
+
+    function initialisePage() {
+        addDynamicStyles();
+        startHeroTextAnimation();
+
+        if (heroTextState.mediaQuery.addEventListener) {
+            heroTextState.mediaQuery.addEventListener("change", startHeroTextAnimation);
+        }
+    }
+
+    initialisePage();
+})();
+
+const hero = document.getElementById('hero');
+
+hero.addEventListener('mousemove', (e) => {
+
+    const rect = hero.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    hero.style.background = `
+        radial-gradient(circle at ${x}px ${y}px,
+        rgba(255,255,0,0.12),
+        transparent 300px),
+        linear-gradient(135deg,#0f172a,#1e293b)`;
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
