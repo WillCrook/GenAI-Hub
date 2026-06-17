@@ -21,7 +21,7 @@
 
 Constraints:
 
-- Bootstrap classes allowed.
+- Bootstrap version 4.6 allowed.
 - Inline styles allowed.
 - External JS allowed
 - No `<style>` tags.
@@ -44,7 +44,7 @@ Constraints:
 
         <!-- Brand -->
 
-        <a class="navbar-brand d-flex align-items-center gap-3 fw-bold"
+        <a class="navbar-brand d-flex align-items-center fw-bold"
 
            href="https://moodle.bath.ac.uk/course/section.php?id=277885"
 
@@ -204,7 +204,7 @@ Constraints:
 
                     </div>
 
-                    <div class="col-lg-4 text-center mt-4 mt-lg-0">
+                    <div id="orb-column" class="col-lg-4 text-center mt-4 mt-lg-0">
 
                         <div id="orb-container"
 
@@ -235,58 +235,336 @@ Constraints:
     </div>
 
 </div>
-<div class="container mb-5" style ="margin-top: -2em;">
-    <div class="row g-4 align-items-stretch">
 
-        <div class="col-md-3">
-            <a href="#featured"
-               class="text-decoration-none">
-                <div class="card border-0 shadow-lg h-100">
-                    <div class="card-body text-center p-4">
-                        <div style="font-size:2rem;">⭐</div>
-                        <h6 class="fw-bold mb-0">Popular Resources</h6>
+<!-- Quick Links -->
+<!-- Quick Links -->
+
+<div class="container mb-5" style="margin-top:-2rem;">
+
+    <div class="mb-4">
+
+        <h2 class="fw-bold mb-1" style="color:#0f172a;">
+
+            Quick Links
+
+        </h2>
+
+        <p class="text-muted mb-0">
+
+            Explore the most popular sections
+
+        </p>
+
+    </div>
+
+    <div class="row g-3">
+
+        <!-- Popular Resources -->
+
+        <div class="col-12 col-md-6 mb-3">
+
+            <a href="#featured" class="text-decoration-none">
+
+                <div data-quick-link
+
+                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
+
+                     style="
+
+                     background:linear-gradient(135deg,#0f172a,#1e293b);
+
+                     border-radius:20px;
+
+                     min-height:88px;
+
+                     color:white;
+
+                     cursor:pointer;">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center"
+
+                             style="
+
+                             width:52px;
+
+                             height:52px;
+
+                             border-radius:50%;
+
+                             background:#f59e0b;
+
+                             font-size:1.3rem;
+
+                             flex-shrink:0;
+
+                             margin-right:18px;">
+
+                            ⭐
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+
+                                Popular Resources
+
+                            </div>
+
+                            <small style="opacity:.75;">
+
+                                Most visited guides and tools
+
+                            </small>
+
+                        </div>
+
                     </div>
+
+                    <div style="font-size:1.5rem;opacity:.7;">
+
+                        →
+
+                    </div>
+
                 </div>
+
             </a>
+
         </div>
 
-        <div class="col-md-3">
-            <a href="#academic"
-               class="text-decoration-none">
-                <div class="card border-0 shadow-lg h-100">
-                    <div class="card-body text-center p-4">
-                        <div style="font-size:2rem;">🎓</div>
-                        <h6 class="fw-bold mb-0">Academic Skills</h6>
+        <!-- Academic Skills -->
+
+        <div class="col-12 col-md-6 mb-3">
+
+            <a href="#academic" class="text-decoration-none">
+
+                <div data-quick-link
+
+                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
+
+                     style="
+
+                     background:linear-gradient(135deg,#0f172a,#1e293b);
+
+                     border-radius:20px;
+
+                     min-height:88px;
+
+                     color:white;
+
+                     cursor:pointer;">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center"
+
+                             style="
+
+                             width:52px;
+
+                             height:52px;
+
+                             border-radius:50%;
+
+                             background:#2563eb;
+
+                             font-size:1.3rem;
+
+                             flex-shrink:0;
+                             
+                             margin-right:18px;">
+
+                            🎓
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+
+                                Academic Skills
+
+                            </div>
+
+                            <small style="opacity:.75;">
+
+                                Study smarter with AI
+
+                            </small>
+
+                        </div>
+
                     </div>
+
+                    <div style="font-size:1.5rem;opacity:.7;">
+
+                        →
+
+                    </div>
+
                 </div>
+
             </a>
+
         </div>
 
-        <div class="col-md-3">
-            <a href="#workplace"
-               class="text-decoration-none">
-                <div class="card border-0 shadow-lg h-100">
-                    <div class="card-body text-center p-4">
-                        <div style="font-size:2rem;">💼</div>
-                        <h6 class="fw-bold mb-0">Workplace Skills</h6>
+        <!-- Workplace Skills -->
+
+        <div class="col-12 col-md-6 mb-3">
+
+            <a href="#workplace" class="text-decoration-none">
+
+                <div data-quick-link
+
+                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
+
+                     style="
+
+                     background:linear-gradient(135deg,#0f172a,#1e293b);
+
+                     border-radius:20px;
+
+                     min-height:88px;
+
+                     color:white;
+
+                     cursor:pointer;">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center"
+
+                             style="
+
+                             width:52px;
+
+                             height:52px;
+
+                             border-radius:50%;
+
+                             background:#059669;
+
+                             font-size:1.3rem;
+
+                             flex-shrink:0;
+                             
+                             margin-right:18px;">
+
+                            💼
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+
+                                Workplace Skills
+
+                            </div>
+
+                            <small style="opacity:.75;">
+
+                                Career and placement support
+
+                            </small>
+
+                        </div>
+
                     </div>
+
+                    <div style="font-size:1.5rem;opacity:.7;">
+
+                        →
+
+                    </div>
+
                 </div>
+
             </a>
+
         </div>
 
-        <div class="col-md-3">
-            <a href="#lifelong"
-               class="text-decoration-none">
-                <div class="card border-0 shadow-lg h-100">
-                    <div class="card-body text-center p-4">
-                        <div style="font-size:2rem;">🚀</div>
-                        <h6 class="fw-bold mb-0">Lifelong Skills</h6>
+        <!-- Lifelong Skills -->
+
+        <div class="col-12 col-md-6 mb-3">
+
+            <a href="#lifelong" class="text-decoration-none">
+
+                <div data-quick-link
+
+                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
+
+                     style="
+
+                     background:linear-gradient(135deg,#0f172a,#1e293b);
+
+                     border-radius:20px;
+
+                     min-height:88px;
+
+                     color:white;
+
+                     cursor:pointer;">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="d-flex align-items-center justify-content-center"
+
+                             style="
+
+                             width:52px;
+
+                             height:52px;
+
+                             border-radius:50%;
+
+                             background:#7c3aed;
+
+                             font-size:1.3rem;
+
+                             flex-shrink:0;
+                             
+                             margin-right:18px;">
+
+                            🚀
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+
+                                Lifelong Skills
+
+                            </div>
+
+                            <small style="opacity:.75;">
+
+                                Learn beyond university
+
+                            </small>
+
+                        </div>
+
                     </div>
+
+                    <div style="font-size:1.5rem;opacity:.7;">
+
+                        →
+
+                    </div>
+
                 </div>
+
             </a>
+
         </div>
 
     </div>
+
 </div>
 
 <div class="container mb-5" id="featured">
@@ -540,7 +818,7 @@ Constraints:
 
                     </p>
 
-                    <div class="d-flex flex-wrap gap-3">
+                    <div class="d-flex flex-wrap">
 
                         <button id="startPathQuiz"
                             class="btn btn-light btn-lg px-4 rounded-pill fw-semibold">
@@ -624,11 +902,12 @@ Constraints:
         startPathQuiz: document.getElementById(ids.startPathQuiz)
     };
 
-    // Hero typing animation
-    const typingConfig = {
+    const heroTextConfig = {
         typeDelay: 60,
         deleteDelay: 30,
         completedPhraseDelay: 1800,
+        holdDelay: 3200,
+        fadeDuration: 700,
         phrases: [
             "my coursework.",
             "my assignments.",
@@ -651,17 +930,47 @@ Constraints:
         ]
     };
 
-    function startHeroTypingAnimation() {
+    const heroTextState = {
+        timeoutId: null,
+        intervalId: null,
+        mediaQuery: window.matchMedia("(max-width: 991.98px)")
+    };
+
+    function clearHeroTextAnimation() {
+        if (heroTextState.timeoutId) {
+            window.clearTimeout(heroTextState.timeoutId);
+            heroTextState.timeoutId = null;
+        }
+
+        if (heroTextState.intervalId) {
+            window.clearInterval(heroTextState.intervalId);
+            heroTextState.intervalId = null;
+        }
+    }
+
+    function startHeroTextAnimation() {
         if (!elements.rotatingText) {
             return;
         }
 
+        clearHeroTextAnimation();
+        elements.rotatingText.textContent = EMPTY_HTML;
+
+        if (heroTextState.mediaQuery.matches) {
+            startHeroPhraseFadeAnimation();
+            return;
+        }
+
+        startHeroTypingAnimation();
+    }
+
+    function startHeroTypingAnimation() {
         let phraseIndex = 0;
         let characterIndex = 0;
         let isDeleting = false;
 
         function typeNextCharacter() {
-            const currentPhrase = typingConfig.phrases[phraseIndex];
+            const currentPhrase = heroTextConfig.phrases[phraseIndex];
 
             if (isDeleting) {
                 elements.rotatingText.textContent = currentPhrase.substring(0, characterIndex - 1);
@@ -669,10 +978,10 @@ Constraints:
 
                 if (characterIndex === 0) {
                     isDeleting = false;
-                    phraseIndex = (phraseIndex + 1) % typingConfig.phrases.length;
+                    phraseIndex = (phraseIndex + 1) % heroTextConfig.phrases.length;
                 }
 
-                setTimeout(typeNextCharacter, typingConfig.deleteDelay);
+                heroTextState.timeoutId = window.setTimeout(typeNextCharacter, heroTextConfig.deleteDelay);
                 return;
             }
 
@@ -681,14 +990,48 @@ Constraints:
 
             if (characterIndex === currentPhrase.length) {
                 isDeleting = true;
-                setTimeout(typeNextCharacter, typingConfig.completedPhraseDelay);
+                heroTextState.timeoutId = window.setTimeout(typeNextCharacter, heroTextConfig.completedPhraseDelay);
                 return;
             }
 
-            setTimeout(typeNextCharacter, typingConfig.typeDelay);
+            heroTextState.timeoutId = window.setTimeout(typeNextCharacter, heroTextConfig.typeDelay);
         }
 
         typeNextCharacter();
+    }
+
+    function startHeroPhraseFadeAnimation() {
+        const phraseSlots = [document.createElement("span"), document.createElement("span")];
+        let activeSlotIndex = 0;
+        let phraseIndex = 0;
+
+        phraseSlots.forEach((slot, index) => {
+            slot.setAttribute("data-rotating-phrase", "");
+            slot.textContent = index === 0 ? heroTextConfig.phrases[0] : EMPTY_HTML;
+            slot.style.opacity = index === 0 ? "1" : "0";
+            elements.rotatingText.appendChild(slot);
+        });
+
+        function showNextPhrase() {
+            const nextSlotIndex = activeSlotIndex === 0 ? 1 : 0;
+            const activeSlot = phraseSlots[activeSlotIndex];
+            const nextSlot = phraseSlots[nextSlotIndex];
+
+            phraseIndex = (phraseIndex + 1) % heroTextConfig.phrases.length;
+            nextSlot.textContent = heroTextConfig.phrases[phraseIndex];
+
+            window.requestAnimationFrame(() => {
+                activeSlot.style.opacity = "0";
+                nextSlot.style.opacity = "1";
+            });
+
+            activeSlotIndex = nextSlotIndex;
+        }
+
+        heroTextState.intervalId = window.setInterval(
+            showNextPhrase,
+            heroTextConfig.holdDelay + heroTextConfig.fadeDuration
+        );
     }
 
     // Lightbulb animation
@@ -700,6 +1043,28 @@ Constraints:
 .bento-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+#rotating-text {
+    height: 1.3em;
+    min-height: 1.3em;
+    position: relative;
+}
+
+#rotating-text [data-rotating-phrase] {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    transition: opacity ${heroTextConfig.fadeDuration}ms ease;
+    will-change: opacity;
+}
+
+@media (max-width: 1199.98px) {
+    #rotating-text {
+        height: 2.4em;
+        min-height: 2.4em;
+    }
 }
 
 #bulb {
@@ -778,6 +1143,34 @@ Constraints:
 @keyframes float {
     0%,100% { transform:translate(-50%,-50%) translateY(0); }
     50% { transform:translate(-50%,-50%) translateY(-12px); }
+}
+
+@media (max-width: 991.98px) {
+    #hero {
+        min-height: 430px;
+        display: flex;
+        align-items: center;
+    }
+
+    #hero > .row {
+        width: 100%;
+    }
+
+    #rotating-text {
+        height: 6em;
+        min-height: 6em;
+        overflow: visible;
+    }
+
+    #orb-column {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #rotating-text [data-rotating-phrase] {
+        transition: none;
+    }
 }
 `;
 
@@ -908,7 +1301,7 @@ Constraints:
 
     function renderAnswerButtons(options) {
         return `
-            <div class="d-grid gap-3">
+            <div class="d-grid mb-3">
                 ${options.map(option => `
                     <button class="btn btn-outline-light btn-lg answerBtn">
                         ${option}
@@ -1032,7 +1425,11 @@ Constraints:
 
     function initialisePage() {
         addDynamicStyles();
-        startHeroTypingAnimation();
+        startHeroTextAnimation();
+
+        if (heroTextState.mediaQuery.addEventListener) {
+            heroTextState.mediaQuery.addEventListener("change", startHeroTextAnimation);
+        }
 
         if (elements.startPathQuiz) {
             elements.startPathQuiz.addEventListener("click", startQuiz);
