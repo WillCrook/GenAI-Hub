@@ -1041,6 +1041,23 @@ Constraints:
 
     initialisePage();
 })();
+
+
+const hero = document.getElementById('hero');
+
+hero.addEventListener('mousemove', (e) => {
+
+    const rect = hero.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    hero.style.background = `
+        radial-gradient(circle at ${x}px ${y}px,
+        rgba(255,255,0,0.12),
+        transparent 300px),
+        linear-gradient(135deg,#0f172a,#1e293b)`;
+});
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    
+
+    <title>Challenges</title>
+
+    <!--Constraints
+    Generate Moodle 4.x compatible HTML.
+
+Constraints:
+
+- Bootstrap classes allowed.
+- Inline styles allowed.
+- External JS allowed
+- No `<style>` tags.
+- No custom CSS classes.
+- No `<html>`, `<head>`, or `<body>` tags.
+- Avoid empty spans/icons that may be stripped.
+- Use Unicode icons where needed.
+- Mobile responsive using Bootstrap grid only.
+- Modern style with student learning in mind.
+
+-->
+
+
+<!-- Copy below for moodle -->
+
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top"
+
+     style="backdrop-filter:blur(12px);">
+
+    <div class="container">
+
+        <!-- Brand -->
+
+        <a class="navbar-brand d-flex align-items-center gap-3 fw-bold"
+
+           href="https://moodle.bath.ac.uk/course/section.php?id=277885"
+
+           style="font-size:1.1rem;text-decoration:none;">
+
+            <div>
+
+                <div style="color:#003c71;line-height:1.1;">
+
+                    GenAI & Digital Skills Hub
+
+                </div>
+
+                <small class="text-muted fw-normal">
+
+                    University of Bath
+
+                </small>
+
+            </div>
+
+        </a>
+
+        <!-- Mobile Toggle -->
+
+        <button class="navbar-toggler"
+
+                type="button"
+
+                data-bs-toggle="collapse"
+
+                data-bs-target="#hubNav">
+
+            <span style="font-size:1.5rem;line-height:1;">☰</span>
+
+        </button>
+
+        <!-- Navigation -->
+
+        <div class="collapse navbar-collapse" id="hubNav">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967">
+
+                        Learn AI 
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969">
+
+                        Challenges
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971">
+
+                        Community
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link px-3 fw-medium"
+
+                       href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972">
+
+                        Using AI at Bath
+
+                    </a>
+
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+ <div class="container py-5 text-center">
+    <div class="display-4 fw-bold">
+        AI Challenges
+    </div>
+
+    <p class="lead mt-3 text-secondary">
+        Learn by doing. Build practical AI skills through real-world challenges.
+    </p>
+
+    <a href="#featured" class="btn btn-primary btn-lg mt-3">
+        Start a Challenge →
+    </a>
+</div>
+
+<div class="container mb-5">
+    <div class="row text-center">
+
+        <div class="col-md-4 mb-3">
+            <div class="border rounded-4 p-4 shadow-sm">
+                <h2>20+</h2>
+                <div class="text-secondary">
+                    Challenges
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="border rounded-4 p-4 shadow-sm">
+                <h2>3</h2>
+                <div class="text-secondary">
+                    Skill Levels
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="border rounded-4 p-4 shadow-sm">
+                <h2>100%</h2>
+                <div class="text-secondary">
+                    Practical Learning
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container py-5" id="featured">
+
+    <h2 class="fw-bold mb-4">
+        Featured Challenges
+    </h2>
+
+    <div class="row">
+
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow h-100 rounded-4">
+
+                <div class="card-body d-flex flex-column">
+
+                    <h4>
+                        📝 Prompt Engineer
+                    </h4>
+
+                    <p class="text-secondary">
+                        Learn how to write effective prompts and improve AI outputs.
+                    </p>
+
+                    <div class="mb-4">
+                        <span class="badge bg-success">
+                            Beginner
+                        </span>
+                    </div>
+
+                    <a href="#challenge-journey" class="btn btn-primary mt-auto">
+                        Start this challenge →
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow h-100 rounded-4">
+
+                <div class="card-body d-flex flex-column">
+
+                    <h4>
+                        📊 Data Detective
+                    </h4>
+
+                    <p class="text-secondary">
+                        Analyse datasets and generate insights using AI tools.
+                    </p>
+
+                    <div class="mb-4">
+                        <span class="badge bg-warning text-dark">
+                            Intermediate
+                        </span>
+                    </div>
+
+                    <a href="#challenge-journey" class="btn btn-primary mt-auto">
+                        Start this challenge →
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow h-100 rounded-4">
+
+                <div class="card-body d-flex flex-column">
+
+                    <h4>
+                        🤖 Build an AI Assistant
+                    </h4>
+
+                    <p class="text-secondary">
+                        Design a workflow that solves a real problem with generative AI.
+                    </p>
+
+                    <div class="mb-4">
+                        <span class="badge bg-danger">
+                            Advanced
+                        </span>
+                    </div>
+
+                    <a href="#challenge-journey" class="btn btn-primary mt-auto">
+                        Start this challenge →
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container py-5" id="challenge-journey">
+
+    <h2 class="fw-bold mb-4">
+        Explore Challenge Areas
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-3 mb-4">
+            <div class="border rounded-4 p-4 h-100 shadow-sm">
+                💡
+                <h5 class="mt-3">Creativity</h5>
+                <p class="text-secondary">
+                    Writing, brainstorming and content creation.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="border rounded-4 p-4 h-100 shadow-sm">
+                📈
+                <h5 class="mt-3">Analysis</h5>
+                <p class="text-secondary">
+                    Data, research and evidence-based decisions.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="border rounded-4 p-4 h-100 shadow-sm">
+                🎓
+                <h5 class="mt-3">Study Skills</h5>
+                <p class="text-secondary">
+                    Revision, note-taking and academic productivity.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="border rounded-4 p-4 h-100 shadow-sm">
+                💼
+                <h5 class="mt-3">Professional Skills</h5>
+                <p class="text-secondary">
+                    Workplace and career-focused AI applications.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container py-5">
+
+    <h2 class="fw-bold mb-5 text-center">
+        Your Challenge Journey
+    </h2>
+
+    <div class="row text-center">
+
+        <div class="col-md-4 mb-4">
+
+            <div class="p-4 border rounded-4 shadow-sm h-100">
+
+                <div class="display-5">
+                    ①
+                </div>
+
+                <h4 class="mt-3">
+                    Choose
+                </h4>
+
+                <p class="text-secondary">
+                    Pick a challenge that matches your interests.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="p-4 border rounded-4 shadow-sm h-100">
+
+                <div class="display-5">
+                    ②
+                </div>
+
+                <h4 class="mt-3">
+                    Complete
+                </h4>
+
+                <p class="text-secondary">
+                    Apply AI tools to solve practical problems.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="p-4 border rounded-4 shadow-sm h-100">
+
+                <div class="display-5">
+                    ③
+                </div>
+
+                <h4 class="mt-3">
+                    Showcase
+                </h4>
+
+                <p class="text-secondary">
+                    Build confidence and develop valuable digital skills.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
