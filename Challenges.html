@@ -143,78 +143,337 @@ Constraints:
 
         <div class="col-lg-10">
 
-            <div id="hero"
+            <div id="ai-challenges-hero"
+             class="p-5 rounded shadow-sm position-relative overflow-hidden"
+             style="
+             min-height:620px;
+             color:white;
+             transition:all 0.2s ease;
+             border-radius:1rem;
+             background:
+             radial-gradient(circle at 52% 42%,rgba(68,166,255,0.25),rgba(11,23,44,0.08) 24%,rgba(4,12,28,0) 46%),
+             radial-gradient(circle at 18% 12%,rgba(110,231,255,0.18),rgba(11,23,44,0) 34%),
+             radial-gradient(circle at 82% 16%,rgba(255,214,129,0.10),rgba(11,23,44,0) 30%),
+             linear-gradient(150deg,#061223 0%,#071a35 46%,#0b2448 100%);
+             isolation:isolate;">
 
-                 class="p-5 rounded-4 shadow-sm"
+        <div data-star-field="one"
+             style="
+             position:absolute;
+             inset:0;
+             opacity:0.78;
+             background-image:
+             radial-gradient(circle at 9% 18%,rgba(255,255,255,0.85) 0 1px,transparent 1.8px),
+             radial-gradient(circle at 18% 74%,rgba(255,255,255,0.6) 0 1px,transparent 1.8px),
+             radial-gradient(circle at 31% 28%,rgba(255,255,255,0.7) 0 1px,transparent 1.8px),
+             radial-gradient(circle at 46% 12%,rgba(255,255,255,0.5) 0 1px,transparent 1.8px),
+             radial-gradient(circle at 61% 78%,rgba(255,255,255,0.65) 0 1px,transparent 1.8px),
+             radial-gradient(circle at 73% 35%,rgba(255,255,255,0.8) 0 1px,transparent 1.8px),
+             radial-gradient(circle at 88% 68%,rgba(255,255,255,0.55) 0 1px,transparent 1.8px);
+             pointer-events:none;">&nbsp;</div>
 
-                 style="
-                 background:linear-gradient(135deg,#0f172a,#1e293b);
-                 color:white;
-                 transition:all 0.2s ease;
-                 overflow:hidden;">
+        <div data-star-field="two"
+             style="
+             position:absolute;
+             inset:0;
+             opacity:0.42;
+             background-image:
+             radial-gradient(circle at 15% 42%,rgba(173,216,255,0.9) 0 1px,transparent 2px),
+             radial-gradient(circle at 25% 9%,rgba(255,255,255,0.75) 0 1px,transparent 2px),
+             radial-gradient(circle at 39% 84%,rgba(255,255,255,0.75) 0 1px,transparent 2px),
+             radial-gradient(circle at 55% 28%,rgba(173,216,255,0.85) 0 1px,transparent 2px),
+             radial-gradient(circle at 69% 9%,rgba(255,255,255,0.72) 0 1px,transparent 2px),
+             radial-gradient(circle at 80% 83%,rgba(173,216,255,0.8) 0 1px,transparent 2px),
+             radial-gradient(circle at 94% 22%,rgba(255,255,255,0.65) 0 1px,transparent 2px);
+             pointer-events:none;">&nbsp;</div>
 
-                <div class="row align-items-center">
+        <div aria-hidden="true"
+             style="
+             position:absolute;
+             left:-5%;
+             right:-5%;
+             bottom:0;
+             height:34%;
+             background:linear-gradient(180deg,rgba(6,18,35,0),rgba(5,13,27,0.84));
+             pointer-events:none;">&nbsp;</div>
 
-                    <div class="col-lg-8">
+        <svg aria-hidden="true"
+             focusable="false"
+             viewBox="0 0 1200 760"
+             preserveAspectRatio="none"
+             style="
+             position:absolute;
+             inset:0;
+             width:100%;
+             height:100%;
+             opacity:0.05;
+             pointer-events:none;
+             z-index:1;">
+            <g fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M68 655 L148 602 L228 655 Z"></path>
+                <path d="M102 636 V580 M130 636 V548 M158 636 V580"></path>
+                <path d="M112 548 Q130 504 148 548"></path>
+                <path d="M312 642 C340 602 405 602 432 642"></path>
+                <path d="M294 642 H450"></path>
+                <path d="M315 642 V602 M337 642 V590 M359 642 V582 M381 642 V582 M403 642 V590 M425 642 V602"></path>
+                <path d="M742 642 C790 596 870 596 918 642"></path>
+                <path d="M732 642 H928 M755 628 H905 M780 613 H880"></path>
+                <path d="M755 642 V598 M785 642 V584 M815 642 V574 M845 642 V574 M875 642 V584 M905 642 V598"></path>
+                <path d="M998 642 H1130"></path>
+                <path d="M1020 642 V585 H1108 V642"></path>
+                <path d="M1040 585 V552 H1088 V585"></path>
+                <path d="M1010 552 H1118"></path>
+                <path d="M1046 642 V616 H1082 V642"></path>
+            </g>
+        </svg>
 
-                        <div style="
-                        font-size:14px;
-                        letter-spacing:1px;
-                        text-transform:uppercase;
-                        opacity:0.8;
-                        margin-top:-2em;
-                        margin-bottom:2em;">
+        <div class="container position-relative"
+             style="z-index:3;">
 
-                            AI Challenges
+            <div class="row justify-content-center">
+
+                <div class="col-12 col-xl-11">
+
+                    <div class="row align-items-center"
+                         style="min-height:520px;">
+
+                        <div class="col-lg-7"
+                             style="z-index:6;">
+
+                            <div style="
+                            font-size:14px;
+                            letter-spacing:1px;
+                            text-transform:uppercase;
+                            opacity:0.8;
+                            margin-top:-2em;
+                            margin-bottom:2em;">
+                                AI Challenges
+                            </div>
+
+                            <h1 class="display-5 fw-bold font-weight-bold mt-2 mb-3">
+                                Forge your legacy in Bath
+                            </h1>
+
+                            <p class="lead mb-4"
+                               style="max-width:700px;">
+                                Take on practical AI challenges, climb the leaderboard and showcase your best work with the Bath student community.
+                            </p>
 
                         </div>
 
-                        <h1 class="display-5 fw-bold mt-2 mb-3">
+                        <div class="col-lg-5 text-center mt-4 mt-lg-0"
+                             style="z-index:5;">
 
-                            Test your skills with
+                            <div id="mission-scene"
+                                 class="mx-auto"
+                                 style="
+                                 position:relative;
+                                 width:100%;
+                                 max-width:520px;
+                                 height:500px;
+                                 margin-top:0;
+                                 margin-left:auto;
+                                 margin-right:auto;">
 
-                        </h1>
+                                <div data-orbit="outer"
+                                     style="
+                                     position:absolute;
+                                     left:4%;
+                                     top:4%;
+                                     width:92%;
+                                     height:92%;
+                                     border:1px solid rgba(185,222,255,0.16);
+                                     border-radius:50%;
+                                     transform:rotate(-18deg) scaleY(0.58);
+                                     box-shadow:0 0 46px rgba(99,179,255,0.06);
+                                     pointer-events:none;">&nbsp;</div>
 
-                        <div id="rotating-text"
-                             style="
-                             color:#ffff00;
-                             font-size:2.5rem;
-                             font-weight:700;
-                             line-height:1.1;
-                             min-height:1.2em;
-                             margin-top:-0.5em;">
-                        </div>
+                                <div data-orbit="middle"
+                                     style="
+                                     position:absolute;
+                                     left:13%;
+                                     top:15%;
+                                     width:74%;
+                                     height:72%;
+                                     border:1px solid rgba(255,255,255,0.13);
+                                     border-radius:50%;
+                                     transform:rotate(22deg) scaleY(0.62);
+                                     pointer-events:none;">&nbsp;</div>
 
-                        <p class="lead mb-4"
-                           style="max-width:700px;">
+                                <div data-orbit="inner"
+                                     style="
+                                     position:absolute;
+                                     left:23%;
+                                     top:25%;
+                                     width:54%;
+                                     height:52%;
+                                     border:1px solid rgba(255,214,129,0.12);
+                                     border-radius:50%;
+                                     transform:rotate(-36deg) scaleY(0.64);
+                                     pointer-events:none;">&nbsp;</div>
 
-                            Take on practical AI challenges, climb the leaderboard
-                            and showcase your best work with the Bath student community.
+                                <div data-rocket-aura="true"
+                                     style="
+                                     position:absolute;
+                                     left:50%;
+                                     top:43%;
+                                     width:260px;
+                                     height:260px;
+                                     margin-left:-130px;
+                                     margin-top:-130px;
+                                     border-radius:50%;
+                                     background:radial-gradient(circle,rgba(74,163,255,0.25),rgba(74,163,255,0.08) 38%,rgba(74,163,255,0) 70%);
+                                     filter:blur(4px);
+                                     pointer-events:none;">&nbsp;</div>
 
-                        </p>
+                                <img src="rocket.webp"
+                                     alt="Rocket launching through the AI Challenges orbit"
+                                     data-rocket="true"
+                                     style="
+                                     position:absolute;
+                                     left:50%;
+                                     top:43%;
+                                     width:220px;
+                                     max-width:42vw;
+                                     height:auto;
+                                     transform:translate(-50%,-50%) rotate(8deg);
+                                     filter:drop-shadow(0 26px 42px rgba(1,8,18,0.42)) drop-shadow(0 0 28px rgba(80,179,255,0.24));
+                                     z-index:4;">
 
-                    </div>
+                                <a href="#leaderboard"
+                                   data-planet-link="leaderboard"
+                                   class="text-decoration-none"
+                                   style="
+                                   position:absolute;
+                                   left:0;
+                                   top:7%;
+                                   width:190px;
+                                   color:white;
+                                   z-index:5;">
+                                    <div style="
+                                    display:flex;
+                                    align-items:center;
+                                    gap:0.85rem;
+                                    padding:0.72rem 0.8rem;
+                                    border-radius:999px;
+                                    border:1px solid rgba(255,255,255,0.17);
+                                    background:rgba(7,18,38,0.54);
+                                    box-shadow:0 14px 34px rgba(0,0,0,0.24),0 0 28px rgba(245,158,11,0.10);
+                                    backdrop-filter:blur(14px);">
+                                        <div style="
+                                        width:46px;
+                                        height:46px;
+                                        border-radius:50%;
+                                        flex:0 0 auto;
+                                        background:radial-gradient(circle at 33% 28%,#fff7d6 0,#f8c45b 24%,#d8871e 58%,#7a3e0c 100%);
+                                        box-shadow:0 0 18px rgba(245,158,11,0.52),inset -10px -12px 18px rgba(40,18,0,0.32);">&nbsp;</div>
+                                        <div>
+                                            <div class="fw-semibold" style="font-size:0.98rem;line-height:1.15;">Leaderboard</div>
+                                        </div>
+                                    </div>
+                                </a>
 
-                    <div id="animation-column" class="col-lg-4 text-center mt-4 mt-lg-0">
+                                <a href="#hall-of-fame"
+                                   data-planet-link="hall"
+                                   class="text-decoration-none"
+                                   style="
+                                   position:absolute;
+                                   right:0;
+                                   top:24%;
+                                   width:198px;
+                                   color:white;
+                                   z-index:5;">
+                                    <div style="
+                                    display:flex;
+                                    align-items:center;
+                                    gap:0.85rem;
+                                    padding:0.72rem 0.8rem;
+                                    border-radius:999px;
+                                    border:1px solid rgba(255,255,255,0.17);
+                                    background:rgba(7,18,38,0.52);
+                                    box-shadow:0 14px 34px rgba(0,0,0,0.24),0 0 30px rgba(74,163,255,0.14);
+                                    backdrop-filter:blur(14px);">
+                                        <div style="
+                                        width:48px;
+                                        height:48px;
+                                        border-radius:50%;
+                                        flex:0 0 auto;
+                                        background:radial-gradient(circle at 31% 27%,#eaf6ff 0,#78c6ff 25%,#2563eb 58%,#102c69 100%);
+                                        box-shadow:0 0 20px rgba(80,179,255,0.54),inset -12px -12px 18px rgba(1,16,49,0.34);">&nbsp;</div>
+                                        <div>
+                                            <div class="fw-semibold" style="font-size:0.98rem;line-height:1.15;">Hall of Fame</div>
+                                            <small style="display:block;color:rgba(232,242,255,0.72);line-height:1.25;">Featured student AI work</small>
+                                        </div>
+                                    </div>
+                                </a>
 
-                        <div id="animation-container"
+                                <a href="#popular"
+                                   data-planet-link="popular"
+                                   class="text-decoration-none"
+                                   style="
+                                   position:absolute;
+                                   left:0;
+                                   bottom:22%;
+                                   width:204px;
+                                   color:white;
+                                   z-index:5;">
+                                    <div style="
+                                    display:flex;
+                                    align-items:center;
+                                    gap:0.85rem;
+                                    padding:0.72rem 0.8rem;
+                                    border-radius:999px;
+                                    border:1px solid rgba(255,255,255,0.17);
+                                    background:rgba(7,18,38,0.52);
+                                    box-shadow:0 14px 34px rgba(0,0,0,0.24),0 0 30px rgba(37,211,145,0.12);
+                                    backdrop-filter:blur(14px);">
+                                        <div style="
+                                        width:48px;
+                                        height:48px;
+                                        border-radius:50%;
+                                        flex:0 0 auto;
+                                        background:radial-gradient(circle at 32% 28%,#dcfff0 0,#7ce0b0 26%,#059669 58%,#064e3b 100%);
+                                        box-shadow:0 0 20px rgba(34,197,94,0.48),inset -12px -12px 18px rgba(2,44,34,0.32);">&nbsp;</div>
+                                        <div>
+                                            <div class="fw-semibold" style="font-size:0.98rem;line-height:1.15;">Popular Challenges</div>
+                                            <small style="display:block;color:rgba(232,242,255,0.72);line-height:1.25;">Most active challenge briefs</small>
+                                        </div>
+                                    </div>
+                                </a>
 
-                             style="
-                             position:relative;
-                             width:300px;
-                             height:300px;
-                             margin:auto;">
-
-                            <div id="rocket-scene" aria-hidden="true">
-                                <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
-
-                                    <dotlottie-wc
-                                    src="https://lottie.host/e594f3cb-5689-40b8-81b9-92b20e27600b/oUSeJKJEMK.lottie"
-                                    style="width:300px;max-width:100%;height:auto;display:block;margin:0 auto;"
-                                    autoplay
-                                    loop
-                                    >
-                                </dotlottie-wc>
+                                <a href="#learning-challenges"
+                                   data-planet-link="learning"
+                                   class="text-decoration-none"
+                                   style="
+                                   position:absolute;
+                                   right:1%;
+                                   bottom:6%;
+                                   width:214px;
+                                   color:white;
+                                   z-index:5;">
+                                    <div style="
+                                    display:flex;
+                                    align-items:center;
+                                    gap:0.85rem;
+                                    padding:0.72rem 0.8rem;
+                                    border-radius:999px;
+                                    border:1px solid rgba(255,255,255,0.17);
+                                    background:rgba(7,18,38,0.52);
+                                    box-shadow:0 14px 34px rgba(0,0,0,0.24),0 0 30px rgba(167,139,250,0.13);
+                                    backdrop-filter:blur(14px);">
+                                        <div style="
+                                        width:48px;
+                                        height:48px;
+                                        border-radius:50%;
+                                        flex:0 0 auto;
+                                        background:radial-gradient(circle at 33% 28%,#f6f0ff 0,#c4b5fd 27%,#7c3aed 58%,#3b1a72 100%);
+                                        box-shadow:0 0 20px rgba(167,139,250,0.52),inset -12px -12px 18px rgba(31,13,67,0.34);">&nbsp;</div>
+                                        <div>
+                                            <div class="fw-semibold" style="font-size:0.98rem;line-height:1.15;">Learning Challenges</div>
+                                            <small style="display:block;color:rgba(232,242,255,0.72);line-height:1.25;">Academic, workplace and lifelong</small>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
 
                         </div>
@@ -227,277 +486,7 @@ Constraints:
 
         </div>
 
-    </div>
-
-</div>
-
-<!-- Quick Links -->
-
-<div class="container mb-5" style="margin-top:-2rem;">
-
-    <div class="mb-4">
-
-        <h2 class="fw-bold mb-1" style="color:#0f172a;">
-
-            Challenge Hub
-
-        </h2>
-
-        <p class="text-muted mb-0">
-
-            Jump into competitions, examples and challenge collections
-
-        </p>
-
-    </div>
-
-    <div class="row" style="row-gap:1.5rem;">
-
-        <div class="col-12 col-md-6 mb-3">
-
-            <a href="#leaderboard" class="text-decoration-none">
-
-                <div data-quick-link
-
-                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
-
-                     style="
-                     background:linear-gradient(135deg,#0f172a,#1e293b);
-                     border-radius:20px;
-                     min-height:88px;
-                     color:white;
-                     cursor:pointer;">
-
-                    <div class="d-flex align-items-center">
-
-                        <div class="d-flex align-items-center justify-content-center"
-
-                             style="
-                             width:52px;
-                             height:52px;
-                             border-radius:50%;
-                             background:#f59e0b;
-                             font-size:1.3rem;
-                             flex-shrink:0;
-                             margin-right:18px;">
-
-                            <span class="bi bi-trophy" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                        </div>
-
-                        <div>
-
-                            <div class="fw-semibold">
-
-                                Leaderboard
-
-                            </div>
-
-                            <small style="opacity:.75;">
-
-                                See the current top performers
-
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                    <div style="font-size:1.5rem;opacity:.7;">
-
-                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                    </div>
-
-                </div>
-
-            </a>
-
-        </div>
-
-        <div class="col-12 col-md-6 mb-3">
-
-            <a href="#hall-of-fame" class="text-decoration-none">
-
-                <div data-quick-link
-
-                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
-
-                     style="
-                     background:linear-gradient(135deg,#0f172a,#1e293b);
-                     border-radius:20px;
-                     min-height:88px;
-                     color:white;
-                     cursor:pointer;">
-
-                    <div class="d-flex align-items-center">
-
-                        <div class="d-flex align-items-center justify-content-center"
-
-                             style="
-                             width:52px;
-                             height:52px;
-                             border-radius:50%;
-                             background:#2563eb;
-                             font-size:1.3rem;
-                             flex-shrink:0;
-                             margin-right:18px;">
-
-                            <span class="bi bi-award" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                        </div>
-
-                        <div>
-
-                            <div class="fw-semibold">
-
-                                Hall of Fame
-
-                            </div>
-
-                            <small style="opacity:.75;">
-
-                                Featured student AI work
-
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                    <div style="font-size:1.5rem;opacity:.7;">
-
-                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                    </div>
-
-                </div>
-
-            </a>
-
-        </div>
-
-        <div class="col-12 col-md-6 mb-3">
-
-            <a href="#popular" class="text-decoration-none">
-
-                <div data-quick-link
-
-                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
-
-                     style="
-                     background:linear-gradient(135deg,#0f172a,#1e293b);
-                     border-radius:20px;
-                     min-height:88px;
-                     color:white;
-                     cursor:pointer;">
-
-                    <div class="d-flex align-items-center">
-
-                        <div class="d-flex align-items-center justify-content-center"
-
-                             style="
-                             width:52px;
-                             height:52px;
-                             border-radius:50%;
-                             background:#059669;
-                             font-size:1.3rem;
-                             flex-shrink:0;
-                             margin-right:18px;">
-
-                            <span class="bi bi-bar-chart-line" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                        </div>
-
-                        <div>
-
-                            <div class="fw-semibold">
-
-                                Popular Challenges
-
-                            </div>
-
-                            <small style="opacity:.75;">
-
-                                Most active challenge briefs
-
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                    <div style="font-size:1.5rem;opacity:.7;">
-
-                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                    </div>
-
-                </div>
-
-            </a>
-
-        </div>
-
-        <div class="col-12 col-md-6 mb-3">
-
-            <a href="#learning-challenges" class="text-decoration-none">
-
-                <div data-quick-link
-
-                     class="d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
-
-                     style="
-                     background:linear-gradient(135deg,#0f172a,#1e293b);
-                     border-radius:20px;
-                     min-height:88px;
-                     color:white;
-                     cursor:pointer;">
-
-                    <div class="d-flex align-items-center">
-
-                        <div class="d-flex align-items-center justify-content-center"
-
-                             style="
-                             width:52px;
-                             height:52px;
-                             border-radius:50%;
-                             background:#7c3aed;
-                             font-size:1.3rem;
-                             flex-shrink:0;
-                             margin-right:18px;">
-
-                            <span class="bi bi-journal-check" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                        </div>
-
-                        <div>
-
-                            <div class="fw-semibold">
-
-                                Learning Challenges
-
-                            </div>
-
-                            <small style="opacity:.75;">
-
-                                Academic, workplace and lifelong
-
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                    <div style="font-size:1.5rem;opacity:.7;">
-
-                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                    </div>
-
-                </div>
-
-            </a>
+            </div>
 
         </div>
 
@@ -1354,6 +1343,7 @@ Constraints:
 
 const hero = document.getElementById('hero');
 
+if (hero) {
 hero.addEventListener('mousemove', (e) => {
 
     const rect = hero.getBoundingClientRect();
@@ -1366,6 +1356,45 @@ hero.addEventListener('mousemove', (e) => {
         transparent 300px),
         linear-gradient(135deg,#0f172a,#1e293b)`;
 });
+}
+
+//rocket animation and planet drift
+
+(function () {
+    var styles = [
+        '#ai-challenges-hero [data-rocket="true"]{animation:bathRocketFloat 6s ease-in-out infinite;}',
+        '#ai-challenges-hero [data-planet-link]{transition:transform 240ms ease,filter 240ms ease;will-change:transform;}',
+        '#ai-challenges-hero [data-planet-link]:hover,#ai-challenges-hero [data-planet-link]:focus{transform:scale(1.045);filter:brightness(1.08);}',
+        '#ai-challenges-hero [data-planet-link="leaderboard"]{animation:bathPlanetDriftA 8s ease-in-out infinite;}',
+        '#ai-challenges-hero [data-planet-link="hall"]{animation:bathPlanetDriftB 9s ease-in-out infinite;}',
+        '#ai-challenges-hero [data-planet-link="popular"]{animation:bathPlanetDriftC 8.5s ease-in-out infinite;}',
+        '#ai-challenges-hero [data-planet-link="learning"]{animation:bathPlanetDriftD 9.5s ease-in-out infinite;}',
+        '#ai-challenges-hero [data-star-field="one"]{animation:bathStarsOne 14s ease-in-out infinite alternate;}',
+        '#ai-challenges-hero [data-star-field="two"]{animation:bathStarsTwo 18s ease-in-out infinite alternate;}',
+        '@keyframes bathRocketFloat{0%,100%{transform:translate(-50%,-51%) rotate(8deg);}50%{transform:translate(-50%,-47%) rotate(8deg);}}',
+        '@keyframes bathPlanetDriftA{0%,100%{margin-top:0;}50%{margin-top:-8px;}}',
+        '@keyframes bathPlanetDriftB{0%,100%{margin-top:0;}50%{margin-top:7px;}}',
+        '@keyframes bathPlanetDriftC{0%,100%{margin-bottom:0;}50%{margin-bottom:8px;}}',
+        '@keyframes bathPlanetDriftD{0%,100%{margin-bottom:0;}50%{margin-bottom:-7px;}}',
+        '@keyframes bathStarsOne{0%{opacity:.52;}100%{opacity:.86;}}',
+        '@keyframes bathStarsTwo{0%{opacity:.26;}100%{opacity:.52;}}',
+        '@media (max-width:991.98px){#ai-challenges-hero{min-height:980px!important;}#ai-challenges-hero .row[style*="min-height:520px"]{min-height:980px!important;}#mission-scene{position:relative!important;right:auto!important;top:auto!important;transform:none!important;width:min(100%,620px)!important;height:520px!important;margin-top:-1rem!important;}#ai-challenges-hero [data-planet-link]{width:min(84vw,260px)!important;}#ai-challenges-hero [data-planet-link="leaderboard"]{left:0!important;top:4%!important;}#ai-challenges-hero [data-planet-link="hall"]{right:0!important;top:20%!important;}#ai-challenges-hero [data-planet-link="popular"]{left:0!important;bottom:21%!important;}#ai-challenges-hero [data-planet-link="learning"]{right:0!important;bottom:4%!important;}#ai-challenges-hero [data-rocket="true"]{width:175px!important;max-width:48vw!important;}#ai-challenges-hero .display-5{font-size:2.75rem!important;}}',
+        '@media (max-width:575.98px){#ai-challenges-hero{min-height:1040px!important;}#mission-scene{height:560px!important;}#ai-challenges-hero [data-planet-link]{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;display:block!important;margin:0.75rem auto!important;}#ai-challenges-hero [data-orbit],#ai-challenges-hero [data-rocket-aura]{display:none!important;}#ai-challenges-hero [data-rocket="true"]{position:relative!important;left:auto!important;top:auto!important;display:block!important;margin:0.25rem auto 1.25rem auto!important;transform:rotate(8deg)!important;animation:bathRocketFloatSmall 6s ease-in-out infinite!important;}#ai-challenges-hero .display-5{font-size:2rem!important;}@keyframes bathRocketFloatSmall{0%,100%{transform:translateY(0) rotate(8deg);}50%{transform:translateY(-10px) rotate(8deg);}}}',
+        '@media (prefers-reduced-motion:reduce){#ai-challenges-hero [data-rocket="true"],#ai-challenges-hero [data-planet-link],#ai-challenges-hero [data-star-field]{animation:none!important;}}'
+    ].join('');
+
+    var styleElement = document.createElement('style');
+    styleElement.textContent = styles;
+    document.head.appendChild(styleElement);
+
+    if (!document.querySelector('link[data-bootstrap-icons]')) {
+        var iconLink = document.createElement('link');
+        iconLink.rel = 'stylesheet';
+        iconLink.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css';
+        iconLink.setAttribute('data-bootstrap-icons', 'true');
+        document.head.appendChild(iconLink);
+    }
+})();
 
 </script>
 
