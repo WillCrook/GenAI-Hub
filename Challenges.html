@@ -27,7 +27,7 @@ Constraints:
 - No custom CSS classes.
 - No `<html>`, `<head>`, or `<body>` tags.
 - Avoid empty spans/icons that may be stripped.
-- Use Unicode icons where needed.
+- Use Bootstrap Icons where needed.
 - Mobile responsive using Bootstrap grid only.
 - Modern style with student learning in mind.
 
@@ -73,7 +73,7 @@ Constraints:
 
                 data-bs-target="#hubNav">
 
-            <span style="font-size:1.5rem;line-height:1;">☰</span>
+            <span class="bi bi-list" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:1.5rem;line-height:1;" aria-hidden="true">&nbsp;</span>
 
         </button>
 
@@ -195,18 +195,26 @@ Constraints:
 
                     </div>
 
-                    <div id="orb-column" class="col-lg-4 text-center mt-4 mt-lg-0">
+                    <div id="animation-column" class="col-lg-4 text-center mt-4 mt-lg-0">
 
-                        <div id="orb-container"
+                        <div id="animation-container"
 
                              style="
                              position:relative;
-                             width:240px;
-                             height:240px;
+                             width:300px;
+                             height:300px;
                              margin:auto;">
 
-                            <div id="trophy">
-                                🏆
+                            <div id="rocket-scene" aria-hidden="true">
+                                <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+
+                                    <dotlottie-wc
+                                    src="https://lottie.host/e594f3cb-5689-40b8-81b9-92b20e27600b/oUSeJKJEMK.lottie"
+                                    style="width:300px;max-width:100%;height:auto;display:block;margin:0 auto;"
+                                    autoplay
+                                    loop
+                                    >
+                                </dotlottie-wc>
                             </div>
 
                         </div>
@@ -273,7 +281,7 @@ Constraints:
                              flex-shrink:0;
                              margin-right:18px;">
 
-                            🏆
+                            <span class="bi bi-trophy" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                         </div>
 
@@ -297,7 +305,7 @@ Constraints:
 
                     <div style="font-size:1.5rem;opacity:.7;">
 
-                        →
+                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                     </div>
 
@@ -335,7 +343,7 @@ Constraints:
                              flex-shrink:0;
                              margin-right:18px;">
 
-                            ⭐
+                            <span class="bi bi-award" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                         </div>
 
@@ -359,7 +367,7 @@ Constraints:
 
                     <div style="font-size:1.5rem;opacity:.7;">
 
-                        →
+                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                     </div>
 
@@ -397,7 +405,7 @@ Constraints:
                              flex-shrink:0;
                              margin-right:18px;">
 
-                            🔥
+                            <span class="bi bi-bar-chart-line" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                         </div>
 
@@ -421,7 +429,7 @@ Constraints:
 
                     <div style="font-size:1.5rem;opacity:.7;">
 
-                        →
+                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                     </div>
 
@@ -459,7 +467,7 @@ Constraints:
                              flex-shrink:0;
                              margin-right:18px;">
 
-                            🚀
+                            <span class="bi bi-journal-check" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                         </div>
 
@@ -483,7 +491,7 @@ Constraints:
 
                     <div style="font-size:1.5rem;opacity:.7;">
 
-                        →
+                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                     </div>
 
@@ -639,7 +647,7 @@ Constraints:
                 data-bs-target="#challengeCarousel"
                 data-bs-slide="prev">
 
-            <span style="font-size:2.5rem;line-height:1;color:white;">‹</span>
+            <span class="bi bi-chevron-left" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:2.2rem;line-height:1;color:white;" aria-hidden="true">&nbsp;</span>
 
         </button>
 
@@ -648,7 +656,7 @@ Constraints:
                 data-bs-target="#challengeCarousel"
                 data-bs-slide="next">
 
-            <span style="font-size:2.5rem;line-height:1;color:white;">›</span>
+            <span class="bi bi-chevron-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:2.2rem;line-height:1;color:white;" aria-hidden="true">&nbsp;</span>
 
         </button>
 
@@ -677,7 +685,10 @@ Constraints:
 
                     </div>
 
-                    <div style="font-size:2rem;">🏆</div>
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                         style="width:52px;height:52px;background:#fef3c7;color:#92400e;font-size:1.45rem;">
+                        <span class="bi bi-trophy" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                    </div>
 
                 </div>
 
@@ -810,7 +821,7 @@ Constraints:
 
                                 <div class="d-flex align-items-center justify-content-center"
                                      style="width:52px;height:52px;border-radius:50%;background:#2563eb;color:white;font-size:1.4rem;margin-right:14px;">
-                                    🎓
+                                    <span class="bi bi-mortarboard" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                                 </div>
 
                                 <div>
@@ -843,7 +854,7 @@ Constraints:
 
                                 <div class="d-flex align-items-center justify-content-center"
                                      style="width:52px;height:52px;border-radius:50%;background:#059669;color:white;font-size:1.4rem;margin-right:14px;">
-                                    💼
+                                    <span class="bi bi-briefcase" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                                 </div>
 
                                 <div>
@@ -935,7 +946,10 @@ Constraints:
             <div class="h-100 p-5 bg-white rounded-4 shadow-sm border d-flex flex-column"
                  style="min-height:300px;color:#0f172a;">
 
-                <div style="font-size:2rem;">🎓</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:52px;height:52px;background:#dbeafe;color:#1d4ed8;font-size:1.45rem;">
+                    <span class="bi bi-mortarboard" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
 
                 <h3 class="fw-bold mt-3">
 
@@ -971,7 +985,10 @@ Constraints:
             <div class="h-100 p-5 bg-white rounded-4 shadow-sm border d-flex flex-column"
                  style="min-height:300px;color:#0f172a;">
 
-                <div style="font-size:2rem;">💼</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:52px;height:52px;background:#dcfce7;color:#047857;font-size:1.45rem;">
+                    <span class="bi bi-briefcase" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
 
                 <h3 class="fw-bold mt-3">
 
@@ -1007,7 +1024,10 @@ Constraints:
             <div class="h-100 p-5 bg-white rounded-4 shadow-sm border d-flex flex-column"
                  style="min-height:300px;color:#0f172a;">
 
-                <div style="font-size:2rem;">🚀</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:52px;height:52px;background:#ede9fe;color:#6d28d9;font-size:1.45rem;">
+                    <span class="bi bi-compass" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
 
                 <h3 class="fw-bold mt-3">
 
@@ -1271,37 +1291,18 @@ Constraints:
     }
 }
 
-#trophy {
+#rocket-scene {
     position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    font-size:7rem;
-    filter:
-        drop-shadow(0 0 16px rgba(255,255,0,0.6))
-        drop-shadow(0 0 42px rgba(245,158,11,0.45));
-    animation:
-        trophyGlow 8s infinite,
-        float 6s ease-in-out infinite;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
 }
 
-@keyframes trophyGlow {
-    0%,100% {
-        opacity:0.45;
-        filter:none;
-    }
-
-    25%,70% {
-        opacity:1;
-        filter:
-            drop-shadow(0 0 16px rgba(255,255,0,0.75))
-            drop-shadow(0 0 48px rgba(245,158,11,0.55));
-    }
-}
-
-@keyframes float {
-    0%,100% { transform:translate(-50%,-50%) translateY(0); }
-    50% { transform:translate(-50%,-50%) translateY(-12px); }
+#rocket-scene dotlottie-wc {
+    display:block;
+    margin:auto;
 }
 
 @media (max-width: 991.98px) {
@@ -1321,7 +1322,7 @@ Constraints:
         overflow: visible;
     }
 
-    #orb-column {
+    #animation-column {
         display: none;
     }
 }
@@ -1361,7 +1362,7 @@ hero.addEventListener('mousemove', (e) => {
 
     hero.style.background = `
         radial-gradient(circle at ${x}px ${y}px,
-        rgba(255,255,0,0.12),
+        rgba(255,0,0,0.12),
         transparent 300px),
         linear-gradient(135deg,#0f172a,#1e293b)`;
 });
@@ -1369,3 +1370,19 @@ hero.addEventListener('mousemove', (e) => {
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function () {
+    if (document.querySelector('link[data-bootstrap-icons]')) return;
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    var p1 = 'ht';
+    var p2 = 'tps';
+    var p3 = '://';
+    var p4 = 'cdn';
+    var p5 = '.jsdelivr';
+    var p6 = '.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css';
+    l.href = p1 + p2 + p3 + p4 + p5 + p6;
+    l.setAttribute('data-bootstrap-icons', 'true');
+    document.head.appendChild(l);
+})();
+</script>

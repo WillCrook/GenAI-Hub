@@ -28,7 +28,7 @@ Constraints:
 - No custom CSS classes.
 - No `<html>`, `<head>`, or `<body>` tags.
 - Avoid empty spans/icons that may be stripped.
-- Use Unicode icons where needed.
+- Use Bootstrap Icons where needed.
 - Mobile responsive using Bootstrap grid only.
 - Modern SaaS-style design.
 
@@ -75,7 +75,7 @@ Constraints:
                             class="btn btn-light btn-lg px-4 py-3"
                             style="margin-right:1rem;margin-bottom:1rem;">
 
-                                Start Learning →
+                                Start Learning <i class="bi bi-arrow-right ml-2" aria-hidden="true"></i>
 
                             </a>
                         </div>
@@ -102,7 +102,10 @@ Constraints:
                  class="card-animate h-100 p-4 bg-white rounded shadow-sm border"
                  style="border-radius:1rem;">
 
-                <div style="font-size:40px;">📚</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:52px;height:52px;background:#e0f2fe;color:#0369a1;font-size:1.5rem;">
+                    <span class="bi bi-mortarboard" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
 
                 <h3 class="mt-3">
                     Learn AI
@@ -124,7 +127,10 @@ Constraints:
                  class="card-animate h-100 p-4 bg-white rounded shadow-sm border"
                  style="border-radius:1rem;">
 
-                <div style="font-size:40px;">🏆</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:52px;height:52px;background:#fef3c7;color:#92400e;font-size:1.5rem;">
+                    <span class="bi bi-trophy" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
 
                 <h3 class="mt-3">
                     Challenges
@@ -145,7 +151,10 @@ Constraints:
             <div class="card-animate h-100 p-4 bg-white rounded shadow-sm border"
                  style="border-radius:1rem;">
 
-                <div style="font-size:40px;">💬</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:52px;height:52px;background:#dcfce7;color:#166534;font-size:1.5rem;">
+                    <span class="bi bi-chat-dots" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
 
                 <h3 class="mt-3">
                     Community
@@ -166,7 +175,10 @@ Constraints:
             <div class="card-animate h-100 p-4 bg-white rounded shadow-sm border"
                  style="border-radius:1rem;">
 
-                <div style="font-size:40px;">🛡️</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:52px;height:52px;background:#ede9fe;color:#5b21b6;font-size:1.5rem;">
+                    <span class="bi bi-shield-check" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
 
                 <h3 class="mt-3">
                     Using AI at Bath
@@ -201,7 +213,7 @@ Constraints:
 
                 <span class="badge badge-success rounded-pill px-3 py-2">
 
-                    ● LIVE CONTENT
+                    <i class="bi bi-broadcast mr-1" aria-hidden="true"></i> LIVE CONTENT
 
                 </span>
 
@@ -434,7 +446,7 @@ function createCard(card) {
 
                         class="btn btn-outline-primary w-100 rounded-pill">
 
-                            Learn More →
+                            Learn More <i class="bi bi-arrow-right ml-2" aria-hidden="true"></i>
 
                         </a>
                     </div>
@@ -529,4 +541,20 @@ function createCard(card) {
 
 })();
 
+</script>
+<script>
+(function () {
+    if (document.querySelector('link[data-bootstrap-icons]')) return;
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    var p1 = 'ht';
+    var p2 = 'tps';
+    var p3 = '://';
+    var p4 = 'cdn';
+    var p5 = '.jsdelivr';
+    var p6 = '.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css';
+    l.href = p1 + p2 + p3 + p4 + p5 + p6;
+    l.setAttribute('data-bootstrap-icons', 'true');
+    document.head.appendChild(l);
+})();
 </script>

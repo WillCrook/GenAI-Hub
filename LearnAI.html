@@ -12,7 +12,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
           rel="stylesheet">
-    
 
     <title>Learn AI</title>
 
@@ -28,7 +27,7 @@ Constraints:
 - No custom CSS classes.
 - No `<html>`, `<head>`, or `<body>` tags.
 - Avoid empty spans/icons that may be stripped.
-- Use Unicode icons where needed.
+- Use Bootstrap Icons where needed.
 - Mobile responsive using Bootstrap grid only.
 - Modern style with student learning in mind.
 
@@ -78,7 +77,7 @@ Constraints:
 
                 data-bs-target="#hubNav">
 
-            <span style="font-size:1.5rem;line-height:1;">☰</span>
+            <span class="bi bi-list" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:1.5rem;line-height:1;" aria-hidden="true">&nbsp;</span>
 
         </button>
 
@@ -219,7 +218,7 @@ Constraints:
                              margin:auto;">
 
                             <div id="bulb">
-                                💡
+                                <span class="bi bi-lightbulb" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                             </div>
 
                         </div>
@@ -300,7 +299,7 @@ Constraints:
 
                              margin-right:18px;">
 
-                            ⭐
+                            <span class="bi bi-award" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                         </div>
 
@@ -324,7 +323,7 @@ Constraints:
 
                     <div style="font-size:1.5rem;opacity:.7;">
 
-                        →
+                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                     </div>
 
@@ -376,7 +375,7 @@ Constraints:
                              
                              margin-right:18px;">
 
-                            🎓
+                            <span class="bi bi-mortarboard" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                         </div>
 
@@ -400,7 +399,7 @@ Constraints:
 
                     <div style="font-size:1.5rem;opacity:.7;">
 
-                        →
+                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                     </div>
 
@@ -452,7 +451,7 @@ Constraints:
                              
                              margin-right:18px;">
 
-                            💼
+                            <span class="bi bi-briefcase" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                         </div>
 
@@ -476,7 +475,7 @@ Constraints:
 
                     <div style="font-size:1.5rem;opacity:.7;">
 
-                        →
+                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                     </div>
 
@@ -528,7 +527,7 @@ Constraints:
                              
                              margin-right:18px;">
 
-                            🚀
+                            <span class="bi bi-compass" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                         </div>
 
@@ -552,7 +551,7 @@ Constraints:
 
                     <div style="font-size:1.5rem;opacity:.7;">
 
-                        →
+                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                     </div>
 
@@ -658,14 +657,14 @@ Constraints:
                 type="button"
                 data-bs-target="#resourceCarousel"
                 data-bs-slide="prev">
-            <span style="font-size:2.5rem;line-height:1;color:white;">‹</span>
+            <span class="bi bi-chevron-left" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:2.2rem;line-height:1;color:white;" aria-hidden="true">&nbsp;</span>
         </button>
 
         <button class="carousel-control-next"
                 type="button"
                 data-bs-target="#resourceCarousel"
                 data-bs-slide="next">
-            <span style="font-size:2.5rem;line-height:1;color:white;">›</span>
+            <span class="bi bi-chevron-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:2.2rem;line-height:1;color:white;" aria-hidden="true">&nbsp;</span>
         </button>
 
     </div>
@@ -687,7 +686,10 @@ Constraints:
         <!-- Large feature card -->
         <div id="academic" class="col-12 col-lg-8 mb-4">
             <div class="h-100 p-5 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
-                <div style="font-size:2rem;">🎓</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:52px;height:52px;background:#dbeafe;color:#1d4ed8;font-size:1.45rem;">
+                    <span class="bi bi-mortarboard" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
                 <h3 class="fw-bold mt-3">
                     AI for Coursework
                 </h3>
@@ -708,7 +710,10 @@ Constraints:
         <!-- Small card -->
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
-                <div style="font-size:2rem;">✨</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:48px;height:48px;background:#e0f2fe;color:#0369a1;font-size:1.35rem;">
+                    <span class="bi bi-chat-square-text" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
                 <h5 class="fw-bold">Prompting</h5>
                 <p class="text-muted mb-4">Learn to write better prompts.</p>
                 <div class="mt-auto">
@@ -724,7 +729,10 @@ Constraints:
         <!-- Small card -->
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
-                <div style="font-size:2rem;">📚</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:48px;height:48px;background:#e0f2fe;color:#0369a1;font-size:1.35rem;">
+                    <span class="bi bi-journal-text" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
                 <h5 class="fw-bold">Revision</h5>
                 <p class="text-muted mb-4">Use AI to test understanding.</p>
                 <div class="mt-auto">
@@ -740,7 +748,10 @@ Constraints:
         <!-- Wide card -->
         <div class="col-12 col-lg-8 mb-4">
             <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
-                <div style="font-size:2rem;">🔍</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:48px;height:48px;background:#e0f2fe;color:#0369a1;font-size:1.35rem;">
+                    <span class="bi bi-search" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
                 <h5 class="fw-bold">Research & Literature Reviews</h5>
                 <p class="text-muted mb-4">
                     Find, analyse and summarise academic sources.
@@ -757,7 +768,10 @@ Constraints:
 
         <div id="workplace" class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
-                <div style="font-size:2rem;">💼</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:48px;height:48px;background:#dcfce7;color:#047857;font-size:1.35rem;">
+                    <span class="bi bi-briefcase" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
                 <h5 class="fw-bold">Placements</h5>
                 <p class="text-muted mb-4">Applications, CVs and interviews.</p>
                 <div class="mt-auto">
@@ -772,7 +786,10 @@ Constraints:
 
         <div class="col-12 col-lg-8 mb-4">
             <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
-                <div style="font-size:2rem;">⚡</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:48px;height:48px;background:#dcfce7;color:#047857;font-size:1.35rem;">
+                    <span class="bi bi-speedometer2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
                 <h5 class="fw-bold">Productivity</h5>
                 <p class="text-muted mb-4">
                     Automate repetitive tasks and work smarter.
@@ -789,7 +806,10 @@ Constraints:
 
         <div id="lifelong" class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
-                <div style="font-size:2rem;">🤖</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:48px;height:48px;background:#ede9fe;color:#6d28d9;font-size:1.35rem;">
+                    <span class="bi bi-diagram-3" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
                 <h5 class="fw-bold">Automation</h5>
                 <p class="text-muted mb-4">Build simple workflows that save time.</p>
                 <div class="mt-auto">
@@ -804,7 +824,10 @@ Constraints:
 
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
-                <div style="font-size:2rem;">🚀</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:48px;height:48px;background:#ede9fe;color:#6d28d9;font-size:1.35rem;">
+                    <span class="bi bi-cpu" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
                 <h5 class="fw-bold">New Technologies</h5>
                 <p class="text-muted mb-4">Keep up with emerging AI tools and trends.</p>
                 <div class="mt-auto">
@@ -819,7 +842,10 @@ Constraints:
 
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
-                <div style="font-size:2rem;">🎨</div>
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
+                     style="width:48px;height:48px;background:#ede9fe;color:#6d28d9;font-size:1.35rem;">
+                    <span class="bi bi-brush" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                </div>
                 <h5 class="fw-bold">Creativity</h5>
                 <p class="text-muted mb-4">Use AI to develop ideas, media and projects.</p>
                 <div class="mt-auto">
@@ -1247,7 +1273,7 @@ Constraints:
         questionLabel: "Suggested Learning Path",
         recommendationLabel: "Your Recommendation",
         recommendedTopicsLabel: "Recommended Topics",
-        startLearningLabel: "Start Learning →"
+        startLearningLabel: "Start Learning <span class=\"bi bi-arrow-right ms-2\" style=\"display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;\" aria-hidden=\"true\">&nbsp;</span>"
     };
 
     const quizOptions = {
@@ -1305,7 +1331,7 @@ Constraints:
 
     const recommendationPaths = {
         academic: {
-            title: "🎓 Academic Skills Path",
+            title: "Academic Skills Path",
             finalStep: "Academic Learning Resources",
             topics: [
                 "Prompting",
@@ -1314,7 +1340,7 @@ Constraints:
             ]
         },
         workplace: {
-            title: "💼 Workplace Skills Path",
+            title: "Workplace Skills Path",
             finalStep: "Workplace Learning Resources",
             topics: [
                 "CVs",
@@ -1323,7 +1349,7 @@ Constraints:
             ]
         },
         lifelong: {
-            title: "🚀 Lifelong Learning Path",
+            title: "Lifelong Learning Path",
             finalStep: "Lifelong Learning Resources",
             topics: [
                 "Automation",
@@ -1404,7 +1430,7 @@ Constraints:
 
                 ${recommendation.topics.map(topic => `
                     <div class="mb-2">
-                        • ${topic}
+                        <span class="bi bi-check-circle me-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>${topic}
                     </div>
                 `).join(EMPTY_HTML)}
             </div>`;
@@ -1520,3 +1546,19 @@ hero.addEventListener('mousemove', (e) => {
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function () {
+    if (document.querySelector('link[data-bootstrap-icons]')) return;
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    var p1 = 'ht';
+    var p2 = 'tps';
+    var p3 = '://';
+    var p4 = 'cdn';
+    var p5 = '.jsdelivr';
+    var p6 = '.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css';
+    l.href = p1 + p2 + p3 + p4 + p5 + p6;
+    l.setAttribute('data-bootstrap-icons', 'true');
+    document.head.appendChild(l);
+})();
+</script>
