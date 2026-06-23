@@ -76,7 +76,7 @@ Constraints:
                             class="btn btn-light btn-lg px-4 py-3"
                             style="margin-right:1rem;margin-bottom:1rem;">
 
-                                Start Learning <i class="bi bi-arrow-right ml-2" aria-hidden="true"></i>
+                                Start Learning <span class="bi bi-arrow-right ml-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                             </a>
                         </div>
@@ -84,7 +84,7 @@ Constraints:
 
                     <div id="orb-column" class="col-lg-4 text-center mt-4 mt-lg-0">
                         <div id="orb-container" style="position:relative;width:min(240px,70vw);aspect-ratio:1/1;margin:auto;transition:transform 0.2s ease;">
-                            <div id="core"></div>
+                            <div id="core" style="position:absolute;top:50%;left:50%;width:90px;height:90px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#dbeafe,#60a5fa,#2563eb);box-shadow:0 0 40px #60a5fa,0 0 100px rgba(96,165,250,0.7),0 0 160px rgba(96,165,250,0.3);"></div>
                         </div>
                     </div>
 
@@ -100,7 +100,8 @@ Constraints:
 
         <div class="col-md-6 col-xl-3 mb-4">
             <div id="learn"
-                 class="card-animate h-100 p-4 bg-white rounded shadow-sm border"
+                 data-animate-card="true"
+                 class="h-100 p-4 bg-white rounded shadow-sm border"
                  style="border-radius:1rem;">
 
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -125,7 +126,8 @@ Constraints:
 
         <div class="col-md-6 col-xl-3 mb-4">
             <div id="challenges"
-                 class="card-animate h-100 p-4 bg-white rounded shadow-sm border"
+                 data-animate-card="true"
+                 class="h-100 p-4 bg-white rounded shadow-sm border"
                  style="border-radius:1rem;">
 
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -149,7 +151,7 @@ Constraints:
         </div>
 
         <div class="col-md-6 col-xl-3 mb-4">
-            <div class="card-animate h-100 p-4 bg-white rounded shadow-sm border"
+            <div data-animate-card="true" class="h-100 p-4 bg-white rounded shadow-sm border"
                  style="border-radius:1rem;">
 
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -173,7 +175,7 @@ Constraints:
         </div>
 
         <div class="col-md-6 col-xl-3 mb-4">
-            <div class="card-animate h-100 p-4 bg-white rounded shadow-sm border"
+            <div data-animate-card="true" class="h-100 p-4 bg-white rounded shadow-sm border"
                  style="border-radius:1rem;">
 
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -214,7 +216,7 @@ Constraints:
 
                 <span class="badge badge-success rounded-pill px-3 py-2">
 
-                    <i class="bi bi-broadcast mr-1" aria-hidden="true"></i> LIVE CONTENT
+                    <span class="bi bi-broadcast mr-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span> LIVE CONTENT
 
                 </span>
 
@@ -231,8 +233,6 @@ Constraints:
                 display:flex;
 
                 width:max-content;
-
-                animation:scrollFeatured 45s linear infinite;
                 ">    
             </div>
 
@@ -471,7 +471,7 @@ Constraints:
 </div>
 <script>
 
-const cards = document.querySelectorAll('.card-animate');
+const cards = document.querySelectorAll('[data-animate-card="true"]');
 
 cards.forEach((card, index) => {
     card.style.opacity = '0';
@@ -520,56 +520,29 @@ const observer = new IntersectionObserver((entries) => {
 
 cards.forEach(card => observer.observe(card));
 
-const style = document.createElement('style');
-style.textContent = `
-	#orb-container {
-	    animation: float 6s ease-in-out infinite;
-	}
-
-    .btn,
-    .navbar-toggler {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-#core {
-    position:absolute;
-    top:50%;
-    left:50%;
-    width:90px;
-    height:90px;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    background:radial-gradient(circle,#dbeafe,#60a5fa,#2563eb);
-    box-shadow:0 0 40px #60a5fa,0 0 100px rgba(96,165,250,0.7),0 0 160px rgba(96,165,250,0.3);
-    animation:pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%,100% {
-        transform:translate(-50%,-50%) scale(1);
-    }
-    50% {
-        transform:translate(-50%,-50%) scale(1.15);
-    }
-}
-
-@keyframes float {
-    0%,100% { transform:translateY(0px); }
-    50% { transform:translateY(-12px); }
-}
-
-@media (max-width: 991.98px) {
-    #orb-column {
-        display:none;
-    }
-}
-`;
-document.head.appendChild(style);
-
 const orb = document.getElementById('orb-container');
+const core = document.getElementById('core');
+let pulseStart = null;
+
+function animateCore(timestamp) {
+    if (pulseStart === null) {
+        pulseStart = timestamp;
+    }
+
+    const elapsed = timestamp - pulseStart;
+    const pulse = 1 + Math.sin(elapsed / 320) * 0.08;
+    const floatY = Math.sin(elapsed / 950) * -6;
+
+    if (core) {
+        core.style.transform = `translate(-50%, calc(-50% + ${floatY.toFixed(2)}px)) scale(${pulse.toFixed(3)})`;
+    }
+
+    window.requestAnimationFrame(animateCore);
+}
+
+if (window.requestAnimationFrame && core) {
+    window.requestAnimationFrame(animateCore);
+}
 
 hero.addEventListener('mousemove', e => {
 
@@ -684,7 +657,7 @@ function createCard(card) {
 
                         class="btn btn-outline-primary w-100 rounded-pill">
 
-                            Learn More <i class="bi bi-arrow-right ml-2" aria-hidden="true"></i>
+                            Learn More <span class="bi bi-arrow-right ml-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
 
                         </a>
                     </div>
@@ -741,41 +714,34 @@ function createCard(card) {
 
     }
 
+    let isPaused = false;
+    let scrollStart = null;
+
     carousel.addEventListener('mouseenter', () => {
-        track.style.animationPlayState = 'paused';
+        isPaused = true;
     });
 
     carousel.addEventListener('mouseleave', () => {
-        track.style.animationPlayState = 'running';
+        isPaused = false;
     });
- 
-    const styleSheet = document.createElement('style');
 
-    styleSheet.textContent = `
-
-        @keyframes scrollFeatured {
-
-            from {
-
-                transform: translateX(0);
-
-            }
-
-            to {
-
-                transform: translateX(-50%);
-
-            }
-
+    function scrollFeatured(timestamp) {
+        if (scrollStart === null || isPaused) {
+            scrollStart = timestamp;
         }
 
-        #featured-carousel:hover #featured-track {
-            animation-play-state: paused;
+        if (window.innerWidth > 768) {
+            const distance = track.scrollWidth / 2;
+            const progress = ((timestamp - scrollStart) / 45000) % 1;
+            track.style.transform = 'translateX(-' + (distance * progress).toFixed(2) + 'px)';
         }
 
-    `;
+        window.requestAnimationFrame(scrollFeatured);
+    }
 
-    document.head.appendChild(styleSheet);
+    if (window.requestAnimationFrame) {
+        window.requestAnimationFrame(scrollFeatured);
+    }
 
 })();
 

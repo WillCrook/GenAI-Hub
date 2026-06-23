@@ -10,7 +10,7 @@
 
     <!-- Bootstrap -->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
     <title>Learn AI</title>
@@ -44,12 +44,12 @@ Constraints:
             </div>
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#hubNav" aria-controls="hubNav" aria-expanded="false" aria-label="Toggle navigation" style="min-height:44px;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hubNav" aria-controls="hubNav" aria-expanded="false" aria-label="Toggle navigation" style="min-height:44px;">
             <span class="bi bi-list" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:1.5rem;line-height:1;" aria-hidden="true">&nbsp;</span>
         </button>
 
         <div class="collapse navbar-collapse" id="hubNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center">
+            <ul class="navbar-nav ml-auto align-items-lg-center">
                 <li class="nav-item">
                     <a class="nav-link px-3 font-weight-bold" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967" style="color:#2563eb;">Learn AI</a>
                 </li>
@@ -75,7 +75,7 @@ Constraints:
 
             <div id="hero" 
 
-                class="p-4 p-md-5 rounded-4 shadow-sm"
+                class="p-4 p-md-5 rounded shadow-sm"
 
                 style="
                  background:linear-gradient(135deg,#0f172a,#1e293b);
@@ -104,7 +104,7 @@ Constraints:
 
                         </div>
 
-                        <h1 class="display-5 fw-bold mt-2 mb-3"
+                        <h1 class="display-4 font-weight-bold mt-2 mb-3"
                             style="font-size:clamp(2rem,8vw,3rem);line-height:1.12;">
                             Build AI skills for
                         </h1>
@@ -115,7 +115,9 @@ Constraints:
                                 font-size:clamp(2rem,8vw,2.5rem);
                                 font-weight:700;
                                 line-height:1.1;
-                                min-height:1.2em;
+                                min-height:1.3em;
+                                height:1.3em;
+                                position:relative;
                                 margin-top:-0.5em;">
                             </div>
 
@@ -143,7 +145,7 @@ Constraints:
 
                              margin:auto;">
 
-                            <div id="bulb">
+                            <div id="bulb" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:7rem;filter:none;opacity:0.4;">
                                 <span class="bi bi-lightbulb" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                             </div>
 
@@ -167,7 +169,7 @@ Constraints:
 
     <div class="mb-4">
 
-        <h2 class="fw-bold mb-1" style="color:#0f172a;">
+        <h2 class="font-weight-bold mb-1" style="color:#0f172a;">
 
             Quick Links
 
@@ -231,7 +233,7 @@ Constraints:
 
                         <div style="min-width:0;">
 
-                            <div class="fw-semibold">
+                            <div class="font-weight-bold">
 
                                 Popular Resources
 
@@ -307,7 +309,7 @@ Constraints:
 
                         <div style="min-width:0;">
 
-                            <div class="fw-semibold">
+                            <div class="font-weight-bold">
 
                                 Academic Skills
 
@@ -383,7 +385,7 @@ Constraints:
 
                         <div style="min-width:0;">
 
-                            <div class="fw-semibold">
+                            <div class="font-weight-bold">
 
                                 Workplace Skills
 
@@ -459,7 +461,7 @@ Constraints:
 
                         <div style="min-width:0;">
 
-                            <div class="fw-semibold">
+                            <div class="font-weight-bold">
 
                                 Lifelong Skills
 
@@ -494,25 +496,25 @@ Constraints:
 <div class="container mb-5" id="featured">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold mb-0">Popular Resources</h2>
+        <h2 class="font-weight-bold mb-0">Popular Resources</h2>
         <span class="text-muted">Hand-picked for Bath students</span>
     </div>
 
     <div id="resourceCarousel"
          class="carousel slide"
-         data-bs-ride="carousel">
+         data-ride="carousel">
 
         <div class="carousel-inner">
 
             <div class="carousel-item active">
-                <div class="card border-0 overflow-hidden rounded-4 shadow">
+                <div class="card border-0 overflow-hidden rounded shadow">
                     <div class="card-body p-5"
                          style="background:linear-gradient(135deg,#2563eb,#1d4ed8);color:white;">
-                        <small class="text-uppercase opacity-75">
+                        <small class="text-uppercase" style="opacity:0.75;">
                             Academic AI
                         </small>
 
-                        <h2 class="fw-bold mt-2">
+                        <h2 class="font-weight-bold mt-2">
                             AI for Coursework
                         </h2>
 
@@ -530,14 +532,14 @@ Constraints:
             </div>
 
             <div class="carousel-item">
-                <div class="card border-0 overflow-hidden rounded-4 shadow">
+                <div class="card border-0 overflow-hidden rounded shadow">
                     <div class="card-body p-5"
                          style="background:linear-gradient(135deg,#059669,#047857);color:white;">
-                        <small class="text-uppercase opacity-75">
+                        <small class="text-uppercase" style="opacity:0.75;">
                             Career Skills
                         </small>
 
-                        <h2 class="fw-bold mt-2">
+                        <h2 class="font-weight-bold mt-2">
                             AI for Employability
                         </h2>
 
@@ -554,14 +556,14 @@ Constraints:
             </div>
 
             <div class="carousel-item">
-                <div class="card border-0 overflow-hidden rounded-4 shadow">
+                <div class="card border-0 overflow-hidden rounded shadow">
                     <div class="card-body p-5"
                          style="background:linear-gradient(135deg,#7c3aed,#6d28d9);color:white;">
-                        <small class="text-uppercase opacity-75">
+                        <small class="text-uppercase" style="opacity:0.75;">
                             Future Skills
                         </small>
 
-                        <h2 class="fw-bold mt-2">
+                        <h2 class="font-weight-bold mt-2">
                             Learn New Technologies
                         </h2>
 
@@ -581,15 +583,15 @@ Constraints:
 
         <button class="carousel-control-prev"
                 type="button"
-                data-bs-target="#resourceCarousel"
-                data-bs-slide="prev">
+                data-target="#resourceCarousel"
+                data-slide="prev">
             <span class="bi bi-chevron-left" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:2.2rem;line-height:1;color:white;" aria-hidden="true">&nbsp;</span>
         </button>
 
         <button class="carousel-control-next"
                 type="button"
-                data-bs-target="#resourceCarousel"
-                data-bs-slide="next">
+                data-target="#resourceCarousel"
+                data-slide="next">
             <span class="bi bi-chevron-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:2.2rem;line-height:1;color:white;" aria-hidden="true">&nbsp;</span>
         </button>
 
@@ -601,22 +603,22 @@ Constraints:
 
 <div class="container pb-5">
     <div class="text-center mb-5">
-        <h2 class="fw-bold">Explore AI Skills</h2>
+        <h2 class="font-weight-bold">Explore AI Skills</h2>
         <p class="text-muted">
             Start with a topic that matters to you.
         </p>
     </div>
 
-    <div class="row g-3">
+    <div class="row" style="margin-left:-0.5rem;margin-right:-0.5rem;">
 
         <!-- Large feature card -->
         <div id="academic" class="col-12 col-lg-8 mb-4">
-            <div class="h-100 p-5 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
+            <div class="h-100 p-5 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
                      style="width:52px;height:52px;background:#dbeafe;color:#1d4ed8;font-size:1.45rem;">
                     <span class="bi bi-mortarboard" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h3 class="fw-bold mt-3">
+                <h3 class="font-weight-bold mt-3">
                     AI for Coursework
                 </h3>
                 <p class="text-muted mb-4">
@@ -625,7 +627,7 @@ Constraints:
                 </p>
                 <div class="mt-auto">
                     <a href="#academic"
-                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       class="btn rounded-pill px-4 font-weight-bold text-white"
                        style="background:#2563eb;border-color:#2563eb;">
                         Explore Academic Skills
                     </a>
@@ -635,16 +637,16 @@ Constraints:
 
         <!-- Small card -->
         <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
+            <div class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
                      style="width:48px;height:48px;background:#e0f2fe;color:#0369a1;font-size:1.35rem;">
                     <span class="bi bi-chat-square-text" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="fw-bold">Prompting</h5>
+                <h5 class="font-weight-bold">Prompting</h5>
                 <p class="text-muted mb-4">Learn to write better prompts.</p>
                 <div class="mt-auto">
                     <a href="#academic"
-                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       class="btn rounded-pill px-4 font-weight-bold text-white"
                        style="background:#2563eb;border-color:#2563eb;">
                         Start Prompting
                     </a>
@@ -654,16 +656,16 @@ Constraints:
 
         <!-- Small card -->
         <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
+            <div class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
                      style="width:48px;height:48px;background:#e0f2fe;color:#0369a1;font-size:1.35rem;">
                     <span class="bi bi-journal-text" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="fw-bold">Revision</h5>
+                <h5 class="font-weight-bold">Revision</h5>
                 <p class="text-muted mb-4">Use AI to test understanding.</p>
                 <div class="mt-auto">
                     <a href="#academic"
-                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       class="btn rounded-pill px-4 font-weight-bold text-white"
                        style="background:#2563eb;border-color:#2563eb;">
                         Practise Revision
                     </a>
@@ -673,18 +675,18 @@ Constraints:
 
         <!-- Wide card -->
         <div class="col-12 col-lg-8 mb-4">
-            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
+            <div class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
                      style="width:48px;height:48px;background:#e0f2fe;color:#0369a1;font-size:1.35rem;">
                     <span class="bi bi-search" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="fw-bold">Research & Literature Reviews</h5>
+                <h5 class="font-weight-bold">Research & Literature Reviews</h5>
                 <p class="text-muted mb-4">
                     Find, analyse and summarise academic sources.
                 </p>
                 <div class="mt-auto">
                     <a href="#academic"
-                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       class="btn rounded-pill px-4 font-weight-bold text-white"
                        style="background:#2563eb;border-color:#2563eb;">
                         Build Research Skills
                     </a>
@@ -693,16 +695,16 @@ Constraints:
         </div>
 
         <div id="workplace" class="col-12 col-md-6 col-lg-4 mb-4">
-            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
+            <div class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
                      style="width:48px;height:48px;background:#dcfce7;color:#047857;font-size:1.35rem;">
                     <span class="bi bi-briefcase" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="fw-bold">Placements</h5>
+                <h5 class="font-weight-bold">Placements</h5>
                 <p class="text-muted mb-4">Applications, CVs and interviews.</p>
                 <div class="mt-auto">
                     <a href="#workplace"
-                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       class="btn rounded-pill px-4 font-weight-bold text-white"
                        style="background:#059669;border-color:#059669;">
                         Prepare for Work
                     </a>
@@ -711,18 +713,18 @@ Constraints:
         </div>
 
         <div class="col-12 col-lg-8 mb-4">
-            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
+            <div class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
                      style="width:48px;height:48px;background:#dcfce7;color:#047857;font-size:1.35rem;">
                     <span class="bi bi-speedometer2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="fw-bold">Productivity</h5>
+                <h5 class="font-weight-bold">Productivity</h5>
                 <p class="text-muted mb-4">
                     Automate repetitive tasks and work smarter.
                 </p>
                 <div class="mt-auto">
                     <a href="#workplace"
-                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       class="btn rounded-pill px-4 font-weight-bold text-white"
                        style="background:#059669;border-color:#059669;">
                         Improve Productivity
                     </a>
@@ -731,16 +733,16 @@ Constraints:
         </div>
 
         <div id="lifelong" class="col-12 col-md-6 col-lg-4 mb-4">
-            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
+            <div class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
                      style="width:48px;height:48px;background:#ede9fe;color:#6d28d9;font-size:1.35rem;">
                     <span class="bi bi-diagram-3" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="fw-bold">Automation</h5>
+                <h5 class="font-weight-bold">Automation</h5>
                 <p class="text-muted mb-4">Build simple workflows that save time.</p>
                 <div class="mt-auto">
                     <a href="#lifelong"
-                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       class="btn rounded-pill px-4 font-weight-bold text-white"
                        style="background:#7c3aed;border-color:#7c3aed;">
                         Try Automation
                     </a>
@@ -749,16 +751,16 @@ Constraints:
         </div>
 
         <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
+            <div class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
                      style="width:48px;height:48px;background:#ede9fe;color:#6d28d9;font-size:1.35rem;">
                     <span class="bi bi-cpu" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="fw-bold">New Technologies</h5>
+                <h5 class="font-weight-bold">New Technologies</h5>
                 <p class="text-muted mb-4">Keep up with emerging AI tools and trends.</p>
                 <div class="mt-auto">
                     <a href="#lifelong"
-                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       class="btn rounded-pill px-4 font-weight-bold text-white"
                        style="background:#7c3aed;border-color:#7c3aed;">
                         Explore Future Skills
                     </a>
@@ -767,16 +769,16 @@ Constraints:
         </div>
 
         <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <div class="h-100 p-4 bg-white rounded-4 shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
+            <div class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#0f172a;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
                      style="width:48px;height:48px;background:#ede9fe;color:#6d28d9;font-size:1.35rem;">
                     <span class="bi bi-brush" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="fw-bold">Creativity</h5>
+                <h5 class="font-weight-bold">Creativity</h5>
                 <p class="text-muted mb-4">Use AI to develop ideas, media and projects.</p>
                 <div class="mt-auto">
                     <a href="#lifelong"
-                       class="btn rounded-pill px-4 fw-semibold text-white"
+                       class="btn rounded-pill px-4 font-weight-bold text-white"
                        style="background:#7c3aed;border-color:#7c3aed;">
                         Start Creating
                     </a>
@@ -792,7 +794,7 @@ Constraints:
 
 <div class="container pb-5">
 
-    <div class="rounded-4 overflow-hidden shadow position-relative"
+    <div class="rounded overflow-hidden shadow position-relative"
          style="
          background:
          linear-gradient(
@@ -819,7 +821,7 @@ Constraints:
 
                     </div>
 
-                    <h2 class="display-6 fw-bold mb-3">
+                    <h2 class="display-4 font-weight-bold mb-3">
                         Not sure where to begin?
                     </h2>
 
@@ -835,7 +837,7 @@ Constraints:
                     <div class="d-flex flex-wrap">
 
                         <button id="startPathQuiz"
-                            class="btn btn-light btn-lg px-4 rounded-pill fw-semibold">
+                            class="btn btn-light btn-lg px-4 rounded-pill font-weight-bold">
                             Find My Learning Path
                         </button>
 
@@ -854,7 +856,7 @@ Constraints:
 
                     <div id="pathQuiz"
 
-                        class="p-4 rounded-4"
+                        class="p-4 rounded"
 
                         style="
 
@@ -872,7 +874,7 @@ Constraints:
 
                         margin:auto;">
 
-                        <h4 class="fw-bold mb-3">
+                        <h4 class="font-weight-bold mb-3">
 
                             Find Your AI Learning Path
 
@@ -1022,6 +1024,12 @@ Constraints:
         phraseSlots.forEach((slot, index) => {
             slot.setAttribute("data-rotating-phrase", "");
             slot.textContent = index === 0 ? heroTextConfig.phrases[0] : EMPTY_HTML;
+            slot.style.position = "absolute";
+            slot.style.inset = "0";
+            slot.style.display = "flex";
+            slot.style.alignItems = "center";
+            slot.style.transition = "opacity " + heroTextConfig.fadeDuration + "ms ease";
+            slot.style.willChange = "opacity";
             slot.style.opacity = index === 0 ? "1" : "0";
             elements.rotatingText.appendChild(slot);
         });
@@ -1048,167 +1056,12 @@ Constraints:
         );
     }
 
-    // Lightbulb animation
-    const dynamicStyles = `
-	.bento-card {
-	    transition: transform 0.25s ease, box-shadow 0.25s ease;
-	}
-
-    .btn,
-    .nav-link,
-    .navbar-toggler {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-.bento-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-}
-
-#rotating-text {
-    height: 1.3em;
-    min-height: 1.3em;
-    position: relative;
-}
-
-#rotating-text [data-rotating-phrase] {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    transition: opacity ${heroTextConfig.fadeDuration}ms ease;
-    will-change: opacity;
-}
-
-@media (max-width: 1199.98px) {
-    #rotating-text {
-        height: 2.4em;
-        min-height: 2.4em;
-    }
-}
-
-#bulb {
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    font-size:7rem;
-    filter:none;
-    opacity:0.4;
-    animation:
-        bulbCycle 8s infinite,
-        float 6s ease-in-out infinite;
-}
-
-@keyframes bulbCycle {
-    0% {
-        opacity:0.15;
-        filter:none;
-    }
-
-    8% {
-        opacity:0.15;
-        filter:none;
-    }
-
-    12% {
-        opacity:1;
-        filter:
-            drop-shadow(0 0 15px rgba(255,255,0,0.8))
-            drop-shadow(0 0 40px rgba(255,255,0,0.5));
-    }
-
-    18% {
-        opacity:0.2;
-        filter:none;
-    }
-
-    24% {
-        opacity:1;
-        filter:
-            drop-shadow(0 0 20px rgba(255,255,0,0.9))
-            drop-shadow(0 0 50px rgba(255,255,0,0.6));
-    }
-
-    32% {
-        opacity:0.25;
-        filter:none;
-    }
-
-    42% {
-        opacity:1;
-        filter:
-            drop-shadow(0 0 25px rgba(255,255,0,1))
-            drop-shadow(0 0 70px rgba(255,255,0,0.7));
-    }
-
-    70% {
-        opacity:1;
-        filter:
-            drop-shadow(0 0 25px rgba(255,255,0,1))
-            drop-shadow(0 0 70px rgba(255,255,0,0.7));
-    }
-
-    85% {
-        opacity:0.3;
-        filter:none;
-    }
-
-    100% {
-        opacity:0.15;
-        filter:none;
-    }
-}
-
-@keyframes float {
-    0%,100% { transform:translate(-50%,-50%) translateY(0); }
-    50% { transform:translate(-50%,-50%) translateY(-12px); }
-}
-
-@media (max-width: 991.98px) {
-    #hero {
-        min-height: 430px;
-        display: flex;
-        align-items: center;
-    }
-
-    #hero > .row {
-        width: 100%;
-    }
-
-    #rotating-text {
-        height: 6em;
-        min-height: 6em;
-        overflow: visible;
-    }
-
-    #orb-column {
-        display: none;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    #rotating-text [data-rotating-phrase] {
-        transition: none;
-    }
-}
-`;
-
-    function addDynamicStyles() {
-        const styleElement = document.createElement("style");
-        styleElement.textContent = dynamicStyles;
-        document.head.appendChild(styleElement);
-    }
-
     // Quiz data
     const quizCopy = {
         questionLabel: "Suggested Learning Path",
         recommendationLabel: "Your Recommendation",
         recommendedTopicsLabel: "Recommended Topics",
-        startLearningLabel: "Start Learning <span class=\"bi bi-arrow-right ms-2\" style=\"display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;\" aria-hidden=\"true\">&nbsp;</span>"
+        startLearningLabel: "Start Learning <span class=\"bi bi-arrow-right ml-2\" style=\"display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;\" aria-hidden=\"true\">&nbsp;</span>"
     };
 
     const quizOptions = {
@@ -1314,7 +1167,7 @@ Constraints:
                 ${label}
             </div>
 
-            <h2 class="display-6 fw-bold mb-4">
+            <h2 class="display-4 font-weight-bold mb-4">
                 ${heading}
             </h2>
 
@@ -1324,9 +1177,9 @@ Constraints:
 
     function renderAnswerButtons(options) {
         return `
-            <div class="d-grid mb-3">
+            <div class="d-flex flex-column mb-3">
                 ${options.map(option => `
-                    <button class="btn btn-outline-light btn-lg answerBtn">
+                    <button class="btn btn-outline-light btn-lg mb-2" data-answer-button="true">
                         ${option}
                     </button>
                 `).join(EMPTY_HTML)}
@@ -1342,7 +1195,7 @@ Constraints:
             renderAnswerButtons(currentQuestion.options)
         );
 
-        elements.questionContainer.querySelectorAll(".answerBtn").forEach(button => {
+        elements.questionContainer.querySelectorAll('[data-answer-button="true"]').forEach(button => {
             button.addEventListener("click", () => handleAnswerSelection(button.textContent.trim()));
         });
     }
@@ -1359,13 +1212,13 @@ Constraints:
 
         const topicsHtml = `
             <div class="mb-4">
-                <div class="fw-bold mb-3">
+                <div class="font-weight-bold mb-3">
                     ${quizCopy.recommendedTopicsLabel}
                 </div>
 
                 ${recommendation.topics.map(topic => `
                     <div class="mb-2">
-                        <span class="bi bi-check-circle me-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>${topic}
+                        <span class="bi bi-check-circle mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>${topic}
                     </div>
                 `).join(EMPTY_HTML)}
             </div>`;
@@ -1447,7 +1300,6 @@ Constraints:
     }
 
     function initialisePage() {
-        addDynamicStyles();
         startHeroTextAnimation();
 
         if (heroTextState.mediaQuery.addEventListener) {
@@ -1460,11 +1312,38 @@ Constraints:
     }
 
     initialisePage();
+
+    const bulb = document.getElementById("bulb");
+    let bulbStart = null;
+
+    function animateBulb(timestamp) {
+        if (bulbStart === null) {
+            bulbStart = timestamp;
+        }
+
+        const elapsed = timestamp - bulbStart;
+        const phase = (elapsed % 8000) / 8000;
+        const floatY = Math.sin(elapsed / 950) * -10;
+        const lit = (phase > 0.12 && phase < 0.18) || (phase > 0.24 && phase < 0.32) || (phase > 0.42 && phase < 0.70);
+
+        if (bulb) {
+            bulb.style.transform = "translate(-50%,-50%) translateY(" + floatY.toFixed(2) + "px)";
+            bulb.style.opacity = lit ? "1" : "0.25";
+            bulb.style.filter = lit ? "drop-shadow(0 0 25px rgba(255,255,0,1)) drop-shadow(0 0 70px rgba(255,255,0,0.7))" : "none";
+        }
+
+        window.requestAnimationFrame(animateBulb);
+    }
+
+    if (window.requestAnimationFrame && bulb) {
+        window.requestAnimationFrame(animateBulb);
+    }
 })();
 
 
 const hero = document.getElementById('hero');
 
+if (hero) {
 hero.addEventListener('mousemove', (e) => {
 
     const rect = hero.getBoundingClientRect();
@@ -1477,10 +1356,12 @@ hero.addEventListener('mousemove', (e) => {
         transparent 300px),
         linear-gradient(135deg,#0f172a,#1e293b)`;
 });
+}
 
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 (function () {
     if (document.querySelector('link[data-bootstrap-icons]')) return;

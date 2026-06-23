@@ -461,7 +461,7 @@ Constraints:
                     <div class="card-body p-4 p-md-5"
                          style="background:linear-gradient(135deg,#2563eb,#1d4ed8);color:white;">
 
-                        <small class="text-uppercase opacity-75">
+                        <small class="text-uppercase" style="opacity:0.75;">
 
                             Academic AI
 
@@ -500,7 +500,7 @@ Constraints:
                     <div class="card-body p-4 p-md-5"
                          style="background:linear-gradient(135deg,#059669,#047857);color:white;">
 
-                        <small class="text-uppercase opacity-75">
+                        <small class="text-uppercase" style="opacity:0.75;">
 
                             Workplace AI
 
@@ -539,7 +539,7 @@ Constraints:
                     <div class="card-body p-4 p-md-5"
                          style="background:linear-gradient(135deg,#7c3aed,#6d28d9);color:white;">
 
-                        <small class="text-uppercase opacity-75">
+                        <small class="text-uppercase" style="opacity:0.75;">
 
                             Lifelong AI
 
@@ -818,7 +818,7 @@ Constraints:
 
                                 <div>
 
-                                    <small class="text-uppercase opacity-75">Student spotlight</small>
+                                    <small class="text-uppercase" style="opacity:0.75;">Student spotlight</small>
 
                                     <h4 class="font-weight-bold mt-2 mb-2">AI Creativity Sprint</h4>
 
@@ -1071,19 +1071,6 @@ Constraints:
 <script>
 (() => {
     const EMPTY_HTML = "";
-
-    const responsiveStyles = document.createElement("style");
-    responsiveStyles.textContent = `
-    .btn,
-    .nav-link,
-    .navbar-toggler {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-    `;
-    document.head.appendChild(responsiveStyles);
 
     const elements = {
         rotatingText: document.getElementById("rotating-text")
