@@ -42,7 +42,7 @@ Constraints:
     <div class="row justify-content-center mb-5">
         <div class="col-lg-10">
 
-            <div id="hero" class="p-5 rounded shadow-sm"
+            <div id="hero" class="p-4 p-md-5 rounded shadow-sm"
                  style="
                  background:linear-gradient(135deg,#0f172a,#1e293b);
                  color:white;
@@ -58,7 +58,8 @@ Constraints:
                             University of Bath
                         </div>
 
-                        <h1 class="display-4 font-weight-bold mt-2 mb-3">
+                        <h1 class="display-4 font-weight-bold mt-2 mb-3"
+                            style="font-size:clamp(2.35rem,9vw,3.5rem);line-height:1.08;">
                             GenAI & Digital Skills Hub
                         </h1>
 
@@ -82,7 +83,7 @@ Constraints:
                     </div>
 
                     <div id="orb-column" class="col-lg-4 text-center mt-4 mt-lg-0">
-                        <div id="orb-container" style="position:relative;width:240px;height:240px;margin:auto;transition:transform 0.2s ease;">
+                        <div id="orb-container" style="position:relative;width:min(240px,70vw);aspect-ratio:1/1;margin:auto;transition:transform 0.2s ease;">
                             <div id="core"></div>
                         </div>
                     </div>
@@ -115,7 +116,7 @@ Constraints:
                     Develop AI skills for academic work, employment and lifelong learning.
                 </p>
 
-                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967" class="btn btn-primary">
+                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967" class="btn btn-primary py-2">
                     Explore Learning
                 </a>
 
@@ -140,7 +141,7 @@ Constraints:
                     Test your skills through weekly AI challenges and competitions.
                 </p>
 
-                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969" class="btn btn-primary">
+                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969" class="btn btn-primary py-2">
                     View Challenges
                 </a>
 
@@ -164,7 +165,7 @@ Constraints:
                     Share ideas, workflows, prompts and projects with other students.
                 </p>
 
-                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" class="btn btn-primary">
+                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" class="btn btn-primary py-2">
                     Join Community
                 </a>
 
@@ -188,7 +189,7 @@ Constraints:
                     Guidance, policies and best practice for responsible AI use.
                 </p>
 
-                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972" class="btn btn-primary">
+                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972" class="btn btn-primary py-2">
                     View Guidance
                 </a>
 
@@ -457,7 +458,7 @@ Constraints:
                         </div>
 
                         <div class="col-md-3 text-md-right">
-                            <a href="#learn" class="btn btn-light rounded-pill font-weight-bold px-4 py-2" style="color:#0f172a;white-space:nowrap;">
+                            <a href="#learn" class="btn btn-light rounded-pill font-weight-bold px-4 py-2" style="color:#0f172a;white-space:normal;min-height:44px;">
                                 Continue Learning <span class="bi bi-arrow-right ml-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                             </a>
                         </div>
@@ -521,9 +522,17 @@ cards.forEach(card => observer.observe(card));
 
 const style = document.createElement('style');
 style.textContent = `
-#orb-container {
-    animation: float 6s ease-in-out infinite;
-}
+	#orb-container {
+	    animation: float 6s ease-in-out infinite;
+	}
+
+    .btn,
+    .navbar-toggler {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 
 #core {
     position:absolute;

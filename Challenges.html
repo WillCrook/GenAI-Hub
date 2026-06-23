@@ -37,14 +37,14 @@ Constraints:
 
 <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top" style="backdrop-filter:blur(12px);">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center font-weight-bold" href="https://moodle.bath.ac.uk/course/section.php?id=277885" style="font-size:1.1rem;text-decoration:none;">
-            <div>
+        <a class="navbar-brand d-flex align-items-center font-weight-bold mr-2" href="https://moodle.bath.ac.uk/course/section.php?id=277885" style="font-size:clamp(0.9rem,4vw,1.1rem);text-decoration:none;white-space:normal;max-width:calc(100% - 4rem);">
+            <div style="min-width:0;">
                 <div style="color:#003c71;line-height:1.1;">GenAI & Digital Skills Hub</div>
                 <small class="text-muted font-weight-normal">University of Bath</small>
             </div>
         </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hubNav" aria-controls="hubNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hubNav" aria-controls="hubNav" aria-expanded="false" aria-label="Toggle navigation" style="min-height:44px;">
             <span class="bi bi-list" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:1.5rem;line-height:1;" aria-hidden="true">&nbsp;</span>
         </button>
 
@@ -74,7 +74,7 @@ Constraints:
         <div class="col-lg-10">
 
             <div id="ai-challenges-hero"
-             class="p-5 rounded shadow-sm position-relative overflow-hidden"
+             class="p-4 p-md-5 rounded shadow-sm position-relative overflow-hidden"
              style="
              min-height:620px;
              color:white;
@@ -120,8 +120,8 @@ Constraints:
         <div aria-hidden="true"
              style="
              position:absolute;
-             left:-5%;
-             right:-5%;
+             left:0;
+             right:0;
              bottom:0;
              height:34%;
              background:linear-gradient(180deg,rgba(6,18,35,0),rgba(5,13,27,0.84));
@@ -151,7 +151,7 @@ Constraints:
                             </div>
 
                             <h1 class="font-weight-bold mt-2 mb-3"
-                                style="font-size:2.75rem;line-height:1.05;">
+                                style="font-size:clamp(2rem,8vw,2.75rem);line-height:1.08;">
                                 Forge your legacy in Bath
                             </h1>
 
@@ -189,10 +189,9 @@ Constraints:
                                                  position:absolute;
                                                  left:50%;
                                                  top:50%;
-                                                 width:210px;
-                                                 height:210px;
-                                                 margin-left:-105px;
-                                                 margin-top:-105px;
+                                                 width:min(210px,65vw);
+                                                 aspect-ratio:1/1;
+                                                 transform:translate(-50%,-50%);
                                                  border-radius:50%;
                                                  background:radial-gradient(circle,rgba(74,163,255,0.25),rgba(74,163,255,0.08) 38%,rgba(74,163,255,0) 70%);
                                                  filter:blur(4px);
@@ -229,10 +228,10 @@ Constraints:
                                             position:relative;
                                             width:100%;
                                             max-width:360px;
-                                            height:96px;
+                                            min-height:88px;
                                             margin:0 auto;
-                                            padding:1rem 3.6rem 1rem 1.15rem;
-                                            border-radius:999px;
+                                            padding:0.875rem 3rem 0.875rem 0.875rem;
+                                            border-radius:1rem;
                                             border:1px solid rgba(255,255,255,0.17);
                                             background:rgba(7,18,38,0.54);
                                             box-shadow:0 14px 34px rgba(0,0,0,0.24),0 0 28px rgba(245,158,11,0.10);
@@ -252,7 +251,7 @@ Constraints:
                                                 line-height:1.2;
                                                 box-shadow:0 8px 18px rgba(0,0,0,0.22);">Open</span>
                                                 <div class="d-flex align-items-center justify-content-start text-left"
-                                                     style="width:100%;">
+                                                     style="width:100%;min-width:0;">
                                                 <div style="
                                                 width:46px;
                                                 height:46px;
@@ -261,7 +260,7 @@ Constraints:
                                                 margin-right:0.75rem;
                                                 background:radial-gradient(circle at 33% 28%,#fff7d6 0,#f8c45b 24%,#d8871e 58%,#7a3e0c 100%);
                                                 box-shadow:0 0 18px rgba(245,158,11,0.52),inset -10px -12px 18px rgba(40,18,0,0.32);">&nbsp;</div>
-                                                <div style="font-size:0.98rem;line-height:1.15;font-weight:600;text-align:left;">Leaderboard</div>
+                                                <div style="font-size:0.98rem;line-height:1.15;font-weight:600;text-align:left;min-width:0;">Leaderboard</div>
                                                 </div>
                                             </div>
                                         </a>
@@ -279,10 +278,10 @@ Constraints:
                                             position:relative;
                                             width:100%;
                                             max-width:360px;
-                                            height:96px;
+                                            min-height:88px;
                                             margin:0 auto;
-                                            padding:1rem 3.6rem 1rem 1.15rem;
-                                            border-radius:999px;
+                                            padding:0.875rem 3rem 0.875rem 0.875rem;
+                                            border-radius:1rem;
                                             border:1px solid rgba(255,255,255,0.17);
                                             background:rgba(7,18,38,0.52);
                                             box-shadow:0 14px 34px rgba(0,0,0,0.24),0 0 30px rgba(37,211,145,0.12);
@@ -302,7 +301,7 @@ Constraints:
                                                 line-height:1.2;
                                                 box-shadow:0 8px 18px rgba(0,0,0,0.22);">Open</span>
                                                 <div class="d-flex align-items-center justify-content-start text-left"
-                                                     style="width:100%;">
+                                                     style="width:100%;min-width:0;">
                                                 <div style="
                                                 width:48px;
                                                 height:48px;
@@ -311,7 +310,7 @@ Constraints:
                                                 margin-right:0.75rem;
                                                 background:radial-gradient(circle at 32% 28%,#dcfff0 0,#7ce0b0 26%,#059669 58%,#064e3b 100%);
                                                 box-shadow:0 0 20px rgba(34,197,94,0.48),inset -12px -12px 18px rgba(2,44,34,0.32);">&nbsp;</div>
-                                                <div style="font-size:0.98rem;line-height:1.15;font-weight:600;text-align:left;">Popular Challenges</div>
+                                                <div style="font-size:0.98rem;line-height:1.15;font-weight:600;text-align:left;min-width:0;">Popular Challenges</div>
                                                 </div>
                                             </div>
                                         </a>
@@ -329,10 +328,10 @@ Constraints:
                                             position:relative;
                                             width:100%;
                                             max-width:360px;
-                                            height:96px;
+                                            min-height:88px;
                                             margin:0 auto;
-                                            padding:1rem 3.6rem 1rem 1.15rem;
-                                            border-radius:999px;
+                                            padding:0.875rem 3rem 0.875rem 0.875rem;
+                                            border-radius:1rem;
                                             border:1px solid rgba(255,255,255,0.17);
                                             background:rgba(7,18,38,0.52);
                                             box-shadow:0 14px 34px rgba(0,0,0,0.24),0 0 30px rgba(74,163,255,0.14);
@@ -352,7 +351,7 @@ Constraints:
                                                 line-height:1.2;
                                                 box-shadow:0 8px 18px rgba(0,0,0,0.22);">Open</span>
                                                 <div class="d-flex align-items-center justify-content-start text-left"
-                                                     style="width:100%;">
+                                                     style="width:100%;min-width:0;">
                                                 <div style="
                                                 width:48px;
                                                 height:48px;
@@ -361,7 +360,7 @@ Constraints:
                                                 margin-right:0.75rem;
                                                 background:radial-gradient(circle at 31% 27%,#eaf6ff 0,#78c6ff 25%,#2563eb 58%,#102c69 100%);
                                                 box-shadow:0 0 20px rgba(80,179,255,0.54),inset -12px -12px 18px rgba(1,16,49,0.34);">&nbsp;</div>
-                                                <div style="font-size:0.98rem;line-height:1.15;font-weight:600;text-align:left;">Hall of Fame</div>
+                                                <div style="font-size:0.98rem;line-height:1.15;font-weight:600;text-align:left;min-width:0;">Hall of Fame</div>
                                                 </div>
                                             </div>
                                         </a>
@@ -379,10 +378,10 @@ Constraints:
                                             position:relative;
                                             width:100%;
                                             max-width:360px;
-                                            height:96px;
+                                            min-height:88px;
                                             margin:0 auto;
-                                            padding:1rem 3.6rem 1rem 1.15rem;
-                                            border-radius:999px;
+                                            padding:0.875rem 3rem 0.875rem 0.875rem;
+                                            border-radius:1rem;
                                             border:1px solid rgba(255,255,255,0.17);
                                             background:rgba(7,18,38,0.52);
                                             box-shadow:0 14px 34px rgba(0,0,0,0.24),0 0 30px rgba(167,139,250,0.13);
@@ -402,7 +401,7 @@ Constraints:
                                                 line-height:1.2;
                                                 box-shadow:0 8px 18px rgba(0,0,0,0.22);">Open</span>
                                                 <div class="d-flex align-items-center justify-content-start text-left"
-                                                     style="width:100%;">
+                                                     style="width:100%;min-width:0;">
                                                 <div style="
                                                 width:48px;
                                                 height:48px;
@@ -411,7 +410,7 @@ Constraints:
                                                 margin-right:0.75rem;
                                                 background:radial-gradient(circle at 33% 28%,#f6f0ff 0,#c4b5fd 27%,#7c3aed 58%,#3b1a72 100%);
                                                 box-shadow:0 0 20px rgba(167,139,250,0.52),inset -12px -12px 18px rgba(31,13,67,0.34);">&nbsp;</div>
-                                                <div style="font-size:0.98rem;line-height:1.15;font-weight:600;text-align:left;">Learning Challenges</div>
+                                                <div style="font-size:0.98rem;line-height:1.15;font-weight:600;text-align:left;min-width:0;">Learning Challenges</div>
                                                 </div>
                                             </div>
                                         </a>
@@ -459,7 +458,7 @@ Constraints:
 
                 <div class="card border-0 overflow-hidden rounded shadow">
 
-                    <div class="card-body p-5"
+                    <div class="card-body p-4 p-md-5"
                          style="background:linear-gradient(135deg,#2563eb,#1d4ed8);color:white;">
 
                         <small class="text-uppercase opacity-75">
@@ -498,7 +497,7 @@ Constraints:
 
                 <div class="card border-0 overflow-hidden rounded shadow">
 
-                    <div class="card-body p-5"
+                    <div class="card-body p-4 p-md-5"
                          style="background:linear-gradient(135deg,#059669,#047857);color:white;">
 
                         <small class="text-uppercase opacity-75">
@@ -537,7 +536,7 @@ Constraints:
 
                 <div class="card border-0 overflow-hidden rounded shadow">
 
-                    <div class="card-body p-5"
+                    <div class="card-body p-4 p-md-5"
                          style="background:linear-gradient(135deg,#7c3aed,#6d28d9);color:white;">
 
                         <small class="text-uppercase opacity-75">
@@ -607,7 +606,7 @@ Constraints:
             <div class="h-100 p-4 bg-white rounded shadow-sm border"
                  style="color:#0f172a;">
 
-                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center mb-4">
 
                     <div>
 
@@ -643,7 +642,7 @@ Constraints:
 
                     </div>
 
-                    <div class="font-weight-bold">980 pts</div>
+	                    <div class="font-weight-bold ml-5 ml-sm-3 mt-2 mt-sm-0">980 pts</div>
 
                 </div>
 
@@ -666,7 +665,7 @@ Constraints:
 
                     </div>
 
-                    <div class="font-weight-bold">920 pts</div>
+	                    <div class="font-weight-bold ml-5 ml-sm-3 mt-2 mt-sm-0">920 pts</div>
 
                 </div>
 
@@ -689,11 +688,11 @@ Constraints:
 
                     </div>
 
-                    <div class="font-weight-bold">875 pts</div>
+	                    <div class="font-weight-bold ml-5 ml-sm-3 mt-2 mt-sm-0">875 pts</div>
 
                 </div>
 
-                <div class="d-flex align-items-center justify-content-between pt-3">
+	                <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between pt-3">
 
                     <div class="text-muted">
 
@@ -702,7 +701,7 @@ Constraints:
                     </div>
 
                     <a href="#archive"
-                       class="btn rounded-pill px-4 font-weight-bold text-white"
+	                       class="btn rounded-pill px-4 py-2 font-weight-bold text-white mt-3 mt-sm-0"
                        style="background:#0f172a;border-color:#0f172a;">
 
                         Submit Work
@@ -875,7 +874,7 @@ Constraints:
 
         <div id="academic" class="col-12 col-lg-4 mb-4">
 
-            <div class="h-100 p-5 bg-white rounded shadow-sm border d-flex flex-column"
+	            <div class="h-100 p-4 p-md-5 bg-white rounded shadow-sm border d-flex flex-column"
                  style="min-height:300px;color:#0f172a;">
 
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -914,7 +913,7 @@ Constraints:
 
         <div id="workplace" class="col-12 col-lg-4 mb-4">
 
-            <div class="h-100 p-5 bg-white rounded shadow-sm border d-flex flex-column"
+	            <div class="h-100 p-4 p-md-5 bg-white rounded shadow-sm border d-flex flex-column"
                  style="min-height:300px;color:#0f172a;">
 
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -953,7 +952,7 @@ Constraints:
 
         <div id="lifelong" class="col-12 col-lg-4 mb-4">
 
-            <div class="h-100 p-5 bg-white rounded shadow-sm border d-flex flex-column"
+	            <div class="h-100 p-4 p-md-5 bg-white rounded shadow-sm border d-flex flex-column"
                  style="min-height:300px;color:#0f172a;">
 
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -1025,7 +1024,8 @@ Constraints:
 
                     </div>
 
-                    <h2 class="display-4 font-weight-bold mb-3">
+	                    <h2 class="display-4 font-weight-bold mb-3"
+                            style="font-size:clamp(2rem,9vw,3.5rem);line-height:1.08;">
 
                         Browse the full challenge archive
 
@@ -1071,6 +1071,19 @@ Constraints:
 <script>
 (() => {
     const EMPTY_HTML = "";
+
+    const responsiveStyles = document.createElement("style");
+    responsiveStyles.textContent = `
+    .btn,
+    .nav-link,
+    .navbar-toggler {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    `;
+    document.head.appendChild(responsiveStyles);
 
     const elements = {
         rotatingText: document.getElementById("rotating-text")
