@@ -38,14 +38,14 @@ Constraints:
 
 <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top" style="backdrop-filter:blur(12px);">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center font-weight-bold" href="https://moodle.bath.ac.uk/course/section.php?id=277885" style="font-size:1.1rem;text-decoration:none;">
-            <div>
-                <div style="color:#003c71;line-height:1.1;">GenAI & Digital Skills Hub</div>
+        <a class="navbar-brand d-flex align-items-center font-weight-bold mr-2" href="https://moodle.bath.ac.uk/course/section.php?id=277885" style="font-size:clamp(0.9rem,4vw,1.1rem);text-decoration:none;white-space:normal;max-width:calc(100% - 4rem);">
+            <div style="min-width:0;">
+                <div style="color:#003c71;line-height:1.1;">GenAI &amp; Digital Skills Hub</div>
                 <small class="text-muted font-weight-normal">University of Bath</small>
             </div>
         </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hubNav" aria-controls="hubNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hubNav" aria-controls="hubNav" aria-expanded="false" aria-label="Toggle navigation" style="min-height:44px;">
             <span class="bi bi-list" style="display:inline-block;width:1em;height:1em;overflow:hidden;font-size:1.5rem;line-height:1;" aria-hidden="true">&nbsp;</span>
         </button>
 
@@ -58,7 +58,7 @@ Constraints:
                     <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969">Challenges</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 font-weight-bold" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" style="color:#2563eb;">Community</a>
+                    <a class="nav-link px-3 font-weight-bold" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" style="color:#003c71;">Community</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972">Using AI at Bath</a>
@@ -68,56 +68,53 @@ Constraints:
     </div>
 </nav>
 
-<div class="container-fluid py-5" style="background:linear-gradient(180deg,#f8fbff 0%,#ffffff 46%,#f6f7ff 100%);color:#0f172a;">
+<div class="container-fluid px-0" style="background:linear-gradient(180deg,#f7fbff 0%,#ffffff 42%,#f4f7fb 100%);color:#0f172a;">
 
-    <div class="row justify-content-center mb-4">
-        <div class="col-lg-10">
-            <div id="communityHero" class="p-3 p-md-4 rounded shadow-sm position-relative overflow-hidden" style="color:white;border-radius:1rem;background:radial-gradient(circle at 76% 24%,rgba(168,85,247,0.28),rgba(15,23,42,0) 28%),radial-gradient(circle at 22% 14%,rgba(56,189,248,0.24),rgba(15,23,42,0) 26%),linear-gradient(135deg,#061223 0%,#111827 48%,#25135c 100%);">
-                <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 12% 22%,rgba(255,255,255,0.70) 0 1px,transparent 2px),radial-gradient(circle at 28% 76%,rgba(255,255,255,0.55) 0 1px,transparent 2px),radial-gradient(circle at 62% 12%,rgba(196,181,253,0.70) 0 1px,transparent 2px),radial-gradient(circle at 84% 70%,rgba(125,211,252,0.65) 0 1px,transparent 2px);opacity:0.55;pointer-events:none;">&nbsp;</div>
-
-                <div class="row align-items-start position-relative" style="z-index:2;">
-                    <div class="col-lg-5 mb-3 mb-lg-0">
-                        <div class="text-uppercase mb-2" style="font-size:0.78rem;letter-spacing:0.13em;color:#bfdbfe;">Community</div>
-                        <h1 class="h2 font-weight-bold mb-2" style="line-height:1.16;">Join the AI Community at Bath</h1>
-                        <p class="mb-0" style="max-width:560px;color:#dbeafe;font-size:1.05rem;">Find practical examples, shared prompts, events, workflows and student reviews in one place.</p>
-                    </div>
-
-                    <div class="col-lg-7">
+    <section id="communityHero" class="py-5" style="background:linear-gradient(135deg,#003c71 0%,#082947 58%,#111827 100%);color:white;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.82rem;">Community marketplace</div>
+                    <h1 class="display-4 font-weight-bold mb-3" style="font-size:clamp(2.25rem,8vw,4rem);line-height:1.05;">Discover the AI Community at Bath</h1>
+                    <p class="lead mb-4" style="max-width:760px;color:#e6eef8;">Browse student examples, practical prompts, reusable workflows, events, discussions and tool reviews from across the GenAI &amp; Digital Skills Hub.</p>
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-3 p-md-4 shadow" style="background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.22);border-radius:16px;backdrop-filter:blur(10px);">
                         <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <a href="#discussions" class="d-flex align-items-start h-100 text-decoration-none p-2" style="height:82px;color:#ffffff;border:1px solid rgba(255,255,255,0.18);border-radius:0.75rem;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);">
-                                    <span class="bi bi-chat-dots mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#93c5fd;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
-                                    <span><strong class="d-block">Discussions</strong><span style="color:#dbeafe;">Ask questions and exchange ideas.</span></span>
+                            <div class="col-md-6 mb-3">
+                                <a href="#student-showcase" class="d-flex align-items-start h-100 text-decoration-none p-3" style="color:#0f172a;background:#ffffff;border-radius:12px;border-left:5px solid #f5c242;">
+                                    <span class="bi bi-stars mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#003c71;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
+                                    <span><strong class="d-block">Student Showcase</strong><span class="text-muted">Projects and experiments</span></span>
                                 </a>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <a href="#community-events" class="d-flex align-items-start h-100 text-decoration-none p-2" style="height:82px;color:#ffffff;border:1px solid rgba(255,255,255,0.18);border-radius:0.75rem;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);">
-                                    <span class="bi bi-calendar-event mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#c4b5fd;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
-                                    <span><strong class="d-block">Events</strong><span style="color:#dbeafe;">Workshops, meetups and challenges.</span></span>
+                            <div class="col-md-6 mb-3">
+                                <a href="#prompt-library" class="d-flex align-items-start h-100 text-decoration-none p-3" style="color:#0f172a;background:#ffffff;border-radius:12px;border-left:5px solid #f5c242;">
+                                    <span class="bi bi-journal-text mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#003c71;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
+                                    <span><strong class="d-block">Prompt Library</strong><span class="text-muted">Copyable study prompts</span></span>
                                 </a>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <a href="#prompt-library" class="d-flex align-items-start h-100 text-decoration-none p-2" style="height:82px;color:#ffffff;border:1px solid rgba(255,255,255,0.18);border-radius:0.75rem;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);">
-                                    <span class="bi bi-journal-text mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#93c5fd;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
-                                    <span><strong class="d-block">Prompt Library</strong><span style="color:#dbeafe;">Reusable prompts for study and work.</span></span>
+                            <div class="col-md-6 mb-3">
+                                <a href="#workflow-library" class="d-flex align-items-start h-100 text-decoration-none p-3" style="color:#0f172a;background:#ffffff;border-radius:12px;border-left:5px solid #f5c242;">
+                                    <span class="bi bi-diagram-3 mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#003c71;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
+                                    <span><strong class="d-block">Workflow Library</strong><span class="text-muted">Repeatable AI processes</span></span>
                                 </a>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <a href="#workflow-library" class="d-flex align-items-start h-100 text-decoration-none p-2" style="height:82px;color:#ffffff;border:1px solid rgba(255,255,255,0.18);border-radius:0.75rem;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);">
-                                    <span class="bi bi-gear mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#c4b5fd;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
-                                    <span><strong class="d-block">Workflow Library</strong><span style="color:#dbeafe;">See how students use AI tools.</span></span>
+                            <div class="col-md-6 mb-3">
+                                <a href="#tool-reviews" class="d-flex align-items-start h-100 text-decoration-none p-3" style="color:#0f172a;background:#ffffff;border-radius:12px;border-left:5px solid #f5c242;">
+                                    <span class="bi bi-star-half mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#003c71;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
+                                    <span><strong class="d-block">Tool Reviews</strong><span class="text-muted">Student-rated tools</span></span>
                                 </a>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <a href="#tool-reviews" class="d-flex align-items-start h-100 text-decoration-none p-2" style="height:82px;color:#ffffff;border:1px solid rgba(255,255,255,0.18);border-radius:0.75rem;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);">
-                                    <span class="bi bi-star-half mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#93c5fd;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
-                                    <span><strong class="d-block">Student Tool Reviews</strong><span style="color:#dbeafe;">Student ratings and tool tips.</span></span>
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <a href="#community-events" class="d-flex align-items-start h-100 text-decoration-none p-3" style="color:#0f172a;background:#ffffff;border-radius:12px;border-left:5px solid #f5c242;">
+                                    <span class="bi bi-calendar-event mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#003c71;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
+                                    <span><strong class="d-block">Events</strong><span class="text-muted">Workshops and meetups</span></span>
                                 </a>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <a href="#student-showcase" class="d-flex align-items-start h-100 text-decoration-none p-2" style="height:82px;color:#ffffff;border:1px solid rgba(255,255,255,0.18);border-radius:0.75rem;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);">
-                                    <span class="bi bi-arrow-right mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#c4b5fd;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
-                                    <span><strong class="d-block">Explore Showcase</strong><span style="color:#dbeafe;">Jump to featured student work.</span></span>
+                            <div class="col-md-6">
+                                <a href="#discussions" class="d-flex align-items-start h-100 text-decoration-none p-3" style="color:#0f172a;background:#ffffff;border-radius:12px;border-left:5px solid #f5c242;">
+                                    <span class="bi bi-chat-dots mr-3 mt-1" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#003c71;font-size:1.35rem;" aria-hidden="true">&nbsp;</span>
+                                    <span><strong class="d-block">Discussions</strong><span class="text-muted">Questions and ideas</span></span>
                                 </a>
                             </div>
                         </div>
@@ -125,416 +122,433 @@ Constraints:
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="container mb-5" id="student-showcase">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
-            <div>
-                <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#2563eb;font-size:0.78rem;">Student Showcase</div>
-                <h2 class="font-weight-bold mb-1">Featured work from Bath students</h2>
-                <p class="text-muted mb-0">Projects, experiments, automations and coursework examples worth exploring.</p>
+    <section class="py-5" style="background:#eef4fb;" id="student-showcase">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+                <div>
+                    <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#003c71;font-size:0.78rem;">Student Showcase</div>
+                    <h2 class="font-weight-bold mb-1">Featured work from Bath students</h2>
+                    <p class="text-muted mb-0">Projects, experiments, automations and coursework examples worth exploring.</p>
+                </div>
+                <a href="#" class="btn btn-outline-primary font-weight-bold px-4 mt-3 mt-md-0" style="border-radius:10px;color:#003c71;border-color:#003c71;">Browse all student work</a>
             </div>
-            <a href="" class="btn btn-outline-primary rounded-pill px-4 mt-3 mt-md-0">View all</a>
-        </div>
 
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div data-hover-card="true" class="h-100 bg-white border shadow-sm overflow-hidden" style="border-radius:1.5rem;transition:all 0.25s ease;">
-                    <div style="height:220px;background:linear-gradient(135deg,rgba(37,99,235,0.88),rgba(124,58,237,0.82)),url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80') center/cover;"></div>
-                    <div class="p-4">
-                        <span class="badge badge-primary rounded-pill px-3 py-2 mb-3">Project</span>
-                        <h4 class="font-weight-bold">AI Study Coach Prototype</h4>
-                        <p class="text-muted mb-4">By Priya M. · A guided revision assistant with reflection prompts and source checks.</p>
-                        <a href="#" class="btn btn-dark rounded-pill px-4">View Project</a>
+            <div class="row align-items-stretch">
+                <div class="col-lg-5 mb-4">
+                    <div data-hover-card="true" class="h-100 bg-white border shadow-sm overflow-hidden" style="border-radius:12px;transition:all 0.25s ease;">
+                        <div style="height:230px;background:linear-gradient(135deg,rgba(0,60,113,0.90),rgba(17,24,39,0.72)),url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80') center/cover;"></div>
+                        <div class="p-4">
+                            <div class="mb-3">
+                                <span class="badge px-3 py-2 mr-2" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                                <span class="badge badge-light px-3 py-2 border">Featured project</span>
+                            </div>
+                            <h3 class="h4 font-weight-bold">AI Study Coach Prototype</h3>
+                            <p class="text-muted mb-4">By Priya M. A guided revision assistant with reflection prompts, retrieval questions and source checks.</p>
+                            <a href="#" class="btn btn-primary font-weight-bold px-4" style="background:#003c71;border-color:#003c71;border-radius:10px;">View Project</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div data-hover-card="true" class="h-100 bg-white border shadow-sm overflow-hidden" style="border-radius:1.5rem;transition:all 0.25s ease;">
-                    <div style="height:220px;background:linear-gradient(135deg,rgba(14,165,233,0.82),rgba(91,33,182,0.80)),url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80') center/cover;"></div>
-                    <div class="p-4">
-                        <span class="badge badge-info rounded-pill px-3 py-2 mb-3">Automation</span>
-                        <h4 class="font-weight-bold">Lab Notes to Action Plan</h4>
-                        <p class="text-muted mb-4">By James L. · Turns messy meeting notes into tasks, risks and next steps.</p>
-                        <a href="#" class="btn btn-dark rounded-pill px-4">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div data-hover-card="true" class="h-100 bg-white border shadow-sm overflow-hidden" style="border-radius:1.5rem;transition:all 0.25s ease;">
-                    <div style="height:220px;background:linear-gradient(135deg,rgba(79,70,229,0.84),rgba(56,189,248,0.72)),url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80') center/cover;"></div>
-                    <div class="p-4">
-                        <span class="badge badge-secondary rounded-pill px-3 py-2 mb-3">AI Experiment</span>
-                        <h4 class="font-weight-bold">Prompt Debugging Notebook</h4>
-                        <p class="text-muted mb-4">By Amelia R. · A test log for comparing prompt versions and model behaviour.</p>
-                        <a href="#" class="btn btn-dark rounded-pill px-4">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div data-hover-card="true" class="h-100 bg-white border shadow-sm overflow-hidden" style="border-radius:1.5rem;transition:all 0.25s ease;">
-                    <div style="height:220px;background:linear-gradient(135deg,rgba(88,28,135,0.82),rgba(37,99,235,0.78)),url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80') center/cover;"></div>
-                    <div class="p-4">
-                        <span class="badge badge-success rounded-pill px-3 py-2 mb-3">Coursework Example</span>
-                        <h4 class="font-weight-bold">Responsible Research Workflow</h4>
-                        <p class="text-muted mb-4">By Chen W. · A transparent method for planning, checking and citing AI-supported work.</p>
-                        <a href="#" class="btn btn-dark rounded-pill px-4">View Project</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container mb-5" id="discussions">
-        <div class="row align-items-stretch">
-            <div class="col-lg-4 mb-4">
-                <div class="h-100 p-4 p-lg-5 text-white shadow-sm" style="border-radius:1.5rem;background:linear-gradient(145deg,#0f172a,#312e81);">
-                    <div class="text-uppercase mb-3" style="letter-spacing:0.12em;color:#bfdbfe;font-size:0.78rem;">Discussions</div>
-                    <h2 class="font-weight-bold mb-4">Latest conversations across the Hub</h2>
+                <div class="col-lg-7 mb-4">
                     <div class="row">
-                        <div class="col-6 mb-4">
-                            <div class="h2 font-weight-bold mb-0">2,480</div>
-                            <small style="color:#c7d2fe;">Active members</small>
+                        <div class="col-md-6 mb-4">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#e8f2ff;color:#003c71;border:1px solid #b9d7f2;">Workplace</span>
+                                <h4 class="h5 font-weight-bold">Lab Notes to Action Plan</h4>
+                                <p class="text-muted mb-3">Turns messy meeting notes into tasks, risks and next steps.</p>
+                                <small class="font-weight-bold" style="color:#5f4300;">Automation by James L.</small>
+                            </div>
                         </div>
-                        <div class="col-6 mb-4">
-                            <div class="h2 font-weight-bold mb-0">126</div>
-                            <small style="color:#c7d2fe;">Discussions this week</small>
+                        <div class="col-md-6 mb-4">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                                <h4 class="h5 font-weight-bold">Prompt Debugging Notebook</h4>
+                                <p class="text-muted mb-3">A test log for comparing prompt versions and model behaviour.</p>
+                                <small class="font-weight-bold" style="color:#5f4300;">AI experiment by Amelia R.</small>
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <div class="h2 font-weight-bold mb-0">390</div>
-                            <small style="color:#c7d2fe;">Resources shared</small>
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#f1e8ff;color:#6d28d9;border:1px solid #d8c4ff;">Lifelong</span>
+                                <h4 class="h5 font-weight-bold">Responsible Research Workflow</h4>
+                                <p class="text-muted mb-3">A transparent method for planning, checking and citing AI-supported work.</p>
+                                <small class="font-weight-bold" style="color:#5f4300;">Coursework example by Chen W.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#e8f2ff;color:#003c71;border:1px solid #b9d7f2;">Workplace</span>
+                                <h4 class="h5 font-weight-bold">Placement Brief Builder</h4>
+                                <p class="text-muted mb-3">A student template for turning placement tasks into structured briefs.</p>
+                                <small class="font-weight-bold" style="color:#5f4300;">Template by Nadia S.</small>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-8 mb-4">
-                <div class="h-100 bg-white border shadow-sm overflow-hidden" style="border-radius:1.5rem;min-height:520px;">
-                    <iframe name="embed-feed"
-                            title="Viva Engage" 
-                            src="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" 
-                            style="border:0;overflow:hidden;width:100%;height:100%;min-height:520px;" 
-                            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms">
-                        </iframe>
-                </div>
-            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="container mb-5" id="prompt-library">
-        <div class="text-center mb-5">
-            <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#7c3aed;font-size:0.78rem;">Prompt Library</div>
-            <h2 class="font-weight-bold">Reusable prompts for student work</h2>
-            <p class="text-muted mb-0">Save, adapt and copy prompts for study, coding, writing, research and productivity.</p>
-        </div>
+    <section class="py-5" id="discussions">
+        <div class="container">
+            <div class="row align-items-stretch">
+                <div class="col-lg-4 mb-4">
+                    <div class="h-100 p-4 p-lg-5 text-white shadow-sm" style="border-radius:16px;background:linear-gradient(145deg,#003c71,#0b2442);border-top:6px solid #f5c242;">
+                        <div class="text-uppercase mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Discussions</div>
+                        <h2 class="font-weight-bold mb-4">Latest conversations across the Hub</h2>
+                        <p style="color:#e6eef8;">Ask questions, share resources and compare practical ways to use AI responsibly at Bath.</p>
+                        <div class="row">
+                            <div class="col-6 mb-4">
+                                <div class="h2 font-weight-bold mb-0">2,480</div>
+                                <small style="color:#dbeafe;">Active members</small>
+                            </div>
+                            <div class="col-6 mb-4">
+                                <div class="h2 font-weight-bold mb-0">126</div>
+                                <small style="color:#dbeafe;">Discussions this week</small>
+                            </div>
+                            <div class="col-12">
+                                <div class="h2 font-weight-bold mb-0">390</div>
+                                <small style="color:#dbeafe;">Resources shared</small>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-light font-weight-bold px-4 mt-4" style="color:#003c71;border-radius:10px;">Join the discussion</a>
+                    </div>
+                </div>
 
-        <div class="row">
-            <div class="col-md-6 col-xl mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge badge-primary rounded-pill px-3 py-2">Study</span>
-                        <button type="button" class="btn btn-light rounded-circle border" style="width:40px;height:40px;"><span class="bi bi-bookmark" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span></button>
-                    </div>
-                    <h5 class="font-weight-bold">Socratic Revision Partner</h5>
-                    <p class="text-muted">Turn lecture notes into questions that test understanding.</p>
-                    <div class="small text-uppercase font-weight-bold mb-3" style="color:#2563eb;letter-spacing:0.08em;">Beginner</div>
-                    <button type="button" data-copy-button="true" class="btn btn-outline-primary rounded-pill px-4">Copy Prompt</button>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge badge-dark rounded-pill px-3 py-2">Coding</span>
-                        <button type="button" class="btn btn-light rounded-circle border" style="width:40px;height:40px;"><span class="bi bi-bookmark" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span></button>
-                    </div>
-                    <h5 class="font-weight-bold">Explain This Error</h5>
-                    <p class="text-muted">Ask for a diagnosis, minimal fix and test case.</p>
-                    <div class="small text-uppercase font-weight-bold mb-3" style="color:#2563eb;letter-spacing:0.08em;">Beginner</div>
-                    <button type="button" data-copy-button="true" class="btn btn-outline-primary rounded-pill px-4">Copy Prompt</button>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge badge-info rounded-pill px-3 py-2">Writing</span>
-                        <button type="button" class="btn btn-light rounded-circle border" style="width:40px;height:40px;"><span class="bi bi-bookmark" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span></button>
-                    </div>
-                    <h5 class="font-weight-bold">Structure Feedback</h5>
-                    <p class="text-muted">Review clarity, flow and argument strength.</p>
-                    <div class="small text-uppercase font-weight-bold mb-3" style="color:#7c3aed;letter-spacing:0.08em;">Intermediate</div>
-                    <button type="button" data-copy-button="true" class="btn btn-outline-primary rounded-pill px-4">Copy Prompt</button>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge badge-success rounded-pill px-3 py-2">Research</span>
-                        <button type="button" class="btn btn-light rounded-circle border" style="width:40px;height:40px;"><span class="bi bi-bookmark" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span></button>
-                    </div>
-                    <h5 class="font-weight-bold">Compare Sources</h5>
-                    <p class="text-muted">Summarise agreement, tension and evidence quality.</p>
-                    <div class="small text-uppercase font-weight-bold mb-3" style="color:#7c3aed;letter-spacing:0.08em;">Intermediate</div>
-                    <button type="button" data-copy-button="true" class="btn btn-outline-primary rounded-pill px-4">Copy Prompt</button>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge badge-warning rounded-pill px-3 py-2">Productivity</span>
-                        <button type="button" class="btn btn-light rounded-circle border" style="width:40px;height:40px;"><span class="bi bi-bookmark" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span></button>
-                    </div>
-                    <h5 class="font-weight-bold">Plan My Week</h5>
-                    <p class="text-muted">Turn deadlines into focused study blocks.</p>
-                    <div class="small text-uppercase font-weight-bold mb-3" style="color:#0f766e;letter-spacing:0.08em;">Beginner</div>
-                    <button type="button" data-copy-button="true" class="btn btn-outline-primary rounded-pill px-4">Copy Prompt</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container mb-5" id="workflow-library">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
-            <div>
-                <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#2563eb;font-size:0.78rem;">Workflow Library</div>
-                <h2 class="font-weight-bold mb-1">AI workflows students use</h2>
-                <p class="text-muted mb-0">Each workflow shows the journey from input, through AI tools, to a useful output.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <h4 class="font-weight-bold mb-4">Literature Review Assistant</h4>
-                    <div class="row text-center align-items-center">
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#eff6ff;">Reading list</div></div>
-                        <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#7c3aed;">→</div>
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#f5f3ff;">AI summary + checks</div></div>
-                        <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#7c3aed;">→</div>
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#ecfeff;">Source matrix</div></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <h4 class="font-weight-bold mb-4">Revision Planner</h4>
-                    <div class="row text-center align-items-center">
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#eff6ff;">Module topics</div></div>
-                        <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#7c3aed;">→</div>
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#f5f3ff;">AI schedule</div></div>
-                        <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#7c3aed;">→</div>
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#ecfeff;">Weekly plan</div></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <h4 class="font-weight-bold mb-4">Meeting Notes to Action Items</h4>
-                    <div class="row text-center align-items-center">
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#eff6ff;">Raw notes</div></div>
-                        <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#7c3aed;">→</div>
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#f5f3ff;">AI extraction</div></div>
-                        <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#7c3aed;">→</div>
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#ecfeff;">Tasks + owners</div></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <h4 class="font-weight-bold mb-4">Coding Helper</h4>
-                    <div class="row text-center align-items-center">
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#eff6ff;">Error + code</div></div>
-                        <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#7c3aed;">→</div>
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#f5f3ff;">AI explanation</div></div>
-                        <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#7c3aed;">→</div>
-                        <div class="col-12 col-md mb-3"><div class="p-3 rounded border" style="background:#ecfeff;">Fix + tests</div></div>
+                <div class="col-lg-8 mb-4">
+                    <div class="h-100 bg-white border shadow-sm overflow-hidden" style="border-radius:16px;min-height:520px;border-top:6px solid #f5c242;">
+                        <iframe name="embed-feed"
+                                title="Viva Engage"
+                                src="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0"
+                                style="border:0;overflow:hidden;width:100%;height:100%;min-height:520px;"
+                                sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms">
+                            </iframe>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="container mb-5" id="tool-reviews">
-        <div class="text-center mb-5">
-            <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#7c3aed;font-size:0.78rem;">Student Tool Reviews</div>
-            <h2 class="font-weight-bold">Student Tool Reviews</h2>
-            <p class="text-muted mb-0 mx-auto" style="max-width:780px;">See how Bath students are using AI tools for studying, revision, research, coding, applications, and productivity.</p>
+    <section class="py-5" style="background:#eef4fb;" id="prompt-library">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+                <div>
+                    <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#003c71;font-size:0.78rem;">Prompt Library</div>
+                    <h2 class="font-weight-bold mb-1">Reusable prompts for student work</h2>
+                    <p class="text-muted mb-0">Save, adapt and copy prompts for study, coding, writing, research and productivity.</p>
+                </div>
+                <a href="#" class="btn btn-outline-primary font-weight-bold px-4 mt-3 mt-md-0" style="border-radius:10px;color:#003c71;border-color:#003c71;">Browse all prompts</a>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="h-100 p-4 p-lg-5 text-white shadow-sm" style="border-radius:16px;background:linear-gradient(145deg,#003c71,#111827);border-top:6px solid #f5c242;">
+                        <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Featured prompt</div>
+                        <h3 class="font-weight-bold mb-3">Socratic Revision Partner</h3>
+                        <p style="color:#e6eef8;">Turn lecture notes into questions that test understanding before you look at model answers.</p>
+                        <span class="badge px-3 py-2 mb-4" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                        <button type="button" data-copy-button="true" class="btn btn-light btn-block font-weight-bold py-3" style="color:#003c71;border-radius:10px;">Copy Prompt</button>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-md-6 col-xl-4 mb-4">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                                <h4 class="h5 font-weight-bold">Explain This Error</h4>
+                                <p class="text-muted">Ask for a diagnosis, minimal fix and test case.</p>
+                                <div class="small text-uppercase font-weight-bold mb-3" style="color:#5f4300;letter-spacing:0.08em;">Beginner</div>
+                                <button type="button" data-copy-button="true" class="btn btn-outline-primary btn-block font-weight-bold" style="border-radius:10px;color:#003c71;border-color:#003c71;">Copy Prompt</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4 mb-4">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                                <h4 class="h5 font-weight-bold">Structure Feedback</h4>
+                                <p class="text-muted">Review clarity, flow and argument strength.</p>
+                                <div class="small text-uppercase font-weight-bold mb-3" style="color:#5f4300;letter-spacing:0.08em;">Intermediate</div>
+                                <button type="button" data-copy-button="true" class="btn btn-outline-primary btn-block font-weight-bold" style="border-radius:10px;color:#003c71;border-color:#003c71;">Copy Prompt</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4 mb-4">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                                <h4 class="h5 font-weight-bold">Compare Sources</h4>
+                                <p class="text-muted">Summarise agreement, tension and evidence quality.</p>
+                                <div class="small text-uppercase font-weight-bold mb-3" style="color:#5f4300;letter-spacing:0.08em;">Intermediate</div>
+                                <button type="button" data-copy-button="true" class="btn btn-outline-primary btn-block font-weight-bold" style="border-radius:10px;color:#003c71;border-color:#003c71;">Copy Prompt</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4 mb-4">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#e8f2ff;color:#003c71;border:1px solid #b9d7f2;">Workplace</span>
+                                <h4 class="h5 font-weight-bold">Plan My Week</h4>
+                                <p class="text-muted">Turn deadlines into focused study and admin blocks.</p>
+                                <div class="small text-uppercase font-weight-bold mb-3" style="color:#5f4300;letter-spacing:0.08em;">Beginner</div>
+                                <button type="button" data-copy-button="true" class="btn btn-outline-primary btn-block font-weight-bold" style="border-radius:10px;color:#003c71;border-color:#003c71;">Copy Prompt</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4 mb-4">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#e8f2ff;color:#003c71;border:1px solid #b9d7f2;">Workplace</span>
+                                <h4 class="h5 font-weight-bold">Meeting Follow-up</h4>
+                                <p class="text-muted">Convert notes into actions, owners and next questions.</p>
+                                <div class="small text-uppercase font-weight-bold mb-3" style="color:#5f4300;letter-spacing:0.08em;">Beginner</div>
+                                <button type="button" data-copy-button="true" class="btn btn-outline-primary btn-block font-weight-bold" style="border-radius:10px;color:#003c71;border-color:#003c71;">Copy Prompt</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4 mb-4">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#f1e8ff;color:#6d28d9;border:1px solid #d8c4ff;">Lifelong</span>
+                                <h4 class="h5 font-weight-bold">Reflect on Feedback</h4>
+                                <p class="text-muted">Turn feedback into learning goals and next attempts.</p>
+                                <div class="small text-uppercase font-weight-bold mb-3" style="color:#5f4300;letter-spacing:0.08em;">Beginner</div>
+                                <button type="button" data-copy-button="true" class="btn btn-outline-primary btn-block font-weight-bold" style="border-radius:10px;color:#003c71;border-color:#003c71;">Copy Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div data-hover-card="true" class="mb-4 bg-white border shadow-sm overflow-hidden" style="border-radius:1.5rem;transition:all 0.25s ease;">
-            <div class="row no-gutters align-items-stretch">
-                <div class="col-lg-5 text-white p-4 p-lg-5 position-relative overflow-hidden" style="background:radial-gradient(circle at 22% 18%,rgba(56,189,248,0.34),rgba(15,23,42,0) 32%),radial-gradient(circle at 86% 82%,rgba(168,85,247,0.38),rgba(15,23,42,0) 34%),linear-gradient(145deg,#0f172a,#312e81);">
-                    <div style="position:absolute;right:-80px;top:-80px;width:220px;height:220px;border-radius:999px;background:rgba(255,255,255,0.08);">&nbsp;</div>
-                    <div class="position-relative" style="z-index:2;">
-                        <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#bfdbfe;font-size:0.78rem;">Featured tool of the month</div>
+    <section class="py-5" id="workflow-library">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+                <div>
+                    <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#003c71;font-size:0.78rem;">Workflow Library</div>
+                    <h2 class="font-weight-bold mb-1">AI workflows students use</h2>
+                    <p class="text-muted mb-0">Each workflow shows the journey from input, through AI tools, to a useful output.</p>
+                </div>
+                <a href="#" class="btn btn-outline-primary font-weight-bold px-4 mt-3 mt-md-0" style="border-radius:10px;color:#003c71;border-color:#003c71;">Browse all workflows</a>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h4 font-weight-bold mb-0">Literature Review Assistant</h3>
+                            <span class="badge px-3 py-2" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                        </div>
+                        <div class="row text-center align-items-center">
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#f8fafc;border-radius:10px;">Reading list</div></div>
+                            <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#003c71;">to</div>
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#fff8df;border-radius:10px;">AI summary + checks</div></div>
+                            <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#003c71;">to</div>
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#f8fafc;border-radius:10px;">Source matrix</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h4 font-weight-bold mb-0">Revision Planner</h3>
+                            <span class="badge px-3 py-2" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                        </div>
+                        <div class="row text-center align-items-center">
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#f8fafc;border-radius:10px;">Module topics</div></div>
+                            <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#003c71;">to</div>
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#fff8df;border-radius:10px;">AI schedule</div></div>
+                            <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#003c71;">to</div>
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#f8fafc;border-radius:10px;">Weekly plan</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h4 font-weight-bold mb-0">Meeting Notes to Action Items</h3>
+                            <span class="badge px-3 py-2" style="background:#e8f2ff;color:#003c71;border:1px solid #b9d7f2;">Workplace</span>
+                        </div>
+                        <div class="row text-center align-items-center">
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#f8fafc;border-radius:10px;">Raw notes</div></div>
+                            <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#003c71;">to</div>
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#fff8df;border-radius:10px;">AI extraction</div></div>
+                            <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#003c71;">to</div>
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#f8fafc;border-radius:10px;">Tasks + owners</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h4 font-weight-bold mb-0">Coding Helper</h3>
+                            <span class="badge px-3 py-2" style="background:#f1e8ff;color:#6d28d9;border:1px solid #d8c4ff;">Lifelong</span>
+                        </div>
+                        <div class="row text-center align-items-center">
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#f8fafc;border-radius:10px;">Error + code</div></div>
+                            <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#003c71;">to</div>
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#fff8df;border-radius:10px;">AI explanation</div></div>
+                            <div class="col-12 col-md-auto mb-3 font-weight-bold" style="color:#003c71;">to</div>
+                            <div class="col-12 col-md mb-3"><div class="p-3 border" style="background:#f8fafc;border-radius:10px;">Fix + tests</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" style="background:#eef4fb;" id="tool-reviews">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+                <div>
+                    <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#003c71;font-size:0.78rem;">Student Tool Review Library</div>
+                    <h2 class="font-weight-bold mb-1">Student Tool Reviews</h2>
+                    <p class="text-muted mb-0">See how Bath students are using AI tools for studying, revision, research, coding, applications and productivity.</p>
+                </div>
+                <a href="#" class="btn btn-outline-primary font-weight-bold px-4 mt-3 mt-md-0" style="border-radius:10px;color:#003c71;border-color:#003c71;">Browse all tool reviews</a>
+            </div>
+
+            <div data-hover-card="true" class="mb-4 bg-white border shadow-sm overflow-hidden" style="border-radius:16px;transition:all 0.25s ease;">
+                <div class="row no-gutters align-items-stretch">
+                    <div class="col-lg-5 text-white p-4 p-lg-5" style="background:linear-gradient(145deg,#003c71,#111827);border-top:6px solid #f5c242;">
+                        <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Featured tool of the month</div>
                         <div class="d-flex align-items-center mb-4">
-                            <div class="d-flex align-items-center justify-content-center rounded-circle mr-3" style="width:70px;height:70px;background:rgba(255,255,255,0.14);font-size:2rem;color:#bfdbfe;"><span class="bi bi-journal-richtext" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span></div>
+                            <div class="d-flex align-items-center justify-content-center mr-3" style="width:70px;height:70px;background:rgba(255,255,255,0.14);font-size:2rem;color:#f5c242;border-radius:12px;"><span class="bi bi-journal-richtext" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span></div>
                             <div>
                                 <h3 class="font-weight-bold mb-1">NotebookLM</h3>
                                 <div style="color:#fde68a;"><span class="bi bi-star-fill" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span> 4.8/5 student rating</div>
                             </div>
                         </div>
-                        <p class="lead mb-4" style="color:#e0e7ff;">"It helped me turn messy lecture notes into focused revision questions."</p>
-                        <a href="#" class="btn btn-light rounded-pill px-4 py-2 font-weight-bold" style="color:#111827;">Read Review <span class="bi bi-arrow-right ml-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span></a>
+                        <p class="lead mb-4" style="color:#e6eef8;">It helped me turn messy lecture notes into focused revision questions.</p>
+                        <span class="badge px-3 py-2" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                    </div>
+                    <div class="col-lg-7 p-4 p-lg-5">
+                        <h4 class="font-weight-bold mb-2">Best for source-based study</h4>
+                        <p class="text-muted">Students rate NotebookLM highly for turning course materials into clear, checkable revision support.</p>
+                        <div class="row">
+                            <div class="col-sm-6 mb-3"><div class="p-3 border h-100" style="background:#f8fafc;border-radius:10px;"><span class="bi bi-check-circle-fill mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#157347;" aria-hidden="true">&nbsp;</span>Revision</div></div>
+                            <div class="col-sm-6 mb-3"><div class="p-3 border h-100" style="background:#f8fafc;border-radius:10px;"><span class="bi bi-check-circle-fill mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#157347;" aria-hidden="true">&nbsp;</span>Lecture notes</div></div>
+                            <div class="col-sm-6 mb-3 mb-sm-0"><div class="p-3 border h-100" style="background:#f8fafc;border-radius:10px;"><span class="bi bi-check-circle-fill mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#157347;" aria-hidden="true">&nbsp;</span>PDFs</div></div>
+                            <div class="col-sm-6"><div class="p-3 border h-100" style="background:#f8fafc;border-radius:10px;"><span class="bi bi-check-circle-fill mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#157347;" aria-hidden="true">&nbsp;</span>Research papers</div></div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-7 p-4 p-lg-5">
-                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start mb-4">
-                        <div>
-                            <h4 class="font-weight-bold mb-2">Best for source-based study</h4>
-                            <p class="text-muted mb-0">Students rate NotebookLM highly for turning course materials into clear, checkable revision support.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-xl-3 mb-4">
+                    <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 font-weight-bold mb-0">ChatGPT</h4>
+                            <div class="font-weight-bold" style="color:#003c71;">4.7/5</div>
                         </div>
-                        <span class="badge badge-primary rounded-pill px-3 py-2 mt-3 mt-md-0">Top rated</span>
+                        <span class="badge px-3 py-2 mb-3" style="background:#f1e8ff;color:#6d28d9;border:1px solid #d8c4ff;">Lifelong</span>
+                        <p class="text-muted mb-0">Brainstorming, writing support and coding help.</p>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6 mb-3">
-                            <div class="p-3 rounded border h-100" style="background:#eff6ff;"><span class="bi bi-check-circle-fill mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#2563eb;" aria-hidden="true">&nbsp;</span>Revision</div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-4">
+                    <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 font-weight-bold mb-0">NotebookLM</h4>
+                            <div class="font-weight-bold" style="color:#003c71;">4.8/5</div>
                         </div>
-                        <div class="col-sm-6 mb-3">
-                            <div class="p-3 rounded border h-100" style="background:#f5f3ff;"><span class="bi bi-check-circle-fill mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#7c3aed;" aria-hidden="true">&nbsp;</span>Lecture notes</div>
+                        <span class="badge px-3 py-2 mb-3" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                        <p class="text-muted mb-0">Revision, document summaries and source-based Q&amp;A.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-4">
+                    <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 font-weight-bold mb-0">Microsoft Copilot</h4>
+                            <div class="font-weight-bold" style="color:#003c71;">4.5/5</div>
                         </div>
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <div class="p-3 rounded border h-100" style="background:#ecfeff;"><span class="bi bi-check-circle-fill mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#0891b2;" aria-hidden="true">&nbsp;</span>PDFs</div>
+                        <span class="badge px-3 py-2 mb-3" style="background:#e8f2ff;color:#003c71;border:1px solid #b9d7f2;">Workplace</span>
+                        <p class="text-muted mb-0">Productivity, emails, Word and PowerPoint support.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-4">
+                    <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 font-weight-bold mb-0">Perplexity</h4>
+                            <div class="font-weight-bold" style="color:#003c71;">4.6/5</div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="p-3 rounded border h-100" style="background:#faf5ff;"><span class="bi bi-check-circle-fill mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#6d28d9;" aria-hidden="true">&nbsp;</span>Research papers</div>
-                        </div>
+                        <span class="badge px-3 py-2 mb-3" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                        <p class="text-muted mb-0">Research, fact checking and source-backed answers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 p-lg-5 bg-white border shadow-sm" style="border-radius:16px;">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 mb-4 mb-lg-0">
+                        <h3 class="font-weight-bold mb-2">Used an AI tool recently?</h3>
+                        <p class="text-muted mb-0">Share what worked, what did not, and how other Bath students could use it.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-right">
+                        <a href="#" class="btn btn-primary px-4 py-3 font-weight-bold" style="background:#003c71;border-color:#003c71;border-radius:10px;box-shadow:0 14px 34px rgba(0,60,113,0.22);">Submit a Tool Review</a>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="row">
-            <div class="col-md-6 col-xl-3 mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <h5 class="font-weight-bold mb-0">ChatGPT</h5>
-                        <div class="font-weight-bold" style="color:#2563eb;">4.7/5</div>
-                    </div>
-                    <span class="badge badge-primary rounded-pill px-3 py-2 mb-4">Beginner</span>
-                    <ul class="list-unstyled text-muted mb-4">
-                        <li class="mb-2"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#2563eb;" aria-hidden="true">&nbsp;</span>Brainstorming</li>
-                        <li class="mb-2"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#2563eb;" aria-hidden="true">&nbsp;</span>Writing support</li>
-                        <li class="mb-0"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#2563eb;" aria-hidden="true">&nbsp;</span>Coding help</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline-primary rounded-pill px-4">View Student Reviews</a>
+    <section class="py-5" id="community-events">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+                <div>
+                    <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#003c71;font-size:0.78rem;">Community Events</div>
+                    <h2 class="font-weight-bold mb-1">Meet, build and learn together</h2>
+                    <p class="text-muted mb-0">Drop into practical sessions, hear from experts and take part in student-led AI challenges.</p>
                 </div>
+                <a href="#" class="btn btn-outline-primary font-weight-bold px-4 mt-3 mt-md-0" style="border-radius:10px;color:#003c71;border-color:#003c71;">Browse all events</a>
             </div>
-            <div class="col-md-6 col-xl-3 mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <h5 class="font-weight-bold mb-0">NotebookLM</h5>
-                        <div class="font-weight-bold" style="color:#7c3aed;">4.8/5</div>
-                    </div>
-                    <span class="badge badge-primary rounded-pill px-3 py-2 mb-4">Beginner</span>
-                    <ul class="list-unstyled text-muted mb-4">
-                        <li class="mb-2"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#7c3aed;" aria-hidden="true">&nbsp;</span>Revision</li>
-                        <li class="mb-2"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#7c3aed;" aria-hidden="true">&nbsp;</span>Document summaries</li>
-                        <li class="mb-0"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#7c3aed;" aria-hidden="true">&nbsp;</span>Source-based Q&amp;A</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline-primary rounded-pill px-4">View Student Reviews</a>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3 mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <h5 class="font-weight-bold mb-0">Microsoft Copilot</h5>
-                        <div class="font-weight-bold" style="color:#2563eb;">4.5/5</div>
-                    </div>
-                    <span class="badge badge-primary rounded-pill px-3 py-2 mb-4">Beginner</span>
-                    <ul class="list-unstyled text-muted mb-4">
-                        <li class="mb-2"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#2563eb;" aria-hidden="true">&nbsp;</span>Productivity</li>
-                        <li class="mb-2"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#2563eb;" aria-hidden="true">&nbsp;</span>Emails</li>
-                        <li class="mb-2"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#2563eb;" aria-hidden="true">&nbsp;</span>Word</li>
-                        <li class="mb-0"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#2563eb;" aria-hidden="true">&nbsp;</span>PowerPoint</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline-primary rounded-pill px-4">View Student Reviews</a>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3 mb-4">
-                <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:1.25rem;transition:all 0.25s ease;">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <h5 class="font-weight-bold mb-0">Perplexity</h5>
-                        <div class="font-weight-bold" style="color:#7c3aed;">4.6/5</div>
-                    </div>
-                    <span class="badge badge-secondary rounded-pill px-3 py-2 mb-4">Intermediate</span>
-                    <ul class="list-unstyled text-muted mb-4">
-                        <li class="mb-2"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#7c3aed;" aria-hidden="true">&nbsp;</span>Research</li>
-                        <li class="mb-2"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#7c3aed;" aria-hidden="true">&nbsp;</span>Fact checking</li>
-                        <li class="mb-0"><span class="bi bi-check2 mr-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;color:#7c3aed;" aria-hidden="true">&nbsp;</span>Source-backed answers</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline-primary rounded-pill px-4">View Student Reviews</a>
-                </div>
-            </div>
-        </div>
 
-        <div class="p-4 p-lg-5 bg-white border shadow-sm" style="border-radius:1.5rem;">
-            <div class="row align-items-center">
-                <div class="col-lg-8 mb-4 mb-lg-0">
-                    <h3 class="font-weight-bold mb-2">Used an AI tool recently?</h3>
-                    <p class="text-muted mb-0">Share what worked, what didn't, and how other Bath students could use it.</p>
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="p-4 p-lg-5 h-100 text-white shadow-sm" style="border-radius:16px;background:linear-gradient(145deg,#003c71,#0b2442);border-top:6px solid #f5c242;">
+                        <div class="text-uppercase mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Next up</div>
+                        <h3 class="font-weight-bold">Prompting for Coursework Planning</h3>
+                        <p style="color:#e6eef8;">Hands-on templates for responsible planning, feedback and reflection.</p>
+                        <span class="badge px-3 py-2" style="background:#e8f7ed;color:#157347;border:1px solid #bfe7cc;">Academic</span>
+                    </div>
                 </div>
-                <div class="col-lg-4 text-lg-right">
-                    <a href="#" class="btn btn-primary rounded-pill px-4 py-3 font-weight-bold" style="box-shadow:0 14px 34px rgba(37,99,235,0.24);">Submit a Tool Review</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container mb-5" id="community-events">
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="p-4 p-lg-5 h-100 text-white shadow-sm" style="border-radius:1.5rem;background:linear-gradient(145deg,#1d4ed8,#7c3aed);">
-                    <div class="text-uppercase mb-3" style="letter-spacing:0.12em;color:#dbeafe;font-size:0.78rem;">Community Events</div>
-                    <h2 class="font-weight-bold">Meet, build and learn together</h2>
-                    <p style="color:#e0e7ff;">Drop into practical sessions, hear from experts and take part in student-led AI challenges.</p>
-                </div>
-            </div>
-            <div class="col-lg-8 mb-4">
-                <div class="p-4 bg-white border shadow-sm" style="border-radius:1.5rem;">
+                <div class="col-lg-8">
                     <div class="row">
                         <div class="col-md-6 mb-4">
-                            <div data-hover-card="true" class="h-100 p-4 border" style="border-radius:1rem;transition:all 0.25s ease;background:#f8fafc;">
-                                <span class="badge badge-primary rounded-pill px-3 py-2 mb-3">Workshop</span>
-                                <h5 class="font-weight-bold">Prompting for Coursework Planning</h5>
-                                <p class="text-muted mb-0">Hands-on templates for responsible planning, feedback and reflection.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div data-hover-card="true" class="h-100 p-4 border" style="border-radius:1rem;transition:all 0.25s ease;background:#f8fafc;">
-                                <span class="badge badge-info rounded-pill px-3 py-2 mb-3">Guest Speaker</span>
-                                <h5 class="font-weight-bold">AI Skills in Graduate Careers</h5>
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#e8f2ff;color:#003c71;border:1px solid #b9d7f2;">Workplace</span>
+                                <h4 class="h5 font-weight-bold">AI Skills in Graduate Careers</h4>
                                 <p class="text-muted mb-0">Employers and alumni share how AI is changing early-career work.</p>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4 mb-md-0">
-                            <div data-hover-card="true" class="h-100 p-4 border" style="border-radius:1rem;transition:all 0.25s ease;background:#f8fafc;">
-                                <span class="badge badge-warning rounded-pill px-3 py-2 mb-3">AI Challenge</span>
-                                <h5 class="font-weight-bold">One-Hour Automation Sprint</h5>
+                        <div class="col-md-6 mb-4">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#e8f2ff;color:#003c71;border:1px solid #b9d7f2;">Workplace</span>
+                                <h4 class="h5 font-weight-bold">One-Hour Automation Sprint</h4>
                                 <p class="text-muted mb-0">Build a small workflow that saves time in study, society or placement work.</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div data-hover-card="true" class="h-100 p-4 border" style="border-radius:1rem;transition:all 0.25s ease;background:#f8fafc;">
-                                <span class="badge badge-success rounded-pill px-3 py-2 mb-3">Meetup</span>
-                                <h5 class="font-weight-bold">Community Show and Tell</h5>
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#f1e8ff;color:#6d28d9;border:1px solid #d8c4ff;">Lifelong</span>
+                                <h4 class="h5 font-weight-bold">Community Show and Tell</h4>
                                 <p class="text-muted mb-0">Share what you built, what you learned and what others can reuse.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div data-hover-card="true" class="h-100 p-4 bg-white border shadow-sm" style="border-radius:12px;transition:all 0.25s ease;">
+                                <span class="badge px-3 py-2 mb-3" style="background:#f1e8ff;color:#6d28d9;border:1px solid #d8c4ff;">Lifelong</span>
+                                <h4 class="h5 font-weight-bold">AI Confidence Clinic</h4>
+                                <p class="text-muted mb-0">A practical drop-in for questions, examples and responsible habits.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="container pb-5">
-        <div class="p-5 text-center text-white shadow position-relative overflow-hidden" style="border-radius:1.5rem;background:radial-gradient(circle at 18% 18%,rgba(56,189,248,0.35),rgba(15,23,42,0) 30%),radial-gradient(circle at 84% 24%,rgba(168,85,247,0.34),rgba(15,23,42,0) 32%),linear-gradient(135deg,#0f172a,#1e1b4b);">
-            <div style="position:absolute;left:10%;right:10%;bottom:-60px;height:150px;background:radial-gradient(ellipse at center,rgba(96,165,250,0.32),rgba(96,165,250,0));pointer-events:none;">&nbsp;</div>
-            <div class="position-relative" style="z-index:2;">
-                <h2 class="display-4 font-weight-bold mb-3">Build. Share. Inspire.</h2>
-                <p class="lead mx-auto mb-4" style="max-width:720px;color:#dbeafe;">Join thousands of University of Bath students shaping the future with AI.</p>
-                <a href="#discussions" class="btn btn-light btn-lg rounded-pill px-5 py-3 font-weight-bold" style="color:#111827;">Get Involved</a>
+    <section class="pb-5">
+        <div class="container">
+            <div class="p-4 p-lg-5 text-center text-white shadow" style="border-radius:16px;background:linear-gradient(135deg,#003c71,#111827);border-top:6px solid #f5c242;">
+                <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Community</div>
+                <h2 class="display-4 font-weight-bold mb-3" style="font-size:clamp(2rem,7vw,3.5rem);line-height:1.05;">Build. Share. Inspire.</h2>
+                <p class="lead mx-auto mb-4" style="max-width:720px;color:#e6eef8;">Join University of Bath students shaping practical, responsible and reusable ways to work with AI.</p>
+                <a href="#discussions" class="btn btn-light btn-lg px-5 py-3 font-weight-bold" style="color:#003c71;border-radius:10px;">Get Involved</a>
             </div>
         </div>
-    </div>
+    </section>
 </div>
 
 <script>
@@ -542,8 +556,8 @@ Constraints:
     var cards = document.querySelectorAll('[data-hover-card="true"]');
     for (var i = 0; i < cards.length; i += 1) {
         cards[i].addEventListener('mouseenter', function () {
-            this.style.transform = 'translateY(-8px)';
-            this.style.boxShadow = '0 24px 58px rgba(37,99,235,0.18),0 0 34px rgba(124,58,237,0.10)';
+            this.style.transform = 'translateY(-6px)';
+            this.style.boxShadow = '0 22px 48px rgba(0,60,113,0.16),0 0 0 1px rgba(245,194,66,0.18)';
         });
         cards[i].addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0)';
@@ -556,11 +570,13 @@ Constraints:
         copyButtons[j].addEventListener('click', function () {
             var original = this.innerHTML;
             this.innerHTML = 'Copied';
-            this.style.background = '#2563eb';
+            this.style.background = '#003c71';
+            this.style.borderColor = '#003c71';
             this.style.color = '#ffffff';
             window.setTimeout(function (button) {
                 button.innerHTML = original;
                 button.style.background = '';
+                button.style.borderColor = '';
                 button.style.color = '';
             }, 1400, this);
         });
