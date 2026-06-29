@@ -51,16 +51,32 @@ Constraints:
         <div class="collapse navbar-collapse" id="hubNav">
             <ul class="navbar-nav ml-auto align-items-lg-center">
                 <li class="nav-item">
-                    <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967">Learn AI</a>
+                    <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967" data-inner-link-color="#007bff" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
+                        <div style="color:#007bff;">
+                            Learn AI
+                        </div>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969">Challenges</a>
+                    <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969" data-inner-link-color="#007bff" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
+                        <div style="color:#007bff;">
+                            Challenges
+                        </div>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971">Community</a>
+                    <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" data-inner-link-color="#007bff" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
+                        <div style="color:#007bff;">
+                            Community
+                        </div>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 font-weight-bold" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972" style="color:#094685;">Using AI at Bath</a>
+                    <a class="nav-link px-3 font-weight-bold" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972" style="color:#094685;">
+                        <div style="color:#094685;">
+                            Using AI at Bath
+                        </div>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -85,7 +101,9 @@ Constraints:
                         </p>
                         <div class="d-flex flex-column flex-md-row justify-content-center">
                             <a href="#decision-tree" class="btn btn-light btn-lg font-weight-bold px-4 py-3 mb-3 mr-md-3" style="color:#094685;border-radius:10px;">
-                                Get quick advice
+                                <div style="color:#094685;">
+                                    Get quick advice
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -93,7 +111,7 @@ Constraints:
                     <div class="row mt-4">
                         <div class="col-lg-6 mb-4">
                             <a href="#open-lane" class="text-decoration-none" style="color:white;">
-                                <div class="h-100 p-4 p-md-5 shadow" style="background:#157347;border:8px solid #ffffff;border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,0.28);min-height:300px;">
+                                <div class="h-100 p-4 p-md-5 shadow" style="color:#ffffff;background:#157347;border:8px solid #ffffff;border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,0.28);min-height:300px;">
                                     <div class="d-flex align-items-start justify-content-between mb-4">
                                         <div class="font-weight-bold text-uppercase" style="font-size:clamp(2rem,9vw,3.35rem);line-height:0.95;letter-spacing:0.03em;">
                                             Open<br>Lane
@@ -114,7 +132,7 @@ Constraints:
 
                         <div class="col-lg-6 mb-4">
                             <a href="#closed-lane" class="text-decoration-none" style="color:white;">
-                                <div class="h-100 p-4 p-md-5 shadow" style="background:#b91c1c;border:8px solid #ffffff;border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,0.28);min-height:300px;">
+                                <div class="h-100 p-4 p-md-5 shadow" style="color:#ffffff;background:#b91c1c;border:8px solid #ffffff;border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,0.28);min-height:300px;">
                                     <div class="d-flex align-items-start justify-content-between mb-4">
                                         <div class="font-weight-bold text-uppercase" style="font-size:clamp(2rem,9vw,3.35rem);line-height:0.95;letter-spacing:0.03em;">
                                             Closed<br>Lane
@@ -644,5 +662,36 @@ Constraints:
     l.href = p1 + p2 + p3 + p4 + p5 + p6;
     l.setAttribute('data-bootstrap-icons', 'true');
     document.head.appendChild(l);
+})();
+
+
+(function () {
+    var links = document.querySelectorAll('[data-inner-link-color]');
+    for (var i = 0; i < links.length; i += 1) {
+        (function (link) {
+            var baseColor = link.getAttribute('data-inner-link-color');
+            var hoverColor = link.getAttribute('data-inner-link-hover-color') || baseColor;
+            var focusColor = link.getAttribute('data-inner-link-focus-color') || baseColor;
+            var content = link.firstElementChild;
+            if (!content) return;
+
+            function setColor(color) {
+                content.style.color = color;
+            }
+
+            function restoreRestingColor() {
+                setColor(document.activeElement === link ? focusColor : baseColor);
+            }
+
+            link.addEventListener('mouseenter', function () { setColor(hoverColor); });
+            link.addEventListener('mouseleave', restoreRestingColor);
+            link.addEventListener('mousedown', function () { setColor(hoverColor); });
+            link.addEventListener('mouseup', function () {
+                setColor(link.matches(':hover') ? hoverColor : (document.activeElement === link ? focusColor : baseColor));
+            });
+            link.addEventListener('focus', function () { setColor(focusColor); });
+            link.addEventListener('blur', function () { setColor(baseColor); });
+        })(links[i]);
+    }
 })();
 </script>
