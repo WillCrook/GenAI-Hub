@@ -254,10 +254,9 @@ Constraints:
 
     </div>
 
-    <!-- FEATURED THIS WEEK -->
+<!-- GenAI Carousel -->
 
-    <div class="p-4 rounded border bg-white shadow-sm overflow-hidden" style="border-radius:1rem;">
-
+    <div id="genaiHubCarousel" class="p-4 rounded border bg-white shadow-sm overflow-hidden" style="border-radius:0.5rem;" role="region" aria-roledescription="carousel" aria-label="GenAI Hub featured resources">
         <div class="d-flex flex-column-reverse flex-md-row justify-content-between align-items-md-center mb-4">
             
             <h2 class="font-weight-bold mb-0">
@@ -279,19 +278,192 @@ Constraints:
             
         </div>
 
-        <div id="featured-carousel" style="overflow:hidden; width:100%;">
+        <div id="genaiHubTopViewport" aria-live="off" style="overflow:hidden;">
+            <div id="genaiHubTopTrack" class="row no-gutters flex-nowrap" style="margin-left:-18%; margin-right:-18%; transition:transform 760ms cubic-bezier(.22,.61,.36,1); will-change:transform;">
+                <div class="col-11 col-md-6 px-1" data-hub-top-card="learn">
+                    <div class="position-relative overflow-hidden shadow-sm" style="height:clamp(280px,34vw,540px); min-height:420px; background:linear-gradient(135deg,#003c71 0%,#0b2442 58%,#172033 100%); border-radius:0;">
+                        <div class="position-absolute" data-hub-decoration="true" data-hub-default-opacity=".85" style="right:-6%; top:0; width:42%; height:100%; background:linear-gradient(160deg,rgba(245,194,66,.92),rgba(95,168,216,.28)); transform:skewX(-12deg); opacity:.85; pointer-events:none; z-index:0;">&nbsp;</div>
+                        <div class="position-absolute" data-hub-decoration="true" style="top:1.5rem; right:2rem; width:clamp(100px,14vw,180px); height:clamp(100px,14vw,180px); color:#f5c242; font-size:clamp(4rem,7vw,7rem); line-height:1; opacity:.82; pointer-events:none; z-index:0;">
+                            <span class="bi bi-lightbulb" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="position-absolute px-4 px-md-5 pb-4 pb-md-5" data-hub-content="true" style="left:0; bottom:0; z-index:1; color:white; width:100%; padding-top:5rem; background:linear-gradient(0deg,rgba(11,25,43,.96) 0%,rgba(11,25,43,.82) 64%,transparent 100%);">
+                            <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:.12em; color:#f5c242; font-size:.78rem;">Start here</div>
+                            <h3 class="font-weight-bold mb-3" style="font-size:clamp(2.1rem,5.3vw,5rem); line-height:.95;">Learn AI<br>with purpose</h3>
+                            <div class="d-flex align-items-center flex-wrap">
+                                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967" class="btn btn-light rounded-pill font-weight-bold px-4 mr-3 mb-2" style="color:#003c71;">Explore learning</a>
+                                <p class="mb-2" style="font-size:clamp(.9rem,1.15vw,1.2rem); max-width:620px;">Build practical AI skills for study, work and responsible experimentation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <div id="featured-track"
-                style="
+                <div class="col-11 col-md-6 px-1" data-hub-top-card="practice">
+                    <div class="position-relative overflow-hidden shadow-sm" style="height:clamp(280px,34vw,540px); min-height:420px; background:linear-gradient(135deg,#f5c242 0%,#fff8df 38%,#003c71 100%); border-radius:0;">
+                        <div class="position-absolute d-flex align-items-center justify-content-center" data-hub-decoration="true" style="top:1.5rem; right:2rem; width:clamp(100px,14vw,180px); height:clamp(100px,14vw,180px); border-radius:50%; background:rgba(255,255,255,.92); color:#003c71; font-size:clamp(4rem,7vw,7rem); box-shadow:0 24px 70px rgba(0,60,113,.25); opacity:.82; pointer-events:none; z-index:0;">
+                            <span class="bi bi-trophy" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="position-absolute px-4 px-md-5 pb-4 pb-md-5" data-hub-content="true" style="left:0; bottom:0; z-index:1; color:#172033; width:100%; padding-top:5rem; background:linear-gradient(0deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.9) 64%,transparent 100%);">
+                            <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:.12em; color:#003c71; font-size:.78rem;">Practice</div>
+                            <h3 class="font-weight-bold mb-3" style="font-size:clamp(2.1rem,5.3vw,5rem); line-height:.95;">Weekly AI<br>challenges</h3>
+                            <div class="d-flex align-items-center flex-wrap">
+                                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969" class="btn rounded-pill font-weight-bold px-4 mr-3 mb-2" style="background:#003c71; color:white;">View challenges</a>
+                                <p class="mb-2" style="font-size:clamp(.9rem,1.15vw,1.2rem); max-width:620px;">Try focused tasks that turn prompt ideas into repeatable digital skills.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                display:flex;
+                <div class="col-11 col-md-6 px-1" data-hub-top-card="community">
+                    <div class="position-relative overflow-hidden shadow-sm" style="height:clamp(280px,34vw,540px); min-height:420px; background:linear-gradient(135deg,#14532d 0%,#157347 52%,#e8fff0 100%); border-radius:0;">
+                        <div class="position-absolute" data-hub-decoration="true" style="top:1.5rem; right:2rem; width:clamp(100px,14vw,180px); height:clamp(100px,14vw,180px); color:rgba(255,255,255,.2); font-size:clamp(4rem,7vw,7rem); line-height:1; opacity:.82; pointer-events:none; z-index:0;">
+                            <span class="bi bi-chat-dots" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="position-absolute px-4 px-md-5 pb-4 pb-md-5" data-hub-content="true" style="left:0; bottom:0; z-index:1; color:white; width:100%; padding-top:5rem; background:linear-gradient(0deg,rgba(11,25,43,.96) 0%,rgba(11,25,43,.82) 64%,transparent 100%);">
+                            <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:.12em; color:#d9f99d; font-size:.78rem;">Community</div>
+                            <h3 class="font-weight-bold mb-3" style="font-size:clamp(2.1rem,5.3vw,5rem); line-height:.95;">Share better<br>workflows</h3>
+                            <div class="d-flex align-items-center flex-wrap">
+                                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" class="btn btn-light rounded-pill font-weight-bold px-4 mr-3 mb-2" style="color:#14532d;">Join community</a>
+                                <p class="mb-2" style="font-size:clamp(.9rem,1.15vw,1.2rem); max-width:620px;">Exchange prompts, methods and examples with other Bath students.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                width:max-content;
-                ">    
+                <div class="col-11 col-md-6 px-1" data-hub-top-card="guidance">
+                    <div class="position-relative overflow-hidden shadow-sm" style="height:clamp(280px,34vw,540px); min-height:420px; background:linear-gradient(135deg,#7f1d1d 0%,#b91c1c 45%,#fff1f2 100%); border-radius:0;">
+                        <div class="position-absolute text-center" data-hub-decoration="true" style="top:1.5rem; right:2rem; width:clamp(100px,14vw,180px); height:clamp(100px,14vw,180px); color:white; font-size:clamp(4rem,7vw,7rem); line-height:1; opacity:.82; pointer-events:none; z-index:0;">
+                            <span class="bi bi-shield-check" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="position-absolute px-4 px-md-5 pb-4 pb-md-5" data-hub-content="true" style="left:0; bottom:0; z-index:1; color:white; width:100%; padding-top:5rem; background:linear-gradient(0deg,rgba(11,25,43,.96) 0%,rgba(11,25,43,.82) 64%,transparent 100%);">
+                            <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:.12em; color:#fee2e2; font-size:.78rem;">Assessment guidance</div>
+                            <h3 class="font-weight-bold mb-3" style="font-size:clamp(2.1rem,5.3vw,5rem); line-height:.95;">Using AI<br>at Bath</h3>
+                            <div class="d-flex align-items-center flex-wrap">
+                                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972" class="btn btn-light rounded-pill font-weight-bold px-4 mr-3 mb-2" style="color:#7f1d1d;">Check guidance</a>
+                                <p class="mb-2" style="font-size:clamp(.9rem,1.15vw,1.2rem); max-width:620px;">Understand Open and Closed Lane expectations before using GenAI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-11 col-md-6 px-1" data-hub-top-card="toolkit">
+                    <div class="position-relative overflow-hidden shadow-sm" style="height:clamp(280px,34vw,540px); min-height:420px; background:linear-gradient(135deg,#4c1d95 0%,#6d28d9 44%,#ede9fe 100%); border-radius:0;">
+                        <div class="position-absolute" data-hub-decoration="true" style="top:1.5rem; right:2rem; width:clamp(100px,14vw,180px); height:clamp(100px,14vw,180px); color:rgba(255,255,255,.92); font-size:clamp(4rem,7vw,7rem); line-height:1; opacity:.82; pointer-events:none; z-index:0;">
+                            <span class="bi bi-stars" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="position-absolute px-4 px-md-5 pb-4 pb-md-5" data-hub-content="true" style="left:0; bottom:0; z-index:1; color:white; width:100%; padding-top:5rem; background:linear-gradient(0deg,rgba(11,25,43,.96) 0%,rgba(11,25,43,.82) 64%,transparent 100%);">
+                            <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:.12em; color:#ddd6fe; font-size:.78rem;">Prompt craft</div>
+                            <h3 class="font-weight-bold mb-3" style="font-size:clamp(2.1rem,5.3vw,5rem); line-height:.95;">Improve your<br>AI outputs</h3>
+                            <div class="d-flex align-items-center flex-wrap">
+                                <a href="#" class="btn btn-light rounded-pill font-weight-bold px-4 mr-3 mb-2" style="color:#4c1d95;">Open toolkit</a>
+                                <p class="mb-2" style="font-size:clamp(.9rem,1.15vw,1.2rem); max-width:620px;">Plan, question, verify and refine AI-supported academic work.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
 
+        <div class="mt-2" style="overflow:hidden;">
+            <div id="genaiHubBottomTrack" class="row no-gutters flex-nowrap" style="margin-left:-10%; margin-right:-10%; transition:transform 620ms cubic-bezier(.22,.61,.36,1); will-change:transform;">
+                <div class="col-8 col-md-3 px-1" data-hub-bottom-card="light">
+                    <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:#ffffff; border:1px solid #d8e2ee;">
+                        <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:#e0f2fe; color:#003c71; font-size:1.55rem;">
+                            <span class="bi bi-mortarboard" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem); color:#003c71;">AI Foundations</h4>
+                            <p class="mb-0" style="font-size:.9rem; color:#3f4b59;">Core concepts, limitations and study uses.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-3 px-1" data-hub-bottom-card="dark">
+                    <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:linear-gradient(135deg,#003c71,#0b2442); color:white;">
+                        <div style="color:#f5c242; font-size:3.2rem;"><span class="bi bi-search" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span></div>
+                        <div class="mt-auto">
+                            <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem);">Verify AI Answers</h4>
+                            <p class="mb-0" style="font-size:.9rem; color:#f1f5f9;">Check claims, references and assumptions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-3 px-1" data-hub-bottom-card="true">
+                    <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:#fff8df; border:1px solid #f1d675;">
+                        <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:#f5c242; color:#172033; font-size:1.55rem;">
+                            <span class="bi bi-keyboard" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem);">Prompt Lab</h4>
+                            <p class="mb-0" style="font-size:.9rem; color:#3f4b59;">Experiment with role, context and constraints.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-3 px-1" data-hub-bottom-card="true">
+                    <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:#f0fdf4; border:1px solid #bbf7d0;">
+                        <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:#dcfce7; color:#166534; font-size:1.55rem;">
+                            <span class="bi bi-people" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem); color:#166534;">Student Community</h4>
+                            <p class="mb-0" style="font-size:.9rem; color:#3f4b59;">Share examples, questions and discoveries.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-3 px-1" data-hub-bottom-card="true">
+                    <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:#fef2f2; border:1px solid #fecaca;">
+                        <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:#fee2e2; color:#991b1b; font-size:1.55rem;">
+                            <span class="bi bi-signpost-split" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem); color:#991b1b;">Open or Closed Lane</h4>
+                            <p class="mb-0" style="font-size:.9rem; color:#3f4b59;">Know what your assessment brief allows.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-3 px-1" data-hub-bottom-card="true">
+                    <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:#f5f3ff; border:1px solid #ddd6fe;">
+                        <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:#ede9fe; color:#5b21b6; font-size:1.55rem;">
+                            <span class="bi bi-journal-check" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem); color:#5b21b6;">Reflective Practice</h4>
+                            <p class="mb-0" style="font-size:.9rem; color:#3f4b59;">Document how AI shaped your choices.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-3 px-1" data-hub-bottom-card="true">
+                    <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:#ffffff; border:1px solid #d8e2ee;">
+                        <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:#e8f2ff; color:#003c71; font-size:1.55rem;">
+                            <span class="bi bi-briefcase" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem); color:#003c71;">Career Skills</h4>
+                            <p class="mb-0" style="font-size:.9rem; color:#3f4b59;">Use GenAI as part of a wider digital toolkit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center mt-3" role="group" aria-label="Choose a featured resource" style="min-height:44px;">
+            <button type="button" data-hub-dot="0" aria-label="Show carousel item 1" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="0" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span>1</button>
+            <button type="button" data-hub-dot="1" aria-label="Show carousel item 2" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="1" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span>2</button>
+            <button type="button" data-hub-dot="2" aria-label="Show carousel item 3" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="2" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span>3</button>
+            <button type="button" data-hub-dot="3" aria-label="Show carousel item 4" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="3" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span>4</button>
+            <button type="button" data-hub-dot="4" aria-label="Show carousel item 5" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="4" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span>5</button>
+        </div>
+
+        <div class="d-flex justify-content-center mt-2">
+        <button type="button" data-hub-pause="true" aria-label="Pause carousel animation" style="position:static; flex:0 0 auto; width:44px; height:44px; border-radius:50%; border:1px solid #9aabba; background:#ffffff; color:#003c71; box-shadow:0 4px 12px rgba(15,23,42,.14); display:flex; align-items:center; justify-content:center; font-size:1.15rem;">
+            <span data-hub-pause-icon="true" class="bi bi-pause-fill" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
+            <span data-hub-pause-text="true" class="sr-only">Pause carousel animation</span>
+        </button>
+        </div>
+        <p data-hub-status="true" class="sr-only" aria-live="polite" aria-atomic="true">Showing carousel item 1 of 5</p>
     </div>
 
     <!-- YOUR JOURNEY THROUGH BATH -->
@@ -586,199 +758,8 @@ if (window.requestAnimationFrame && core) {
     window.requestAnimationFrame(animateCore);
 }
 
-//FEATURED THIS WEEK CARD DATA
-const featuredCards = [
-
-    {
-
-        tag: "NEW",
-
-        colour: "primary",
-
-        title: "AI for Academic Research",
-
-        description: "Learn practical workflows for literature reviews.",
-
-        link: "#"
-
-    },
-
-    {
-
-        tag: "POPULAR",
-
-        colour: "warning",
-
-        title: "Prompt Engineering",
-
-        description: "Learn techniques used by professionals.",
-
-        link: "#"
-
-    },
-
-    {
-
-        tag: "LIVE",
-
-        colour: "success",
-
-        title: "Weekly Challenge",
-
-        description: "Build an AI study assistant.",
-
-        link: "#"
-
-    },
-
-    {
-
-        tag: "NEW",
-
-        colour: "primary",
-
-        title: "AI Careers Hub",
-
-        description: "Discover emerging careers.",
-
-        link: "#"
-
-    }
-];
-
-function createCard(card) {
-
-    return `
-
-        <div class="card shadow rounded mr-4"
-        style="width:300px;flex-shrink:0;border:1px solid #94a3b8;border-radius:1rem;">
-
-            <div class="card-body p-3 d-flex flex-column"
-
-                style="min-height:380px;">
-
-                <span class="badge badge-${card.colour} rounded-pill align-self-start">
-
-                    ${card.tag}
-
-                </span>
-
-                <h5 class="font-weight-bold mt-3">
-
-                    ${card.title}
-
-                </h5>
-
-                <p class="text-muted mb-0">
-
-                    ${card.description}
-
-                </p>
-
-                <div class="mt-auto">
-                    <div class="rounded mb-3 d-flex align-items-center justify-content-center"
-
-                        style="height:140px;background:#f1f5f9;font-size:14px;color:#64748b;border-radius:0.5rem;">
-
-                            Image Placeholder
-                    </div>
-                    <div class="mt-auto pt-3">
-
-                        <a href="${card.link}"
-
-                        class="btn btn-outline-primary w-100 rounded-pill" data-inner-link-color="#007bff" data-inner-link-hover-color="#ffffff">
-
-                            <div style="color:#007bff;">
-                                Learn More <span class="bi bi-arrow-right ml-2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-                            </div>
-
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-(function() {
-
-    const track = document.getElementById('featured-track');
-
-    let html = '';
-
-    featuredCards.forEach(card => {
-        html += createCard(card);
-    });
-    //Duplicate for
-    featuredCards.forEach(card => {
-        html += createCard(card);
-    });
-    
-
-    track.innerHTML = html;
-
-    const carousel = document.getElementById('featured-carousel');
-
-    if (window.innerWidth <= 768) {
-
-    track.style.animation = 'none';
-
-    track.style.width = 'auto';
-
-    carousel.style.overflowX = 'auto';
-
-    carousel.style.webkitOverflowScrolling = 'touch';
-
-    carousel.style.scrollSnapType = 'x mandatory';
-
-    track.querySelectorAll('.card').forEach(card => {
-
-        card.style.scrollSnapAlign = 'start';
-
-        card.style.flexShrink = '0';
-
-        card.style.width = '260px';
-
-    });
-
-    }
-
-    let isPaused = false;
-    let scrollStart = null;
-
-    carousel.addEventListener('mouseenter', () => {
-        isPaused = true;
-    });
-
-    carousel.addEventListener('mouseleave', () => {
-        isPaused = false;
-    });
-
-    function scrollFeatured(timestamp) {
-        if (scrollStart === null || isPaused) {
-            scrollStart = timestamp;
-        }
-
-        if (window.innerWidth > 768) {
-            const distance = track.scrollWidth / 2;
-            const progress = ((timestamp - scrollStart) / 45000) % 1;
-            track.style.transform = 'translateX(-' + (distance * progress).toFixed(2) + 'px)';
-        }
-
-        window.requestAnimationFrame(scrollFeatured);
-    }
-
-    if (window.requestAnimationFrame) {
-        window.requestAnimationFrame(scrollFeatured);
-    }
-
-})();
-
 </script>
+
 <script>
 (function () {
     if (document.querySelector('link[data-bootstrap-icons]')) return;
@@ -826,3 +807,314 @@ function createCard(card) {
     }
 })();
 </script>
+
+<!-- Carousel JS -->
+<script>
+(function () {
+    var root = document.getElementById('genaiHubCarousel');
+    if (!root) { return; }
+
+    var topViewport = document.getElementById('genaiHubTopViewport');
+    var topTrack = document.getElementById('genaiHubTopTrack');
+    var bottomTrack = document.getElementById('genaiHubBottomTrack');
+    var topCards = root.querySelectorAll('[data-hub-top-card]');
+    var bottomCards = root.querySelectorAll('[data-hub-bottom-card]');
+    var dots = root.querySelectorAll('[data-hub-dot]');
+    var progressBars = root.querySelectorAll('[data-hub-progress]');
+    var pauseButton = root.querySelector('[data-hub-pause]');
+    var pauseIcon = root.querySelector('[data-hub-pause-icon]');
+    var pauseText = root.querySelector('[data-hub-pause-text]');
+    var status = root.querySelector('[data-hub-status]');
+    var activeIndex = 0;
+    var bottomIndex = 0;
+    var topCount = topCards.length;
+    var bottomCount = bottomCards.length;
+    var duration = 5200;
+    var startedAt = Date.now();
+    var intervalId;
+    var progressId;
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var paused = reducedMotion;
+    var keyboardFocus = false;
+
+    for (var originalIndex = 0; originalIndex < topCards.length; originalIndex++) {
+        var heading = topCards[originalIndex].querySelector('h3');
+        topCards[originalIndex].setAttribute('data-hub-original-index', originalIndex);
+        topCards[originalIndex].setAttribute('role', 'group');
+        topCards[originalIndex].setAttribute('aria-roledescription', 'slide');
+        topCards[originalIndex].setAttribute('aria-label', (originalIndex + 1) + ' of ' + topCount + ': ' + (heading ? heading.textContent.replace(/\s+/g, ' ').trim() : 'Featured resource'));
+        if (dots[originalIndex] && heading) {
+            dots[originalIndex].setAttribute('aria-label', 'Show ' + heading.textContent.replace(/\s+/g, ' ').trim());
+        }
+    }
+
+    for (var originalBottomIndex = 0; originalBottomIndex < bottomCards.length; originalBottomIndex++) {
+        var bottomHeading = bottomCards[originalBottomIndex].querySelector('h4');
+        bottomCards[originalBottomIndex].setAttribute('data-hub-bottom-original-index', originalBottomIndex);
+        bottomCards[originalBottomIndex].setAttribute('role', 'group');
+        if (bottomHeading) {
+            bottomCards[originalBottomIndex].setAttribute('aria-label', bottomHeading.textContent.trim());
+        }
+    }
+
+    function appendClones(track, cards, amount) {
+        for (var i = 0; i < amount; i++) {
+            var clone = cards[i % cards.length].cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            clone.setAttribute('data-hub-clone', 'true');
+            clone.removeAttribute('data-hub-original-index');
+            clone.removeAttribute('data-hub-bottom-original-index');
+            clone.removeAttribute('role');
+            clone.removeAttribute('aria-roledescription');
+            clone.removeAttribute('aria-label');
+            clone.inert = true;
+            var cloneInteractive = clone.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+            for (var c = 0; c < cloneInteractive.length; c++) {
+                cloneInteractive[c].tabIndex = -1;
+            }
+            track.appendChild(clone);
+        }
+    }
+
+    function prependClones(track, cards, amount) {
+        for (var i = amount - 1; i >= 0; i--) {
+            var clone = cards[(cards.length - 1 - i + cards.length) % cards.length].cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            clone.setAttribute('data-hub-clone', 'true');
+            clone.removeAttribute('data-hub-original-index');
+            clone.removeAttribute('data-hub-bottom-original-index');
+            clone.removeAttribute('role');
+            clone.removeAttribute('aria-roledescription');
+            clone.removeAttribute('aria-label');
+            clone.inert = true;
+            var cloneInteractive = clone.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+            for (var c = 0; c < cloneInteractive.length; c++) {
+                cloneInteractive[c].tabIndex = -1;
+            }
+            track.insertBefore(clone, track.firstChild);
+        }
+    }
+
+    var topCloneCount = Math.min(3, topCount);
+    var bottomCloneCount = Math.min(5, bottomCount);
+
+    prependClones(topTrack, topCards, topCloneCount);
+    appendClones(topTrack, topCards, topCloneCount);
+    prependClones(bottomTrack, bottomCards, bottomCloneCount);
+    appendClones(bottomTrack, bottomCards, bottomCloneCount);
+    topCards = root.querySelectorAll('[data-hub-top-card]');
+    bottomCards = root.querySelectorAll('[data-hub-bottom-card]');
+
+    function applyResponsiveDeckSizing() {
+        var narrow = window.innerWidth < 768;
+        topTrack.style.marginLeft = narrow ? '0' : '-18%';
+        topTrack.style.marginRight = narrow ? '0' : '-18%';
+        for (var i = 0; i < topCards.length; i++) {
+            topCards[i].style.flex = narrow ? '0 0 82%' : '';
+            topCards[i].style.maxWidth = narrow ? '82%' : '';
+            var panel = topCards[i].firstElementChild;
+            var heading = topCards[i].querySelector('h3');
+            var decorations = topCards[i].querySelectorAll('[data-hub-decoration]');
+            var content = topCards[i].querySelector('[data-hub-content]');
+            if (panel) {
+                panel.style.height = narrow ? '440px' : 'clamp(280px,34vw,540px)';
+            }
+            if (heading) {
+                heading.style.fontSize = narrow ? 'clamp(2rem,10vw,3rem)' : 'clamp(2.1rem,5.3vw,5rem)';
+                heading.style.lineHeight = narrow ? '1.02' : '.95';
+            }
+            for (var d = 0; d < decorations.length; d++) {
+                decorations[d].style.opacity = narrow ? '.28' : (decorations[d].getAttribute('data-hub-default-opacity') || '.82');
+            }
+            if (content) {
+                content.style.paddingTop = '5rem';
+                content.style.paddingRight = narrow ? '1.5rem' : '';
+                content.style.paddingBottom = narrow ? '1.5rem' : '';
+                content.style.paddingLeft = narrow ? '1.5rem' : '';
+            }
+        }
+    }
+
+    function setTrackPositions() {
+        applyResponsiveDeckSizing();
+        var topCard = topCards[topCloneCount + activeIndex] || topCards[topCloneCount + (activeIndex % topCount)];
+        var bottomCard = bottomCards[bottomCloneCount + bottomIndex] || bottomCards[bottomCloneCount + (bottomIndex % bottomCount)];
+        var topViewportRect = topViewport.getBoundingClientRect();
+        var bottomViewportRect = bottomTrack.parentNode.getBoundingClientRect();
+        var topCardRect = topCard.getBoundingClientRect();
+        var bottomCardRect = bottomCard.getBoundingClientRect();
+        var topTransform = new window.DOMMatrixReadOnly(window.getComputedStyle(topTrack).transform);
+        var bottomTransform = new window.DOMMatrixReadOnly(window.getComputedStyle(bottomTrack).transform);
+        var topCenterOffset = topTransform.m41 + ((topViewportRect.left + (topViewportRect.width / 2)) - (topCardRect.left + (topCardRect.width / 2)));
+        var bottomCenterOffset = bottomTransform.m41 + ((bottomViewportRect.left + (bottomViewportRect.width / 2)) - (bottomCardRect.left + (bottomCardRect.width / 2)));
+        topTrack.style.transform = 'translateX(' + topCenterOffset + 'px)';
+        bottomTrack.style.transform = 'translateX(' + bottomCenterOffset + 'px)';
+    }
+
+    function updateDots() {
+        var activeDot = activeIndex % topCount;
+        for (var i = 0; i < dots.length; i++) {
+            var active = i === activeDot;
+            dots[i].style.opacity = active ? '1' : '.8';
+            dots[i].setAttribute('aria-current', active ? 'true' : 'false');
+            progressBars[i].style.width = active ? '30px' : '10px';
+            progressBars[i].style.background = active ? '#c3cfdd' : '#657184';
+        }
+        updateSlideAccessibility(activeDot, bottomIndex % bottomCount);
+        startedAt = Date.now();
+    }
+
+    function updateSlideAccessibility(activeTop, activeBottom) {
+        var originalTopCards = root.querySelectorAll('[data-hub-original-index]');
+        var originalBottomCards = root.querySelectorAll('[data-hub-bottom-original-index]');
+
+        for (var i = 0; i < originalTopCards.length; i++) {
+            var isActive = parseInt(originalTopCards[i].getAttribute('data-hub-original-index'), 10) === activeTop;
+            originalTopCards[i].setAttribute('aria-hidden', isActive ? 'false' : 'true');
+            var interactive = originalTopCards[i].querySelectorAll('a, button, input, select, textarea, [tabindex]');
+            for (var j = 0; j < interactive.length; j++) {
+                interactive[j].tabIndex = isActive ? 0 : -1;
+            }
+        }
+
+        for (var k = 0; k < originalBottomCards.length; k++) {
+            var isBottomActive = parseInt(originalBottomCards[k].getAttribute('data-hub-bottom-original-index'), 10) === activeBottom;
+            originalBottomCards[k].setAttribute('aria-hidden', isBottomActive ? 'false' : 'true');
+        }
+
+        if (status) {
+            var activeCard = root.querySelector('[data-hub-original-index="' + activeTop + '"]');
+            status.textContent = activeCard ? 'Showing ' + activeCard.getAttribute('aria-label') : '';
+        }
+    }
+
+    function snapWrappedTracks() {
+        var needsSnap = false;
+
+        if (activeIndex >= topCount) {
+            activeIndex = activeIndex % topCount;
+            needsSnap = true;
+        }
+
+        if (bottomIndex >= bottomCount) {
+            bottomIndex = bottomIndex % bottomCount;
+            needsSnap = true;
+        }
+
+        if (!needsSnap) { return; }
+
+        topTrack.style.transition = 'none';
+        bottomTrack.style.transition = 'none';
+        setTrackPositions();
+
+        window.setTimeout(function () {
+            topTrack.style.transition = reducedMotion ? 'none' : 'transform 760ms cubic-bezier(.22,.61,.36,1)';
+            bottomTrack.style.transition = reducedMotion ? 'none' : 'transform 620ms cubic-bezier(.22,.61,.36,1)';
+        }, 30);
+    }
+
+    function goTo(index) {
+        activeIndex = index;
+        bottomIndex = bottomIndex + 1;
+        setTrackPositions();
+        updateDots();
+        window.setTimeout(snapWrappedTracks, 780);
+    }
+
+    function restartTimer() {
+        window.clearInterval(intervalId);
+        window.clearInterval(progressId);
+        if (paused) { return; }
+        intervalId = window.setInterval(function () {
+            goTo(activeIndex + 1);
+        }, duration);
+        progressId = window.setInterval(function () {
+            var pct = Math.min(100, ((Date.now() - startedAt) / duration) * 100);
+            var activeDot = activeIndex % topCount;
+            if (progressBars[activeDot]) {
+                progressBars[activeDot].style.background = 'linear-gradient(90deg,#003c71 0%,#003c71 ' + pct + '%,#c3cfdd ' + pct + '%,#c3cfdd 100%)';
+            }
+        }, 80);
+    }
+
+    function setPaused(nextPaused) {
+        paused = nextPaused;
+        if (paused) {
+            window.clearInterval(intervalId);
+            window.clearInterval(progressId);
+            pauseButton.setAttribute('aria-label', 'Play carousel animation');
+            pauseIcon.className = 'bi bi-play-fill';
+            pauseText.textContent = 'Play carousel animation';
+        } else {
+            pauseButton.setAttribute('aria-label', 'Pause carousel animation');
+            pauseIcon.className = 'bi bi-pause-fill';
+            pauseText.textContent = 'Pause carousel animation';
+            startedAt = Date.now();
+            restartTimer();
+        }
+    }
+
+    for (var i = 0; i < dots.length; i++) {
+        dots[i].addEventListener('click', function () {
+            var index = parseInt(this.getAttribute('data-hub-dot'), 10);
+            activeIndex = index;
+            bottomIndex = index % bottomCount;
+            setTrackPositions();
+            updateDots();
+            restartTimer();
+        });
+    }
+
+    pauseButton.addEventListener('click', function () {
+        setPaused(!paused);
+    });
+
+    root.addEventListener('keydown', function (event) {
+        if (event.key === 'Tab') { keyboardFocus = true; }
+    });
+
+    root.addEventListener('mousedown', function () {
+        keyboardFocus = false;
+    });
+
+    root.addEventListener('focusin', function (event) {
+        if (keyboardFocus && event.target.matches('a, button')) {
+            event.target.style.outline = '3px solid #f5c242';
+            event.target.style.outlineOffset = '3px';
+            event.target.setAttribute('data-hub-original-shadow', event.target.style.boxShadow || '');
+            event.target.style.boxShadow = '0 0 0 6px #172033';
+        }
+        if (event.target.matches('[data-hub-top-card] a')) {
+            setPaused(true);
+        }
+    });
+
+    root.addEventListener('focusout', function (event) {
+        if (event.target.matches('a, button') && event.target.hasAttribute('data-hub-original-shadow')) {
+            event.target.style.outline = '';
+            event.target.style.outlineOffset = '';
+            event.target.style.boxShadow = event.target.getAttribute('data-hub-original-shadow') || '';
+            event.target.removeAttribute('data-hub-original-shadow');
+        }
+    });
+
+    window.addEventListener('resize', setTrackPositions);
+    window.addEventListener('load', setTrackPositions);
+    topTrack.style.transition = 'none';
+    bottomTrack.style.transition = 'none';
+    setTrackPositions();
+    updateDots();
+    window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+            topTrack.style.transition = reducedMotion ? 'none' : 'transform 760ms cubic-bezier(.22,.61,.36,1)';
+            bottomTrack.style.transition = reducedMotion ? 'none' : 'transform 620ms cubic-bezier(.22,.61,.36,1)';
+        });
+    });
+    if (paused) {
+        setPaused(true);
+    } else {
+        restartTimer();
+    }
+})();
+</script>
+
