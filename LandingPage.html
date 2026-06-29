@@ -11,10 +11,9 @@
     <!-- Bootstrap -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-
           rel="stylesheet">
 
-    <title>GenAI Hub</title>
+    <title>GenAI & Digital Skills Hub</title>
 
     <!--Constraints
     Generate Moodle 4.x compatible HTML.
@@ -31,10 +30,11 @@ Constraints:
 - Use Bootstrap Icons where needed.
 - Mobile responsive using Bootstrap grid only.
 - Modern style with student learning in mind.
+-don't remove the document scaffolds
 
 -->
 
-<!-- COPY TO MOODLE BELOW -->
+<!-- COPY BELOW FOR MOODLE -->
 
 <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top" style="backdrop-filter:blur(12px);">
     <div class="container">
@@ -90,11 +90,10 @@ Constraints:
     <div class="row justify-content-center mb-5">
         <div class="col-lg-10">
 
-            <div id="hero" class="p-4 p-md-5 rounded shadow-sm"
+            <div id="genai-hub-hero" class="p-4 p-md-5 rounded shadow-sm"
                  style="
                  background:linear-gradient(135deg,#094685 0%,#0b2442 58%,#172033 100%);
                  color:white;
-                 transition:all 0.2s ease;
                  border-radius:1rem;
                  overflow:hidden;">
 
@@ -551,21 +550,6 @@ cards.forEach((card, index) => {
     });
 });
 
-const hero = document.getElementById('hero');
-
-hero.addEventListener('mousemove', (e) => {
-
-    const rect = hero.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    hero.style.background = `
-        radial-gradient(circle at ${x}px ${y}px,
-        rgba(255,255,255,0.12),
-        transparent 300px),
-        linear-gradient(135deg,#094685 0%,#0b2442 58%,#172033 100%)`;
-});
-
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -577,6 +561,7 @@ const observer = new IntersectionObserver((entries) => {
 
 cards.forEach(card => observer.observe(card));
 
+const hero = document.getElementById('genai-hub-hero');
 const orb = document.getElementById('orb-container');
 const core = document.getElementById('core');
 let pulseStart = null;
@@ -600,16 +585,6 @@ function animateCore(timestamp) {
 if (window.requestAnimationFrame && core) {
     window.requestAnimationFrame(animateCore);
 }
-
-hero.addEventListener('mousemove', e => {
-
-    const rect = hero.getBoundingClientRect();
-
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    orb.style.transform = `translate(${x * 15}px, ${y * 15}px)`;
-});
 
 //FEATURED THIS WEEK CARD DATA
 const featuredCards = [
