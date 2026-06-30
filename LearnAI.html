@@ -84,416 +84,79 @@ Constraints:
     </div>
 </nav>
 
-<div class="container py-5">
-
-    <div class="row justify-content-center mb-5">
-
-        <div class="col-lg-10">
-
-            <div id="hero" 
-
-                class="p-4 p-md-5 rounded shadow-sm"
-
-                style="
-                 background:linear-gradient(135deg,#0b4f87 0%,#123f70 58%,#173653 100%);
-                 color:white;
-                 transition:all 0.2s ease;
-                 overflow:hidden;">
-
-
-                <div class="row align-items-center">
-
-                    <div class="col-lg-8">
-
-                        <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.82rem;">Learn AI</div>
-
-                        <h1 class="display-4 font-weight-bold mt-2 mb-3"
-                            style="font-size:clamp(2rem,8vw,3rem);line-height:1.12;">
-                            Build AI skills for
-                        </h1>
-
-                        <div id="rotating-text"
-                                style="
-                                color:#f5c242;
-                                font-size:clamp(2rem,8vw,2.5rem);
-                                font-weight:700;
-                                line-height:1.1;
-                                min-height:1.3em;
-                                height:1.3em;
-                                position:relative;
-                                margin-top:-0.5em;">
-                            </div>
-
-                        <p class="lead mb-4"
-
-                           style="max-width:700px;">
-
-                            Build practical AI skills for success at Bath, in your career and beyond.
-
-                        </p>
-
+<div class="container pt-4 pb-4">
+    <section id="hero" class="rounded shadow-sm overflow-hidden" aria-labelledby="hero-title"
+             style="background:linear-gradient(135deg,#0b4f87 0%,#123f70 58%,#173653 100%);color:white;">
+        <div class="px-4 px-md-5 pt-4 pt-md-5 pb-3">
+            <div class="row align-items-center">
+                <div class="col-lg-8 pr-lg-5">
+                    <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:.12em;color:#f5c242;font-size:.78rem;">Learn AI</div>
+                    <h1 id="hero-title" class="font-weight-bold mb-1" style="font-size:clamp(2rem,7vw,3rem);line-height:1.08;">Build AI skills for</h1>
+                    <div id="rotating-text" aria-live="off"
+                         style="position:relative;height:1.2em;overflow:hidden;color:#f5c242;font-size:clamp(1.75rem,8vw,2.35rem);font-weight:700;line-height:1.12;white-space:nowrap;">
+                        <span style="position:absolute;inset:0;display:flex;align-items:flex-start;white-space:nowrap;">your studies.</span>
                     </div>
-
-                    <div id="orb-column" class="col-lg-4 text-center mt-4 mt-lg-0">
-
-                        <div id="orb-container"
-
-                             style="
-
-                             position:relative;
-
-                             width:min(240px,70vw);
-
-                             aspect-ratio:1/1;
-
-                             margin:auto;">
-
-                            <div id="bulb" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:7rem;filter:none;opacity:0.4;">
-                                <span class="bi bi-lightbulb" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
+                    <p class="lead mb-3" style="max-width:680px;font-size:1.05rem;line-height:1.5;color:rgba(255,255,255,.88);">
+                        Practical guidance to help you study, create and work confidently with AI at Bath and beyond.
+                    </p>
                 </div>
 
+                <div class="col-lg-4 d-none d-lg-flex justify-content-center" aria-hidden="true">
+                    <div id="hero-bulb" style="width:210px;height:210px;transform:translateY(0);will-change:transform;">
+                        <img src="https://willcrook.github.io/GenAI-Hub/Lightbulb.svg"
+                             alt=""
+                             data-lightbulb="true"
+                             style="display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 22px rgba(0,0,0,.18));pointer-events:none;">
+                    </div>
+                </div>
             </div>
-
         </div>
 
-    </div>
-
-</div>
-
-<!-- Quick Links -->
-
-<div class="container mb-5 mt-0">
-
-    <div class="mb-4">
-
-        <h2 class="font-weight-bold mb-1" style="color:#172033;">
-
-            Quick Links
-
-        </h2>
-
-        <p class="text-muted mb-0">
-
-            Explore the most popular sections
-
-        </p>
-
-    </div>
-
-    <div class="row">
-
-        <!-- Popular Resources -->
-
-        <div class="col-12 col-md-6 mb-4">
-
-            <a href="#featured" class="text-decoration-none">
-
-                <div data-quick-link data-pathway="academic"
-
-                     class="d-flex align-items-center justify-content-between px-3 px-sm-4 py-3 shadow-sm"
-
-                     style="
-
-                     background:linear-gradient(135deg,#0b4f87 0%,#123f70 58%,#173653 100%);
-
-                     border-radius:20px;
-
-                     min-height:88px;
-
-                     color:white;
-
-                     cursor:pointer;">
-
-                    <div class="d-flex align-items-center" style="min-width:0;">
-
-                        <div class="d-flex align-items-center justify-content-center"
-
-                             style="
-
-                             width:52px;
-
-                             height:52px;
-
-                             border-radius:50%;
-
-                             background:#f5c242;
-
-                             font-size:1.3rem;
-
-                             flex-shrink:0;
-
-                             margin-right:1rem;">
-
-                            <span class="bi bi-award" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
+        <nav class="px-3 px-md-4 pt-3 pb-1" aria-label="Explore AI learning sections"
+             style="background:rgba(5,35,65,.34);border-top:1px solid rgba(255,255,255,.14);">
+            <div class="d-flex align-items-center px-1 mb-2">
+                <span class="text-uppercase font-weight-bold" style="font-size:.72rem;letter-spacing:.1em;color:rgba(255,255,255,.72);">Explore learning</span>
+            </div>
+            <div class="row mx-n1 mx-md-n2">
+                <div class="col-6 col-lg-3 px-1 px-md-2 mb-2">
+                    <a href="#featured" class="text-decoration-none d-block h-100">
+                        <div data-quick-link class="d-flex align-items-center h-100 px-2 px-md-3 py-2 rounded"
+                             style="min-height:52px;color:white;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);transition:background .2s ease,transform .2s ease,box-shadow .2s ease;">
+                            <span class="bi bi-award mr-2" style="color:#f5c242;font-size:1.1rem;" aria-hidden="true">&nbsp;</span>
+                            <span class="font-weight-bold" style="font-size:.88rem;line-height:1.15;">Popular</span>
                         </div>
-
-                        <div style="min-width:0;">
-
-                            <div class="font-weight-bold">
-
-                                Popular Resources
-
-                            </div>
-
-                            <small style="opacity:.75;">
-
-                                Most visited guides and tools
-
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                    <div style="font-size:1.5rem;opacity:.7;flex-shrink:0;">
-
-                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                    </div>
-
+                    </a>
                 </div>
-
-            </a>
-
-        </div>
-
-        <!-- Academic Skills -->
-
-        <div class="col-12 col-md-6 mb-4">
-
-            <a href="#academic" class="text-decoration-none">
-
-                <div data-quick-link
-
-                     class="d-flex align-items-center justify-content-between px-3 px-sm-4 py-3 shadow-sm"
-
-                     style="
-
-                     background:linear-gradient(135deg,#0b4f87 0%,#123f70 58%,#173653 100%);
-
-                     border-radius:20px;
-
-                     min-height:88px;
-
-                     color:white;
-
-                     cursor:pointer;">
-
-                    <div class="d-flex align-items-center" style="min-width:0;">
-
-                        <div class="d-flex align-items-center justify-content-center"
-
-                             style="
-
-                             width:52px;
-
-                             height:52px;
-
-                             border-radius:50%;
-
-                             background:#15803D;
-
-                             font-size:1.3rem;
-
-                             flex-shrink:0;
-                             
-                             margin-right:1rem;">
-
-                            <span class="bi bi-mortarboard" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
+                <div class="col-6 col-lg-3 px-1 px-md-2 mb-2">
+                    <a href="#academic" class="text-decoration-none d-block h-100">
+                        <div data-quick-link data-pathway="academic" class="d-flex align-items-center h-100 px-2 px-md-3 py-2 rounded"
+                             style="min-height:52px;color:white;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);transition:background .2s ease,transform .2s ease,box-shadow .2s ease;">
+                            <span class="bi bi-mortarboard mr-2" style="color:#86efac;font-size:1.1rem;" aria-hidden="true">&nbsp;</span>
+                            <span class="font-weight-bold" style="font-size:.88rem;line-height:1.15;">Academic</span>
                         </div>
-
-                        <div style="min-width:0;">
-
-                            <div class="font-weight-bold">
-
-                                Academic Skills
-
-                            </div>
-
-                            <small style="opacity:.75;">
-
-                                Study smarter with AI
-
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                    <div style="font-size:1.5rem;opacity:.7;flex-shrink:0;">
-
-                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                    </div>
-
+                    </a>
                 </div>
-
-            </a>
-
-        </div>
-
-        <!-- Workplace Skills -->
-
-        <div class="col-12 col-md-6 mb-4">
-
-            <a href="#workplace" class="text-decoration-none">
-
-                <div data-quick-link data-pathway="workplace"
-
-                     class="d-flex align-items-center justify-content-between px-3 px-sm-4 py-3 shadow-sm"
-
-                     style="
-
-                     background:linear-gradient(135deg,#0b4f87 0%,#123f70 58%,#173653 100%);
-
-                     border-radius:20px;
-
-                     min-height:88px;
-
-                     color:white;
-
-                     cursor:pointer;">
-
-                    <div class="d-flex align-items-center" style="min-width:0;">
-
-                        <div class="d-flex align-items-center justify-content-center"
-
-                             style="
-
-                             width:52px;
-
-                             height:52px;
-
-                             border-radius:50%;
-
-                             background:#258FEB;
-
-                             font-size:1.3rem;
-
-                             flex-shrink:0;
-                             
-                             margin-right:1rem;">
-
-                            <span class="bi bi-briefcase" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
+                <div class="col-6 col-lg-3 px-1 px-md-2 mb-2">
+                    <a href="#workplace" class="text-decoration-none d-block h-100">
+                        <div data-quick-link data-pathway="workplace" class="d-flex align-items-center h-100 px-2 px-md-3 py-2 rounded"
+                             style="min-height:52px;color:white;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);transition:background .2s ease,transform .2s ease,box-shadow .2s ease;">
+                            <span class="bi bi-briefcase mr-2" style="color:#93c5fd;font-size:1.1rem;" aria-hidden="true">&nbsp;</span>
+                            <span class="font-weight-bold" style="font-size:.88rem;line-height:1.15;">Workplace</span>
                         </div>
-
-                        <div style="min-width:0;">
-
-                            <div class="font-weight-bold">
-
-                                Workplace Skills
-
-                            </div>
-
-                            <small style="opacity:.75;">
-
-                                Career and placement support
-
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                    <div style="font-size:1.5rem;opacity:.7;flex-shrink:0;">
-
-                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                    </div>
-
+                    </a>
                 </div>
-
-            </a>
-
-        </div>
-
-        <!-- Lifelong Skills -->
-
-        <div class="col-12 col-md-6 mb-4">
-
-            <a href="#lifelong" class="text-decoration-none">
-
-                <div data-quick-link data-pathway="lifelong"
-
-                     class="d-flex align-items-center justify-content-between px-3 px-sm-4 py-3 shadow-sm"
-
-                     style="
-
-                     background:linear-gradient(135deg,#0b4f87 0%,#123f70 58%,#173653 100%);
-
-                     border-radius:20px;
-
-                     min-height:88px;
-
-                     color:white;
-
-                     cursor:pointer;">
-
-                    <div class="d-flex align-items-center" style="min-width:0;">
-
-                        <div class="d-flex align-items-center justify-content-center"
-
-                             style="
-
-                             width:52px;
-
-                             height:52px;
-
-                             border-radius:50%;
-
-                             background:#7c3aed;
-
-                             font-size:1.3rem;
-
-                             flex-shrink:0;
-                             
-                             margin-right:1rem;">
-
-                            <span class="bi bi-compass" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
+                <div class="col-6 col-lg-3 px-1 px-md-2 mb-2">
+                    <a href="#lifelong" class="text-decoration-none d-block h-100">
+                        <div data-quick-link data-pathway="lifelong" class="d-flex align-items-center h-100 px-2 px-md-3 py-2 rounded"
+                             style="min-height:52px;color:white;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);transition:background .2s ease,transform .2s ease,box-shadow .2s ease;">
+                            <span class="bi bi-compass mr-2" style="color:#c4b5fd;font-size:1.1rem;" aria-hidden="true">&nbsp;</span>
+                            <span class="font-weight-bold" style="font-size:.88rem;line-height:1.15;">Lifelong</span>
                         </div>
-
-                        <div style="min-width:0;">
-
-                            <div class="font-weight-bold">
-
-                                Lifelong Skills
-
-                            </div>
-
-                            <small style="opacity:.75;">
-
-                                Learn beyond university
-
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                    <div style="font-size:1.5rem;opacity:.7;flex-shrink:0;">
-
-                        <span class="bi bi-arrow-right" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
-
-                    </div>
-
+                    </a>
                 </div>
-
-            </a>
-
-        </div>
-
-    </div>
-
+            </div>
+        </nav>
+    </section>
 </div>
 
 <div class="container mb-5" id="featured">
@@ -885,34 +548,59 @@ Constraints:
         typeDelay: 60,
         deleteDelay: 30,
         completedPhraseDelay: 1800,
-        holdDelay: 3200,
-        fadeDuration: 700,
-        phrases: [
-            "my coursework.",
-            "my assignments.",
-            "revision and exam preparation.",
-            "engineering projects.",
-            "research and literature reviews.",
-            "writing reports more efficiently.",
-            "data analysis and visualisation.",
-            "improving my productivity.",
-            "creating presentations.",
-            "developing workplace skills.",
-            "job applications and CVs.",
-            "preparing for interviews.",
-            "learning new technologies.",
-            "solving complex problems.",
-            "collaborating with others.",
-            "boosting my employability.",
+        holdDelay: 3000,
+        fadeDuration: 500,
+        desktopPhrases: [
             "academic success.",
-            "lifelong learning."
-        ]
+            "better grades and stronger assignments.",
+            "exam confidence and revision.",
+            "your studies and future career.",
+            "research and creative projects.",
+            "faster, smarter learning.",
+            "solving real world problems.",
+            "standing out to employers.",
+            "confident decision making.",
+            "everyday productivity.",
+            "turning ideas into reality.",
+            "working more efficiently.",
+            "critical thinking and analysis.",
+            "collaboration and teamwork.",
+            "lifelong learning.",
+            "your next opportunity.",
+            "innovation with confidence.",
+            "tackling complex challenges.",
+            "achieving more with less effort.",
+            "making informed decisions."
+            ],
+        mobilePhrases: [
+            "your studies.",
+            "your career.",
+            "better grades.",
+            "exam success.",
+            "creative projects.",
+            "faster learning.",
+            "critical thinking.",
+            "future success.",
+            "digital confidence.",
+            "lifelong learning.",
+            "research skills.",
+            "smarter work.",
+            "problem solving.",
+            "better writing.",
+            "career readiness.",
+            "new opportunities.",
+            "innovation.",
+            "productivity.",
+            "collaboration.",
+            "confidence."
+            ]
     };
 
     const heroTextState = {
         timeoutId: null,
         intervalId: null,
-        mediaQuery: window.matchMedia("(max-width: 991.98px)")
+        mobileQuery: window.matchMedia("(max-width: 767.98px)"),
+        reducedMotionQuery: window.matchMedia("(prefers-reduced-motion: reduce)")
     };
 
     function clearHeroTextAnimation() {
@@ -933,39 +621,55 @@ Constraints:
         }
 
         clearHeroTextAnimation();
+        const phrases = heroTextState.mobileQuery.matches
+            ? heroTextConfig.mobilePhrases
+            : heroTextConfig.desktopPhrases;
+
         elements.rotatingText.textContent = EMPTY_HTML;
 
-        if (heroTextState.mediaQuery.matches) {
-            startHeroPhraseFadeAnimation();
+        if (heroTextState.reducedMotionQuery.matches) {
+            startHeroPhraseFadeAnimation(phrases);
             return;
         }
 
-        startHeroTypingAnimation();
+        startHeroTypingAnimation(phrases);
     }
 
-    function startHeroTypingAnimation() {
+    function getRandomPhraseIndex(phrases, currentIndex) {
+        if (phrases.length < 2) {
+            return 0;
+        }
+
+        let nextIndex = currentIndex;
+        while (nextIndex === currentIndex) {
+            nextIndex = Math.floor(Math.random() * phrases.length);
+        }
+        return nextIndex;
+    }
+
+    function startHeroTypingAnimation(phrases) {
         let phraseIndex = 0;
         let characterIndex = 0;
         let isDeleting = false;
 
         function typeNextCharacter() {
-            const currentPhrase = heroTextConfig.phrases[phraseIndex];
+            const currentPhrase = phrases[phraseIndex];
 
             if (isDeleting) {
-                elements.rotatingText.textContent = currentPhrase.substring(0, characterIndex - 1);
                 characterIndex--;
+                elements.rotatingText.textContent = currentPhrase.substring(0, characterIndex);
 
                 if (characterIndex === 0) {
                     isDeleting = false;
-                    phraseIndex = (phraseIndex + 1) % heroTextConfig.phrases.length;
+                    phraseIndex = getRandomPhraseIndex(phrases, phraseIndex);
                 }
 
                 heroTextState.timeoutId = window.setTimeout(typeNextCharacter, heroTextConfig.deleteDelay);
                 return;
             }
 
-            elements.rotatingText.textContent = currentPhrase.substring(0, characterIndex + 1);
             characterIndex++;
+            elements.rotatingText.textContent = currentPhrase.substring(0, characterIndex);
 
             if (characterIndex === currentPhrase.length) {
                 isDeleting = true;
@@ -979,18 +683,19 @@ Constraints:
         typeNextCharacter();
     }
 
-    function startHeroPhraseFadeAnimation() {
+    function startHeroPhraseFadeAnimation(phrases) {
         const phraseSlots = [document.createElement("span"), document.createElement("span")];
         let activeSlotIndex = 0;
         let phraseIndex = 0;
 
         phraseSlots.forEach((slot, index) => {
             slot.setAttribute("data-rotating-phrase", "");
-            slot.textContent = index === 0 ? heroTextConfig.phrases[0] : EMPTY_HTML;
+            slot.textContent = index === 0 ? phrases[0] : EMPTY_HTML;
             slot.style.position = "absolute";
             slot.style.inset = "0";
             slot.style.display = "flex";
-            slot.style.alignItems = "center";
+            slot.style.alignItems = "flex-start";
+            slot.style.whiteSpace = "nowrap";
             slot.style.transition = "opacity " + heroTextConfig.fadeDuration + "ms ease";
             slot.style.willChange = "opacity";
             slot.style.opacity = index === 0 ? "1" : "0";
@@ -1002,8 +707,8 @@ Constraints:
             const activeSlot = phraseSlots[activeSlotIndex];
             const nextSlot = phraseSlots[nextSlotIndex];
 
-            phraseIndex = (phraseIndex + 1) % heroTextConfig.phrases.length;
-            nextSlot.textContent = heroTextConfig.phrases[phraseIndex];
+            phraseIndex = getRandomPhraseIndex(phrases, phraseIndex);
+            nextSlot.textContent = phrases[phraseIndex];
 
             window.requestAnimationFrame(() => {
                 activeSlot.style.opacity = "0";
@@ -1274,8 +979,9 @@ Constraints:
     function initialisePage() {
         startHeroTextAnimation();
 
-        if (heroTextState.mediaQuery.addEventListener) {
-            heroTextState.mediaQuery.addEventListener("change", startHeroTextAnimation);
+        if (heroTextState.mobileQuery.addEventListener) {
+            heroTextState.mobileQuery.addEventListener("change", startHeroTextAnimation);
+            heroTextState.reducedMotionQuery.addEventListener("change", startHeroTextAnimation);
         }
 
         if (elements.startPathQuiz) {
@@ -1285,7 +991,7 @@ Constraints:
 
     initialisePage();
 
-    const bulb = document.getElementById("bulb");
+    const bulb = document.getElementById("hero-bulb");
     let bulbStart = null;
 
     function animateBulb(timestamp) {
@@ -1294,41 +1000,16 @@ Constraints:
         }
 
         const elapsed = timestamp - bulbStart;
-        const phase = (elapsed % 8000) / 8000;
-        const floatY = Math.sin(elapsed / 950) * -10;
-        const lit = (phase > 0.12 && phase < 0.18) || (phase > 0.24 && phase < 0.32) || (phase > 0.42 && phase < 0.70);
-
-        if (bulb) {
-            bulb.style.transform = "translate(-50%,-50%) translateY(" + floatY.toFixed(2) + "px)";
-            bulb.style.opacity = lit ? "1" : "0.25";
-            bulb.style.filter = lit ? "drop-shadow(0 0 25px rgba(245,194,66,1)) drop-shadow(0 0 70px rgba(245,194,66,0.7))" : "none";
-        }
+        const floatY = Math.sin(elapsed / 950) * 8;
+        bulb.style.transform = "translateY(" + floatY.toFixed(2) + "px)";
 
         window.requestAnimationFrame(animateBulb);
     }
 
-    if (window.requestAnimationFrame && bulb) {
+    if (window.requestAnimationFrame && bulb && !heroTextState.reducedMotionQuery.matches) {
         window.requestAnimationFrame(animateBulb);
     }
 })();
-
-
-const hero = document.getElementById('hero');
-
-if (hero) {
-hero.addEventListener('mousemove', (e) => {
-
-    const rect = hero.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    hero.style.background = `
-        radial-gradient(circle at ${x}px ${y}px,
-        rgba(245,194,66,0.07),
-        transparent 300px),
-        linear-gradient(135deg,#0b4f87 0%,#123f70 58%,#173653 100%)`;
-});
-}
 
 </script>
 
@@ -1607,6 +1288,30 @@ function createCard(card) {
             element.addEventListener('focusin', activate);
             element.addEventListener('focusout', restore);
         })(pathwayElements[i]);
+    }
+
+    var quickLinks = document.querySelectorAll('[data-quick-link]');
+    for (var j = 0; j < quickLinks.length; j += 1) {
+        (function (quickLink) {
+            function activateQuickLink() {
+                quickLink.style.background = 'rgba(255,255,255,.18)';
+                quickLink.style.transform = 'translateY(-2px)';
+                quickLink.style.outline = '2px solid #f5c242';
+                quickLink.style.outlineOffset = '2px';
+            }
+            function restoreQuickLink() {
+                quickLink.style.background = 'rgba(255,255,255,.1)';
+                quickLink.style.transform = 'translateY(0)';
+                quickLink.style.outline = 'none';
+            }
+            var link = quickLink.parentElement;
+            quickLink.addEventListener('mouseenter', activateQuickLink);
+            quickLink.addEventListener('mouseleave', restoreQuickLink);
+            if (link) {
+                link.addEventListener('focus', activateQuickLink);
+                link.addEventListener('blur', restoreQuickLink);
+            }
+        })(quickLinks[j]);
     }
 })();
 </script>
