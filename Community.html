@@ -84,9 +84,9 @@ Constraints:
     </div>
 </nav>
 
-<div class="container-fluid px-0" style="background:linear-gradient(180deg,#f7fbff 0%,#ffffff 42%,#f4f7fb 100%);color:#0f172a;">
+<div class="container-fluid px-3 px-md-4 py-4 py-md-5" style="background:#ffffff;color:#0f172a;">
 
-    <section id="communityHero" class="py-5" style="background:linear-gradient(135deg,#094685 0%,#082947 58%,#111827 100%);color:white;">
+    <section id="communityHero" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:linear-gradient(135deg,#094685 0%,#082947 58%,#111827 100%);color:white;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 mb-4 mb-lg-0">
@@ -152,7 +152,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="py-5" style="background:#eef4fb;" id="student-showcase">
+    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;" id="student-showcase">
         <div class="container">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
                 <div>
@@ -237,10 +237,15 @@ Constraints:
         </div>
     </section>
 
-    <section class="py-5" id="discussions">
+    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" id="discussions" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
         <div class="container">
-            <div class="d-flex justify-content-md-end mb-3">
-                <a href="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" class="d-inline-flex align-items-center text-decoration-none" aria-label="Browse all discussions" style="color:#094685;padding:8px 0;line-height:1;white-space:normal;">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+                <div>
+                    <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#094685;font-size:0.78rem;">Discussions</div>
+                    <h2 class="font-weight-bold mb-1">Latest conversations across the Hub</h2>
+                    <p class="text-muted mb-0">Ask questions, share resources and compare practical ways to use AI responsibly at Bath.</p>
+                </div>
+                <a href="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" class="d-inline-flex align-items-center align-self-start align-self-md-end text-decoration-none mt-3 mt-md-0 ml-md-4" aria-label="Browse all discussions" style="color:#094685;padding:8px 0;line-height:1;white-space:normal;">
                     <div class="d-flex align-items-center" style="color:#094685;">
                         <span class="font-weight-bold" style="font-size:clamp(1rem,3vw,1.15rem);line-height:1.1;">Browse All Discussions</span>
                         <span class="d-inline-flex align-items-center justify-content-center rounded-circle ml-2" style="width:30px;height:30px;min-width:30px;background:#094685;color:#ffffff;font-size:1.45rem;line-height:1;">
@@ -250,11 +255,10 @@ Constraints:
                 </a>
             </div>
             <div class="row align-items-stretch">
-                <div class="col-lg-4 mb-4">
+                <div class="col-lg-4 mb-2 mb-lg-4">
                     <div class="h-100 p-4 p-lg-5 text-white shadow-sm" style="border-radius:16px;background:linear-gradient(145deg,#094685,#0b2442);border-top:6px solid #f5c242;">
-                        <div class="text-uppercase mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Discussions</div>
-                        <h2 class="font-weight-bold mb-4">Latest conversations across the Hub</h2>
-                        <p style="color:#e6eef8;">Ask questions, share resources and compare practical ways to use AI responsibly at Bath.</p>
+                        <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Discussion spaces</div>
+                        <h3 class="h4 font-weight-bold mb-3">Choose where to join in</h3>
                         <div class="row">
                             <div class="col-6 mb-4">
                                 <div class="h2 font-weight-bold mb-0">2,480</div>
@@ -269,17 +273,29 @@ Constraints:
                                 <small style="color:#dbeafe;">Resources shared</small>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-light font-weight-bold px-4 mt-4" style="color:#094685;border-radius:10px;">
-                            <div style="color:#094685;">
-                                Join the discussion
-                            </div>
-                        </a>
+                        <nav class="mt-2" aria-label="Discussion platforms">
+                            <button type="button" data-discussion-selector="true" data-discussion-label="Engage" data-discussion-url="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" data-discussion-src="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" data-discussion-title="Viva Engage" aria-pressed="true" class="btn btn-block text-left font-weight-bold px-3 py-3 mb-2" style="color:#082947;background:#f5c242;border:2px solid #f5c242;border-radius:10px;"><img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Viva_Engage_logo.svg" alt="" width="28" height="28" class="mr-2" style="object-fit:contain;vertical-align:middle;">Engage</button>
+                            <button type="button" data-discussion-selector="true" data-discussion-label="LinkedIn" data-discussion-url="https://www.linkedin.com/school/university-of-bath/" data-discussion-src="https://www.linkedin.com/school/university-of-bath/" data-discussion-title="University of Bath on LinkedIn" aria-pressed="false" class="btn btn-light btn-block text-left font-weight-bold px-3 py-3 mb-2" style="color:#094685;border:2px solid #ffffff;border-radius:10px;"><img src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg" alt="" width="28" height="28" class="mr-2" style="object-fit:contain;vertical-align:middle;">LinkedIn</button>
+                            <button type="button" data-discussion-selector="true" data-discussion-label="Moodle discussions" data-discussion-url="https://moodle.bath.ac.uk/course/section.php?id=277885" data-discussion-src="https://moodle.bath.ac.uk/course/section.php?id=277885" data-discussion-title="Moodle discussions" aria-pressed="false" class="btn btn-light btn-block text-left font-weight-bold px-3 py-3" style="color:#094685;border:2px solid #ffffff;border-radius:10px;">Moodle discussions</button>
+                        </nav>
                     </div>
                 </div>
 
                 <div class="col-lg-8 mb-4">
                     <div class="h-100 bg-white border shadow-sm overflow-hidden" style="border-radius:16px;min-height:520px;border-top:6px solid #f5c242;">
-                        <iframe name="embed-feed" 
+                        <div class="p-3 border-bottom" style="background:#f4f7fb;">
+                            <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between">
+                                <div class="mr-sm-3 mb-3 mb-sm-0">
+                                    <div class="font-weight-bold" style="color:#094685;">Showing: <span id="discussion-feed-label">Engage</span></div>
+                                    <p id="discussion-feed-status" class="small text-muted mb-0 mt-1" role="status" aria-live="polite">The selected discussion content will appear below. You may be asked to sign in.</p>
+                                </div>
+                                <a id="discussion-fullscreen-link" href="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-weight-bold px-3 py-2 text-nowrap" aria-label="Open Engage full screen in a new tab" style="background:#094685;border-color:#094685;border-radius:8px;">
+                                    <span class="bi bi-arrows-fullscreen mr-2" aria-hidden="true">&nbsp;</span>Open full screen
+                                </a>
+                            </div>
+                        </div>
+                        <iframe name="embed-feed"
+                                id="discussion-feed"
                                 title="Viva Engage" 
                                 src="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" 
                                 loading="lazy" 
@@ -292,7 +308,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="py-5" style="background:#eef4fb;" id="prompt-library">
+    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;" id="prompt-library">
         <div class="container">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
                 <div>
@@ -388,7 +404,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="py-5" id="workflow-library">
+    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" id="workflow-library" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
         <div class="container">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
                 <div>
@@ -478,7 +494,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="py-5" style="background:#eef4fb;" id="tool-reviews">
+    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;" id="tool-reviews">
         <div class="container">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
                 <div>
@@ -594,7 +610,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="py-5" id="community-events">
+    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" id="community-events" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
         <div class="container">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
                 <div>
@@ -671,7 +687,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="pb-5">
+    <section class="p-4 p-md-5 mx-auto" style="width:100%;max-width:1140px;">
         <div class="container">
             <div class="p-4 p-lg-5 text-center text-white shadow" style="border-radius:16px;background:linear-gradient(135deg,#094685,#111827);border-top:6px solid #f5c242;">
                 <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Community</div>
@@ -761,6 +777,39 @@ Constraints:
                 button.style.borderColor = '';
                 button.style.color = '';
             }, 1400, this);
+        });
+    }
+
+    var discussionFeed = document.getElementById('discussion-feed');
+    var discussionSelectors = document.querySelectorAll('[data-discussion-selector="true"]');
+    for (var n = 0; n < discussionSelectors.length; n += 1) {
+        discussionSelectors[n].addEventListener('click', function () {
+            var selectedButton = this;
+            if (!discussionFeed) return;
+            discussionFeed.src = selectedButton.getAttribute('data-discussion-src');
+            discussionFeed.title = selectedButton.getAttribute('data-discussion-title');
+            var discussionFeedLabel = document.getElementById('discussion-feed-label');
+            var discussionFeedStatus = document.getElementById('discussion-feed-status');
+            var discussionFullscreenLink = document.getElementById('discussion-fullscreen-link');
+            if (discussionFeedLabel) discussionFeedLabel.textContent = selectedButton.getAttribute('data-discussion-label');
+            if (discussionFeedStatus) discussionFeedStatus.textContent = 'Loading the selected discussion content below. You may be asked to sign in.';
+            if (discussionFullscreenLink) {
+                discussionFullscreenLink.href = selectedButton.getAttribute('data-discussion-url');
+                discussionFullscreenLink.setAttribute('aria-label', 'Open ' + selectedButton.getAttribute('data-discussion-label') + ' full screen in a new tab');
+            }
+            for (var q = 0; q < discussionSelectors.length; q += 1) {
+                var isSelected = discussionSelectors[q] === selectedButton;
+                discussionSelectors[q].setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+                discussionSelectors[q].style.background = isSelected ? '#f5c242' : '#ffffff';
+                discussionSelectors[q].style.borderColor = isSelected ? '#f5c242' : '#ffffff';
+                discussionSelectors[q].style.color = isSelected ? '#082947' : '#094685';
+            }
+        });
+    }
+    if (discussionFeed) {
+        discussionFeed.addEventListener('load', function () {
+            var discussionFeedStatus = document.getElementById('discussion-feed-status');
+            if (discussionFeedStatus) discussionFeedStatus.textContent = 'The selected discussion frame is ready below. Sign in if prompted.';
         });
     }
 })();
