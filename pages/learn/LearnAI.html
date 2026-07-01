@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 
 <html lang="en">
 
@@ -30,13 +30,13 @@ Constraints:
 - Use Bootstrap Icons where needed.
 - Mobile responsive using Bootstrap grid only.
 - Modern style with student learning in mind.
--Wrap clickable card content in a styled <div> inside the <a> to prevent visited-link styling.
 
 -->
 
 <!-- COPY BELOW FOR MOODLE -->
+<a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
 
-<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top" style="backdrop-filter:blur(12px);">
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top" aria-label="Primary navigation" style="backdrop-filter:blur(12px);">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center font-weight-bold mr-2" href="https://moodle.bath.ac.uk/course/section.php?id=277885" style="font-size:clamp(0.9rem,4vw,1.1rem);text-decoration:none;white-space:normal;max-width:calc(100% - 4rem);">
             <div style="min-width:0;">
@@ -52,28 +52,28 @@ Constraints:
         <div class="collapse navbar-collapse" id="hubNav">
             <ul class="navbar-nav ml-auto align-items-lg-center">
                 <li class="nav-item">
-                    <a class="nav-link px-3 font-weight-bold" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967" style="color:#094685;">
+                    <a class="nav-link px-3 py-3 font-weight-bold" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967" aria-current="page" style="color:#094685;">
                         <div style="color:#094685;">
                             Learn AI
                         </div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969" data-inner-link-color="#007bff" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
+                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969" data-inner-link-color="#007bff" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
                         <div style="color:#007bff;">
                             Challenges
                         </div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" data-inner-link-color="#007bff" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
+                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" data-inner-link-color="#007bff" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
                         <div style="color:#007bff;">
                             Community
                         </div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972" data-inner-link-color="#007bff" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
+                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972" data-inner-link-color="#007bff" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
                         <div style="color:#007bff;">
                             Using AI at Bath
                         </div>
@@ -83,6 +83,8 @@ Constraints:
         </div>
     </div>
 </nav>
+
+<main id="main-content" tabindex="-1">
 
 <div class="container pt-4 pb-4">
     <section id="hero" class="rounded shadow-sm overflow-hidden" aria-labelledby="hero-title"
@@ -250,7 +252,7 @@ Constraints:
                      style="width:48px;height:48px;background:#F0FDF4;color:#15803D;font-size:1.35rem;">
                     <span class="bi bi-chat-square-text" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="font-weight-bold mt-3">Prompting</h5>
+                <h3 class="h5 font-weight-bold mt-3">Prompting</h3>
                 <p class="text-muted mb-4">Learn to write better prompts.</p>
                 <div class="mt-auto">
                     <a href="#academic"
@@ -271,7 +273,7 @@ Constraints:
                      style="width:48px;height:48px;background:#F0FDF4;color:#15803D;font-size:1.35rem;">
                     <span class="bi bi-journal-text" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="font-weight-bold mt-3">Revision</h5>
+                <h3 class="h5 font-weight-bold mt-3">Revision</h3>
                 <p class="text-muted mb-4">Use AI to test understanding.</p>
                 <div class="mt-auto">
                     <a href="#academic"
@@ -292,7 +294,7 @@ Constraints:
                      style="width:48px;height:48px;background:#F0FDF4;color:#15803D;font-size:1.35rem;">
                     <span class="bi bi-search" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="font-weight-bold mt-3">Research & Literature Reviews</h5>
+                <h3 class="h5 font-weight-bold mt-3">Research &amp; Literature Reviews</h3>
                 <p class="text-muted mb-4">
                     Find, analyse and summarise academic sources.
                 </p>
@@ -314,7 +316,7 @@ Constraints:
                      style="width:48px;height:48px;background:#EFF6FF;color:#258FEB;font-size:1.35rem;">
                     <span class="bi bi-briefcase" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="font-weight-bold mt-3">Placements</h5>
+                <h3 class="h5 font-weight-bold mt-3">Placements</h3>
                 <p class="text-muted mb-4">Applications, CVs and interviews.</p>
                 <div class="mt-auto">
                     <a href="#workplace"
@@ -334,7 +336,7 @@ Constraints:
                      style="width:48px;height:48px;background:#EFF6FF;color:#258FEB;font-size:1.35rem;">
                     <span class="bi bi-speedometer2" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="font-weight-bold mt-3">Productivity</h5>
+                <h3 class="h5 font-weight-bold mt-3">Productivity</h3>
                 <p class="text-muted mb-4">
                     Automate repetitive tasks and work smarter.
                 </p>
@@ -356,7 +358,7 @@ Constraints:
                      style="width:48px;height:48px;background:#F5F3FF;color:#7C3AED;font-size:1.35rem;">
                     <span class="bi bi-diagram-3" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="font-weight-bold mt-3">Automation</h5>
+                <h3 class="h5 font-weight-bold mt-3">Automation</h3>
                 <p class="text-muted mb-4">Build simple workflows that save time.</p>
                 <div class="mt-auto">
                     <a href="#lifelong"
@@ -376,7 +378,7 @@ Constraints:
                      style="width:48px;height:48px;background:#F5F3FF;color:#7C3AED;font-size:1.35rem;">
                     <span class="bi bi-cpu" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="font-weight-bold mt-3">New Technologies</h5>
+                <h3 class="h5 font-weight-bold mt-3">New Technologies</h3>
                 <p class="text-muted mb-4">Keep up with emerging AI tools and trends.</p>
                 <div class="mt-auto">
                     <a href="#lifelong"
@@ -396,7 +398,7 @@ Constraints:
                      style="width:48px;height:48px;background:#F5F3FF;color:#7C3AED;font-size:1.35rem;">
                     <span class="bi bi-brush" style="display:inline-block;width:1em;height:1em;overflow:hidden;line-height:1;" aria-hidden="true">&nbsp;</span>
                 </div>
-                <h5 class="font-weight-bold mt-3">Creativity</h5>
+                <h3 class="h5 font-weight-bold mt-3">Creativity</h3>
                 <p class="text-muted mb-4">Use AI to develop ideas, media and projects.</p>
                 <div class="mt-auto">
                     <a href="#lifelong"
@@ -465,7 +467,7 @@ Constraints:
                             Find My Learning Path
                         </button>
 
-                        <a href="#"
+                        <a href="#featured"
                         class="btn btn-outline-light btn-lg px-4 rounded-pill" data-inner-link-color="#f8f9fa" data-inner-link-hover-color="#212529">
                             <div style="color:#f8f9fa;">
                                 Browse All Resources
@@ -500,11 +502,11 @@ Constraints:
 
                         margin:auto;">
 
-                        <h4 class="font-weight-bold mb-3">
+                        <h3 class="h4 font-weight-bold mb-3">
 
                             Find Your AI Learning Path
 
-                        </h4>
+                        </h3>
 
                         <div id="questionContainer" style="min-height:260px;"></div>
 
@@ -519,6 +521,8 @@ Constraints:
     </div>
 
 </div>
+
+</main>
 
 <script>
 (() => {
@@ -1139,11 +1143,11 @@ function createCard(card) {
 
                 </span>
 
-                <h5 class="font-weight-bold mt-3">
+                <h3 class="h5 font-weight-bold mt-3">
 
                     ${card.title}
 
-                </h5>
+                </h3>
 
                 <p class="text-muted mb-0">
 
@@ -1255,7 +1259,7 @@ function createCard(card) {
         window.requestAnimationFrame(scrollFeatured);
     }
 
-    if (window.requestAnimationFrame) {
+    if (window.requestAnimationFrame && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
         window.requestAnimationFrame(scrollFeatured);
     }
 
