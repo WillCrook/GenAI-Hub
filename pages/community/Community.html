@@ -279,9 +279,8 @@ Constraints:
                             </div>
                         </div>
                         <nav class="mt-2" aria-label="Discussion platforms">
-                            <button type="button" data-discussion-selector="true" data-discussion-label="Engage" data-discussion-url="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" data-discussion-src="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" data-discussion-title="Viva Engage" aria-pressed="true" class="btn btn-block text-left font-weight-bold px-3 py-3 mb-2" style="color:#082947;background:#f5c242;border:2px solid #f5c242;border-radius:10px;"><img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Viva_Engage_logo.svg" alt="" width="28" height="28" class="mr-2" style="object-fit:contain;vertical-align:middle;">Engage</button>
-                            <button type="button" data-discussion-selector="true" data-discussion-label="LinkedIn" data-discussion-url="https://www.linkedin.com/school/university-of-bath/" data-discussion-src="https://www.linkedin.com/school/university-of-bath/" data-discussion-title="University of Bath on LinkedIn" aria-pressed="false" class="btn btn-light btn-block text-left font-weight-bold px-3 py-3 mb-2" style="color:#094685;border:2px solid #ffffff;border-radius:10px;"><img src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg" alt="" width="28" height="28" class="mr-2" style="object-fit:contain;vertical-align:middle;">LinkedIn</button>
-                            <button type="button" data-discussion-selector="true" data-discussion-label="Moodle discussions" data-discussion-url="https://moodle.bath.ac.uk/course/section.php?id=277885" data-discussion-src="https://moodle.bath.ac.uk/course/section.php?id=277885" data-discussion-title="Moodle discussions" aria-pressed="false" class="btn btn-light btn-block text-left font-weight-bold px-3 py-3" style="color:#094685;border:2px solid #ffffff;border-radius:10px;">Moodle discussions</button>
+                            <a href="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" target="embed-feed" data-discussion-selector="true" data-discussion-label="Engage" data-discussion-fullscreen-url="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" aria-current="true" class="btn btn-block text-left font-weight-bold px-3 py-3 mb-2" style="color:#082947;background:#f5c242;border:2px solid #f5c242;border-radius:10px;"><img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Viva_Engage_logo.svg" alt="" width="28" height="28" class="mr-2" style="object-fit:contain;vertical-align:middle;">Engage</a>
+                            <a href="https://moodle.bath.ac.uk/course/section.php?id=277885" target="embed-feed" data-discussion-selector="true" data-discussion-label="Moodle discussions" data-discussion-fullscreen-url="https://moodle.bath.ac.uk/course/section.php?id=277885" class="btn btn-light btn-block text-left font-weight-bold px-3 py-3" style="color:#094685;background:#ffffff;border:2px solid #ffffff;border-radius:10px;">Moodle discussions</a>
                         </nav>
                     </div>
                 </div>
@@ -289,11 +288,8 @@ Constraints:
                 <div class="col-lg-8 mb-4">
                     <div class="h-100 bg-white border shadow-sm overflow-hidden" style="border-radius:16px;min-height:520px;border-top:6px solid #f5c242;">
                         <div class="p-3 border-bottom" style="background:#f4f7fb;">
-                            <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between">
-                                <div class="mr-sm-3 mb-3 mb-sm-0">
-                                    <div class="font-weight-bold" style="color:#094685;">Showing: <span id="discussion-feed-label">Engage</span></div>
-                                    <p id="discussion-feed-status" class="small text-muted mb-0 mt-1" role="status" aria-live="polite">The selected discussion content will appear below. You may be asked to sign in.</p>
-                                </div>
+                            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                                <p class="small text-muted mb-3 mb-md-0 mr-md-3">Choose a discussion space to show it below. You may be asked to sign in.</p>
                                 <a id="discussion-fullscreen-link" href="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-weight-bold px-3 py-2 text-nowrap" aria-label="Open Engage full screen in a new tab" style="background:#094685;border-color:#094685;border-radius:8px;">
                                     <i class="fa-solid fa-expand mr-2" aria-hidden="true">&#8203;</i>Open full screen
                                 </a>
@@ -301,7 +297,7 @@ Constraints:
                         </div>
                         <iframe name="embed-feed"
                                 id="discussion-feed"
-                                title="Viva Engage" 
+                                title="Discussion platform content"
                                 src="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" 
                                 loading="lazy" 
                                 style="border: 0px; overflow: hidden; width: 100%; height: 100%; min-height: 400px;"
@@ -789,36 +785,26 @@ Constraints:
         });
     }
 
-    var discussionFeed = document.getElementById('discussion-feed');
     var discussionSelectors = document.querySelectorAll('[data-discussion-selector="true"]');
     for (var n = 0; n < discussionSelectors.length; n += 1) {
         discussionSelectors[n].addEventListener('click', function () {
             var selectedButton = this;
-            if (!discussionFeed) return;
-            discussionFeed.src = selectedButton.getAttribute('data-discussion-src');
-            discussionFeed.title = selectedButton.getAttribute('data-discussion-title');
-            var discussionFeedLabel = document.getElementById('discussion-feed-label');
-            var discussionFeedStatus = document.getElementById('discussion-feed-status');
             var discussionFullscreenLink = document.getElementById('discussion-fullscreen-link');
-            if (discussionFeedLabel) discussionFeedLabel.textContent = selectedButton.getAttribute('data-discussion-label');
-            if (discussionFeedStatus) discussionFeedStatus.textContent = 'Loading the selected discussion content below. You may be asked to sign in.';
             if (discussionFullscreenLink) {
-                discussionFullscreenLink.href = selectedButton.getAttribute('data-discussion-url');
+                discussionFullscreenLink.href = selectedButton.getAttribute('data-discussion-fullscreen-url');
                 discussionFullscreenLink.setAttribute('aria-label', 'Open ' + selectedButton.getAttribute('data-discussion-label') + ' full screen in a new tab');
             }
             for (var q = 0; q < discussionSelectors.length; q += 1) {
                 var isSelected = discussionSelectors[q] === selectedButton;
-                discussionSelectors[q].setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+                if (isSelected) {
+                    discussionSelectors[q].setAttribute('aria-current', 'true');
+                } else {
+                    discussionSelectors[q].removeAttribute('aria-current');
+                }
                 discussionSelectors[q].style.background = isSelected ? '#f5c242' : '#ffffff';
                 discussionSelectors[q].style.borderColor = isSelected ? '#f5c242' : '#ffffff';
                 discussionSelectors[q].style.color = isSelected ? '#082947' : '#094685';
             }
-        });
-    }
-    if (discussionFeed) {
-        discussionFeed.addEventListener('load', function () {
-            var discussionFeedStatus = document.getElementById('discussion-feed-status');
-            if (discussionFeedStatus) discussionFeedStatus.textContent = 'The selected discussion frame is ready below. Sign in if prompted.';
         });
     }
 })();
