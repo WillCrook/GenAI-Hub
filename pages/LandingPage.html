@@ -285,7 +285,7 @@ Constraints:
         </div>
 
         <div id="genaiHubTopViewport" aria-live="off" style="width:calc(100vw - 16px); margin-left:calc(50% - 50vw + 8px); overflow:hidden;">
-            <div id="genaiHubTopTrack" class="row no-gutters flex-nowrap" style="margin-left:-18%; margin-right:-18%; transition:transform 760ms cubic-bezier(.22,.61,.36,1); will-change:transform;">
+            <div id="genaiHubTopTrack" class="row no-gutters flex-nowrap" style="margin-left:0; margin-right:0; transition:transform 760ms cubic-bezier(.22,.61,.36,1); will-change:transform;">
                 <div class="col-11 col-md-6 px-1" data-hub-top-card="learn">
                     <div class="position-relative overflow-hidden shadow-sm" style="height:clamp(280px,34vw,540px); min-height:420px; background:linear-gradient(135deg,#003c71 0%,#0b2442 58%,#172033 100%); border-radius:0;">
                         <div class="position-absolute" data-hub-decoration="true" data-hub-default-opacity=".85" style="right:-6%; top:0; width:42%; height:100%; background:linear-gradient(160deg,rgba(245,194,66,.92),rgba(95,168,216,.28)); transform:skewX(-12deg); opacity:.85; pointer-events:none;">&nbsp;</div>
@@ -370,7 +370,7 @@ Constraints:
         </div>
 
         <div class="mt-2" style="width:calc(100vw - 16px); margin-left:calc(50% - 50vw + 8px); overflow:hidden;">
-            <div id="genaiHubBottomTrack" class="row no-gutters flex-nowrap" style="margin-left:-10%; margin-right:-10%; transition:transform 620ms cubic-bezier(.22,.61,.36,1); will-change:transform;">
+            <div id="genaiHubBottomTrack" class="row no-gutters flex-nowrap" style="margin-left:0; margin-right:0; transition:transform 620ms cubic-bezier(.22,.61,.36,1); will-change:transform;">
                 <div class="col-8 col-md-3 px-1" data-hub-bottom-card="light">
                     <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:#ffffff; border:1px solid #d8e2ee;">
                         <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:#e0f2fe; color:#003c71; font-size:1.55rem;">
@@ -385,7 +385,9 @@ Constraints:
 
                 <div class="col-8 col-md-3 px-1" data-hub-bottom-card="dark">
                     <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:linear-gradient(135deg,#003c71,#0b2442); color:white;">
-                        <div style="color:#f5c242; font-size:3.2rem;"><i class="fa-solid fa-magnifying-glass" style="line-height:1;" aria-hidden="true">&#8203;</i></div>
+                        <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,.12); color:#f5c242; font-size:1.55rem;">
+                            <i class="fa-solid fa-magnifying-glass" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                        </div>
                         <div class="mt-auto">
                             <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem);">Verify AI Answers</h4>
                             <p class="mb-0" style="font-size:.9rem; color:#f1f5f9;">Check claims, references and assumptions.</p>
@@ -449,6 +451,42 @@ Constraints:
                         <div class="mt-auto">
                             <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem); color:#003c71;">Career Skills</h4>
                             <p class="mb-0" style="font-size:.9rem; color:#3f4b59;">Use GenAI as part of a wider digital toolkit.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-3 px-1" data-hub-bottom-card="privacy">
+                    <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:#ecfeff; border:1px solid #a5f3fc;">
+                        <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:#cffafe; color:#155e75; font-size:1.55rem;">
+                            <i class="fa-solid fa-lock" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem); color:#155e75;">Protect Your Data</h4>
+                            <p class="mb-0" style="font-size:.9rem; color:#3f4b59;">Keep personal and sensitive information out of AI tools.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-3 px-1" data-hub-bottom-card="multimodal">
+                    <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:#fff7ed; border:1px solid #fed7aa;">
+                        <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:#ffedd5; color:#9a3412; font-size:1.55rem;">
+                            <i class="fa-solid fa-photo-film" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem); color:#9a3412;">Multimodal AI</h4>
+                            <p class="mb-0" style="font-size:.9rem; color:#3f4b59;">Work thoughtfully across text, images, audio and video.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-3 px-1" data-hub-bottom-card="study-planning">
+                    <div class="position-relative overflow-hidden shadow-sm d-flex flex-column" style="height:auto; min-height:210px; padding:1.25rem; background:#eff6ff; border:1px solid #bfdbfe;">
+                        <div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; border-radius:50%; background:#dbeafe; color:#1d4ed8; font-size:1.55rem;">
+                            <i class="fa-solid fa-calendar-check" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="font-weight-bold mb-1" style="font-size:clamp(1rem,1.2vw,1.25rem); color:#1d4ed8;">AI Study Planner</h4>
+                            <p class="mb-0" style="font-size:.9rem; color:#3f4b59;">Turn learning goals into a realistic, adaptable study plan.</p>
                         </div>
                     </div>
                 </div>
@@ -907,8 +945,8 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
 
     function applyResponsiveDeckSizing() {
         var narrow = window.innerWidth < 768;
-        topTrack.style.marginLeft = narrow ? '0' : '-18%';
-        topTrack.style.marginRight = narrow ? '0' : '-18%';
+        topTrack.style.marginLeft = '0';
+        topTrack.style.marginRight = '0';
         for (var i = 0; i < topCards.length; i++) {
             topCards[i].style.flex = narrow ? '0 0 82%' : '';
             topCards[i].style.maxWidth = narrow ? '82%' : '';
