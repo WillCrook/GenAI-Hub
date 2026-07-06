@@ -331,10 +331,14 @@ Constraints:
                 <div class="col-lg-4 mb-4">
                     <div class="h-100 p-4 p-lg-5 text-white shadow-sm d-flex flex-column align-items-start" style="border-radius:16px;background:linear-gradient(145deg,#094685,#111827);border-top:6px solid #f5c242;">
                         <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Featured prompt</div>
+                        <span class="badge px-3 py-2 mb-3" style="background:#15803D;color:#FFFFFF;border:1px solid #15803D;">Academic</span>
                         <h3 class="font-weight-bold mb-3">Socratic Revision Partner</h3>
                         <p style="color:#e6eef8;">Turn lecture notes into questions that test understanding before you look at model answers.</p>
-                        <span class="badge px-3 py-2 mb-4" style="background:#15803D;color:#FFFFFF;border:1px solid #15803D;">Academic</span>
-                        <button type="button" data-copy-button="true" class="btn btn-light btn-block font-weight-bold py-3 mt-auto" style="color:#094685;border-radius:10px;">Copy Prompt</button>
+                        <a href="#prompt-library" class="btn btn-light rounded-pill mt-auto d-inline-flex align-items-center justify-content-center align-self-start" style="white-space:nowrap;">
+                            <div class="d-inline-flex align-items-center justify-content-center" style="color:#212529;">
+                                Use Prompt <i class="fa-solid fa-arrow-right ml-1" style="line-height:1;font-size:1.2rem;vertical-align:-0.12em;" aria-hidden="true">&#8203;</i>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -636,10 +640,11 @@ Constraints:
                             <div class="text-uppercase mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Next up</div>
                             <h3 class="font-weight-bold">Prompting for Coursework Planning</h3>
                             <p style="color:#e6eef8;">Hands-on templates for responsible planning, feedback and reflection.</p>
-                            <span class="badge px-3 py-2" style="background:#15803D;color:#FFFFFF;border:1px solid #15803D;">Academic</span>
-                            <div class="font-weight-bold pt-3 d-flex align-items-center" style="color:#f5c242;font-size:1.05rem;line-height:1.1;">
-                                View Event
-                                <i class="fa-solid fa-arrow-right ml-1" style="line-height:1;font-size:1.45rem;vertical-align:-0.18em;" aria-hidden="true">&#8203;</i>
+                            <span class="badge px-3 py-2 mb-3" style="background:#15803D;color:#FFFFFF;border:1px solid #15803D;">Academic</span>
+                            <div class="btn btn-light rounded-pill d-inline-flex align-items-center justify-content-center" style="white-space:nowrap;">
+                                <div class="d-inline-flex align-items-center justify-content-center" style="color:#212529;">
+                                    View Event <i class="fa-solid fa-arrow-right ml-1" style="line-height:1;font-size:1.2rem;vertical-align:-0.12em;" aria-hidden="true">&#8203;</i>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -694,9 +699,9 @@ Constraints:
                 <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Community</div>
                 <h2 class="display-4 font-weight-bold mb-3" style="font-size:clamp(2rem,7vw,3.5rem);line-height:1.05;">Build. Share. Inspire.</h2>
                 <p class="lead mx-auto mb-4" style="max-width:720px;color:#e6eef8;">Join University of Bath students shaping practical, responsible and reusable ways to work with AI.</p>
-                <a href="#discussions" class="btn btn-light btn-lg px-5 py-3 font-weight-bold" style="color:#094685;border-radius:10px;">
-                    <div style="color:#094685;">
-                        Get Involved
+                <a href="#discussions" class="btn btn-light rounded-pill d-inline-flex align-items-center justify-content-center" style="white-space:nowrap;">
+                    <div class="d-inline-flex align-items-center justify-content-center" style="color:#212529;">
+                        Get Involved <i class="fa-solid fa-arrow-right ml-1" style="line-height:1;font-size:1.2rem;vertical-align:-0.12em;" aria-hidden="true">&#8203;</i>
                     </div>
                 </a>
             </div>
@@ -764,7 +769,7 @@ Constraints:
             cta.style.color = linkedCards[k].classList.contains('text-white') ? '#f5c242' : '#094685';
             cta.style.fontSize = '1.05rem';
             cta.style.lineHeight = '1.1';
-            cta.innerHTML = labelText + ' <i class="fa-solid fa-arrow-right ml-1" style="line-height:1;font-size:1.45rem;vertical-align:-0.18em;" aria-hidden="true">&#8203;</i>';
+            cta.innerHTML = labelText + ' <i class="fa-solid fa-arrow-up-right-from-square ml-1" style="line-height:1;font-size:1.45rem;vertical-align:-0.18em;" aria-hidden="true">&#8203;</i>';
             linkedCards[k].firstElementChild.appendChild(cta);
         }
         linkedCards[k].addEventListener('focus', function () {
@@ -804,29 +809,6 @@ Constraints:
         window.clearTimeout(quickLinkResizeTimer);
         quickLinkResizeTimer = window.setTimeout(equalizeQuickLinks, 100);
     });
-
-})();
-</script>
-
-<script>
-// Copy-button visual feedback
-(function () {
-    var copyButtons = document.querySelectorAll('[data-copy-button="true"]');
-    for (var j = 0; j < copyButtons.length; j += 1) {
-        copyButtons[j].addEventListener('click', function () {
-            var original = this.innerHTML;
-            this.innerHTML = 'Copied';
-            this.style.background = '#094685';
-            this.style.borderColor = '#094685';
-            this.style.color = '#ffffff';
-            window.setTimeout(function (button) {
-                button.innerHTML = original;
-                button.style.background = '';
-                button.style.borderColor = '';
-                button.style.color = '';
-            }, 1400, this);
-        });
-    }
 
 })();
 </script>
