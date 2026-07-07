@@ -55,28 +55,28 @@ Constraints:
         <div class="collapse navbar-collapse" id="hubNav">
             <ul class="navbar-nav ml-auto align-items-lg-center">
                 <li class="nav-item">
-                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967" data-inner-link-color="#0056b3" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
+                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967">
                         <div style="color:#0056b3;">
                             Learn AI
                         </div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969" data-inner-link-color="#0056b3" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
+                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969">
                         <div style="color:#0056b3;">
                             Challenges
                         </div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" data-inner-link-color="#0056b3" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
+                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971">
                         <div style="color:#0056b3;">
                             Community
                         </div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972" data-inner-link-color="#0056b3" data-inner-link-hover-color="#0056b3" data-inner-link-focus-color="#0056b3">
+                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972">
                         <div style="color:#0056b3;">
                             Using AI at Bath
                         </div>
@@ -859,39 +859,6 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
 
 })();
 
-</script>
-
-<script>
-// Inner-link hover and focus colour handling
-(function () {
-    var links = document.querySelectorAll('[data-inner-link-color]');
-    for (var i = 0; i < links.length; i += 1) {
-        (function (link) {
-            var baseColor = link.getAttribute('data-inner-link-color');
-            var hoverColor = link.getAttribute('data-inner-link-hover-color') || baseColor;
-            var focusColor = link.getAttribute('data-inner-link-focus-color') || baseColor;
-            var content = link.firstElementChild;
-            if (!content) return;
-
-            function setColor(color) {
-                content.style.color = color;
-            }
-
-            function restoreRestingColor() {
-                setColor(document.activeElement === link ? focusColor : baseColor);
-            }
-
-            link.addEventListener('mouseenter', function () { setColor(hoverColor); });
-            link.addEventListener('mouseleave', restoreRestingColor);
-            link.addEventListener('mousedown', function () { setColor(hoverColor); });
-            link.addEventListener('mouseup', function () {
-                setColor(link.matches(':hover') ? hoverColor : (document.activeElement === link ? focusColor : baseColor));
-            });
-            link.addEventListener('focus', function () { setColor(focusColor); });
-            link.addEventListener('blur', function () { setColor(baseColor); });
-        })(links[i]);
-    }
-})();
 </script>
 
 <!-- Carousel JS -->

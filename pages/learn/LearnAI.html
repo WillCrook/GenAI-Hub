@@ -176,13 +176,12 @@ Constraints:
 
         </h2>
 
-        <div class="mb-3 mb-md-0">
+        <div class="mb-3 mb-md-0" id="featured-autoplay-control" style="display:none;">
 
-            <span class="badge badge-success rounded-pill px-3 py-2" style="background-color:#157347;color:#ffffff;">
-
-                <i class="fa-solid fa-tower-broadcast mr-1" style="line-height:1;" aria-hidden="true">&#8203;</i> LIVE CONTENT
-
-            </span>
+            <button type="button" id="featured-autoplay-toggle" class="badge badge-success rounded-pill px-2 py-1 border-0 font-weight-bold" aria-pressed="false" aria-label="Pause automatic carousel rotation" style="width:9rem;background-color:#157347;color:#ffffff;cursor:pointer;transition:background-color .2s ease,color .2s ease,border-color .2s ease;">
+                <i data-autoplay-icon class="fa-solid fa-play" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                <span data-autoplay-label class="ml-1">Auto-rotating</span>
+            </button>
 
         </div>
 
@@ -1264,24 +1263,62 @@ function createCard(card) {
 
     }
 
-    let isPaused = false;
+    const autoplayControl = document.getElementById('featured-autoplay-control');
+    const autoplayToggle = document.getElementById('featured-autoplay-toggle');
+    const autoplayIcon = autoplayToggle.querySelector('[data-autoplay-icon]');
+    const autoplayLabel = autoplayToggle.querySelector('[data-autoplay-label]');
+    const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let userPaused = reducedMotion;
+    let hoverPaused = false;
     let elapsed = 0;
     let previousTimestamp = null;
 
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+
+    function isPaused() {
+        return userPaused || hoverPaused || isMobile();
+    }
+
+    function updateAutoplayControl() {
+        const paused = isPaused();
+        autoplayControl.style.display = isMobile() ? 'none' : 'block';
+        autoplayIcon.classList.toggle('fa-play', !paused);
+        autoplayIcon.classList.toggle('fa-pause', paused);
+        autoplayLabel.textContent = paused ? 'Paused' : 'Auto-rotating';
+        autoplayToggle.setAttribute('aria-pressed', paused ? 'true' : 'false');
+        autoplayToggle.setAttribute('aria-label', paused ? 'Resume automatic carousel rotation' : 'Pause automatic carousel rotation');
+        autoplayToggle.classList.toggle('badge-success', !paused);
+        autoplayToggle.classList.toggle('badge-secondary', paused);
+        autoplayToggle.style.backgroundColor = paused ? '#6c757d' : '#157347';
+        autoplayToggle.style.color = '#ffffff';
+    }
+
+    autoplayToggle.addEventListener('click', () => {
+        userPaused = !userPaused;
+        updateAutoplayControl();
+    });
+
     carousel.addEventListener('mouseenter', () => {
-        isPaused = true;
+        hoverPaused = true;
+        updateAutoplayControl();
     });
 
     carousel.addEventListener('mouseleave', () => {
-        isPaused = false;
+        hoverPaused = false;
+        updateAutoplayControl();
     });
+
+    window.addEventListener('resize', updateAutoplayControl);
+    updateAutoplayControl();
 
     function scrollFeatured(timestamp) {
         if (previousTimestamp === null) {
             previousTimestamp = timestamp;
         }
 
-        if (!isPaused) {
+        if (!isPaused()) {
             elapsed += timestamp - previousTimestamp;
         }
 
@@ -1296,7 +1333,7 @@ function createCard(card) {
         window.requestAnimationFrame(scrollFeatured);
     }
 
-    if (window.requestAnimationFrame && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    if (window.requestAnimationFrame) {
         window.requestAnimationFrame(scrollFeatured);
     }
 
