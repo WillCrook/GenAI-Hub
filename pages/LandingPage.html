@@ -273,11 +273,10 @@ Constraints:
 
             <div class="mb-3 mb-md-0">
 
-                <span class="badge badge-success rounded-pill px-3 py-2" style="background-color:#157347;color:#ffffff;">
-
-                    <i class="fa-solid fa-tower-broadcast mr-1" style="line-height:1;" aria-hidden="true">&#8203;</i> LIVE CONTENT
-
-                </span>
+                <button type="button" data-hub-pause="true" class="badge badge-success rounded-pill px-3 py-2 border-0 font-weight-bold" aria-pressed="false" aria-label="Pause automatic carousel rotation" style="width:9rem;background-color:#157347;color:#ffffff;cursor:pointer;transition:background-color .2s ease,color .2s ease,border-color .2s ease;">
+                    <i data-hub-pause-icon="true" class="fa-solid fa-play" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                    <span data-hub-pause-text="true" class="ml-1">Auto-rotating</span>
+                </button>
 
             </div>
 
@@ -511,12 +510,6 @@ Constraints:
             <button type="button" data-hub-dot="4" aria-label="Show carousel item 5" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="4" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
         </div>
 
-        <div class="d-flex justify-content-center mt-2">
-        <button type="button" data-hub-pause="true" aria-label="Pause carousel animation" style="position:static; flex:0 0 auto; width:44px; height:44px; border-radius:50%; border:1px solid #9aabba; background:#ffffff; color:#003c71; box-shadow:0 4px 12px rgba(15,23,42,.14); display:flex; align-items:center; justify-content:center; font-size:1.15rem;">
-            <i data-hub-pause-icon="true" class="fa-solid fa-pause" style="line-height:1;" aria-hidden="true">&#8203;</i>
-            <span data-hub-pause-text="true" class="sr-only">Pause carousel animation</span>
-        </button>
-        </div>
         <p data-hub-status="true" class="sr-only" aria-live="polite" aria-atomic="true">Showing carousel item 1 of 5</p>
     </div>
 
@@ -885,8 +878,9 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
     var bottomCount = bottomCards.length;
     var duration = 5200;
     var startedAt = Date.now();
-    var intervalId;
+    var transitionTimeoutId;
     var progressId;
+    var elapsed = 0;
     var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var paused = reducedMotion;
     var keyboardFocus = false;
@@ -1018,6 +1012,7 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
             progressBars[i].style.background = active ? '#c3cfdd' : '#657184';
         }
         updateSlideAccessibility(activeDot, bottomIndex % bottomCount);
+        elapsed = 0;
         startedAt = Date.now();
     }
 
@@ -1120,14 +1115,16 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
     }
 
     function restartTimer() {
-        window.clearInterval(intervalId);
+        window.clearTimeout(transitionTimeoutId);
         window.clearInterval(progressId);
         if (paused) { return; }
-        intervalId = window.setInterval(function () {
+        var remaining = Math.max(0, duration - elapsed);
+        transitionTimeoutId = window.setTimeout(function () {
             goTo(activeIndex + 1);
-        }, duration);
+            restartTimer();
+        }, remaining);
         progressId = window.setInterval(function () {
-            var pct = Math.min(100, ((Date.now() - startedAt) / duration) * 100);
+            var pct = Math.min(100, ((elapsed + Date.now() - startedAt) / duration) * 100);
             var activeDot = activeIndex % topCount;
             if (progressBars[activeDot]) {
                 progressBars[activeDot].style.background = 'linear-gradient(90deg,#003c71 0%,#003c71 ' + pct + '%,#c3cfdd ' + pct + '%,#c3cfdd 100%)';
@@ -1136,17 +1133,22 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
     }
 
     function setPaused(nextPaused) {
+        if (nextPaused && !paused) {
+            elapsed = Math.min(duration, elapsed + Date.now() - startedAt);
+        }
         paused = nextPaused;
+        pauseIcon.className = paused ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+        pauseText.textContent = paused ? 'Paused' : 'Auto-rotating';
+        pauseButton.setAttribute('aria-pressed', paused ? 'true' : 'false');
+        pauseButton.setAttribute('aria-label', paused ? 'Resume automatic carousel rotation' : 'Pause automatic carousel rotation');
+        pauseButton.classList.toggle('badge-success', !paused);
+        pauseButton.classList.toggle('badge-secondary', paused);
+        pauseButton.style.backgroundColor = paused ? '#6c757d' : '#157347';
+        pauseButton.style.color = '#ffffff';
         if (paused) {
-            window.clearInterval(intervalId);
+            window.clearTimeout(transitionTimeoutId);
             window.clearInterval(progressId);
-            pauseButton.setAttribute('aria-label', 'Play carousel animation');
-            pauseIcon.className = 'fa-solid fa-play';
-            pauseText.textContent = 'Play carousel animation';
         } else {
-            pauseButton.setAttribute('aria-label', 'Pause carousel animation');
-            pauseIcon.className = 'fa-solid fa-pause';
-            pauseText.textContent = 'Pause carousel animation';
             startedAt = Date.now();
             restartTimer();
         }

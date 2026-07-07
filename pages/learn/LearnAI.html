@@ -108,10 +108,14 @@ Constraints:
 
                 <div class="col-lg-4 d-none d-lg-flex justify-content-center" aria-hidden="true">
                     <div id="hero-bulb" style="width:210px;height:210px;transform:translateY(0);will-change:transform;">
-                        <img src="https://willcrook.github.io/GenAI-Hub/assets/Lightbulb.svg"
-                             alt=""
-                             data-lightbulb="true"
-                             style="display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 22px rgba(0,0,0,.18));pointer-events:none;">
+                        <picture style="display:block;width:100%;height:100%;">
+                            <source media="(prefers-reduced-motion: reduce)"
+                                    srcset="https://willcrook.github.io/GenAI-Hub/assets/Lightbulb-static.png">
+                            <img src="https://willcrook.github.io/GenAI-Hub/assets/Lightbulb.svg"
+                                 alt=""
+                                 data-lightbulb="true"
+                                 style="display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 22px rgba(0,0,0,.18));pointer-events:none;">
+                        </picture>
                     </div>
                 </div>
             </div>
@@ -1044,6 +1048,7 @@ Constraints:
     const bulb = document.getElementById("hero-bulb");
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let bulbStart = null;
+    let bulbFrame = null;
 
     // Updates the bulb's vertical position for each animation frame.
     function animateBulb(timestamp) {
@@ -1055,11 +1060,33 @@ Constraints:
         const floatY = Math.sin(elapsed / 950) * 8;
         bulb.style.transform = "translateY(" + floatY.toFixed(2) + "px)";
 
-        window.requestAnimationFrame(animateBulb);
+        bulbFrame = window.requestAnimationFrame(animateBulb);
     }
 
-    if (window.requestAnimationFrame && bulb && !reducedMotionQuery.matches) {
-        window.requestAnimationFrame(animateBulb);
+    // Starts or stops the float when the OS motion preference changes.
+    function updateBulbMotion() {
+        if (!window.requestAnimationFrame || !bulb) {
+            return;
+        }
+
+        if (reducedMotionQuery.matches) {
+            if (bulbFrame !== null) {
+                window.cancelAnimationFrame(bulbFrame);
+                bulbFrame = null;
+            }
+            bulbStart = null;
+            bulb.style.transform = "translateY(0)";
+            return;
+        }
+
+        if (bulbFrame === null) {
+            bulbFrame = window.requestAnimationFrame(animateBulb);
+        }
+    }
+
+    updateBulbMotion();
+    if (reducedMotionQuery.addEventListener) {
+        reducedMotionQuery.addEventListener("change", updateBulbMotion);
     }
 })();
 

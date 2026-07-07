@@ -207,19 +207,23 @@ Constraints:
                                                  filter:blur(4px);
                                                  pointer-events:none;">&nbsp;</div>
 
-                                            <img src="https://willcrook.github.io/GenAI-Hub/assets/Rocket.svg"
-                                                alt=""
-                                                data-rocket="true"
-                                                style="
-                                                position:relative;
-                                                display:block;
-                                                width:190px;
-                                                max-width:100%;
-                                                height:auto;
-                                                margin:0 auto;
-                                                transform:rotate(8deg);
+                                            <picture style="display:block;position:relative;">
+                                                <source media="(prefers-reduced-motion: reduce)"
+                                                        srcset="https://willcrook.github.io/GenAI-Hub/assets/Rocket-static.png">
+                                                <img src="https://willcrook.github.io/GenAI-Hub/assets/Rocket.svg"
+                                                    alt=""
+                                                    data-rocket="true"
+                                                    style="
+                                                    position:relative;
+                                                    display:block;
+                                                    width:190px;
+                                                    max-width:100%;
+                                                    height:auto;
+                                                    margin:0 auto;
+                                                    transform:rotate(8deg);
                                                 filter:drop-shadow(0 26px 42px rgba(1,8,18,0.42)) drop-shadow(0 0 28px rgba(245,194,66,0.22));
-                                                pointer-events:none;">
+                                                    pointer-events:none;">
+                                            </picture>
                                         </div>
                                     </div>
                                 </div>
@@ -1167,7 +1171,7 @@ Constraints:
         return;
     }
 
-    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var reducedMotionQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
     var rocket = heroElement.querySelector('[data-rocket="true"]');
     var starOne = heroElement.querySelector('[data-star-field="one"]');
     var starTwo = heroElement.querySelector('[data-star-field="two"]');
@@ -1219,8 +1223,9 @@ Constraints:
         });
     });
 
-    if (!reducedMotion && window.requestAnimationFrame) {
+    if (window.requestAnimationFrame) {
         var start = null;
+        var heroFrame = null;
 
         // Updates all ambient hero animation states in one frame loop.
         function animateHero(timestamp) {
@@ -1253,10 +1258,36 @@ Constraints:
                 starTwo.style.opacity = starTwoOpacity.toFixed(2);
             }
 
-            window.requestAnimationFrame(animateHero);
+            heroFrame = window.requestAnimationFrame(animateHero);
         }
 
-        window.requestAnimationFrame(animateHero);
+        // Starts or stops ambient motion when the OS preference changes.
+        function updateHeroMotion() {
+            if (reducedMotionQuery && reducedMotionQuery.matches) {
+                if (heroFrame !== null) {
+                    window.cancelAnimationFrame(heroFrame);
+                    heroFrame = null;
+                }
+                start = null;
+                if (rocket) {
+                    rocket.style.transform = 'rotate(8deg)';
+                }
+                cards.forEach(function (card) {
+                    card.setAttribute('data-current-drift', '0');
+                    setCardTransform(card, 0);
+                });
+                return;
+            }
+
+            if (heroFrame === null) {
+                heroFrame = window.requestAnimationFrame(animateHero);
+            }
+        }
+
+        updateHeroMotion();
+        if (reducedMotionQuery && reducedMotionQuery.addEventListener) {
+            reducedMotionQuery.addEventListener('change', updateHeroMotion);
+        }
     }
 
 })();
