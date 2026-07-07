@@ -271,7 +271,7 @@ Constraints:
 
             </h2>
 
-            <div class="mb-3 mb-md-0">
+            <div class="mb-3 mb-md-0" data-hub-desktop-controls="true">
 
                 <button type="button" data-hub-pause="true" class="badge badge-success rounded-pill px-3 py-2 border-0 font-weight-bold" aria-pressed="false" aria-label="Pause automatic carousel rotation" style="width:9rem;background-color:#157347;color:#ffffff;cursor:pointer;transition:background-color .2s ease,color .2s ease,border-color .2s ease;">
                     <i data-hub-pause-icon="true" class="fa-solid fa-play" style="line-height:1;" aria-hidden="true">&#8203;</i>
@@ -502,15 +502,25 @@ Constraints:
             </div>
         </div>
 
-        <div class="d-flex justify-content-center align-items-center mt-2" role="group" aria-label="Choose a featured resource" style="min-height:44px;">
-            <button type="button" data-hub-dot="0" aria-label="Show carousel item 1" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="0" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
-            <button type="button" data-hub-dot="1" aria-label="Show carousel item 2" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="1" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
-            <button type="button" data-hub-dot="2" aria-label="Show carousel item 3" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="2" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
-            <button type="button" data-hub-dot="3" aria-label="Show carousel item 4" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="3" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
-            <button type="button" data-hub-dot="4" aria-label="Show carousel item 5" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0 2px; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="4" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+        <div class="d-flex justify-content-center align-items-center mt-2 position-relative" data-hub-navigation="true" style="min-height:44px;">
+            <div role="group" aria-label="Choose a featured resource" style="width:220px; max-width:calc(100% - 44px); overflow:hidden;">
+                <div class="d-flex flex-nowrap" data-hub-dot-track="true" style="width:max-content; transition:transform 260ms ease;">
+                    <button type="button" data-hub-dot="0" aria-label="Show carousel state 1" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="0" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+                    <button type="button" data-hub-dot="1" aria-label="Show carousel state 2" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="1" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+                    <button type="button" data-hub-dot="2" aria-label="Show carousel state 3" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="2" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+                    <button type="button" data-hub-dot="3" aria-label="Show carousel state 4" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="3" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+                    <button type="button" data-hub-dot="4" aria-label="Show carousel state 5" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="4" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+                    <button type="button" data-hub-dot="5" aria-label="Show carousel state 6" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="5" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+                    <button type="button" data-hub-dot="6" aria-label="Show carousel state 7" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="6" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+                    <button type="button" data-hub-dot="7" aria-label="Show carousel state 8" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="7" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+                    <button type="button" data-hub-dot="8" aria-label="Show carousel state 9" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="8" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+                    <button type="button" data-hub-dot="9" aria-label="Show carousel state 10" style="position:relative; width:44px; height:44px; min-width:44px; padding:0; margin:0; border:0; background:transparent; overflow:visible; font-size:0; line-height:0;"><span data-hub-progress="9" aria-hidden="true" style="position:absolute; left:50%; top:50%; display:block; width:10px; height:10px; border-radius:999px; background:#657184; transform:translate(-50%,-50%); transition:width 260ms ease,background 260ms ease;">&nbsp;</span></button>
+                </div>
+            </div>
+            <div data-hub-mobile-controls="true" style="position:absolute; right:0; top:0; min-width:44px; min-height:44px;"></div>
         </div>
 
-        <p data-hub-status="true" class="sr-only" aria-live="polite" aria-atomic="true">Showing carousel item 1 of 5</p>
+        <p data-hub-status="true" class="sr-only" aria-live="polite" aria-atomic="true">Showing carousel state 1 of 10</p>
     </div>
 
     <!-- YOUR JOURNEY THROUGH BATH -->
@@ -864,28 +874,38 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
     var topViewport = document.getElementById('genaiHubTopViewport');
     var topTrack = document.getElementById('genaiHubTopTrack');
     var bottomTrack = document.getElementById('genaiHubBottomTrack');
+    var bottomViewport = bottomTrack.parentNode;
     var topCards = root.querySelectorAll('[data-hub-top-card]');
     var bottomCards = root.querySelectorAll('[data-hub-bottom-card]');
     var dots = root.querySelectorAll('[data-hub-dot]');
     var progressBars = root.querySelectorAll('[data-hub-progress]');
+    var dotTrack = root.querySelector('[data-hub-dot-track]');
     var pauseButton = root.querySelector('[data-hub-pause]');
     var pauseIcon = root.querySelector('[data-hub-pause-icon]');
     var pauseText = root.querySelector('[data-hub-pause-text]');
+    var desktopControls = root.querySelector('[data-hub-desktop-controls]');
+    var mobileControls = root.querySelector('[data-hub-mobile-controls]');
     var status = root.querySelector('[data-hub-status]');
-    var activeIndex = 0;
-    var bottomIndex = 0;
     var topCount = topCards.length;
     var bottomCount = bottomCards.length;
+    var stateCount = bottomCount;
+    var activeState = 0;
+    var topVisualIndex = 0;
+    var bottomVisualIndex = 0;
     var duration = 5200;
     var startedAt = Date.now();
     var transitionTimeoutId;
+    var snapTimeoutId;
     var progressId;
     var elapsed = 0;
     var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var paused = reducedMotion;
     var keyboardFocus = false;
-    var keyboardSequenceActive = false;
-    var keyboardPairCount = 0;
+    var wheelLocked = false;
+    var pointerStartX = 0;
+    var pointerStartY = 0;
+    var pointerId = null;
+    var suppressSwipeClick = false;
 
     for (var originalIndex = 0; originalIndex < topCards.length; originalIndex++) {
         var heading = topCards[originalIndex].querySelector('h3');
@@ -893,9 +913,6 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
         topCards[originalIndex].setAttribute('role', 'group');
         topCards[originalIndex].setAttribute('aria-roledescription', 'slide');
         topCards[originalIndex].setAttribute('aria-label', (originalIndex + 1) + ' of ' + topCount + ': ' + (heading ? heading.innerText.replace(/\s+/g, ' ').trim() : 'Featured resource'));
-        if (dots[originalIndex] && heading) {
-            dots[originalIndex].setAttribute('aria-label', 'Show ' + heading.innerText.replace(/\s+/g, ' ').trim());
-        }
     }
 
     for (var originalBottomIndex = 0; originalBottomIndex < bottomCards.length; originalBottomIndex++) {
@@ -904,6 +921,18 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
         bottomCards[originalBottomIndex].setAttribute('role', 'group');
         if (bottomHeading) {
             bottomCards[originalBottomIndex].setAttribute('aria-label', bottomHeading.textContent.trim());
+        }
+    }
+
+    for (var stateLabelIndex = 0; stateLabelIndex < stateCount; stateLabelIndex++) {
+        var stateTopCard = topCards[stateLabelIndex % topCount];
+        var stateBottomCard = bottomCards[stateLabelIndex];
+        var stateTopHeading = stateTopCard ? stateTopCard.querySelector('h3') : null;
+        var stateBottomHeading = stateBottomCard ? stateBottomCard.querySelector('h4') : null;
+        var stateTopName = stateTopHeading ? stateTopHeading.innerText.replace(/\s+/g, ' ').trim() : 'featured resource';
+        var stateBottomName = stateBottomHeading ? stateBottomHeading.textContent.trim() : 'learning resource';
+        if (dots[stateLabelIndex]) {
+            dots[stateLabelIndex].setAttribute('aria-label', 'Show state ' + (stateLabelIndex + 1) + ' of ' + stateCount + ': ' + stateTopName + ' and ' + stateBottomName);
         }
     }
 
@@ -927,8 +956,9 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
     }
 
     function prependClones(track, cards, amount) {
-        for (var i = amount - 1; i >= 0; i--) {
-            var clone = cards[(cards.length - 1 - i + cards.length) % cards.length].cloneNode(true);
+        var fragment = document.createDocumentFragment();
+        for (var i = amount; i > 0; i--) {
+            var clone = cards[(cards.length - i) % cards.length].cloneNode(true);
             clone.setAttribute('aria-hidden', 'true');
             clone.setAttribute('data-hub-clone', 'true');
             clone.removeAttribute('data-hub-original-index');
@@ -941,8 +971,9 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
             for (var c = 0; c < cloneInteractive.length; c++) {
                 cloneInteractive[c].tabIndex = -1;
             }
-            track.insertBefore(clone, track.firstChild);
+            fragment.appendChild(clone);
         }
+        track.insertBefore(fragment, track.firstChild);
     }
 
     var topCloneCount = Math.min(3, topCount);
@@ -987,10 +1018,11 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
 
     function setTrackPositions() {
         applyResponsiveDeckSizing();
-        var topCard = topCards[topCloneCount + activeIndex] || topCards[topCloneCount + (activeIndex % topCount)];
-        var bottomCard = bottomCards[bottomCloneCount + bottomIndex] || bottomCards[bottomCloneCount + (bottomIndex % bottomCount)];
+        var topCard = topCards[topCloneCount + topVisualIndex];
+        var bottomCard = bottomCards[bottomCloneCount + bottomVisualIndex];
+        if (!topCard || !bottomCard) { return; }
         var topViewportRect = topViewport.getBoundingClientRect();
-        var bottomViewportRect = bottomTrack.parentNode.getBoundingClientRect();
+        var bottomViewportRect = bottomViewport.getBoundingClientRect();
         var topCardRect = topCard.getBoundingClientRect();
         var bottomCardRect = bottomCard.getBoundingClientRect();
         var topTransform = new window.DOMMatrixReadOnly(window.getComputedStyle(topTrack).transform);
@@ -1002,16 +1034,17 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
     }
 
     function updateDots() {
-        var activeDot = activeIndex % topCount;
+        var windowStart = Math.max(0, Math.min(activeState - 2, stateCount - 5));
+        dotTrack.style.transform = 'translateX(' + (-windowStart * 44) + 'px)';
         for (var i = 0; i < dots.length; i++) {
-            var active = i === activeDot;
+            var active = i === activeState;
             dots[i].style.opacity = active ? '1' : '.8';
             dots[i].setAttribute('aria-current', active ? 'true' : 'false');
             dots[i].tabIndex = active ? 0 : -1;
             progressBars[i].style.width = active ? '30px' : '10px';
             progressBars[i].style.background = active ? '#c3cfdd' : '#657184';
         }
-        updateSlideAccessibility(activeDot, bottomIndex % bottomCount);
+        updateSlideAccessibility(activeState % topCount, activeState);
         elapsed = 0;
         startedAt = Date.now();
     }
@@ -1040,78 +1073,96 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
 
         if (status) {
             var activeCard = root.querySelector('[data-hub-original-index="' + activeTop + '"]');
-            status.textContent = activeCard ? 'Showing ' + activeCard.getAttribute('aria-label') : '';
+            var activeLowerCard = root.querySelector('[data-hub-bottom-original-index="' + activeBottom + '"]');
+            status.textContent = activeCard && activeLowerCard ? 'Showing state ' + (activeState + 1) + ' of ' + stateCount + ': ' + activeCard.getAttribute('aria-label').replace(/^\d+ of \d+: /, '') + ' and ' + activeLowerCard.getAttribute('aria-label') : '';
         }
     }
 
-    function snapWrappedTracks() {
-        var needsSnap = false;
+    function setTransitions(enabled) {
+        topTrack.style.transition = enabled && !reducedMotion ? 'transform 760ms cubic-bezier(.22,.61,.36,1)' : 'none';
+        bottomTrack.style.transition = enabled && !reducedMotion ? 'transform 620ms cubic-bezier(.22,.61,.36,1)' : 'none';
+    }
 
-        if (activeIndex >= topCount) {
-            activeIndex = activeIndex % topCount;
-            needsSnap = true;
-        }
-
-        if (bottomIndex >= bottomCount) {
-            bottomIndex = bottomIndex % bottomCount;
-            needsSnap = true;
-        }
-
-        if (!needsSnap) { return; }
-
-        topTrack.style.transition = 'none';
-        bottomTrack.style.transition = 'none';
+    function snapVisualCursors() {
+        topVisualIndex = normaliseIndex(topVisualIndex, topCount);
+        bottomVisualIndex = normaliseIndex(bottomVisualIndex, bottomCount);
+        setTransitions(false);
         setTrackPositions();
-
-        window.setTimeout(function () {
-            topTrack.style.transition = reducedMotion ? 'none' : 'transform 760ms cubic-bezier(.22,.61,.36,1)';
-            bottomTrack.style.transition = reducedMotion ? 'none' : 'transform 620ms cubic-bezier(.22,.61,.36,1)';
-        }, 30);
+        window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(function () { setTransitions(true); });
+        });
     }
 
-    function goTo(index) {
-        activeIndex = index;
-        bottomIndex = bottomIndex + 1;
+    function normaliseVisualCursorsBeforeMovement() {
+        var topOutsideOriginals = topVisualIndex < 0 || topVisualIndex >= topCount;
+        var bottomOutsideOriginals = bottomVisualIndex < 0 || bottomVisualIndex >= bottomCount;
+        if (!topOutsideOriginals && !bottomOutsideOriginals) { return; }
+        topVisualIndex = normaliseIndex(topVisualIndex, topCount);
+        bottomVisualIndex = normaliseIndex(bottomVisualIndex, bottomCount);
+        setTransitions(false);
+        setTrackPositions();
+        topTrack.getBoundingClientRect();
+        bottomTrack.getBoundingClientRect();
+        setTransitions(true);
+    }
+
+    function prepareBackwardWrap() {
+        var wrapped = false;
+        if (topVisualIndex === 0) {
+            topVisualIndex = topCount;
+            wrapped = true;
+        }
+        if (bottomVisualIndex === 0) {
+            bottomVisualIndex = bottomCount;
+            wrapped = true;
+        }
+        if (!wrapped) { return; }
+        setTransitions(false);
+        setTrackPositions();
+        topTrack.getBoundingClientRect();
+        bottomTrack.getBoundingClientRect();
+        setTransitions(true);
+    }
+
+    function renderState(direction) {
+        window.clearTimeout(snapTimeoutId);
+        if (direction) { normaliseVisualCursorsBeforeMovement(); }
+        if (direction === 1) {
+            topVisualIndex += 1;
+            bottomVisualIndex += 1;
+        } else if (direction === -1) {
+            prepareBackwardWrap();
+            topVisualIndex -= 1;
+            bottomVisualIndex -= 1;
+        } else {
+            topVisualIndex = activeState % topCount;
+            bottomVisualIndex = activeState;
+        }
         setTrackPositions();
         updateDots();
-        window.setTimeout(snapWrappedTracks, 780);
+        if (topVisualIndex < 0 || topVisualIndex >= topCount || bottomVisualIndex < 0 || bottomVisualIndex >= bottomCount) {
+            snapTimeoutId = window.setTimeout(snapVisualCursors, reducedMotion ? 0 : 780);
+        }
+    }
+
+    function changeState(nextState, options) {
+        var settings = options || {};
+        var normalisedState = normaliseIndex(nextState, stateCount);
+        var direction = settings.direction || 0;
+        activeState = normalisedState;
+        renderState(direction);
+        if (settings.focusDot) {
+            window.requestAnimationFrame(function () { dots[activeState].focus(); });
+        }
+        if (settings.restart !== false) { restartTimer(); }
+    }
+
+    function moveState(direction, focusDot) {
+        changeState(activeState + direction, { direction: direction, focusDot: !!focusDot });
     }
 
     function normaliseIndex(index, count) {
         return ((index % count) + count) % count;
-    }
-
-    function getOriginalTopLink(index) {
-        var card = root.querySelector('[data-hub-original-index="' + normaliseIndex(index, topCount) + '"]');
-        return card ? card.querySelector('a, button, input, select, textarea, [tabindex]') : null;
-    }
-
-    function getOriginalBottomLink(index) {
-        var card = root.querySelector('[data-hub-bottom-original-index="' + normaliseIndex(index, bottomCount) + '"]');
-        return card ? card.querySelector('a, button, input, select, textarea, [tabindex]') : null;
-    }
-
-    function showKeyboardPair(topIndex, lowerIndex, focusTarget) {
-        activeIndex = normaliseIndex(topIndex, topCount);
-        bottomIndex = normaliseIndex(lowerIndex, bottomCount);
-        setTrackPositions();
-        updateDots();
-        window.requestAnimationFrame(function () {
-            window.requestAnimationFrame(function () {
-                var target = focusTarget === 'bottom' ? getOriginalBottomLink(bottomIndex) : getOriginalTopLink(activeIndex);
-                if (target) target.focus();
-            });
-        });
-    }
-
-    function selectDot(index) {
-        activeIndex = normaliseIndex(index, topCount);
-        bottomIndex = activeIndex % bottomCount;
-        keyboardSequenceActive = false;
-        keyboardPairCount = 0;
-        setTrackPositions();
-        updateDots();
-        restartTimer();
     }
 
     function restartTimer() {
@@ -1120,16 +1171,62 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
         if (paused) { return; }
         var remaining = Math.max(0, duration - elapsed);
         transitionTimeoutId = window.setTimeout(function () {
-            goTo(activeIndex + 1);
-            restartTimer();
+            moveState(1, false);
         }, remaining);
         progressId = window.setInterval(function () {
             var pct = Math.min(100, ((elapsed + Date.now() - startedAt) / duration) * 100);
-            var activeDot = activeIndex % topCount;
-            if (progressBars[activeDot]) {
-                progressBars[activeDot].style.background = 'linear-gradient(90deg,#003c71 0%,#003c71 ' + pct + '%,#c3cfdd ' + pct + '%,#c3cfdd 100%)';
+            if (progressBars[activeState]) {
+                progressBars[activeState].style.background = 'linear-gradient(90deg,#003c71 0%,#003c71 ' + pct + '%,#c3cfdd ' + pct + '%,#c3cfdd 100%)';
             }
         }, 80);
+    }
+
+    function placePauseControl() {
+        var mobile = window.innerWidth < 768;
+        var target = mobile ? mobileControls : desktopControls;
+        if (pauseButton.parentNode !== target) { target.appendChild(pauseButton); }
+        pauseButton.style.width = mobile ? '44px' : '9rem';
+        pauseButton.style.height = mobile ? '44px' : '';
+        pauseButton.style.minWidth = mobile ? '44px' : '';
+        pauseButton.style.padding = mobile ? '0' : '';
+        pauseButton.style.borderRadius = mobile ? '50%' : '';
+        pauseText.style.display = mobile ? 'none' : '';
+        desktopControls.style.display = mobile ? 'none' : '';
+    }
+
+    function handleResize() {
+        placePauseControl();
+        setTrackPositions();
+    }
+
+    function addSwipeSupport(viewport) {
+        viewport.style.touchAction = 'pan-y';
+        viewport.addEventListener('pointerdown', function (event) {
+            if (event.pointerType === 'mouse' && event.button !== 0) { return; }
+            pointerId = event.pointerId;
+            pointerStartX = event.clientX;
+            pointerStartY = event.clientY;
+            if (viewport.setPointerCapture) { viewport.setPointerCapture(event.pointerId); }
+        });
+        viewport.addEventListener('pointerup', function (event) {
+            if (event.pointerId !== pointerId) { return; }
+            var deltaX = event.clientX - pointerStartX;
+            var deltaY = event.clientY - pointerStartY;
+            pointerId = null;
+            if (Math.abs(deltaX) >= 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
+                suppressSwipeClick = true;
+                moveState(deltaX < 0 ? 1 : -1, false);
+                window.setTimeout(function () { suppressSwipeClick = false; }, 0);
+            }
+        });
+        viewport.addEventListener('pointercancel', function () { pointerId = null; });
+        viewport.addEventListener('wheel', function (event) {
+            if (wheelLocked || Math.abs(event.deltaX) < 18 || Math.abs(event.deltaX) <= Math.abs(event.deltaY)) { return; }
+            event.preventDefault();
+            wheelLocked = true;
+            moveState(event.deltaX > 0 ? 1 : -1, false);
+            window.setTimeout(function () { wheelLocked = false; }, 600);
+        }, { passive: false });
     }
 
     function setPaused(nextPaused) {
@@ -1137,7 +1234,7 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
             elapsed = Math.min(duration, elapsed + Date.now() - startedAt);
         }
         paused = nextPaused;
-        pauseIcon.className = paused ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+        pauseIcon.className = paused ? 'fa-solid fa-play' : 'fa-solid fa-pause';
         pauseText.textContent = paused ? 'Paused' : 'Auto-rotating';
         pauseButton.setAttribute('aria-pressed', paused ? 'true' : 'false');
         pauseButton.setAttribute('aria-label', paused ? 'Resume automatic carousel rotation' : 'Pause automatic carousel rotation');
@@ -1149,6 +1246,7 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
             window.clearTimeout(transitionTimeoutId);
             window.clearInterval(progressId);
         } else {
+            elapsed = 0;
             startedAt = Date.now();
             restartTimer();
         }
@@ -1156,37 +1254,33 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
 
     for (var i = 0; i < dots.length; i++) {
         dots[i].addEventListener('click', function () {
-            var index = parseInt(this.getAttribute('data-hub-dot'), 10);
-            selectDot(index);
+            changeState(parseInt(this.getAttribute('data-hub-dot'), 10), { focusDot: false });
+        });
+        dots[i].addEventListener('keydown', function (event) {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowLeft' || event.key === 'Home' || event.key === 'End') {
+                event.preventDefault();
+                if (event.key === 'ArrowRight') { moveState(1, true); }
+                if (event.key === 'ArrowLeft') { moveState(-1, true); }
+                if (event.key === 'Home') { changeState(0, { focusDot: true }); }
+                if (event.key === 'End') { changeState(stateCount - 1, { focusDot: true }); }
+            }
         });
     }
 
-    pauseButton.addEventListener('click', function () {
-        setPaused(!paused);
-    });
+    pauseButton.addEventListener('click', function () { setPaused(!paused); });
+
+    root.addEventListener('click', function (event) {
+        if (suppressSwipeClick) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }, true);
 
     root.addEventListener('keydown', function (event) {
         if (event.key === 'Tab') { keyboardFocus = true; }
-
-        var topLink = event.target.closest('[data-hub-original-index] a');
-        var bottomLink = event.target.closest('[data-hub-bottom-original-index] a');
-
-        if (event.key !== 'Tab' || !keyboardSequenceActive) return;
-
-        if (bottomLink && !event.shiftKey && keyboardPairCount < topCount) {
-            event.preventDefault();
-            keyboardPairCount += 1;
-            showKeyboardPair(activeIndex + 1, bottomIndex + 1, 'top');
-        } else if (topLink && event.shiftKey && keyboardPairCount > 1) {
-            event.preventDefault();
-            keyboardPairCount -= 1;
-            showKeyboardPair(activeIndex - 1, bottomIndex - 1, 'bottom');
-        }
     });
 
-    root.addEventListener('mousedown', function () {
-        keyboardFocus = false;
-    });
+    root.addEventListener('mousedown', function () { keyboardFocus = false; });
 
     root.addEventListener('focusin', function (event) {
         if (keyboardFocus && event.target.matches('a, button')) {
@@ -1202,13 +1296,7 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
                 lowerPanel.style.setProperty('box-shadow', 'inset 0 0 0 5px #f5c242, inset 0 0 0 8px #172033, 0 8px 24px rgba(15,23,42,.28)', 'important');
             }
         }
-        if (event.target.matches('[data-hub-top-card] a, [data-hub-bottom-card] a')) {
-            setPaused(true);
-        }
-        if (event.target.matches('[data-hub-original-index] a, [data-hub-bottom-original-index] a') && !keyboardSequenceActive) {
-            keyboardSequenceActive = true;
-            keyboardPairCount = 1;
-        }
+        if (event.target.matches('[data-hub-top-card] a, [data-hub-bottom-card] a')) { setPaused(true); }
     });
 
     root.addEventListener('focusout', function (event) {
@@ -1225,30 +1313,19 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
                 lowerPanel.removeAttribute('data-hub-focus-panel');
             }
         }
-        window.setTimeout(function () {
-            if (!root.contains(document.activeElement)) {
-                keyboardSequenceActive = false;
-                keyboardPairCount = 0;
-            }
-        }, 0);
     });
 
-    window.addEventListener('resize', setTrackPositions);
-    window.addEventListener('load', setTrackPositions);
-    topTrack.style.transition = 'none';
-    bottomTrack.style.transition = 'none';
+    addSwipeSupport(topViewport);
+    addSwipeSupport(bottomViewport);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('load', handleResize);
+    setTransitions(false);
+    placePauseControl();
     setTrackPositions();
     updateDots();
     window.requestAnimationFrame(function () {
-        window.requestAnimationFrame(function () {
-            topTrack.style.transition = reducedMotion ? 'none' : 'transform 760ms cubic-bezier(.22,.61,.36,1)';
-            bottomTrack.style.transition = reducedMotion ? 'none' : 'transform 620ms cubic-bezier(.22,.61,.36,1)';
-        });
+        window.requestAnimationFrame(function () { setTransitions(true); });
     });
-    if (paused) {
-        setPaused(true);
-    } else {
-        restartTimer();
-    }
+    setPaused(paused);
 })();
 </script>
