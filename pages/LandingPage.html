@@ -767,6 +767,7 @@ Constraints:
     document.addEventListener('focusin', function (event) {
         var target = event.target;
         if (!keyboardMode || !target.matches('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])')) return;
+        if (target.matches('[data-hub-dot]')) return;
         target.setAttribute('data-accessible-focus', 'true');
         target.style.outline = '3px solid #f5c242';
         target.style.outlineOffset = '3px';
@@ -774,6 +775,7 @@ Constraints:
     });
     document.addEventListener('focusout', function (event) {
         var target = event.target;
+        if (target.matches('[data-hub-dot]')) return;
         if (!target.hasAttribute('data-accessible-focus')) return;
         target.style.outline = '';
         target.style.outlineOffset = '';
@@ -1181,6 +1183,22 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
         }, 80);
     }
 
+    function stylePauseControl() {
+        var mobile = window.innerWidth < 768;
+        pauseButton.classList.toggle('badge-success', !mobile && !paused);
+        pauseButton.classList.toggle('badge-secondary', !mobile && paused);
+        pauseButton.style.backgroundColor = mobile ? 'transparent' : (paused ? '#6c757d' : '#157347');
+        pauseButton.style.color = mobile ? '#003c71' : '#ffffff';
+        pauseIcon.style.display = mobile ? 'inline-flex' : '';
+        pauseIcon.style.alignItems = mobile ? 'center' : '';
+        pauseIcon.style.justifyContent = mobile ? 'center' : '';
+        pauseIcon.style.width = mobile ? '36px' : '';
+        pauseIcon.style.height = mobile ? '36px' : '';
+        pauseIcon.style.borderRadius = mobile ? '50%' : '';
+        pauseIcon.style.backgroundColor = mobile ? '#e5e7eb' : '';
+        pauseIcon.style.color = mobile ? '#003c71' : '';
+    }
+
     function placePauseControl() {
         var mobile = window.innerWidth < 768;
         var target = mobile ? mobileControls : desktopControls;
@@ -1192,6 +1210,7 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
         pauseButton.style.borderRadius = mobile ? '50%' : '';
         pauseText.style.display = mobile ? 'none' : '';
         desktopControls.style.display = mobile ? 'none' : '';
+        stylePauseControl();
     }
 
     function handleResize() {
@@ -1238,10 +1257,7 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
         pauseText.textContent = paused ? 'Paused' : 'Auto-rotating';
         pauseButton.setAttribute('aria-pressed', paused ? 'true' : 'false');
         pauseButton.setAttribute('aria-label', paused ? 'Resume automatic carousel rotation' : 'Pause automatic carousel rotation');
-        pauseButton.classList.toggle('badge-success', !paused);
-        pauseButton.classList.toggle('badge-secondary', paused);
-        pauseButton.style.backgroundColor = paused ? '#6c757d' : '#157347';
-        pauseButton.style.color = '#ffffff';
+        stylePauseControl();
         if (paused) {
             window.clearTimeout(transitionTimeoutId);
             window.clearInterval(progressId);
@@ -1283,11 +1299,17 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
     root.addEventListener('mousedown', function () { keyboardFocus = false; });
 
     root.addEventListener('focusin', function (event) {
-        if (keyboardFocus && event.target.matches('a, button')) {
+        if (keyboardFocus && event.target.matches('a, button') && !event.target.matches('[data-hub-dot]')) {
             event.target.style.outline = '3px solid #f5c242';
             event.target.style.outlineOffset = '3px';
             event.target.setAttribute('data-hub-original-shadow', event.target.style.boxShadow || '');
             event.target.style.boxShadow = '0 0 0 6px #172033';
+        }
+        if (keyboardFocus && event.target.matches('[data-hub-dot]')) {
+            event.target.setAttribute('data-hub-dot-shadow', event.target.style.boxShadow || '');
+            event.target.style.outline = 'none';
+            event.target.style.outlineOffset = '0';
+            event.target.style.boxShadow = 'inset 0 0 0 3px #f5c242, inset 0 0 0 6px #003c71';
         }
         if (keyboardFocus && event.target.matches('[data-hub-bottom-card] a')) {
             var lowerPanel = event.target.parentElement;
@@ -1300,6 +1322,12 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
     });
 
     root.addEventListener('focusout', function (event) {
+        if (event.target.matches('[data-hub-dot]') && event.target.hasAttribute('data-hub-dot-shadow')) {
+            event.target.style.outline = '';
+            event.target.style.outlineOffset = '';
+            event.target.style.boxShadow = event.target.getAttribute('data-hub-dot-shadow') || '';
+            event.target.removeAttribute('data-hub-dot-shadow');
+        }
         if (event.target.matches('a, button') && event.target.hasAttribute('data-hub-original-shadow')) {
             event.target.style.outline = '';
             event.target.style.outlineOffset = '';
