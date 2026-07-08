@@ -3,3 +3,4 @@ test-results/
 Test.html
 Build-Components/
 maintenance/
+.DS_Store
