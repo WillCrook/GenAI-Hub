@@ -319,7 +319,7 @@ Constraints:
         <div id="workplace" class="col-12 col-md-6 col-lg-4 mb-4">
             <div data-pathway-card="workplace" class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#172033;border-color:#BFDBFE!important;transition:border-color 0.2s ease,box-shadow 0.2s ease;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
-                     style="width:48px;height:48px;background-color:#2563EB;color:#FFFFFF;font-size:1.35rem;">
+                     style="width:48px;height:48px;background-color:#e5f3fc;color:#2563EB;font-size:1.35rem;">
                     <i class="fa-solid fa-briefcase" style="line-height:1;" aria-hidden="true">&#8203;</i>
                 </div>
                 <h3 class="h5 font-weight-bold mt-3">Placements</h3>
@@ -339,7 +339,7 @@ Constraints:
         <div class="col-12 col-lg-8 mb-4">
             <div data-pathway-card="workplace" class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column" style="min-height:220px;color:#172033;border-color:#BFDBFE!important;transition:border-color 0.2s ease,box-shadow 0.2s ease;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
-                     style="width:48px;height:48px;background-color:#2563EB;color:#FFFFFF;font-size:1.35rem;">
+                     style="width:48px;height:48px;background-color:#e5f3fc;color:#2563EB;font-size:1.35rem;">
                     <i class="fa-solid fa-gauge-high" style="line-height:1;" aria-hidden="true">&#8203;</i>
                 </div>
                 <h3 class="h5 font-weight-bold mt-3">Productivity</h3>
@@ -1265,6 +1265,19 @@ function createCard(card) {
     track.innerHTML = html;
 
     const carousel = document.getElementById('featured-carousel');
+    const scrollSurface = document.createElement('div');
+    scrollSurface.setAttribute('data-featured-scroll-surface', '');
+    scrollSurface.style.width = '100%';
+    scrollSurface.style.overflowX = 'hidden';
+    scrollSurface.style.overflowY = 'hidden';
+    scrollSurface.style.webkitOverflowScrolling = 'touch';
+    scrollSurface.style.scrollbarWidth = 'none';
+    scrollSurface.style.msOverflowStyle = 'none';
+    scrollSurface.style.paddingBottom = '1rem';
+    scrollSurface.style.marginBottom = '-1rem';
+    carousel.style.overflow = 'hidden';
+    carousel.insertBefore(scrollSurface, track);
+    scrollSurface.appendChild(track);
 
     if (window.innerWidth <= 768) {
 
@@ -1272,11 +1285,11 @@ function createCard(card) {
 
     track.style.width = 'auto';
 
-    carousel.style.overflowX = 'auto';
+    scrollSurface.style.overflowX = 'auto';
 
-    carousel.style.webkitOverflowScrolling = 'touch';
+    scrollSurface.style.webkitOverflowScrolling = 'touch';
 
-    carousel.style.scrollSnapType = 'x mandatory';
+    scrollSurface.style.scrollSnapType = 'x mandatory';
 
     track.querySelectorAll('.card').forEach(card => {
 
@@ -1297,8 +1310,10 @@ function createCard(card) {
     const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let userPaused = reducedMotion;
     let hoverPaused = false;
-    let elapsed = 0;
     let previousTimestamp = null;
+    let normalisingScroll = false;
+    let deferScrollNormalisation = false;
+    const autoplayPixelsPerSecond = 48;
 
     function isMobile() {
         return window.innerWidth <= 768;
@@ -1308,9 +1323,45 @@ function createCard(card) {
         return userPaused || hoverPaused || isMobile();
     }
 
+    function getLoopDistance() {
+        return track.scrollWidth / 2;
+    }
+
+    function normaliseScrollPosition() {
+        const distance = getLoopDistance();
+        if (!distance) {
+            return;
+        }
+
+        let nextScrollLeft = scrollSurface.scrollLeft;
+        while (nextScrollLeft >= distance) {
+            nextScrollLeft -= distance;
+        }
+
+        if (nextScrollLeft < 0) {
+            nextScrollLeft += distance;
+        }
+
+        if (nextScrollLeft !== scrollSurface.scrollLeft) {
+            normalisingScroll = true;
+            scrollSurface.scrollLeft = nextScrollLeft;
+            normalisingScroll = false;
+        }
+    }
+
+    function updateManualScrollState(paused) {
+        carousel.style.overflow = 'hidden';
+        scrollSurface.style.overflowX = paused ? 'auto' : 'hidden';
+        scrollSurface.style.webkitOverflowScrolling = 'touch';
+        scrollSurface.setAttribute('tabindex', paused ? '0' : '-1');
+        track.style.transform = 'none';
+        normaliseScrollPosition();
+    }
+
     function updateAutoplayControl() {
         const paused = isPaused();
         autoplayControl.style.display = isMobile() ? 'none' : 'block';
+        updateManualScrollState(paused);
         autoplayIcon.classList.toggle('fa-play', !paused);
         autoplayIcon.classList.toggle('fa-pause', paused);
         autoplayLabel.textContent = paused ? 'Paused' : 'Auto-rotating';
@@ -1337,6 +1388,46 @@ function createCard(card) {
         updateAutoplayControl();
     });
 
+    scrollSurface.addEventListener('keydown', event => {
+        if (!isPaused() || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const direction = event.key === 'ArrowLeft' ? -1 : 1;
+        const scrollAmount = Math.min(scrollSurface.clientWidth * 0.85, 360);
+        const distance = getLoopDistance();
+
+        if (distance) {
+            deferScrollNormalisation = true;
+
+            if (direction < 0 && scrollSurface.scrollLeft < scrollAmount) {
+                scrollSurface.scrollLeft += distance;
+            } else if (direction > 0 && scrollSurface.scrollLeft + scrollAmount >= distance) {
+                scrollSurface.scrollLeft -= distance;
+            }
+
+            window.setTimeout(() => {
+                deferScrollNormalisation = false;
+                normaliseScrollPosition();
+            }, 500);
+        }
+
+        scrollSurface.scrollBy({
+            left: direction * scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+
+    scrollSurface.addEventListener('scroll', () => {
+        if (normalisingScroll || deferScrollNormalisation) {
+            return;
+        }
+
+        window.requestAnimationFrame(normaliseScrollPosition);
+    });
+
     window.addEventListener('resize', updateAutoplayControl);
     updateAutoplayControl();
 
@@ -1345,16 +1436,12 @@ function createCard(card) {
             previousTimestamp = timestamp;
         }
 
-        if (!isPaused()) {
-            elapsed += timestamp - previousTimestamp;
-        }
-
+        const elapsed = timestamp - previousTimestamp;
         previousTimestamp = timestamp;
 
-        if (window.innerWidth > 768) {
-            const distance = track.scrollWidth / 2;
-            const progress = (elapsed / 45000) % 1;
-            track.style.transform = 'translateX(-' + (distance * progress).toFixed(2) + 'px)';
+        if (!isPaused() && window.innerWidth > 768) {
+            scrollSurface.scrollLeft += elapsed / 1000 * autoplayPixelsPerSecond;
+            normaliseScrollPosition();
         }
 
         window.requestAnimationFrame(scrollFeatured);
@@ -1364,7 +1451,7 @@ function createCard(card) {
         window.requestAnimationFrame(scrollFeatured);
     }
 
-})();
+    })();
 })();
 </script>
 
