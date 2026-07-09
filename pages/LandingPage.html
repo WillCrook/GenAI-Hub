@@ -1175,12 +1175,14 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
         transitionTimeoutId = window.setTimeout(function () {
             moveState(1, false);
         }, remaining);
-        progressId = window.setInterval(function () {
+        function updateProgressBar() {
             var pct = Math.min(100, ((elapsed + Date.now() - startedAt) / duration) * 100);
             if (progressBars[activeState]) {
                 progressBars[activeState].style.background = 'linear-gradient(90deg,#003c71 0%,#003c71 ' + pct + '%,#c3cfdd ' + pct + '%,#c3cfdd 100%)';
             }
-        }, 80);
+        }
+        updateProgressBar();
+        progressId = window.setInterval(updateProgressBar, 80);
     }
 
     function stylePauseControl() {
@@ -1213,7 +1215,17 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
         stylePauseControl();
     }
 
+    function containWithinMoodleGutters() {
+        root.style.position = '';
+        root.style.left = '';
+        root.style.marginLeft = '';
+        root.style.maxWidth = '100%';
+        root.style.boxSizing = 'border-box';
+        root.style.width = '100%';
+    }
+
     function handleResize() {
+        containWithinMoodleGutters();
         placePauseControl();
         setTrackPositions();
     }
@@ -1261,8 +1273,11 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
         if (paused) {
             window.clearTimeout(transitionTimeoutId);
             window.clearInterval(progressId);
+            var pct = Math.min(100, (elapsed / duration) * 100);
+            if (progressBars[activeState]) {
+                progressBars[activeState].style.background = 'linear-gradient(90deg,#003c71 0%,#003c71 ' + pct + '%,#c3cfdd ' + pct + '%,#c3cfdd 100%)';
+            }
         } else {
-            elapsed = 0;
             startedAt = Date.now();
             restartTimer();
         }
@@ -1348,6 +1363,7 @@ if (window.requestAnimationFrame && core && !reduceMotion) {
     window.addEventListener('resize', handleResize);
     window.addEventListener('load', handleResize);
     setTransitions(false);
+    containWithinMoodleGutters();
     placePauseControl();
     setTrackPositions();
     updateDots();
