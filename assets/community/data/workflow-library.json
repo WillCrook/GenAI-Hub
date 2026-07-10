@@ -1,0 +1,74 @@
+{
+  "workflows": [
+    {
+      "id": "workflow-literature-review",
+      "title": "Literature Review Assistant",
+      "summary": "Move from reading list to source matrix with checks built in.",
+      "description": "A repeatable workflow for summarising papers, checking claims and building a comparison matrix before writing.",
+      "author": "Workflow by James L.",
+      "tags": ["Academic", "Workflow", "Research"],
+      "featured": true,
+      "featuredOrder": 3,
+      "status": "published",
+      "workflowSteps": [
+        {
+          "label": "Input sources",
+          "tool": "Reading list",
+          "description": "Collect bibliographic details, PDFs and your own skim notes before using AI."
+        },
+        {
+          "label": "Extract claims",
+          "tool": "AI assistant",
+          "description": "Ask for claims, methods, limitations and key terms for one source at a time."
+        },
+        {
+          "label": "Human check",
+          "tool": "Original paper",
+          "description": "Check every generated point against the original source and mark anything uncertain."
+        },
+        {
+          "label": "Compare",
+          "tool": "Source matrix",
+          "description": "Move verified points into a matrix so similarities, differences and gaps are visible."
+        }
+      ],
+      "checkingAdvice": "Do not cite AI summaries. Cite the original sources after checking the generated notes yourself.",
+      "ctaLabel": "View Workflow"
+    },
+    {
+      "id": "workflow-group-project-brief",
+      "title": "Group Project Brief Builder",
+      "summary": "Turn a shared project aim into roles, risks and first actions.",
+      "description": "A structured workflow for using AI during early group planning while keeping decisions with the team.",
+      "author": "Workflow by Mina K.",
+      "tags": ["Workplace", "Workflow", "Planning"],
+      "featured": false,
+      "featuredOrder": 9,
+      "status": "published",
+      "workflowSteps": [
+        {
+          "label": "Define aim",
+          "tool": "Team notes",
+          "description": "Write the project aim, constraints and deadline in the team's own words."
+        },
+        {
+          "label": "Generate questions",
+          "tool": "AI assistant",
+          "description": "Ask AI for questions the team should answer before choosing a direction."
+        },
+        {
+          "label": "Assign roles",
+          "tool": "Shared document",
+          "description": "Convert agreed tasks into named owners, dates and dependencies."
+        },
+        {
+          "label": "Review risks",
+          "tool": "Team meeting",
+          "description": "Discuss risks as a group before the plan is final."
+        }
+      ],
+      "checkingAdvice": "Use AI to expose options, not to decide roles or allocate responsibility.",
+      "ctaLabel": "View Workflow"
+    }
+  ]
+}

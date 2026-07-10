@@ -1,0 +1,38 @@
+{
+  "showcase": [
+    {
+      "id": "student-showcase-study-coach",
+      "title": "AI Study Coach Prototype",
+      "summary": "Revision support with prompts, checks and next-step suggestions.",
+      "description": "A student-built prototype that turns module notes into short revision questions, confidence checks and suggested follow-up tasks.",
+      "author": "Prototype by Priya M.",
+      "tags": ["Academic", "Revision", "Prototype"],
+      "featured": true,
+      "featuredOrder": 1,
+      "status": "published",
+      "problem": "Students wanted structured revision checks without receiving complete model answers.",
+      "approach": "The prototype uses staged prompts to ask one question at a time, waits for the student's answer and then gives feedback on confidence and gaps.",
+      "outcome": "Test users reported that the sequence made revision feel more active and helped them decide what to revisit next.",
+      "toolsUsed": ["Claude", "Google Docs", "Module notes", "Peer testing"],
+      "reflection": "The strongest version kept the AI in a coaching role and asked students to make the final judgement on what to revise.",
+      "ctaLabel": "View Work"
+    },
+    {
+      "id": "student-showcase-lab-notes-action-plan",
+      "title": "Lab Notes to Action Plan",
+      "summary": "A practical assistant for turning messy experiment notes into next-step checklists.",
+      "description": "A lightweight student workflow that helps organise observations, uncertainties and follow-up actions after practical sessions.",
+      "author": "Prototype by Noah S.",
+      "tags": ["Academic", "Workflow", "Reflection"],
+      "featured": false,
+      "featuredOrder": 7,
+      "status": "published",
+      "problem": "Lab notes often contained useful observations but students struggled to turn them into follow-up study tasks.",
+      "approach": "The prototype asks students to separate observations, measurements, possible errors and questions before generating an action list.",
+      "outcome": "The resulting checklist helped students prepare better questions for lab demonstrators and seminars.",
+      "toolsUsed": ["ChatGPT", "OneNote", "Checklist prompts"],
+      "reflection": "Keeping uncertainty visible was more useful than asking AI to produce a polished conclusion too early.",
+      "ctaLabel": "View Work"
+    }
+  ]
+}

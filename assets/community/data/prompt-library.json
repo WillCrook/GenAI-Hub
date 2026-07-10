@@ -1,0 +1,44 @@
+{
+  "prompts": [
+    {
+      "id": "prompt-socratic-revision",
+      "title": "Socratic Revision Partner",
+      "summary": "Turn notes into short revision checks without asking for direct answers.",
+      "description": "A reusable prompt for asking an AI assistant to quiz you, wait for your answer and then give targeted feedback.",
+      "author": "Prompt by Learning Partnerships",
+      "tags": ["Academic", "Beginner", "Prompt"],
+      "featured": true,
+      "featuredOrder": 2,
+      "status": "published",
+      "model": "ChatGPT 4o or Claude Sonnet",
+      "useCase": "Revision, coursework planning and seminar preparation",
+      "promptText": "Act as a Socratic revision partner. I will paste a short extract from my notes. Ask me one question at a time to check my understanding. Wait for my answer before giving feedback. Do not write a model answer unless I ask for one. Point out gaps, misconceptions and useful follow-up topics. Start with factual recall, then move to applied explanation, then end with a reflection question about what I should revise next.\n\nNotes:\n[Paste notes here]",
+      "guidance": [
+        "Paste a short, relevant extract rather than an entire chapter.",
+        "Answer each question before asking for feedback.",
+        "Check suggested follow-up topics against your module materials."
+      ],
+      "ctaLabel": "Use Prompt"
+    },
+    {
+      "id": "prompt-feedback-boundaries",
+      "title": "Feedback Boundary Checker",
+      "summary": "Ask for feedback on structure and clarity without asking AI to rewrite the work.",
+      "description": "A prompt that helps students get high-level feedback while keeping authorship and final wording with them.",
+      "author": "Prompt by Digital Skills",
+      "tags": ["Academic", "Responsible use", "Prompt"],
+      "featured": false,
+      "featuredOrder": 8,
+      "status": "published",
+      "model": "Microsoft Copilot",
+      "useCase": "Coursework planning and review",
+      "promptText": "Review the outline below for structure, clarity and missing considerations. Do not rewrite it. Give feedback as bullet points grouped by strengths, unclear areas and questions I should answer before drafting. Keep the feedback at planning level.\n\nOutline:\n[Paste outline here]",
+      "guidance": [
+        "Use this before writing a full draft.",
+        "Keep the AI away from final wording.",
+        "Record which suggestions you used and why."
+      ],
+      "ctaLabel": "Use Prompt"
+    }
+  ]
+}
