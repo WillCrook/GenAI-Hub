@@ -39,7 +39,7 @@ Constraints:
 <!-- COPY BELOW FOR MOODLE -->
 <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
 
-<nav class="navbar navbar-expand-lg bg-white border-bottom" aria-label="Primary navigation" style="backdrop-filter:blur(12px);">
+<nav class="navbar navbar-expand-lg bg-white border-bottom" aria-label="Primary navigation" data-tour-target="navigation" style="backdrop-filter:blur(12px);">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center font-weight-bold mr-2" href="https://moodle.bath.ac.uk/course/section.php?id=277885" style="font-size:clamp(0.9rem,4vw,1.1rem);text-decoration:none;white-space:normal;max-width:calc(100% - 4rem);">
             <div style="min-width:0;">
@@ -119,12 +119,12 @@ Constraints:
 
                         <div class="d-flex flex-column flex-md-row align-items-start mt-4">
 
-                            <a href="#learn"
+                            <a href="#learn" data-tour-start="true"
 
                             class="btn btn-light btn-lg px-4 py-3 mr-md-3 mb-3 mb-md-0">
 
                                 <div style="color:#212529;">
-                                    Start Learning <i class="fa-solid fa-arrow-right ml-2" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                                    Take a quick tour <i class="fa-solid fa-route ml-2" style="line-height:1;" aria-hidden="true">&#8203;</i>
                                 </div>
 
                             </a>
@@ -150,6 +150,7 @@ Constraints:
 
         <div class="col-md-6 col-xl-3 mb-4">
             <div id="learn"
+                 data-tour-target="learning"
                  data-animate-card="true"
                  class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column"
                  style="border-radius:1rem;">
@@ -178,6 +179,7 @@ Constraints:
 
         <div class="col-md-6 col-xl-3 mb-4">
             <div id="challenges"
+                 data-tour-target="challenges"
                  data-animate-card="true"
                  class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column"
                  style="border-radius:1rem;">
@@ -205,7 +207,7 @@ Constraints:
         </div>
 
         <div class="col-md-6 col-xl-3 mb-4">
-            <div data-animate-card="true" class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column"
+            <div data-animate-card="true" data-tour-target="community" class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column"
                  style="border-radius:1rem;">
 
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -231,7 +233,7 @@ Constraints:
         </div>
 
         <div class="col-md-6 col-xl-3 mb-4">
-            <div data-animate-card="true" class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column"
+            <div data-animate-card="true" data-tour-target="guidance" class="h-100 p-4 bg-white rounded shadow-sm border d-flex flex-column"
                  style="border-radius:1rem;">
 
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -260,7 +262,7 @@ Constraints:
 
 <!-- GenAI Carousel -->
 
-    <div id="genaiHubCarousel" class="p-4" role="region" aria-roledescription="carousel" aria-label="GenAI Hub featured resources">
+    <div id="genaiHubCarousel" class="p-4" role="region" aria-roledescription="carousel" aria-label="GenAI Hub featured resources" data-tour-target="featured" tabindex="-1">
         <div class="d-flex flex-column-reverse flex-md-row justify-content-between align-items-md-center mb-3">
             
             <h2 class="font-weight-bold mb-0">
@@ -522,7 +524,7 @@ Constraints:
     </div>
 
     <!-- YOUR JOURNEY THROUGH BATH -->
-    <div class="mt-5 p-4 p-lg-5 rounded shadow-sm overflow-hidden"
+    <div class="mt-5 p-4 p-lg-5 rounded shadow-sm overflow-hidden" data-tour-target="journey" tabindex="-1"
          style="border-radius:1rem;background:linear-gradient(135deg,rgba(9,70,133,0.96),rgba(11,36,66,0.94) 58%,rgba(23,32,51,0.92));color:white;position:relative;">
 
         <div style="position:absolute;left:0;right:0;bottom:0;height:48%;background:linear-gradient(180deg,rgba(245,194,66,0),rgba(245,194,66,0.12));pointer-events:none;">&nbsp;</div>
@@ -535,7 +537,48 @@ Constraints:
             </div>
         </div>
 
-        <div class="row align-items-start justify-content-center mt-5 position-relative" data-journey-milestones="true" style="--journey-heading-size:clamp(1.1rem,1.25vw,1.2rem);">
+        <div class="d-lg-none mt-3 position-relative">
+            <div class="p-4 text-center"
+                 style="border-radius:1rem;background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.22);box-shadow:0 20px 48px rgba(23,32,51,0.34);backdrop-filter:blur(14px);">
+                <div class="d-inline-block position-relative mb-3">
+                    <span class="badge badge-light rounded-pill px-3 py-2" style="color:#172033;box-shadow:0 10px 26px rgba(245,194,66,0.18);">
+                        You are here
+                    </span>
+                </div>
+
+                <div class="mx-auto position-relative d-flex align-items-center justify-content-center"
+                     style="width:94px;height:94px;border-radius:28px;background:linear-gradient(135deg,rgba(245,194,66,0.28),rgba(95,168,216,0.18));border:1px solid rgba(255,255,255,0.46);box-shadow:0 0 0 8px rgba(245,194,66,0.08),0 0 38px rgba(245,194,66,0.36),0 18px 42px rgba(23,32,51,0.4);backdrop-filter:blur(14px);">
+                    <i class="fa-solid fa-building-columns" style="line-height:1;font-size:2.25rem;color:#fef3c7;" aria-hidden="true">&#8203;</i>
+                </div>
+
+                <div class="small text-uppercase font-weight-bold mt-4" style="letter-spacing:0.08em;color:#dbeafe;">
+                    Current Level
+                </div>
+                <h3 class="h4 font-weight-bold mt-1 mb-4">
+                    Royal Crescent
+                </h3>
+
+                <div class="d-flex justify-content-between align-items-center mb-2 text-left">
+                    <span class="small text-uppercase font-weight-bold" style="letter-spacing:0.08em;color:#dbeafe;">
+                        Progress
+                    </span>
+                    <span class="font-weight-bold">62%</span>
+                </div>
+                <div class="progress rounded-pill mb-4" style="height:10px;background:rgba(255,255,255,0.18);">
+                    <div class="progress-bar rounded-pill" role="progressbar" aria-label="AI foundations learning path progress" style="width:62%;background:linear-gradient(90deg,#5fa8d8,#f5c242);" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
+                        &nbsp;
+                    </div>
+                </div>
+
+                <a href="user/user.html" class="btn btn-light btn-block rounded-pill font-weight-bold px-4 py-2" aria-label="View your XP dashboard and complete progress road" style="color:#172033;white-space:normal;min-height:44px;">
+                    <div style="color:#172033;">
+                        View your progress <i class="fa-solid fa-map-location-dot ml-1" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row d-none d-lg-flex align-items-start justify-content-center mt-5 position-relative" data-journey-milestones="true" style="--journey-heading-size:clamp(1.1rem,1.25vw,1.2rem);">
 
             <div class="col-12 col-lg mb-4 mb-lg-0 text-center position-relative">
                 <div class="d-none d-lg-block" style="position:absolute;top:47px;left:50%;right:-50%;height:3px;background:linear-gradient(90deg,#5fa8d8,#22c55e);opacity:0.9;">&nbsp;</div>
@@ -696,7 +739,7 @@ Constraints:
 
         </div>
 
-        <div class="row justify-content-center mt-4 mt-lg-5 position-relative">
+        <div class="row d-none d-lg-flex justify-content-center mt-4 mt-lg-5 position-relative">
             <div class="col-lg-10">
                 <div class="p-4 rounded"
                      style="border-radius:1rem;background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.22);box-shadow:0 20px 48px rgba(23,32,51,0.34);backdrop-filter:blur(14px);">
@@ -739,7 +782,7 @@ Constraints:
                         </div>
 
                         <div class="col-md-3 text-md-right">
-                            <a href="#learn" class="btn btn-light rounded-pill font-weight-bold px-4 py-2" style="color:#172033;white-space:normal;min-height:44px;">
+                            <a href="user/user.html" class="btn btn-light rounded-pill font-weight-bold px-4 py-2" style="color:#172033;white-space:normal;min-height:44px;">
                                 <div style="color:#172033;">
                                     Continue Learning <i class="fa-solid fa-arrow-right ml-1" style="line-height:1;" aria-hidden="true">&#8203;</i>
                                 </div>
@@ -781,6 +824,317 @@ Constraints:
         target.removeAttribute('data-accessible-focus');
     });
 
+})();
+</script>
+
+<script>
+// Optional, accessible landing-page tour
+(function () {
+    var launcher = document.querySelector('[data-tour-start="true"]');
+    if (!launcher) { return; }
+
+    var steps = [
+        {
+            target: 'navigation',
+            title: 'Find your way around',
+            text: 'Use the main navigation to move between learning, challenges, community content and guidance for using AI responsibly at Bath.'
+        },
+        {
+            target: 'learning',
+            title: 'Build useful AI skills',
+            text: 'Learn AI offers practical guidance for study, employment and lifelong learning, so it is a good place to build confidence or start from the basics.'
+        },
+        {
+            target: 'challenges',
+            title: 'Put ideas into practice',
+            text: 'Challenges are focused activities and competitions that help you test techniques, solve problems and turn new knowledge into repeatable skills.'
+        },
+        {
+            target: 'community',
+            title: 'Learn with the community',
+            text: 'Community is where students share prompts, workflows, projects and ideas, making it useful when you want inspiration or a different perspective.'
+        },
+        {
+            target: 'guidance',
+            title: 'Use AI responsibly at Bath',
+            text: 'Using AI at Bath brings together University guidance, policies and good practice, so you can check what responsible and appropriate AI use looks like for your work.'
+        },
+        {
+            target: 'featured',
+            title: 'Discover what is featured',
+            text: 'Featured This Week brings timely resources and activities together, so you can quickly find a useful next step without searching the whole site.'
+        },
+        {
+            target: 'journey',
+            title: 'Climb the hill with XP',
+            text: 'As you complete learning and challenges and contribute to the community, you will earn XP that marks your progress as you climb the hill through Bath and beyond.'
+        }
+    ];
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var activeSteps = [];
+    var stepIndex = 0;
+    var isOpen = false;
+    var panels = [];
+    var highlight;
+    var dialog;
+    var title;
+    var description;
+    var progress;
+    var backButton;
+    var nextButton;
+    var closeButton;
+    var previousDocumentOverflow = '';
+    var previousBodyOverflow = '';
+    var previousBodyPaddingRight = '';
+    var previousDocumentOverscroll = '';
+    var previousBodyOverscroll = '';
+    var repositionTimer;
+
+    function makeElement(tag, attributes, styles) {
+        var element = document.createElement(tag);
+        Object.keys(attributes || {}).forEach(function (name) {
+            if (name === 'text') { element.textContent = attributes[name]; }
+            else { element.setAttribute(name, attributes[name]); }
+        });
+        Object.keys(styles || {}).forEach(function (name) { element.style[name] = styles[name]; });
+        return element;
+    }
+
+    function targetFor(step) {
+        return document.querySelector('[data-tour-target="' + step.target + '"]');
+    }
+
+    function isVisible(element) {
+        if (!element) { return false; }
+        var style = window.getComputedStyle(element);
+        var rect = element.getBoundingClientRect();
+        return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+    }
+
+    function createTour() {
+        var overlayStyles = {
+            position: 'fixed', background: 'rgba(11,25,43,.78)', zIndex: '1050', pointerEvents: 'auto'
+        };
+        for (var i = 0; i < 4; i++) {
+            panels[i] = makeElement('div', { 'aria-hidden': 'true', 'data-tour-overlay': String(i) }, overlayStyles);
+            document.body.appendChild(panels[i]);
+        }
+
+        highlight = makeElement('div', { 'aria-hidden': 'true', 'data-tour-highlight': 'true' }, {
+            position: 'fixed', zIndex: '1051', borderRadius: '.75rem', pointerEvents: 'auto',
+            transition: reducedMotion ? 'none' : 'top .18s ease,left .18s ease,width .18s ease,height .18s ease'
+        });
+        document.body.appendChild(highlight);
+
+        dialog = makeElement('div', {
+            role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'site-tour-title',
+            'aria-describedby': 'site-tour-description', 'data-tour-dialog': 'true'
+        }, {
+            position: 'fixed', zIndex: '1052', width: 'min(400px,calc(100vw - 2rem))', maxHeight: 'calc(100vh - 2rem)',
+            overflowY: 'auto', background: '#ffffff', color: '#172033', border: '1px solid #d8e2ee', borderRadius: '1rem',
+            boxShadow: '0 20px 60px rgba(0,0,0,.35)', padding: '1.25rem', transition: reducedMotion ? 'none' : 'opacity .18s ease'
+        });
+
+        var headingRow = makeElement('div', {}, { display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem' });
+        title = makeElement('h2', { id: 'site-tour-title' }, { fontSize: '1.35rem', margin: '0', color: '#094685', lineHeight: '1.25' });
+        closeButton = makeElement('button', { type: 'button', 'aria-label': 'Skip and close site tour', text: 'Close' }, {
+            border: '0', background: 'transparent', color: '#094685', minWidth: '44px', minHeight: '44px', padding: '.25rem', fontWeight: '700'
+        });
+        headingRow.appendChild(title);
+        headingRow.appendChild(closeButton);
+        dialog.appendChild(headingRow);
+
+        progress = makeElement('p', { 'aria-live': 'polite', 'aria-atomic': 'true' }, {
+            margin: '.5rem 0', color: '#4f5962', fontWeight: '700', fontSize: '.9rem'
+        });
+        description = makeElement('p', { id: 'site-tour-description' }, { margin: '0 0 1rem', lineHeight: '1.55' });
+        dialog.appendChild(progress);
+        dialog.appendChild(description);
+
+        var controls = makeElement('div', {}, { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '.75rem', flexWrap: 'wrap' });
+        backButton = makeElement('button', { type: 'button', text: 'Back' }, { minHeight: '44px' });
+        backButton.className = 'btn btn-outline-primary px-3';
+        nextButton = makeElement('button', { type: 'button', text: 'Next' }, { minHeight: '44px', background: '#094685', borderColor: '#094685' });
+        nextButton.className = 'btn btn-primary px-4 ml-auto';
+        controls.appendChild(backButton);
+        controls.appendChild(nextButton);
+        dialog.appendChild(controls);
+        document.body.appendChild(dialog);
+
+        closeButton.addEventListener('click', function () { closeTour(true); });
+        backButton.addEventListener('click', function () { showStep(stepIndex - 1); });
+        nextButton.addEventListener('click', function () {
+            if (stepIndex === activeSteps.length - 1) { closeTour(false); }
+            else { showStep(stepIndex + 1); }
+        });
+    }
+
+    function setRect(element, top, left, width, height) {
+        element.style.top = Math.max(0, top) + 'px';
+        element.style.left = Math.max(0, left) + 'px';
+        element.style.width = Math.max(0, width) + 'px';
+        element.style.height = Math.max(0, height) + 'px';
+    }
+
+    function positionTour() {
+        if (!isOpen || !activeSteps.length) { return; }
+        var target = targetFor(activeSteps[stepIndex]);
+        if (!isVisible(target)) {
+            activeSteps.splice(stepIndex, 1);
+            if (!activeSteps.length) { closeTour(true); return; }
+            stepIndex = Math.min(stepIndex, activeSteps.length - 1);
+            renderStep();
+            return;
+        }
+
+        var viewportWidth = document.documentElement.clientWidth;
+        var viewportHeight = window.innerHeight;
+        var rect = target.getBoundingClientRect();
+        var gap = 8;
+        var left = Math.max(gap, rect.left - gap);
+        var top = Math.max(gap, rect.top - gap);
+        var right = Math.min(viewportWidth - gap, rect.right + gap);
+        var bottom = Math.min(viewportHeight - gap, rect.bottom + gap);
+
+        setRect(highlight, top, left, right - left, bottom - top);
+        setRect(panels[0], 0, 0, viewportWidth, top);
+        setRect(panels[1], bottom, 0, viewportWidth, viewportHeight - bottom);
+        setRect(panels[2], top, 0, left, bottom - top);
+        setRect(panels[3], top, right, viewportWidth - right, bottom - top);
+
+        dialog.style.bottom = 'auto';
+        if (viewportWidth < 576) {
+            dialog.style.left = '1rem';
+            dialog.style.top = 'auto';
+            dialog.style.bottom = '1rem';
+            dialog.style.width = 'calc(100vw - 2rem)';
+            return;
+        }
+
+        dialog.style.width = 'min(400px,calc(100vw - 2rem))';
+        var dialogRect = dialog.getBoundingClientRect();
+        var dialogLeft = Math.min(Math.max(16, left), viewportWidth - dialogRect.width - 16);
+        var below = bottom + 14;
+        var above = top - dialogRect.height - 14;
+        var dialogTop = below + dialogRect.height <= viewportHeight - 16 ? below : Math.max(16, above);
+        dialog.style.left = dialogLeft + 'px';
+        dialog.style.top = dialogTop + 'px';
+    }
+
+    function renderStep() {
+        var step = activeSteps[stepIndex];
+        title.textContent = step.title;
+        description.textContent = step.text;
+        progress.textContent = 'Step ' + (stepIndex + 1) + ' of ' + activeSteps.length;
+        backButton.disabled = stepIndex === 0;
+        backButton.setAttribute('aria-disabled', stepIndex === 0 ? 'true' : 'false');
+        nextButton.textContent = stepIndex === activeSteps.length - 1 ? 'Finish tour' : 'Next';
+        nextButton.setAttribute('aria-label', stepIndex === activeSteps.length - 1 ? 'Finish site tour' : 'Next tour step');
+        var target = targetFor(step);
+        var rect = target.getBoundingClientRect();
+        var needsScroll = rect.top < 16 || rect.bottom > window.innerHeight - (window.innerWidth < 576 ? 300 : 120);
+        if (needsScroll) {
+            target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: window.innerWidth < 576 ? 'start' : 'center', inline: 'nearest' });
+        }
+        window.clearTimeout(repositionTimer);
+        repositionTimer = window.setTimeout(positionTour, reducedMotion || !needsScroll ? 0 : 420);
+        nextButton.focus({ preventScroll: true });
+    }
+
+    function showStep(index) {
+        if (!isOpen || !activeSteps.length) { return; }
+        stepIndex = Math.max(0, Math.min(index, activeSteps.length - 1));
+        renderStep();
+    }
+
+    function startTour(event) {
+        activeSteps = steps.filter(function (step) { return isVisible(targetFor(step)); });
+        if (!activeSteps.length) { return; }
+        event.preventDefault();
+        if (isOpen) { return; }
+        isOpen = true;
+        stepIndex = 0;
+        previousDocumentOverflow = document.documentElement.style.overflow;
+        previousBodyOverflow = document.body.style.overflow;
+        previousBodyPaddingRight = document.body.style.paddingRight;
+        previousDocumentOverscroll = document.documentElement.style.overscrollBehavior;
+        previousBodyOverscroll = document.body.style.overscrollBehavior;
+        var scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+        if (scrollbarWidth) {
+            var bodyPadding = parseFloat(window.getComputedStyle(document.body).paddingRight) || 0;
+            document.body.style.paddingRight = (bodyPadding + scrollbarWidth) + 'px';
+        }
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overscrollBehavior = 'none';
+        document.body.style.overscrollBehavior = 'none';
+        createTour();
+        document.addEventListener('keydown', handleKeydown, true);
+        document.addEventListener('wheel', blockBackgroundScroll, { passive: false });
+        document.addEventListener('touchmove', blockBackgroundScroll, { passive: false });
+        window.addEventListener('resize', positionTour);
+        window.addEventListener('scroll', positionTour, true);
+        renderStep();
+    }
+
+    function blockBackgroundScroll(event) {
+        if (!dialog.contains(event.target)) { event.preventDefault(); }
+    }
+
+    function handleKeydown(event) {
+        if (!isOpen) { return; }
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            closeTour(true);
+            return;
+        }
+        if (!dialog.contains(document.activeElement) && ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].indexOf(event.key) !== -1) {
+            event.preventDefault();
+            return;
+        }
+        if (event.key !== 'Tab') { return; }
+        var focusable = Array.prototype.slice.call(dialog.querySelectorAll('button:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])'));
+        if (!focusable.length) { event.preventDefault(); dialog.focus(); return; }
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+
+    function closeTour(returnToLauncher) {
+        if (!isOpen) { return; }
+        isOpen = false;
+        window.clearTimeout(repositionTimer);
+        document.removeEventListener('keydown', handleKeydown, true);
+        document.removeEventListener('wheel', blockBackgroundScroll, { passive: false });
+        document.removeEventListener('touchmove', blockBackgroundScroll, { passive: false });
+        window.removeEventListener('resize', positionTour);
+        window.removeEventListener('scroll', positionTour, true);
+        document.documentElement.style.overflow = previousDocumentOverflow;
+        document.body.style.overflow = previousBodyOverflow;
+        document.body.style.paddingRight = previousBodyPaddingRight;
+        document.documentElement.style.overscrollBehavior = previousDocumentOverscroll;
+        document.body.style.overscrollBehavior = previousBodyOverscroll;
+        panels.forEach(function (panel) { panel.remove(); });
+        highlight.remove();
+        dialog.remove();
+        panels = [];
+        if (returnToLauncher) {
+            launcher.focus();
+        } else {
+            var featured = targetFor(steps[steps.length - 1]);
+            if (featured) {
+                var hadTabindex = featured.hasAttribute('tabindex');
+                var oldTabindex = featured.getAttribute('tabindex');
+                featured.setAttribute('tabindex', '-1');
+                featured.focus({ preventScroll: true });
+                if (hadTabindex) { featured.setAttribute('tabindex', oldTabindex); }
+                else { featured.removeAttribute('tabindex'); }
+            }
+        }
+    }
+
+    launcher.addEventListener('click', startTour);
 })();
 </script>
 
