@@ -435,13 +435,13 @@ Constraints:
          rgba(18,63,112,0.64)),
          url('https://willcrook.github.io/GenAI-Hub/assets/learn/images/learning-journey-background.webp')
          center/cover;
-         min-height:520px;">
+         height:clamp(36rem,78svh,42.5rem);">
 
-        <div class="row h-100 align-items-center">
+        <div style="box-sizing:border-box;height:100%;width:100%;max-width:880px;margin:0 auto;padding:clamp(1.5rem,4vw,3rem);color:#ffffff;">
 
-            <div class="col-12 col-lg-8 mx-auto p-4 p-md-5 text-white">
+            <div style="height:100%;">
                 <div id="pathContent"
-                     style="min-height:360px;display:flex;flex-direction:column;justify-content:center;">
+                    style="box-sizing:border-box;height:100%;display:flex;flex-direction:column;justify-content:flex-start;padding-top:clamp(1rem,7vh,5rem);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;">
 
                     <div class="text-uppercase mb-3"
                         style="
@@ -453,7 +453,7 @@ Constraints:
 
                     </div>
 
-                    <h2 class="display-4 font-weight-bold mb-3">
+                    <h2 class="display-4 font-weight-bold mb-3" style="max-width:620px;">
                         Not sure where to begin?
                     </h2>
 
@@ -466,63 +466,53 @@ Constraints:
 
                     </p>
 
-                    <div class="d-flex flex-column flex-sm-row align-items-start">
+                    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;max-width:550px;">
 
                         <button id="startPathQuiz"
-                            class="btn btn-light btn-lg px-4 rounded-pill font-weight-bold mr-sm-3 mb-3 mb-sm-0">
+                            class="btn btn-light btn-lg rounded-pill font-weight-bold"
+                            style="flex:1 1 220px;width:100%;min-height:54px;">
                             Find My Learning Path
                         </button>
 
                         <a href="#featured"
-                        class="btn btn-outline-light btn-lg px-4 rounded-pill" data-inner-link-color="#f8f9fa" data-inner-link-hover-color="#212529">
-                            <div style="color:#f8f9fa;">
-                                Browse All Resources
-                            </div>
+                        class="btn btn-outline-light btn-lg rounded-pill" data-inner-link-color="#f8f9fa" data-inner-link-hover-color="#212529"
+                        style="flex:1 1 220px;width:100%;min-height:54px;display:flex;align-items:center;justify-content:center;color:#f8f9fa;">
+                            Browse All Resources
                         </a>
                     </div>
                 </div>
 
                 <div id="quizContainer"
 
-                    class="text-white"
-
-                    style="display:none;min-height:360px;align-items:center;justify-content:center;">
+                    style="display:none;height:100%;align-items:center;justify-content:center;">
 
                     <div id="pathQuiz"
-
-                        class="p-4 rounded"
-
                         style="
-
                         display:none;
-
+                        box-sizing:border-box;
+                        display:none;
                         background:rgba(255,255,255,0.1);
-
                         backdrop-filter:blur(10px);
-
-                        min-height:360px;
-
+                        height:100%;
                         width:100%;
-
                         max-width:720px;
-
+                        width:100%;
+                        max-width:720px;
                         margin:auto;">
 
-                        <h3 class="h4 font-weight-bold mb-3">
-
-                            Find Your AI Learning Path
-
-                        </h3>
-
-                        <div id="questionContainer" style="min-height:260px;"></div>
+                        <div style="box-sizing:border-box;height:100%;display:flex;flex-direction:column;padding:clamp(1.25rem,3vw,2rem);">
+                            <div id="quizHeader" style="display:grid;grid-template-columns:minmax(7rem,1fr) auto minmax(7rem,1fr);align-items:center;min-height:44px;column-gap:0.5rem;">
+                                <button id="quizNavigation" class="btn btn-link text-white p-0 text-left" type="button" style="justify-self:start;min-height:44px;visibility:hidden;" aria-hidden="true" tabindex="-1"></button>
+                                <div id="quizProgress" class="text-uppercase text-center" style="letter-spacing:1.4px;font-size:0.75rem;opacity:0.82;white-space:nowrap;"></div>
+                            </div>
+                            <div id="questionContainer" style="flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-top:clamp(1rem,3vh,1.75rem);"></div>
+                        </div>
 
                     </div>
 
                 </div>
 
             </div>
-
-        </div>
 
     </div>
 
@@ -774,6 +764,8 @@ Constraints:
         pathContent: document.getElementById("pathContent"),
         quizContainer: document.getElementById("quizContainer"),
         pathQuiz: document.getElementById("pathQuiz"),
+        quizNavigation: document.getElementById("quizNavigation"),
+        quizProgress: document.getElementById("quizProgress"),
         questionContainer: document.getElementById("questionContainer"),
         startPathQuiz: document.getElementById("startPathQuiz")
     };
@@ -833,18 +825,11 @@ Constraints:
         }
     ];
 
-    const foundationSteps = [
-        "AI Foundations",
-        "Working with AI",
-        "Learning Paths"
-    ];
-
     const recommendationPaths = {
         academic: {
             pathway: "academic",
             accent: "#15803D",
             title: "Academic Skills Path",
-            finalStep: "Academic Learning Resources",
             topics: [
                 "Prompting",
                 "Revision",
@@ -855,7 +840,6 @@ Constraints:
             pathway: "workplace",
             accent: "#2563EB",
             title: "Workplace Skills Path",
-            finalStep: "Workplace Learning Resources",
             topics: [
                 "CVs",
                 "Interviews",
@@ -866,7 +850,6 @@ Constraints:
             pathway: "lifelong",
             accent: "#7C3AED",
             title: "Lifelong Learning Path",
-            finalStep: "Lifelong Learning Resources",
             topics: [
                 "Automation",
                 "New Technologies",
@@ -887,15 +870,25 @@ Constraints:
         }
     }
 
-    function renderCenteredPanel(label, heading, bodyHtml) {
+    function setQuizHeader(actionLabel, progressLabel, actionVisible) {
+        elements.quizProgress.textContent = progressLabel;
+        elements.quizNavigation.innerHTML = actionLabel
+            ? `<i class="fa-solid fa-arrow-left mr-2" style="line-height:1;" aria-hidden="true">&#8203;</i>${actionLabel}`
+            : EMPTY_HTML;
+        elements.quizNavigation.style.visibility = actionVisible ? "visible" : "hidden";
+        elements.quizNavigation.setAttribute("aria-hidden", String(!actionVisible));
+        elements.quizNavigation.tabIndex = actionVisible ? 0 : -1;
+    }
+
+    function renderQuestionPanel(label, heading, bodyHtml) {
         return `
-        <div class="col-lg-8 mx-auto text-center">
+        <div style="width:100%;max-width:560px;margin:0 auto;text-align:center;">
             <div class="text-uppercase mb-3"
                  style="letter-spacing:2px;font-size:0.8rem;opacity:0.8;">
                 ${label}
             </div>
 
-            <h2 class="display-4 font-weight-bold mb-4">
+            <h2 class="font-weight-bold mb-4" style="display:flex;align-items:center;justify-content:center;height:7rem;font-size:clamp(1.75rem,5vw,2.8rem);line-height:1.15;">
                 ${heading}
             </h2>
 
@@ -904,10 +897,12 @@ Constraints:
     }
 
     function renderAnswerButtons(options) {
+        const selectedAnswer = quizState.answers[quizState.currentQuestionIndex];
+
         return `
-            <div class="d-flex flex-column mb-3">
+            <div style="display:flex;flex-direction:column;gap:0.75rem;">
                 ${options.map(option => `
-                    <button class="btn btn-outline-light btn-lg mb-2" data-answer-button="true">
+                    <button class="btn btn-outline-light btn-lg${option === selectedAnswer ? ' active' : ''}" data-answer-button="true" aria-pressed="${option === selectedAnswer}" style="width:100%;min-height:56px;white-space:normal;">
                         ${option}
                     </button>
                 `).join(EMPTY_HTML)}
@@ -917,7 +912,13 @@ Constraints:
     function renderQuestion() {
         const currentQuestion = quizQuestions[quizState.currentQuestionIndex];
 
-        elements.questionContainer.innerHTML = renderCenteredPanel(
+        setQuizHeader(
+            "Back",
+            `Question ${quizState.currentQuestionIndex + 1} of ${quizQuestions.length}`,
+            quizState.currentQuestionIndex > 0
+        );
+
+        elements.questionContainer.innerHTML = renderQuestionPanel(
             quizCopy.questionLabel,
             currentQuestion.question,
             renderAnswerButtons(currentQuestion.options)
@@ -926,20 +927,14 @@ Constraints:
         elements.questionContainer.querySelectorAll('[data-answer-button="true"]').forEach(button => {
             button.addEventListener("click", () => handleAnswerSelection(button.textContent.trim()));
         });
+
+        elements.questionContainer.scrollTop = 0;
+
     }
 
     function renderRecommendation(recommendation) {
-        const stepsHtml = `
-            <div class="mb-4">
-                ${recommendation.steps.map((step, index) => `
-                    <div class="mb-3">
-                        ${index + 1}. ${step}
-                    </div>
-                `).join(EMPTY_HTML)}
-            </div>`;
-
         const topicsHtml = `
-            <div class="mb-4">
+            <div class="mb-4" style="text-align:left;">
                 <div class="font-weight-bold mb-3">
                     ${quizCopy.recommendedTopicsLabel}
                 </div>
@@ -953,15 +948,19 @@ Constraints:
 
         const buttonHtml = `
             <button class="btn btn-lg rounded-pill font-weight-bold" data-pathway="${recommendation.pathway}"
-                    style="background:${recommendation.accent};border-color:${recommendation.accent};color:#ffffff;box-shadow:0 12px 28px ${recommendation.pathway === 'academic' ? 'rgba(21,128,61,0.28)' : recommendation.pathway === 'workplace' ? 'rgba(37,143,235,0.28)' : 'rgba(124,58,237,0.28)'};">
+                    style="width:100%;min-height:56px;background:${recommendation.accent};border-color:${recommendation.accent};color:#ffffff;box-shadow:0 12px 28px ${recommendation.pathway === 'academic' ? 'rgba(21,128,61,0.28)' : recommendation.pathway === 'workplace' ? 'rgba(37,143,235,0.28)' : 'rgba(124,58,237,0.28)'};">
                 ${quizCopy.startLearningLabel}
             </button>`;
 
-        elements.questionContainer.innerHTML = renderCenteredPanel(
+        setQuizHeader("Change answers", quizCopy.recommendationLabel, true);
+
+        elements.questionContainer.innerHTML = renderQuestionPanel(
             quizCopy.recommendationLabel,
             recommendation.title,
-            stepsHtml + topicsHtml + buttonHtml
+            topicsHtml + buttonHtml
         );
+
+        elements.questionContainer.scrollTop = 0;
     }
 
     function startQuiz() {
@@ -976,7 +975,8 @@ Constraints:
     }
 
     function handleAnswerSelection(answer) {
-        quizState.answers.push(answer);
+        quizState.answers[quizState.currentQuestionIndex] = answer;
+        quizState.answers = quizState.answers.slice(0, quizState.currentQuestionIndex + 1);
         quizState.currentQuestionIndex++;
 
         if (quizState.currentQuestionIndex < quizQuestions.length) {
@@ -987,22 +987,29 @@ Constraints:
         renderRecommendation(getRecommendation(quizState.answers));
     }
 
+    function handleBack() {
+        quizState.currentQuestionIndex--;
+        renderQuestion();
+    }
+
+    function handleQuizNavigation() {
+        if (quizState.currentQuestionIndex === quizQuestions.length) {
+            quizState.currentQuestionIndex = quizQuestions.length - 1;
+            renderQuestion();
+            return;
+        }
+
+        handleBack();
+    }
+
     // Recommendation logic
     function getRecommendation(answers) {
-        const experienceAnswer = answers[0];
         const goalAnswer = answers[1];
-        const basicsAnswer = answers[2];
         const recommendationPath = getRecommendationPath(goalAnswer);
-        const needsFoundation = (
-            experienceAnswer === quizOptions.experience.newToAi ||
-            basicsAnswer === quizOptions.basics.no
-        );
-
         return {
             pathway: recommendationPath.pathway,
             accent: recommendationPath.accent,
             title: recommendationPath.title,
-            steps: buildRecommendedSteps(recommendationPath.finalStep, needsFoundation),
             topics: recommendationPath.topics
         };
     }
@@ -1019,21 +1026,14 @@ Constraints:
         return recommendationPaths.lifelong;
     }
 
-    function buildRecommendedSteps(finalStep, includeFoundationSteps) {
-        if (includeFoundationSteps) {
-            return foundationSteps.concat(finalStep);
-        }
-
-        return [
-            "Learning Paths",
-            finalStep
-        ];
-    }
-
     // Connects the quiz launcher after all quiz state and renderers are ready.
     function initialiseQuiz() {
         if (elements.startPathQuiz) {
             elements.startPathQuiz.addEventListener("click", startQuiz);
+        }
+
+        if (elements.quizNavigation) {
+            elements.quizNavigation.addEventListener("click", handleQuizNavigation);
         }
     }
 
