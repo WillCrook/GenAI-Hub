@@ -740,6 +740,201 @@ Constraints:
 </main>
 
 <script>
+// Resource-card popouts: the existing hard-coded cards remain the source of truth until JSON rendering is added.
+(function () {
+    var resourceSections = ['student-showcase', 'prompt-library', 'workflow-library', 'tool-reviews', 'community-events'];
+    var cards = [];
+    var activePopout;
+    var previouslyFocused;
+    var previousBodyOverflow;
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function addCard(card) {
+        if (!card || cards.indexOf(card) !== -1) return;
+        card.setAttribute('data-resource-popout', 'true');
+        card.setAttribute('aria-haspopup', 'dialog');
+        if (card.tagName !== 'A' && card.tagName !== 'BUTTON') {
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.addEventListener('keydown', function (event) {
+                if (event.key !== 'Enter' && event.key !== ' ') return;
+                event.preventDefault();
+                openPopout(card);
+            });
+        }
+        card.addEventListener('click', function (event) {
+            event.preventDefault();
+            openPopout(card);
+        });
+        cards.push(card);
+    }
+
+    function findCards() {
+        for (var i = 0; i < resourceSections.length; i += 1) {
+            var section = document.getElementById(resourceSections[i]);
+            if (!section) continue;
+            var resourceCards = section.querySelectorAll('[data-hover-card="true"]');
+            for (var j = 0; j < resourceCards.length; j += 1) addCard(resourceCards[j]);
+        }
+        var featuredEvent = document.querySelector('#community-events a[href="https://unihub.bath.ac.uk/students/events/Detail/1403582"]');
+        addCard(featuredEvent);
+    }
+
+    function getTargetRect() {
+        var inset = window.innerWidth < 576 ? 12 : 24;
+        return {
+            left: inset,
+            top: inset,
+            width: Math.min(960, window.innerWidth - (inset * 2)),
+            height: Math.min(800, window.innerHeight - (inset * 2))
+        };
+    }
+
+    function applyRect(element, rect) {
+        element.style.left = rect.left + 'px';
+        element.style.top = rect.top + 'px';
+        element.style.width = rect.width + 'px';
+        element.style.height = rect.height + 'px';
+    }
+
+    function animate(element, from, to, done) {
+        applyRect(element, from);
+        if (reducedMotion.matches || !element.animate) {
+            applyRect(element, to);
+            if (done) done();
+            return;
+        }
+        var animation = element.animate([
+            { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', borderRadius: '12px' },
+            { left: to.left + 'px', top: to.top + 'px', width: to.width + 'px', height: to.height + 'px', borderRadius: '16px' }
+        ], { duration: 340, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+        animation.onfinish = function () {
+            applyRect(element, to);
+            if (done) done();
+        };
+    }
+
+    function getFocusable(container) {
+        return Array.prototype.slice.call(container.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+    }
+
+    function handleKeydown(event) {
+        if (!activePopout) return;
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            closePopout();
+            return;
+        }
+        if (event.key !== 'Tab') return;
+        var focusable = getFocusable(activePopout.dialog);
+        if (!focusable.length) return;
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    }
+
+    function createDialog(sourceCard) {
+        var dialog = document.createElement('div');
+        var header = document.createElement('div');
+        var title = sourceCard.querySelector('h2, h3, h4');
+        var heading = document.createElement('h2');
+        var close = document.createElement('button');
+        var body = document.createElement('div');
+        var clone = sourceCard.cloneNode(true);
+        var ids = clone.querySelectorAll('[id]');
+
+        dialog.setAttribute('role', 'dialog');
+        dialog.setAttribute('aria-modal', 'true');
+        dialog.setAttribute('aria-labelledby', 'resource-popout-title');
+        dialog.style.cssText = 'position:fixed;z-index:1050;display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#0f172a;border:1px solid #dee2e6;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,0.28);';
+
+        header.style.cssText = 'display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:1.25rem 1.25rem 1rem;background:linear-gradient(135deg,#094685,#111827);border-top:6px solid #f5c242;color:#fff;';
+        heading.id = 'resource-popout-title';
+        heading.className = 'h3 font-weight-bold mb-0';
+        heading.style.lineHeight = '1.15';
+        heading.textContent = title ? title.textContent : 'Community resource';
+        close.type = 'button';
+        close.setAttribute('data-resource-popout-close', 'true');
+        close.className = 'btn btn-light rounded-pill font-weight-bold px-3 py-2';
+        close.style.cssText += 'min-height:40px;white-space:nowrap;flex-shrink:0;';
+        close.innerHTML = '<i class="fa-solid fa-xmark mr-2" aria-hidden="true">&#8203;</i>Close';
+        close.addEventListener('click', closePopout);
+        header.appendChild(heading);
+        header.appendChild(close);
+
+        for (var i = 0; i < ids.length; i += 1) ids[i].removeAttribute('id');
+        clone.removeAttribute('id');
+        clone.removeAttribute('data-resource-popout');
+        clone.removeAttribute('aria-haspopup');
+        clone.style.width = '100%';
+        clone.style.height = 'auto';
+        clone.style.flexShrink = '0';
+        body.style.cssText = 'overflow:auto;min-height:0;padding:1.25rem;';
+        body.appendChild(clone);
+        dialog.appendChild(header);
+        dialog.appendChild(body);
+        return { dialog: dialog, close: close };
+    }
+
+    function openPopout(sourceCard) {
+        if (activePopout) closePopout(true);
+        previouslyFocused = sourceCard;
+        var sourceRect = sourceCard.getBoundingClientRect();
+        var startRect = { left: sourceRect.left, top: sourceRect.top, width: sourceRect.width, height: sourceRect.height };
+        var backdrop = document.createElement('div');
+        var built = createDialog(sourceCard);
+
+        backdrop.setAttribute('data-resource-popout-backdrop', 'true');
+        backdrop.style.cssText = 'position:fixed;inset:0;z-index:1040;background:rgba(8,41,71,0);transition:' + (reducedMotion.matches ? 'none' : 'background-color .24s ease') + ';';
+        backdrop.addEventListener('click', closePopout);
+        document.body.appendChild(backdrop);
+        document.body.appendChild(built.dialog);
+        previousBodyOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        sourceCard.style.opacity = '0';
+        sourceCard.style.pointerEvents = 'none';
+        activePopout = { backdrop: backdrop, dialog: built.dialog, sourceCard: sourceCard, startRect: startRect };
+        document.addEventListener('keydown', handleKeydown);
+
+        window.requestAnimationFrame(function () {
+            if (!activePopout) return;
+            backdrop.style.background = 'rgba(8,41,71,0.76)';
+            animate(built.dialog, startRect, getTargetRect(), function () { built.close.focus(); });
+        });
+    }
+
+    function closePopout(immediate) {
+        if (!activePopout) return;
+        var popout = activePopout;
+        activePopout = null;
+        document.removeEventListener('keydown', handleKeydown);
+        popout.backdrop.style.background = 'rgba(8,41,71,0)';
+
+        function finish() {
+            if (popout.dialog.parentNode) popout.dialog.parentNode.removeChild(popout.dialog);
+            if (popout.backdrop.parentNode) popout.backdrop.parentNode.removeChild(popout.backdrop);
+            popout.sourceCard.style.opacity = '';
+            popout.sourceCard.style.pointerEvents = '';
+            document.body.style.overflow = previousBodyOverflow;
+            if (previouslyFocused && previouslyFocused.focus) previouslyFocused.focus();
+            previouslyFocused = null;
+        }
+
+        if (immediate) { finish(); return; }
+        animate(popout.dialog, getTargetRect(), popout.startRect, finish);
+    }
+
+    findCards();
+})();
+</script>
+
+<script>
 // Mobile-only outer-card flattening. Inner resource cards and controls remain untouched.
 (function () {
     var mobileQuery = window.matchMedia('(max-width: 767.98px)');
