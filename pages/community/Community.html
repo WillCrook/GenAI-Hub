@@ -748,10 +748,48 @@ Constraints:
     var previouslyFocused;
     var previousBodyOverflow;
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var resourceDetails = {
+        'student-showcase': {
+            'AI Study Coach Prototype': { story: 'A lightweight revision companion that turns course topics into questions, confidence checks and sensible next steps.', tools: ['Claude for guided questions', 'Structured document prompts'], outcome: 'Produces revision checks and a clear plan for what to revisit next.' },
+            'Lab Notes to Action Plan': { story: 'A simple automation for turning unstructured meeting notes into accountable follow-up work.', tools: ['AI note analysis', 'Task template'], outcome: 'Separates actions, owners, risks and decisions for an easier handover.' },
+            'Prompt Debugging Notebook': { story: 'A repeatable test log for comparing prompt wording, outputs and model behaviour.', tools: ['Versioned prompts', 'Test observations'], outcome: 'Makes it easier to spot what changed and improve a prompt deliberately.' },
+            'Responsible Research Workflow': { story: 'A transparent approach to planning, checking and citing AI-supported research.', tools: ['Research checklist', 'Citation checks'], outcome: 'Keeps the student in control of evidence, attribution and final judgement.' },
+            'Placement Brief Builder': { story: 'A structured way to turn placement tasks into clear, shareable briefs.', tools: ['Brief template', 'Planning prompts'], outcome: 'Creates a focused outline with scope, milestones and next actions.' }
+        },
+        'prompt-library': {
+            'Socratic Revision Partner': { prompt: 'Act as a Socratic revision partner. Ask me one short question at a time about [topic]. Wait for my answer, point out any gap kindly, then ask the next question. Do not give the answer until I have tried.', setup: 'Use with your own lecture notes and a single topic at a time.', guidance: ['Check important explanations against course materials.', 'Ask for a recap of weak areas at the end.'] },
+            'Explain This Error': { prompt: 'Explain this error in plain English: [paste error]. Show the smallest likely fix, explain why it works, and suggest one test I can run. Do not rewrite unrelated code.', setup: 'Paste the exact error and the smallest relevant code example.', guidance: ['Remove confidential data before sharing code.', 'Run the suggested test yourself.'] },
+            'Structure Feedback': { prompt: 'Review this draft for clarity, logical flow and argument structure. Identify the strongest point, the biggest gap, and three specific improvements. Do not rewrite the whole piece: explain the changes I should make.', setup: 'Share a draft and state the assignment question or purpose.', guidance: ['Keep your own academic voice.', 'Use feedback as suggestions, not final judgement.'] },
+            'Compare Sources': { prompt: 'Compare these sources on their main claim, supporting evidence, areas of agreement, disagreement and limitations. Present a short table, then suggest questions I should investigate further.', setup: 'Provide source excerpts or reliable links you have already checked.', guidance: ['Read the original sources before citing them.', 'Verify publication dates and authorship.'] },
+            'Plan My Week': { prompt: 'Help me plan a realistic week around these deadlines and commitments: [list]. Break work into small tasks, suggest focused study blocks, include breaks, and flag anything that looks unrealistic.', setup: 'Include fixed commitments, deadlines and the time you actually have.', guidance: ['Treat the plan as flexible.', 'Review and adjust it each day.'] },
+            'Meeting Follow-up': { prompt: 'Turn these meeting notes into a concise follow-up. List decisions, actions with owners, open questions and the next meeting preparation. Do not invent information that is not in the notes.', setup: 'Paste cleaned notes and identify attendees if owners are named.', guidance: ['Check named owners before sending.', 'Keep sensitive meeting information private.'] },
+            'Reflect on Feedback': { prompt: 'Help me reflect on this feedback. Separate strengths, improvement points and questions to ask. Suggest two practical learning goals and one small action for my next attempt.', setup: 'Paste feedback alongside the task criteria where possible.', guidance: ['Focus on actions you can control.', 'Discuss unclear feedback with your tutor.'] }
+        },
+        'workflow-library': {
+            'Literature Review Assistant': { steps: ['Collect and label sources', 'Summarise key claims', 'Compare evidence and gaps', 'Draft a checked synthesis'], advice: 'Use AI to organise your reading, then verify claims and citations against every original source.' },
+            'Revision Planner': { steps: ['List topics and deadlines', 'Identify confidence gaps', 'Create short revision blocks', 'Review progress and adjust'], advice: 'Keep sessions realistic and use active recall rather than relying on generated summaries alone.' },
+            'Meeting Notes to Action Items': { steps: ['Capture decisions and notes', 'Extract actions and owners', 'Check priorities and deadlines', 'Share the agreed follow-up'], advice: 'Confirm actions with attendees before treating an AI summary as the final record.' },
+            'Coding Helper': { steps: ['Describe the problem', 'Share the smallest reproducible example', 'Request a minimal explanation or fix', 'Run and test the change'], advice: 'Understand and test every suggestion; never paste secrets or production data into a tool.' }
+        },
+        'tool-reviews': {
+            'NotebookLM': { rating: '4.8/5', verdict: 'Students value it for working directly with supplied source material and generating revision questions.', bestFor: ['Revision from course materials', 'Document summaries'], limits: ['Check every generated claim', 'Source quality still determines output quality'] },
+            'ChatGPT': { rating: '4.7/5', verdict: 'A flexible starting point for brainstorming, writing support and coding explanations.', bestFor: ['Idea generation', 'Writing and code support'], limits: ['Can sound confident when wrong', 'Needs clear prompts and checking'] },
+            'Microsoft Copilot': { rating: '4.5/5', verdict: 'Useful for productivity tasks when your work already happens in Microsoft tools.', bestFor: ['Emails and documents', 'Presentation support'], limits: ['Check organisational guidance', 'Review generated wording before sharing'] },
+            'Perplexity': { rating: '4.6/5', verdict: 'Helpful for research exploration when used as a route into sources rather than a final authority.', bestFor: ['Finding starting points', 'Comparing source-backed answers'], limits: ['Open and assess cited sources', 'Do not treat summaries as evidence'] }
+        },
+        'community-events': {
+            'Prompting for Coursework Planning': { details: ['Hands-on planning and reflection templates', 'Designed for responsible coursework support'], bring: ['A current task or deadline', 'Questions about your own planning process'] },
+            'AI Skills in Graduate Careers': { details: ['Employer and alumni perspectives', 'Practical discussion of early-career AI skills'], bring: ['Questions about careers', 'Examples of skills you want to develop'] },
+            'One-Hour Automation Sprint': { details: ['Build one small, useful automation', 'Suitable for study, society or placement tasks'], bring: ['A repetitive task to improve', 'A laptop if available'] },
+            'Community Show and Tell': { details: ['Share a project, experiment or lesson learned', 'Learn what other students have made reusable'], bring: ['A short example to share', 'Curiosity and constructive feedback'] },
+            'AI Confidence Clinic': { details: ['Informal practical support', 'Space to explore responsible AI habits'], bring: ['Questions from your current work', 'A note of any tools or tasks you want to discuss'] }
+        }
+    };
 
-    function addCard(card) {
+    function addCard(card, library) {
         if (!card || cards.indexOf(card) !== -1) return;
         card.setAttribute('data-resource-popout', 'true');
+        card.setAttribute('data-resource-library', library);
         card.setAttribute('aria-haspopup', 'dialog');
         if (card.tagName !== 'A' && card.tagName !== 'BUTTON') {
             card.setAttribute('role', 'button');
@@ -774,10 +812,10 @@ Constraints:
             var section = document.getElementById(resourceSections[i]);
             if (!section) continue;
             var resourceCards = section.querySelectorAll('[data-hover-card="true"]');
-            for (var j = 0; j < resourceCards.length; j += 1) addCard(resourceCards[j]);
+            for (var j = 0; j < resourceCards.length; j += 1) addCard(resourceCards[j], resourceSections[i]);
         }
         var featuredEvent = document.querySelector('#community-events a[href="https://unihub.bath.ac.uk/students/events/Detail/1403582"]');
-        addCard(featuredEvent);
+        addCard(featuredEvent, 'community-events');
     }
 
     function getTargetRect() {
@@ -839,6 +877,184 @@ Constraints:
         }
     }
 
+    function makeElement(tag, className, text) {
+        var element = document.createElement(tag);
+        if (className) element.className = className;
+        if (text) element.textContent = text;
+        return element;
+    }
+
+    function createPanel(title) {
+        var panel = makeElement('section', 'p-3 mb-3 border');
+        panel.style.cssText = 'background:#f8fafc;border-radius:12px;border-color:#d8e2ee!important;';
+        var heading = makeElement('h3', 'h6 font-weight-bold mb-2', title);
+        heading.style.color = '#094685';
+        panel.appendChild(heading);
+        return panel;
+    }
+
+    function appendList(panel, items) {
+        var list = makeElement('ul', 'mb-0 pl-3');
+        for (var i = 0; i < items.length; i += 1) list.appendChild(makeElement('li', 'mb-2', items[i]));
+        panel.appendChild(list);
+    }
+
+    function appendKeyValue(panel, label, value) {
+        var item = makeElement('div', 'mb-3');
+        item.appendChild(makeElement('strong', 'd-block', label));
+        var text = makeElement('span', 'text-muted', value);
+        text.style.color = '#4f5962';
+        item.appendChild(text);
+        panel.appendChild(item);
+    }
+
+    function copyPrompt(text, feedback) {
+        function done(message) { feedback.textContent = message; }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () { done('Prompt copied.'); }).catch(function () { done('Copy failed. Select the prompt text manually.'); });
+            return;
+        }
+        var area = document.createElement('textarea');
+        area.value = text;
+        area.setAttribute('readonly', 'readonly');
+        area.style.cssText = 'position:fixed;left:-9999px;top:0;';
+        document.body.appendChild(area);
+        area.select();
+        try { document.execCommand('copy'); done('Prompt copied.'); } catch (error) { done('Copy failed. Select the prompt text manually.'); }
+        document.body.removeChild(area);
+    }
+
+    function createShowcaseDetails(detail) {
+        var row = makeElement('div', 'row');
+        var left = makeElement('div', 'col-lg-7');
+        var right = makeElement('div', 'col-lg-5');
+        var story = createPanel('Project story');
+        appendKeyValue(story, 'Approach', detail.story);
+        appendKeyValue(story, 'Outcome', detail.outcome);
+        left.appendChild(story);
+        var tools = createPanel('Tools used');
+        appendList(tools, detail.tools);
+        right.appendChild(tools);
+        row.appendChild(left);
+        row.appendChild(right);
+        return row;
+    }
+
+    function createPromptDetails(detail) {
+        var row = makeElement('div', 'row');
+        var left = makeElement('div', 'col-lg-7');
+        var right = makeElement('div', 'col-lg-5');
+        var promptPanel = createPanel('Prompt');
+        var prompt = makeElement('pre', 'p-3 mb-3');
+        prompt.style.cssText = 'white-space:pre-wrap;overflow:auto;background:#fff;border:1px solid #dee2e6;border-radius:10px;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9rem;';
+        prompt.textContent = detail.prompt;
+        var actions = makeElement('div', 'd-flex flex-wrap align-items-center');
+        var copy = makeElement('button', 'btn btn-primary rounded-pill font-weight-bold px-3 py-2', 'Copy Prompt');
+        copy.type = 'button';
+        copy.style.cssText = 'background:#094685;border-color:#094685;';
+        var feedback = makeElement('span', 'ml-3 font-weight-bold');
+        feedback.setAttribute('role', 'status');
+        feedback.setAttribute('aria-live', 'polite');
+        feedback.style.color = '#5f4300';
+        copy.addEventListener('click', function () { copyPrompt(detail.prompt, feedback); });
+        actions.appendChild(copy);
+        actions.appendChild(feedback);
+        promptPanel.appendChild(prompt);
+        promptPanel.appendChild(actions);
+        left.appendChild(promptPanel);
+        var setup = createPanel('Prompt setup');
+        appendKeyValue(setup, 'Use it with', detail.setup);
+        right.appendChild(setup);
+        var guidance = createPanel('Guidance');
+        appendList(guidance, detail.guidance);
+        right.appendChild(guidance);
+        row.appendChild(left);
+        row.appendChild(right);
+        return row;
+    }
+
+    function createWorkflowDetails(detail) {
+        var wrapper = makeElement('div');
+        var map = createPanel('Workflow map');
+        var steps = makeElement('div', 'd-flex flex-wrap');
+        for (var i = 0; i < detail.steps.length; i += 1) {
+            var step = makeElement('div', 'p-3 border mb-2 mr-2');
+            step.style.cssText = 'background:#fff;border-color:#9fbfdd!important;border-radius:10px;flex:1 1 160px;';
+            var number = makeElement('span', 'd-inline-flex align-items-center justify-content-center rounded-circle font-weight-bold mb-2', String(i + 1));
+            number.style.cssText = 'width:30px;height:30px;background:#094685;color:#f5c242;';
+            step.appendChild(number);
+            step.appendChild(makeElement('div', 'font-weight-bold', detail.steps[i]));
+            steps.appendChild(step);
+        }
+        map.appendChild(steps);
+        wrapper.appendChild(map);
+        var advice = createPanel('Checking advice');
+        advice.appendChild(makeElement('p', 'mb-0 text-muted', detail.advice));
+        wrapper.appendChild(advice);
+        return wrapper;
+    }
+
+    function createReviewDetails(detail) {
+        var row = makeElement('div', 'row');
+        var left = makeElement('div', 'col-lg-7');
+        var right = makeElement('div', 'col-lg-5');
+        var verdict = createPanel('Student verdict');
+        var rating = makeElement('span', 'd-inline-flex align-items-center rounded-pill px-3 py-2 mb-3 font-weight-bold', '★ ' + detail.rating);
+        rating.style.cssText = 'background:#094685;color:#f5c242;';
+        verdict.appendChild(rating);
+        verdict.appendChild(makeElement('p', 'mb-0 text-muted', detail.verdict));
+        left.appendChild(verdict);
+        var bestFor = createPanel('Best for');
+        appendList(bestFor, detail.bestFor);
+        left.appendChild(bestFor);
+        var limits = createPanel('Limitations');
+        appendList(limits, detail.limits);
+        right.appendChild(limits);
+        row.appendChild(left);
+        row.appendChild(right);
+        return row;
+    }
+
+    function createEventDetails(detail, sourceCard) {
+        var row = makeElement('div', 'row');
+        var left = makeElement('div', 'col-lg-7');
+        var right = makeElement('div', 'col-lg-5');
+        var eventDetails = createPanel('Event details');
+        appendList(eventDetails, detail.details);
+        left.appendChild(eventDetails);
+        var bring = createPanel('What to bring');
+        appendList(bring, detail.bring);
+        left.appendChild(bring);
+        var originalLink = sourceCard.tagName === 'A' ? sourceCard.getAttribute('href') : '';
+        if (originalLink && originalLink.indexOf('#') !== 0) {
+            var link = makeElement('a', 'btn btn-primary rounded-pill font-weight-bold d-inline-flex align-items-center justify-content-center px-3 py-2', 'Book or View Details');
+            link.href = originalLink;
+            link.style.cssText = 'background:#094685;border-color:#094685;white-space:normal;';
+            right.appendChild(link);
+        }
+        var note = createPanel('Good to know');
+        note.appendChild(makeElement('p', 'mb-0 text-muted', 'Check the event listing for the latest date, time, location and booking information.'));
+        right.appendChild(note);
+        row.appendChild(left);
+        row.appendChild(right);
+        return row;
+    }
+
+    function createDetailContent(sourceCard, title) {
+        var library = sourceCard.getAttribute('data-resource-library');
+        var detail = resourceDetails[library] && resourceDetails[library][title];
+        if (!detail) {
+            var fallback = createPanel('Resource details');
+            fallback.appendChild(makeElement('p', 'mb-0 text-muted', 'More detail for this resource will be added when the card content moves to JSON.'));
+            return fallback;
+        }
+        if (library === 'student-showcase') return createShowcaseDetails(detail);
+        if (library === 'prompt-library') return createPromptDetails(detail);
+        if (library === 'workflow-library') return createWorkflowDetails(detail);
+        if (library === 'tool-reviews') return createReviewDetails(detail);
+        return createEventDetails(detail, sourceCard);
+    }
+
     function createDialog(sourceCard) {
         var dialog = document.createElement('div');
         var header = document.createElement('div');
@@ -871,12 +1087,16 @@ Constraints:
         for (var i = 0; i < ids.length; i += 1) ids[i].removeAttribute('id');
         clone.removeAttribute('id');
         clone.removeAttribute('data-resource-popout');
+        clone.removeAttribute('data-resource-library');
         clone.removeAttribute('aria-haspopup');
         clone.style.width = '100%';
         clone.style.height = 'auto';
         clone.style.flexShrink = '0';
         body.style.cssText = 'overflow:auto;min-height:0;padding:1.25rem;';
         body.appendChild(clone);
+        var details = createDetailContent(sourceCard, heading.textContent);
+        details.style.marginTop = '1.25rem';
+        body.appendChild(details);
         dialog.appendChild(header);
         dialog.appendChild(body);
         return { dialog: dialog, close: close };
