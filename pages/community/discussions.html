@@ -40,8 +40,8 @@ Constraints:
 
 <section aria-labelledby="genai-discussion-title" class="my-4" style="background:linear-gradient(135deg,#094685 0%,#0b2442 100%);border-top:6px solid #f5c242;border-radius:16px;color:#ffffff;overflow:hidden;box-shadow:0 14px 34px rgba(9,70,133,0.16);">
     <div class="p-4 p-md-5">
-        <div class="row align-items-center">
-            <div class="col-lg-5 mb-4 mb-lg-0">
+        <div class="row">
+            <div class="col-12">
                 <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">GenAI Discussion</div>
                 <h2 id="genai-discussion-title" class="font-weight-bold mb-3" style="font-size:clamp(1.75rem,5vw,2.5rem);line-height:1.08;color:#ffffff;">
                     Hop into the GenAI Discussion
@@ -50,62 +50,6 @@ Constraints:
                     Start or join longer forum discussions that students can return to later.
                 </p>
             </div>
-
-            <div class="col-lg-7">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="h-100 p-4 bg-white border d-flex flex-column" style="border-color:rgba(224,242,254,0.8)!important;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,0.12);">
-                            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width:48px;height:48px;min-width:48px;background:#fef3c7;color:#5f4300;font-size:1.25rem;">
-                                <i class="fa-regular fa-comment-dots" style="line-height:1;" aria-hidden="true">&#8203;</i>
-                            </div>
-                            <h3 class="h5 font-weight-bold mb-2" style="color:#172033;">Forum</h3>
-                            <p class="mb-4" style="color:#4f5962;">
-                                Start or join longer discussions that students can return to later.
-                            </p>
-                            <a href="#forum-discussions" class="btn btn-outline-primary font-weight-bold mt-auto align-self-start px-4 py-2" style="background:#ffffff;border-color:#094685;border-radius:8px;color:#094685;transition:background-color .18s ease,color .18s ease,box-shadow .18s ease;" onfocus="this.style.outline='3px solid #f5c242';this.style.outlineOffset='3px';this.style.boxShadow='0 0 0 0.2rem rgba(245,194,66,0.35)';" onblur="this.style.outline='';this.style.outlineOffset='';this.style.boxShadow='';" onmouseover="this.style.backgroundColor='#094685';this.style.color='#ffffff';" onmouseout="this.style.backgroundColor='#ffffff';this.style.color='#094685';">
-                                Go to Forum <span aria-hidden="true">↓</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
-
-<script>
-(function () {
-    function setUpForumScroll() {
-        var forumLink = document.querySelector('a[href="#forum-discussions"]');
-        var forumTarget = document.getElementById('forum-discussions');
-
-        if (!forumLink || !forumTarget) {
-            return;
-        }
-
-        forumLink.addEventListener('click', function (event) {
-            var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            if (reduceMotion || !forumTarget.scrollIntoView) {
-                return;
-            }
-
-            event.preventDefault();
-            forumTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            forumTarget.focus({ preventScroll: true });
-
-            if (history.pushState) {
-                history.pushState(null, '', '#forum-discussions');
-            }
-        });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setUpForumScroll);
-    } else {
-        setUpForumScroll();
-    }
-}());
-</script>
-
-<div id="forum-discussions" tabindex="-1" aria-label="Moodle forum activity starts here"></div>

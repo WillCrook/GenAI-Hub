@@ -276,25 +276,31 @@ Constraints:
                     </div>
                 </a>
             </div>
-            <div class="bg-white border shadow-sm overflow-hidden mb-4" style="border-radius:16px;min-height:520px;border-top:6px solid #f5c242;">
-                <div class="p-3 border-bottom" style="background:#f4f7fb;">
-                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
-                        <div class="d-flex flex-wrap align-items-center mb-3 mb-md-0 mr-md-3" role="tablist" aria-label="Discussion platforms">
-                            <button type="button" id="discussion-tab-engage" role="tab" aria-selected="true" aria-controls="discussion-feed" tabindex="0" data-discussion-selector="true" data-discussion-embed-url="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" data-discussion-label="Chat" data-discussion-fullscreen-url="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" class="btn d-inline-flex align-items-center justify-content-center font-weight-bold px-3 py-2 mr-2 mb-2 mb-sm-0" style="color:#082947;background:#f5c242;border:2px solid #f5c242;border-radius:8px;"><i class="fa-solid fa-message mr-2" aria-hidden="true">&#8203;</i>Chat</button>
-                            <button type="button" id="discussion-tab-moodle" role="tab" aria-selected="false" aria-controls="discussion-feed" tabindex="-1" data-discussion-selector="true" data-discussion-embed-url="https://moodle.bath.ac.uk/mod/forum/view.php?id=1570174" data-discussion-label="Forums" data-discussion-fullscreen-url="https://moodle.bath.ac.uk/mod/forum/view.php?id=1570174" class="btn d-inline-flex align-items-center justify-content-center font-weight-bold px-3 py-2 mb-2 mb-sm-0" style="color:#094685;background:#ffffff;border:2px solid #ffffff;border-radius:8px;"><i class="fa-solid fa-users mr-2" aria-hidden="true">&#8203;</i>Forums</button>
+            <div id="discussion-embed-panel" class="bg-white border shadow-sm overflow-hidden mb-4 d-flex flex-column" style="border-radius:16px;height:654px;border-top:6px solid #f5c242;">
+                <div id="discussion-embed-toolbar" class="p-2 border-bottom" style="background:#f4f7fb;">
+                    <div class="d-flex flex-wrap align-items-start">
+                        <div class="d-flex flex-wrap align-items-center mr-sm-3" role="tablist" aria-label="Discussion platforms">
+                            <button type="button" id="discussion-tab-engage" role="tab" aria-selected="true" aria-controls="discussion-feed" tabindex="0" data-discussion-selector="true" data-discussion-embed-url="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" data-discussion-label="Chat" data-discussion-fullscreen-url="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" class="btn d-inline-flex align-items-center justify-content-center font-weight-bold px-2 py-1 mr-2" style="color:#082947;background:#f5c242;border:2px solid #f5c242;border-radius:8px;"><i class="fa-solid fa-message mr-2" aria-hidden="true">&#8203;</i>Chat</button>
+                            <button type="button" id="discussion-tab-moodle" role="tab" aria-selected="false" aria-controls="discussion-feed" tabindex="-1" data-discussion-selector="true" data-discussion-embed-url="https://moodle.bath.ac.uk/mod/forum/view.php?id=1570174" data-discussion-label="Forums" data-discussion-fullscreen-url="https://moodle.bath.ac.uk/mod/forum/view.php?id=1570174" class="btn d-inline-flex align-items-center justify-content-center font-weight-bold px-2 py-1" style="color:#094685;background:#ffffff;border:2px solid #ffffff;border-radius:8px;"><i class="fa-solid fa-users mr-2" aria-hidden="true">&#8203;</i>Forums</button>
                         </div>
-                        <a id="discussion-fullscreen-link" href="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-weight-bold px-3 py-2 text-nowrap" aria-label="Open full screen: Chat (new tab)" style="background:#094685;border-color:#094685;border-radius:8px;">
-                            <i class="fa-solid fa-expand mr-2" aria-hidden="true">&#8203;</i>Open full screen
+                        <a id="discussion-fullscreen-link" href="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-weight-bold px-2 py-1 text-nowrap ml-auto" aria-label="Open full screen: Chat (new tab)" style="background:#094685;border-color:#094685;border-radius:8px;">
+                            <i id="discussion-fullscreen-icon" class="fa-solid fa-expand" aria-hidden="true">&#8203;</i><span id="discussion-fullscreen-text">Full screen</span>
                         </a>
                     </div>
                 </div>
-                <iframe id="discussion-feed"
-                        title="Discussion platform content"
-                        src="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0"
-                        loading="lazy"
-                        style="border:0;overflow:hidden;width:100%;height:100%;min-height:400px;"
-                        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms">
-                </iframe>
+                <div id="discussion-embed-area" style="position:relative;height:600px;flex:0 0 600px;">
+                    <iframe id="discussion-feed"
+                            title="Discussion platform content"
+                            src="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0"
+                            loading="lazy"
+                            style="border:0;overflow:hidden;width:100%;height:100%;display:block;"
+                            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms">
+                    </iframe>
+                    <div id="discussion-forums-loading" role="status" aria-live="polite" aria-hidden="true" style="position:absolute;top:0;right:0;bottom:0;left:0;z-index:1;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(244,247,251,0.96);color:#094685;">
+                        <i class="fa-solid fa-spinner fa-spin" style="margin-bottom:0.75rem;color:#f5c242;font-size:2rem;line-height:1;" aria-hidden="true">&#8203;</i>
+                        <span style="font-weight:700;">Loading forums&hellip;</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -869,9 +875,49 @@ Constraints:
     var discussionSelectors = document.querySelectorAll('[data-discussion-selector="true"]');
     var discussionFeed = document.getElementById('discussion-feed');
     var discussionFullscreenLink = document.getElementById('discussion-fullscreen-link');
+    var discussionEmbedPanel = document.getElementById('discussion-embed-panel');
+    var discussionEmbedToolbar = document.getElementById('discussion-embed-toolbar');
+    var discussionEmbedArea = document.getElementById('discussion-embed-area');
+    var discussionForumsLoading = document.getElementById('discussion-forums-loading');
+    var discussionFullscreenText = document.getElementById('discussion-fullscreen-text');
+    var discussionFullscreenIcon = document.getElementById('discussion-fullscreen-icon');
+    var discussionForumsLoadingTimeout;
+
+    function setDiscussionForumsLoading(isLoading) {
+        if (discussionForumsLoadingTimeout) {
+            window.clearTimeout(discussionForumsLoadingTimeout);
+            discussionForumsLoadingTimeout = null;
+        }
+        if (!discussionForumsLoading) return;
+        discussionForumsLoading.style.display = isLoading ? 'flex' : 'none';
+        discussionForumsLoading.setAttribute('aria-hidden', isLoading ? 'false' : 'true');
+    }
+
+    function resizeDiscussionEmbed() {
+        var feedHeight = window.innerWidth >= 992 ? 750 : (window.innerWidth >= 768 ? 650 : 600);
+        if (discussionEmbedArea) {
+            discussionEmbedArea.style.height = feedHeight + 'px';
+            discussionEmbedArea.style.flexBasis = feedHeight + 'px';
+        }
+        if (discussionEmbedPanel && discussionEmbedToolbar) {
+            discussionEmbedPanel.style.height = (feedHeight + discussionEmbedToolbar.offsetHeight) + 'px';
+        }
+        if (discussionFullscreenText && discussionFullscreenIcon) {
+            var iconOnly = window.innerWidth < 576;
+            discussionFullscreenText.style.display = iconOnly ? 'none' : 'inline';
+            discussionFullscreenIcon.style.marginRight = iconOnly ? '0' : '0.5rem';
+        }
+    }
 
     function selectDiscussion(selectedButton) {
+        var isForums = selectedButton.getAttribute('data-discussion-label') === 'Forums';
         if (discussionFeed) {
+            setDiscussionForumsLoading(isForums);
+            if (isForums) {
+                discussionForumsLoadingTimeout = window.setTimeout(function () {
+                    setDiscussionForumsLoading(false);
+                }, 2000);
+            }
             discussionFeed.src = selectedButton.getAttribute('data-discussion-embed-url');
         }
         if (discussionFullscreenLink) {
@@ -886,6 +932,12 @@ Constraints:
             discussionSelectors[q].style.borderColor = isSelected ? '#f5c242' : '#ffffff';
             discussionSelectors[q].style.color = isSelected ? '#082947' : '#094685';
         }
+    }
+
+    if (discussionFeed) {
+        discussionFeed.addEventListener('load', function () {
+            setDiscussionForumsLoading(false);
+        });
     }
 
     for (var n = 0; n < discussionSelectors.length; n += 1) {
@@ -912,6 +964,9 @@ Constraints:
             selectDiscussion(discussionSelectors[nextIndex]);
         });
     }
+
+    resizeDiscussionEmbed();
+    window.addEventListener('resize', resizeDiscussionEmbed);
 })();
 
 </script>
