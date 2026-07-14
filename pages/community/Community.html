@@ -276,52 +276,25 @@ Constraints:
                     </div>
                 </a>
             </div>
-            <div class="row align-items-stretch">
-                <div class="col-lg-4 mb-2 mb-lg-4">
-                    <div class="h-100 p-4 p-lg-5 text-white shadow-sm" style="border-radius:16px;background:linear-gradient(145deg,#094685,#0b2442);border-top:6px solid #f5c242;">
-                        <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#f5c242;font-size:0.78rem;">Discussion spaces</div>
-                        <h3 class="h4 font-weight-bold mb-3">Choose where to join in</h3>
-                        <div class="row">
-                            <div class="col-6 mb-4">
-                                <div class="h2 font-weight-bold mb-0">2,480</div>
-                                <small style="color:#dbeafe;">Active members</small>
-                            </div>
-                            <div class="col-6 mb-4">
-                                <div class="h2 font-weight-bold mb-0">126</div>
-                                <small style="color:#dbeafe;">Discussions this week</small>
-                            </div>
-                            <div class="col-12">
-                                <div class="h2 font-weight-bold mb-0">390</div>
-                                <small style="color:#dbeafe;">Resources shared</small>
-                            </div>
+            <div class="bg-white border shadow-sm overflow-hidden mb-4" style="border-radius:16px;min-height:520px;border-top:6px solid #f5c242;">
+                <div class="p-3 border-bottom" style="background:#f4f7fb;">
+                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                        <div class="d-flex flex-wrap align-items-center mb-3 mb-md-0 mr-md-3" role="tablist" aria-label="Discussion platforms">
+                            <button type="button" id="discussion-tab-engage" role="tab" aria-selected="true" aria-controls="discussion-feed" tabindex="0" data-discussion-selector="true" data-discussion-embed-url="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" data-discussion-label="Chat" data-discussion-fullscreen-url="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" class="btn d-inline-flex align-items-center justify-content-center font-weight-bold px-3 py-2 mr-2 mb-2 mb-sm-0" style="color:#082947;background:#f5c242;border:2px solid #f5c242;border-radius:8px;"><i class="fa-solid fa-message mr-2" aria-hidden="true">&#8203;</i>Chat</button>
+                            <button type="button" id="discussion-tab-moodle" role="tab" aria-selected="false" aria-controls="discussion-feed" tabindex="-1" data-discussion-selector="true" data-discussion-embed-url="https://moodle.bath.ac.uk/mod/forum/view.php?id=1570174" data-discussion-label="Forums" data-discussion-fullscreen-url="https://moodle.bath.ac.uk/mod/forum/view.php?id=1570174" class="btn d-inline-flex align-items-center justify-content-center font-weight-bold px-3 py-2 mb-2 mb-sm-0" style="color:#094685;background:#ffffff;border:2px solid #ffffff;border-radius:8px;"><i class="fa-solid fa-users mr-2" aria-hidden="true">&#8203;</i>Forums</button>
                         </div>
-                        <nav class="mt-2" aria-label="Discussion platforms">
-                            <a href="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" target="embed-feed" data-discussion-selector="true" data-discussion-label="Engage" data-discussion-fullscreen-url="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" aria-current="true" class="btn btn-block text-left font-weight-bold px-3 py-3 mb-2" style="color:#082947;background:#f5c242;border:2px solid #f5c242;border-radius:10px;"><img src="https://willcrook.github.io/GenAI-Hub/assets/community/images/viva-engage-logo.svg" alt="" width="28" height="28" class="mr-2" style="object-fit:contain;vertical-align:middle;">Engage</a>
-                            <a href="https://moodle.bath.ac.uk/mod/forum/view.php?id=1570174" target="embed-feed" data-discussion-selector="true" data-discussion-label="Moodle discussions" data-discussion-fullscreen-url="https://moodle.bath.ac.uk/mod/forum/view.php?id=1570174" class="btn btn-light btn-block text-left font-weight-bold px-3 py-3" style="color:#094685;background:#ffffff;border:2px solid #ffffff;border-radius:10px;">Moodle discussions</a>
-                        </nav>
+                        <a id="discussion-fullscreen-link" href="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-weight-bold px-3 py-2 text-nowrap" aria-label="Open full screen: Chat (new tab)" style="background:#094685;border-color:#094685;border-radius:8px;">
+                            <i class="fa-solid fa-expand mr-2" aria-hidden="true">&#8203;</i>Open full screen
+                        </a>
                     </div>
                 </div>
-
-                <div class="col-lg-8 mb-4">
-                    <div class="h-100 bg-white border shadow-sm overflow-hidden" style="border-radius:16px;min-height:520px;border-top:6px solid #f5c242;">
-                        <div class="p-3 border-bottom" style="background:#f4f7fb;">
-                            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
-                                <p class="small text-muted mb-3 mb-md-0 mr-md-3" style="color:#4f5962!important;">Choose a discussion space to show it below. You may be asked to sign in.</p>
-                                <a id="discussion-fullscreen-link" href="https://engage.cloud.microsoft/main/org/bath.ac.uk/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-weight-bold px-3 py-2 text-nowrap" aria-label="Open full screen: Engage (new tab)" style="background:#094685;border-color:#094685;border-radius:8px;">
-                                    <i class="fa-solid fa-expand mr-2" aria-hidden="true">&#8203;</i>Open full screen
-                                </a>
-                            </div>
-                        </div>
-                        <iframe name="embed-feed"
-                                id="discussion-feed"
-                                title="Discussion platform content"
-                                src="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0" 
-                                loading="lazy" 
-                                style="border: 0px; overflow: hidden; width: 100%; height: 100%; min-height: 400px;"
-                                sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms">
-                        </iframe>
-                    </div>
-                </div>
+                <iframe id="discussion-feed"
+                        title="Discussion platform content"
+                        src="https://engage.cloud.microsoft/embed/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Njg0NzE4NTkyIn0"
+                        loading="lazy"
+                        style="border:0;overflow:hidden;width:100%;height:100%;min-height:400px;"
+                        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms">
+                </iframe>
             </div>
         </div>
     </section>
@@ -891,28 +864,52 @@ Constraints:
 
 
 <script>
-// Discussion selector and full-screen link updates
+// Discussion tabs update the embedded feed and contextual full-screen link.
 (function () {
     var discussionSelectors = document.querySelectorAll('[data-discussion-selector="true"]');
+    var discussionFeed = document.getElementById('discussion-feed');
+    var discussionFullscreenLink = document.getElementById('discussion-fullscreen-link');
+
+    function selectDiscussion(selectedButton) {
+        if (discussionFeed) {
+            discussionFeed.src = selectedButton.getAttribute('data-discussion-embed-url');
+        }
+        if (discussionFullscreenLink) {
+            discussionFullscreenLink.href = selectedButton.getAttribute('data-discussion-fullscreen-url');
+            discussionFullscreenLink.setAttribute('aria-label', 'Open full screen: ' + selectedButton.getAttribute('data-discussion-label') + ' (new tab)');
+        }
+        for (var q = 0; q < discussionSelectors.length; q += 1) {
+            var isSelected = discussionSelectors[q] === selectedButton;
+            discussionSelectors[q].setAttribute('aria-selected', isSelected ? 'true' : 'false');
+            discussionSelectors[q].setAttribute('tabindex', isSelected ? '0' : '-1');
+            discussionSelectors[q].style.background = isSelected ? '#f5c242' : '#ffffff';
+            discussionSelectors[q].style.borderColor = isSelected ? '#f5c242' : '#ffffff';
+            discussionSelectors[q].style.color = isSelected ? '#082947' : '#094685';
+        }
+    }
+
     for (var n = 0; n < discussionSelectors.length; n += 1) {
-        discussionSelectors[n].addEventListener('click', function () {
-            var selectedButton = this;
-            var discussionFullscreenLink = document.getElementById('discussion-fullscreen-link');
-            if (discussionFullscreenLink) {
-                discussionFullscreenLink.href = selectedButton.getAttribute('data-discussion-fullscreen-url');
-                discussionFullscreenLink.setAttribute('aria-label', 'Open full screen: ' + selectedButton.getAttribute('data-discussion-label') + ' (new tab)');
+        discussionSelectors[n].addEventListener('click', function (event) {
+            event.preventDefault();
+            selectDiscussion(this);
+        });
+        discussionSelectors[n].addEventListener('keydown', function (event) {
+            var nextIndex;
+            var currentIndex = Array.prototype.indexOf.call(discussionSelectors, this);
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                nextIndex = (currentIndex + 1) % discussionSelectors.length;
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                nextIndex = (currentIndex - 1 + discussionSelectors.length) % discussionSelectors.length;
+            } else if (event.key === 'Home') {
+                nextIndex = 0;
+            } else if (event.key === 'End') {
+                nextIndex = discussionSelectors.length - 1;
+            } else {
+                return;
             }
-            for (var q = 0; q < discussionSelectors.length; q += 1) {
-                var isSelected = discussionSelectors[q] === selectedButton;
-                if (isSelected) {
-                    discussionSelectors[q].setAttribute('aria-current', 'true');
-                } else {
-                    discussionSelectors[q].removeAttribute('aria-current');
-                }
-                discussionSelectors[q].style.background = isSelected ? '#f5c242' : '#ffffff';
-                discussionSelectors[q].style.borderColor = isSelected ? '#f5c242' : '#ffffff';
-                discussionSelectors[q].style.color = isSelected ? '#082947' : '#094685';
-            }
+            event.preventDefault();
+            discussionSelectors[nextIndex].focus();
+            selectDiscussion(discussionSelectors[nextIndex]);
         });
     }
 })();
