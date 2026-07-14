@@ -778,7 +778,7 @@ Constraints:
             'Perplexity': { rating: '4.6/5', verdict: 'Helpful for research exploration when used as a route into sources rather than a final authority.', bestFor: ['Finding starting points', 'Comparing source-backed answers'], limits: ['Open and assess cited sources', 'Do not treat summaries as evidence'] }
         },
         'community-events': {
-            'Prompting for Coursework Planning': { details: ['Hands-on planning and reflection templates', 'Designed for responsible coursework support'], bring: ['A current task or deadline', 'Questions about your own planning process'] },
+            'Prompting for Coursework Planning': { details: ['Hands-on planning and reflection templates', 'Designed for responsible coursework support'], bring: ['An assignment brief or planning notes', 'A laptop', 'Questions about responsible AI use'], startDateTime: '2026-10-14T13:00:00+01:00', endDateTime: '2026-10-14T14:30:00+01:00', location: 'University of Bath Library, Skills Zone', format: 'In-person workshop' },
             'AI Skills in Graduate Careers': { details: ['Employer and alumni perspectives', 'Practical discussion of early-career AI skills'], bring: ['Questions about careers', 'Examples of skills you want to develop'] },
             'One-Hour Automation Sprint': { details: ['Build one small, useful automation', 'Suitable for study, society or placement tasks'], bring: ['A repetitive task to improve', 'A laptop if available'] },
             'Community Show and Tell': { details: ['Share a project, experiment or lesson learned', 'Learn what other students have made reusable'], bring: ['A short example to share', 'Curiosity and constructive feedback'] },
@@ -820,11 +820,13 @@ Constraints:
 
     function getTargetRect() {
         var inset = window.innerWidth < 576 ? 12 : 24;
+        var width = Math.min(960, window.innerWidth - (inset * 2));
+        var height = Math.min(800, window.innerHeight - (inset * 2));
         return {
-            left: inset,
-            top: inset,
-            width: Math.min(960, window.innerWidth - (inset * 2)),
-            height: Math.min(800, window.innerHeight - (inset * 2))
+            left: Math.round((window.innerWidth - width) / 2),
+            top: Math.round((window.innerHeight - height) / 2),
+            width: width,
+            height: height
         };
     }
 
@@ -908,6 +910,65 @@ Constraints:
         panel.appendChild(item);
     }
 
+    function getCardSummary(card) {
+        var summary = card.querySelector('p');
+        return summary ? summary.textContent.trim() : 'Practical information and next steps for this community resource.';
+    }
+
+    function getCardCategory(card) {
+        var badge = card.querySelector('.badge');
+        var library = card.getAttribute('data-resource-library');
+        var labels = {
+            'student-showcase': 'Student showcase',
+            'prompt-library': 'Prompt library',
+            'workflow-library': 'Workflow library',
+            'tool-reviews': 'Student tool review',
+            'community-events': 'Community event'
+        };
+        return badge ? badge.textContent.trim() : labels[library];
+    }
+
+    function formatDateTime(value) {
+        var date = new Date(value);
+        if (Number.isNaN(date.getTime())) return 'To be confirmed';
+        return date.toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+
+    function createCountdown(detail, cleanupTasks) {
+        if (!detail.startDateTime) return null;
+        var panel = createPanel('Countdown');
+        var counter = makeElement('div', 'h4 font-weight-bold mb-2');
+        counter.style.color = '#094685';
+        var helper = makeElement('p', 'mb-0 text-muted');
+        panel.appendChild(counter);
+        panel.appendChild(helper);
+        function update() {
+            var start = new Date(detail.startDateTime);
+            var end = new Date(detail.endDateTime || detail.startDateTime);
+            var now = new Date();
+            if (now > end) {
+                counter.textContent = 'This event has ended';
+                helper.textContent = 'Browse the Community Events section for future sessions.';
+                return;
+            }
+            if (now >= start) {
+                counter.textContent = 'Happening now';
+                helper.textContent = 'The session has started.';
+                return;
+            }
+            var remaining = start.getTime() - now.getTime();
+            var days = Math.floor(remaining / 86400000);
+            var hours = Math.floor((remaining % 86400000) / 3600000);
+            var minutes = Math.floor((remaining % 3600000) / 60000);
+            counter.textContent = days + 'd ' + hours + 'h ' + minutes + 'm';
+            helper.textContent = 'Until ' + formatDateTime(detail.startDateTime) + '.';
+        }
+        update();
+        var timer = window.setInterval(update, 60000);
+        cleanupTasks.push(function () { window.clearInterval(timer); });
+        return panel;
+    }
+
     function copyPrompt(text, feedback) {
         function done(message) { feedback.textContent = message; }
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -929,9 +990,13 @@ Constraints:
         var left = makeElement('div', 'col-lg-7');
         var right = makeElement('div', 'col-lg-5');
         var story = createPanel('Project story');
-        appendKeyValue(story, 'Approach', detail.story);
+        appendKeyValue(story, 'Problem', detail.problem || detail.story);
+        appendKeyValue(story, 'Approach', detail.approach || 'A small, focused workflow designed around the need described above.');
         appendKeyValue(story, 'Outcome', detail.outcome);
         left.appendChild(story);
+        var reflection = createPanel('Student reflection');
+        reflection.appendChild(makeElement('p', 'mb-0 text-muted', detail.reflection || 'The useful part is keeping the student in control: use the output to guide a next step, then make the final judgement yourself.'));
+        left.appendChild(reflection);
         var tools = createPanel('Tools used');
         appendList(tools, detail.tools);
         right.appendChild(tools);
@@ -963,7 +1028,8 @@ Constraints:
         promptPanel.appendChild(actions);
         left.appendChild(promptPanel);
         var setup = createPanel('Prompt setup');
-        appendKeyValue(setup, 'Use it with', detail.setup);
+        appendKeyValue(setup, 'Recommended model', detail.model || 'Your usual approved AI assistant');
+        appendKeyValue(setup, 'Use case', detail.useCase || detail.setup);
         right.appendChild(setup);
         var guidance = createPanel('Guidance');
         appendList(guidance, detail.guidance);
@@ -988,6 +1054,11 @@ Constraints:
         }
         map.appendChild(steps);
         wrapper.appendChild(map);
+        var plainSteps = createPanel('Plain workflow steps');
+        var ordered = makeElement('ol', 'mb-0 pl-3');
+        for (var j = 0; j < detail.steps.length; j += 1) ordered.appendChild(makeElement('li', 'mb-2', detail.steps[j]));
+        plainSteps.appendChild(ordered);
+        wrapper.appendChild(plainSteps);
         var advice = createPanel('Checking advice');
         advice.appendChild(makeElement('p', 'mb-0 text-muted', detail.advice));
         wrapper.appendChild(advice);
@@ -1010,27 +1081,43 @@ Constraints:
         var limits = createPanel('Limitations');
         appendList(limits, detail.limits);
         right.appendChild(limits);
+        var checking = createPanel('Checking advice');
+        checking.appendChild(makeElement('p', 'mb-0 text-muted', detail.checkingAdvice || 'Check important outputs yourself and use the original source or task requirements as the final authority.'));
+        right.appendChild(checking);
         row.appendChild(left);
         row.appendChild(right);
         return row;
     }
 
-    function createEventDetails(detail, sourceCard) {
+    function createEventDetails(detail, sourceCard, cleanupTasks) {
         var row = makeElement('div', 'row');
         var left = makeElement('div', 'col-lg-7');
         var right = makeElement('div', 'col-lg-5');
         var eventDetails = createPanel('Event details');
         appendList(eventDetails, detail.details);
+        if (detail.startDateTime) {
+            appendKeyValue(eventDetails, 'Starts', formatDateTime(detail.startDateTime));
+            appendKeyValue(eventDetails, 'Ends', formatDateTime(detail.endDateTime));
+            appendKeyValue(eventDetails, 'Format', detail.format);
+            appendKeyValue(eventDetails, 'Location', detail.location);
+        } else {
+            appendKeyValue(eventDetails, 'When and where', 'Details to be confirmed.');
+        }
         left.appendChild(eventDetails);
         var bring = createPanel('What to bring');
         appendList(bring, detail.bring);
         left.appendChild(bring);
+        var countdown = createCountdown(detail, cleanupTasks);
+        if (countdown) right.appendChild(countdown);
         var originalLink = sourceCard.tagName === 'A' ? sourceCard.getAttribute('href') : '';
         if (originalLink && originalLink.indexOf('#') !== 0) {
+            var actions = makeElement('div', 'd-flex mb-3');
+            actions.style.cssText = 'padding-top:.25rem;';
             var link = makeElement('a', 'btn btn-primary rounded-pill font-weight-bold d-inline-flex align-items-center justify-content-center px-3 py-2', 'Book or View Details');
             link.href = originalLink;
             link.style.cssText = 'background:#094685;border-color:#094685;white-space:normal;';
-            right.appendChild(link);
+            actions.appendChild(link);
+            right.appendChild(actions);
         }
         var note = createPanel('Good to know');
         note.appendChild(makeElement('p', 'mb-0 text-muted', 'Check the event listing for the latest date, time, location and booking information.'));
@@ -1040,7 +1127,7 @@ Constraints:
         return row;
     }
 
-    function createDetailContent(sourceCard, title) {
+    function createDetailContent(sourceCard, title, cleanupTasks) {
         var library = sourceCard.getAttribute('data-resource-library');
         var detail = resourceDetails[library] && resourceDetails[library][title];
         if (!detail) {
@@ -1052,7 +1139,7 @@ Constraints:
         if (library === 'prompt-library') return createPromptDetails(detail);
         if (library === 'workflow-library') return createWorkflowDetails(detail);
         if (library === 'tool-reviews') return createReviewDetails(detail);
-        return createEventDetails(detail, sourceCard);
+        return createEventDetails(detail, sourceCard, cleanupTasks);
     }
 
     function createDialog(sourceCard) {
@@ -1062,8 +1149,9 @@ Constraints:
         var heading = document.createElement('h2');
         var close = document.createElement('button');
         var body = document.createElement('div');
-        var clone = sourceCard.cloneNode(true);
-        var ids = clone.querySelectorAll('[id]');
+        var cleanupTasks = [];
+        var category = getCardCategory(sourceCard);
+        var summary = getCardSummary(sourceCard);
 
         dialog.setAttribute('role', 'dialog');
         dialog.setAttribute('aria-modal', 'true');
@@ -1071,6 +1159,9 @@ Constraints:
         dialog.style.cssText = 'position:fixed;z-index:1050;display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#0f172a;border:1px solid #dee2e6;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,0.28);';
 
         header.style.cssText = 'display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:1.25rem 1.25rem 1rem;background:linear-gradient(135deg,#094685,#111827);border-top:6px solid #f5c242;color:#fff;';
+        var headingWrap = makeElement('div');
+        var categoryLabel = makeElement('div', 'text-uppercase font-weight-bold mb-2', category);
+        categoryLabel.style.cssText = 'letter-spacing:.12em;color:#f5c242;font-size:.78rem;';
         heading.id = 'resource-popout-title';
         heading.className = 'h3 font-weight-bold mb-0';
         heading.style.lineHeight = '1.15';
@@ -1081,25 +1172,20 @@ Constraints:
         close.style.cssText += 'min-height:40px;white-space:nowrap;flex-shrink:0;';
         close.innerHTML = '<i class="fa-solid fa-xmark mr-2" aria-hidden="true">&#8203;</i>Close';
         close.addEventListener('click', closePopout);
-        header.appendChild(heading);
+        headingWrap.appendChild(categoryLabel);
+        headingWrap.appendChild(heading);
+        header.appendChild(headingWrap);
         header.appendChild(close);
 
-        for (var i = 0; i < ids.length; i += 1) ids[i].removeAttribute('id');
-        clone.removeAttribute('id');
-        clone.removeAttribute('data-resource-popout');
-        clone.removeAttribute('data-resource-library');
-        clone.removeAttribute('aria-haspopup');
-        clone.style.width = '100%';
-        clone.style.height = 'auto';
-        clone.style.flexShrink = '0';
         body.style.cssText = 'overflow:auto;min-height:0;padding:1.25rem;';
-        body.appendChild(clone);
-        var details = createDetailContent(sourceCard, heading.textContent);
-        details.style.marginTop = '1.25rem';
+        var introduction = makeElement('p', 'lead mb-4', summary);
+        introduction.style.cssText = 'color:#4f5962;font-size:1.05rem;line-height:1.55;';
+        body.appendChild(introduction);
+        var details = createDetailContent(sourceCard, heading.textContent, cleanupTasks);
         body.appendChild(details);
         dialog.appendChild(header);
         dialog.appendChild(body);
-        return { dialog: dialog, close: close };
+        return { dialog: dialog, close: close, cleanupTasks: cleanupTasks };
     }
 
     function openPopout(sourceCard) {
@@ -1119,7 +1205,7 @@ Constraints:
         document.body.style.overflow = 'hidden';
         sourceCard.style.opacity = '0';
         sourceCard.style.pointerEvents = 'none';
-        activePopout = { backdrop: backdrop, dialog: built.dialog, sourceCard: sourceCard, startRect: startRect };
+        activePopout = { backdrop: backdrop, dialog: built.dialog, sourceCard: sourceCard, startRect: startRect, cleanupTasks: built.cleanupTasks };
         document.addEventListener('keydown', handleKeydown);
 
         window.requestAnimationFrame(function () {
@@ -1134,6 +1220,7 @@ Constraints:
         var popout = activePopout;
         activePopout = null;
         document.removeEventListener('keydown', handleKeydown);
+        for (var i = 0; i < popout.cleanupTasks.length; i += 1) popout.cleanupTasks[i]();
         popout.backdrop.style.background = 'rgba(8,41,71,0)';
 
         function finish() {
