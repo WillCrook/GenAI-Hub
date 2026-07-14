@@ -90,7 +90,7 @@ Constraints:
 
 <div class="container-fluid px-3 px-md-4 py-4 py-md-5" style="background:#ffffff;color:#0f172a;">
 
-    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:linear-gradient(135deg,#094685 0%,#0b2442 56%,#172033 100%);color:white;">
+    <section data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:linear-gradient(135deg,#094685 0%,#0b2442 56%,#172033 100%);color:white;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-11">
@@ -122,11 +122,11 @@ Constraints:
                         <div class="col-lg-6 mb-4">
                             <a href="#open-lane" class="text-decoration-none d-block h-100" style="color:white;">
                                 <div class="h-100 p-4 p-md-5 shadow d-flex flex-column" style="color:#ffffff;background:#157347;border:8px solid #ffffff;border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,0.28);min-height:300px;">
-                                    <div class="d-flex align-items-start justify-content-between mb-4">
-                                        <div class="font-weight-bold text-uppercase" style="font-size:clamp(2rem,9vw,3.35rem);line-height:0.95;letter-spacing:0.03em;">
+                                    <div data-lane-signpost="true" class="d-flex align-items-start justify-content-between mb-4">
+                                        <div data-lane-signpost-heading="true" class="font-weight-bold text-uppercase" style="font-size:clamp(2rem,9vw,3.35rem);line-height:0.95;letter-spacing:0.03em;">
                                             Open<br>Lane
                                         </div>
-                                        <div class="text-center" style="font-size:4rem;line-height:1;" aria-hidden="true">
+                                        <div data-lane-signpost-icon="true" class="text-center" style="font-size:4rem;line-height:1;" aria-hidden="true">
                                             <i class="fa-solid fa-check" style="line-height:1;" aria-hidden="true">&#8203;</i>
                                         </div>
                                     </div>
@@ -143,11 +143,11 @@ Constraints:
                         <div class="col-lg-6 mb-4">
                             <a href="#closed-lane" class="text-decoration-none d-block h-100" style="color:white;">
                                 <div class="h-100 p-4 p-md-5 shadow d-flex flex-column" style="color:#ffffff;background:#b91c1c;border:8px solid #ffffff;border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,0.28);min-height:300px;">
-                                    <div class="d-flex align-items-start justify-content-between mb-4">
-                                        <div class="font-weight-bold text-uppercase" style="font-size:clamp(2rem,9vw,3.35rem);line-height:0.95;letter-spacing:0.03em;">
+                                    <div data-lane-signpost="true" class="d-flex align-items-start justify-content-between mb-4">
+                                        <div data-lane-signpost-heading="true" class="font-weight-bold text-uppercase" style="font-size:clamp(2rem,9vw,3.35rem);line-height:0.95;letter-spacing:0.03em;">
                                             Closed<br>Lane
                                         </div>
-                                        <div class="text-center" style="font-size:4rem;line-height:1;" aria-hidden="true">
+                                        <div data-lane-signpost-icon="true" class="text-center" style="font-size:4rem;line-height:1;" aria-hidden="true">
                                             <i class="fa-solid fa-xmark" style="line-height:1;" aria-hidden="true">&#8203;</i>
                                         </div>
                                     </div>
@@ -190,7 +190,7 @@ Constraints:
         </div>
     </section>
 
-    <section id="video-overview" class="p-4 p-md-5 mb-4 mx-auto" style="width:100%;max-width:1140px;">
+    <section id="video-overview" data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto" style="width:100%;max-width:1140px;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -218,7 +218,7 @@ Constraints:
         </div>
     </section>
 
-    <section id="decision-tree" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
+    <section id="decision-tree" data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
         <div class="container">
             <div class="row justify-content-center mb-4">
                 <div class="col-lg-9 text-center">
@@ -255,7 +255,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
+    <section data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
         <div class="container">
             <div class="row justify-content-center mb-4">
                 <div class="col-lg-9 text-center">
@@ -306,7 +306,7 @@ Constraints:
         </div>
     </section>
 
-    <section id="open-lane" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
+    <section id="open-lane" data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
     <div class="container">
       <div class="row align-items-stretch">
         <div class="col-lg-5 mb-4">
@@ -342,7 +342,7 @@ Constraints:
       </div>
     </div>
   </section>
-  <section id="closed-lane" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
+  <section id="closed-lane" data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
         <div class="container">
             <div class="row align-items-stretch">
                 <div class="col-lg-5 mb-4">
@@ -379,7 +379,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
+    <section data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
         <div class="container">
             <div class="row justify-content-center mb-4">
                 <div class="col-lg-9 text-center">
@@ -414,7 +414,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
+    <section data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
         <div class="container">
             <div class="row justify-content-center mb-4">
                 <div class="col-lg-9 text-center">
@@ -457,7 +457,7 @@ Constraints:
         </div>
     </section>
 
-    <section id="ai-use-statements" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
+    <section id="ai-use-statements" data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
         <div class="container">
             <div class="row align-items-stretch">
                 <div class="col-lg-5 mb-4">
@@ -496,7 +496,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
+    <section data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
         <div class="container">
             <div class="row justify-content-center mb-4">
                 <div class="col-lg-9 text-center">
@@ -543,7 +543,7 @@ Constraints:
         </div>
     </section>
 
-    <section id="before-submit" class="p-4 p-md-5 mb-4 mx-auto" style="width:100%;max-width:1140px;">
+    <section id="before-submit" data-mobile-outer="true" class="p-4 p-md-5 mb-4 mx-auto" style="width:100%;max-width:1140px;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -580,7 +580,7 @@ Constraints:
         </div>
     </section>
 
-    <section class="p-4 p-md-5 mx-auto" style="width:100%;max-width:1140px;">
+    <section data-mobile-outer="true" class="p-4 p-md-5 mx-auto" style="width:100%;max-width:1140px;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -719,6 +719,64 @@ Constraints:
         result.innerHTML = '';
         question.focus();
     });
+})();
+</script>
+
+<script>
+// Mobile-only outer-card flattening. Inner content cards are intentionally never selected here.
+(function () {
+    var mobileQuery = window.matchMedia('(max-width: 767.98px)');
+    var outerCards = document.querySelectorAll('[data-mobile-outer="true"]');
+    var signposts = document.querySelectorAll('[data-lane-signpost="true"]');
+    var signpostHeadings = document.querySelectorAll('[data-lane-signpost-heading="true"]');
+    var signpostIcons = document.querySelectorAll('[data-lane-signpost-icon="true"]');
+
+    function remember(element) {
+        if (element.hasAttribute('data-mobile-original-class')) return;
+        element.setAttribute('data-mobile-original-class', element.className);
+        element.setAttribute('data-mobile-original-style', element.getAttribute('style') || '');
+    }
+
+    function restore(element) {
+        element.className = element.getAttribute('data-mobile-original-class') || '';
+        element.setAttribute('style', element.getAttribute('data-mobile-original-style') || '');
+    }
+
+    function updateMobileLayout() {
+        var isMobile = mobileQuery.matches;
+        var i;
+        for (i = 0; i < outerCards.length; i += 1) {
+            remember(outerCards[i]);
+            if (!isMobile) { restore(outerCards[i]); continue; }
+            outerCards[i].classList.remove('border', 'shadow', 'shadow-sm', 'overflow-hidden', 'p-4');
+            outerCards[i].classList.add('px-0', 'py-3');
+            outerCards[i].style.borderRadius = '0';
+            outerCards[i].style.boxShadow = 'none';
+        }
+        for (i = 0; i < signposts.length; i += 1) {
+            remember(signposts[i]);
+            if (!isMobile) { restore(signposts[i]); continue; }
+            signposts[i].style.flexDirection = 'column';
+            signposts[i].style.alignItems = 'flex-start';
+        }
+        for (i = 0; i < signpostHeadings.length; i += 1) {
+            remember(signpostHeadings[i]);
+            if (isMobile) signpostHeadings[i].style.whiteSpace = 'nowrap'; else restore(signpostHeadings[i]);
+        }
+        for (i = 0; i < signpostIcons.length; i += 1) {
+            remember(signpostIcons[i]);
+            if (isMobile) {
+                signpostIcons[i].style.marginTop = '0.75rem';
+                signpostIcons[i].style.fontSize = '3rem';
+            } else {
+                restore(signpostIcons[i]);
+            }
+        }
+    }
+
+    updateMobileLayout();
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', updateMobileLayout);
+    else mobileQuery.addListener(updateMobileLayout);
 })();
 </script>
 
