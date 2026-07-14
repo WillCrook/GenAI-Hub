@@ -131,7 +131,7 @@ Constraints:
                         </div>
                     </div>
 
-                    <div id="orb-column" class="col-lg-4 text-center mt-4 mt-lg-0">
+                    <div id="orb-column" class="col-lg-4 text-center mt-4 mt-lg-0 d-none d-lg-block">
                         <div id="orb-container" style="position:relative;width:min(240px,70vw);aspect-ratio:1/1;margin:auto;transition:transform 0.2s ease;">
                             <div id="core" style="position:absolute;top:50%;left:50%;width:90px;height:90px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#dbeafe,#5fa8d8,#094685);box-shadow:0 0 40px #5fa8d8,0 0 100px rgba(95,168,216,0.58),0 0 160px rgba(245,194,66,0.22);"></div>
                         </div>
@@ -572,7 +572,7 @@ Constraints:
 
                 <a href="user/user.html" class="btn btn-light btn-block rounded-pill font-weight-bold px-4 py-2" aria-label="View your XP dashboard and complete progress road" style="color:#172033;white-space:normal;min-height:44px;">
                     <div style="color:#172033;">
-                        View your progress <i class="fa-solid fa-map-location-dot ml-1" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                        View your progress <i class="fa-solid fa-arrow-right ml-1" style="line-height:1;" aria-hidden="true">&#8203;</i>
                     </div>
                 </a>
             </div>
@@ -921,8 +921,7 @@ Constraints:
         }
 
         highlight = makeElement('div', { 'aria-hidden': 'true', 'data-tour-highlight': 'true' }, {
-            position: 'fixed', zIndex: '1051', borderRadius: '.75rem', pointerEvents: 'auto',
-            transition: reducedMotion ? 'none' : 'top .18s ease,left .18s ease,width .18s ease,height .18s ease'
+            position: 'fixed', zIndex: '1051', borderRadius: '.75rem', pointerEvents: 'auto'
         });
         document.body.appendChild(highlight);
 
@@ -951,7 +950,7 @@ Constraints:
         dialog.appendChild(progress);
         dialog.appendChild(description);
 
-        var controls = makeElement('div', {}, { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '.75rem', flexWrap: 'wrap' });
+        var controls = makeElement('div', {}, { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '.75rem', flexWrap: 'wrap', position: 'sticky', bottom: '-1.25rem', zIndex: '1', background: '#ffffff', paddingTop: '.5rem', paddingBottom: '1.25rem', marginBottom: '-1.25rem' });
         backButton = makeElement('button', { type: 'button', text: 'Back' }, { minHeight: '44px' });
         backButton.className = 'btn btn-outline-primary px-3';
         nextButton = makeElement('button', { type: 'button', text: 'Next' }, { minHeight: '44px', background: '#094685', borderColor: '#094685' });
@@ -976,6 +975,90 @@ Constraints:
         element.style.height = Math.max(0, height) + 'px';
     }
 
+    function prepareMobileDialog() {
+        dialog.style.left = '1rem';
+        dialog.style.top = 'auto';
+        dialog.style.bottom = '1rem';
+        dialog.style.width = 'calc(100vw - 2rem)';
+        dialog.style.maxHeight = 'calc(42vh - 1rem)';
+    }
+
+    function isMobileTourViewport() {
+        return window.innerWidth < 768 || (window.innerHeight < 500 && window.innerWidth < 900);
+    }
+
+    function mobileSafeArea() {
+        prepareMobileDialog();
+        var dialogRect = dialog.getBoundingClientRect();
+        var safeTop = 12;
+        var safeBottom = Math.max(safeTop + 44, Math.min(window.innerHeight - 12, dialogRect.top - 12));
+        return { top: safeTop, bottom: safeBottom, height: safeBottom - safeTop };
+    }
+
+    function hostTopInset(target) {
+        var inset = 0;
+        var minimumWidth = document.documentElement.clientWidth * 0.5;
+        var elements = document.body.querySelectorAll('*');
+
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            if (element === target || target.contains(element) || element.closest('[data-tour-dialog],[data-tour-overlay],[data-tour-highlight]')) { continue; }
+            var style = window.getComputedStyle(element);
+            if (style.position !== 'fixed' && style.position !== 'sticky') { continue; }
+            var rect = element.getBoundingClientRect();
+            if (rect.width < minimumWidth || rect.height <= 0 || rect.top > 8 || rect.bottom <= 0) { continue; }
+            if (rect.bottom < window.innerHeight * 0.4) { inset = Math.max(inset, rect.bottom + 8); }
+        }
+
+        return inset;
+    }
+
+    function applyHostTopInset(safeArea, target, step) {
+        var inset = hostTopInset(target);
+        safeArea.top = step.target === 'navigation' && !inset ? 0 : Math.max(safeArea.top, inset);
+        safeArea.height = Math.max(44, safeArea.bottom - safeArea.top);
+        return safeArea;
+    }
+
+    function scrollContainerFor(element) {
+        var ancestor = element.parentElement;
+        while (ancestor && ancestor !== document.body && ancestor !== document.documentElement) {
+            var style = window.getComputedStyle(ancestor);
+            if (/(auto|scroll|overlay)/.test(style.overflowY) && ancestor.scrollHeight > ancestor.clientHeight) {
+                return ancestor;
+            }
+            ancestor = ancestor.parentElement;
+        }
+        return document.scrollingElement || document.documentElement;
+    }
+
+    function adjustScrollContainer(container, amount) {
+        if (container === document.body || container === document.documentElement || container === document.scrollingElement) {
+            window.scrollBy(0, amount);
+        } else {
+            container.scrollTop += amount;
+        }
+    }
+
+    function scrollTargetIntoMobileSafeArea(target, step) {
+        var safeArea = applyHostTopInset(mobileSafeArea(), target, step);
+        var scrollContainer = scrollContainerFor(target);
+
+        target.scrollIntoView({ behavior: 'auto', block: step.target === 'navigation' ? 'start' : 'center', inline: 'nearest' });
+        var rect = target.getBoundingClientRect();
+        var desiredTop;
+
+        if (step.target === 'navigation') {
+            desiredTop = safeArea.top;
+        } else if (rect.height <= safeArea.height) {
+            desiredTop = safeArea.top + ((safeArea.height - rect.height) / 2);
+        } else {
+            desiredTop = safeArea.top;
+        }
+
+        adjustScrollContainer(scrollContainer, rect.top - desiredTop);
+    }
+
     function positionTour() {
         if (!isOpen || !activeSteps.length) { return; }
         var target = targetFor(activeSteps[stepIndex]);
@@ -989,12 +1072,20 @@ Constraints:
 
         var viewportWidth = document.documentElement.clientWidth;
         var viewportHeight = window.innerHeight;
+        var narrow = isMobileTourViewport();
+        var safeArea = narrow ? mobileSafeArea() : { top: 8, bottom: viewportHeight - 8 };
+        if (narrow) { safeArea = applyHostTopInset(safeArea, target, activeSteps[stepIndex]); }
         var rect = target.getBoundingClientRect();
         var gap = 8;
         var left = Math.max(gap, rect.left - gap);
-        var top = Math.max(gap, rect.top - gap);
+        var top = Math.max(safeArea.top, rect.top - gap);
         var right = Math.min(viewportWidth - gap, rect.right + gap);
-        var bottom = Math.min(viewportHeight - gap, rect.bottom + gap);
+        var bottom = Math.min(safeArea.bottom, rect.bottom + gap);
+
+        if (bottom <= top) {
+            top = safeArea.top;
+            bottom = Math.min(safeArea.bottom, safeArea.top + 44);
+        }
 
         setRect(highlight, top, left, right - left, bottom - top);
         setRect(panels[0], 0, 0, viewportWidth, top);
@@ -1002,15 +1093,12 @@ Constraints:
         setRect(panels[2], top, 0, left, bottom - top);
         setRect(panels[3], top, right, viewportWidth - right, bottom - top);
 
-        dialog.style.bottom = 'auto';
-        if (viewportWidth < 576) {
-            dialog.style.left = '1rem';
-            dialog.style.top = 'auto';
-            dialog.style.bottom = '1rem';
-            dialog.style.width = 'calc(100vw - 2rem)';
+        if (narrow) {
             return;
         }
 
+        dialog.style.bottom = 'auto';
+        dialog.style.maxHeight = 'calc(100vh - 2rem)';
         dialog.style.width = 'min(400px,calc(100vw - 2rem))';
         var dialogRect = dialog.getBoundingClientRect();
         var dialogLeft = Math.min(Math.max(16, left), viewportWidth - dialogRect.width - 16);
@@ -1031,10 +1119,20 @@ Constraints:
         nextButton.textContent = stepIndex === activeSteps.length - 1 ? 'Finish tour' : 'Next';
         nextButton.setAttribute('aria-label', stepIndex === activeSteps.length - 1 ? 'Finish site tour' : 'Next tour step');
         var target = targetFor(step);
+        if (isMobileTourViewport()) {
+            prepareMobileDialog();
+            window.clearTimeout(repositionTimer);
+            window.requestAnimationFrame(function () {
+                scrollTargetIntoMobileSafeArea(target, step);
+                window.requestAnimationFrame(positionTour);
+            });
+            nextButton.focus({ preventScroll: true });
+            return;
+        }
         var rect = target.getBoundingClientRect();
-        var needsScroll = rect.top < 16 || rect.bottom > window.innerHeight - (window.innerWidth < 576 ? 300 : 120);
+        var needsScroll = rect.top < 16 || rect.bottom > window.innerHeight - 120;
         if (needsScroll) {
-            target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: window.innerWidth < 576 ? 'start' : 'center', inline: 'nearest' });
+            target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center', inline: 'nearest' });
         }
         window.clearTimeout(repositionTimer);
         repositionTimer = window.setTimeout(positionTour, reducedMotion || !needsScroll ? 0 : 420);
@@ -1045,6 +1143,20 @@ Constraints:
         if (!isOpen || !activeSteps.length) { return; }
         stepIndex = Math.max(0, Math.min(index, activeSteps.length - 1));
         renderStep();
+    }
+
+    function handleTourViewportChange() {
+        if (!isOpen || !activeSteps.length) { return; }
+        if (isMobileTourViewport()) {
+            var target = targetFor(activeSteps[stepIndex]);
+            if (!isVisible(target)) { positionTour(); return; }
+            window.requestAnimationFrame(function () {
+                scrollTargetIntoMobileSafeArea(target, activeSteps[stepIndex]);
+                window.requestAnimationFrame(positionTour);
+            });
+        } else {
+            positionTour();
+        }
     }
 
     function startTour(event) {
@@ -1059,20 +1171,13 @@ Constraints:
         previousBodyPaddingRight = document.body.style.paddingRight;
         previousDocumentOverscroll = document.documentElement.style.overscrollBehavior;
         previousBodyOverscroll = document.body.style.overscrollBehavior;
-        var scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
-        if (scrollbarWidth) {
-            var bodyPadding = parseFloat(window.getComputedStyle(document.body).paddingRight) || 0;
-            document.body.style.paddingRight = (bodyPadding + scrollbarWidth) + 'px';
-        }
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
         document.documentElement.style.overscrollBehavior = 'none';
         document.body.style.overscrollBehavior = 'none';
         createTour();
         document.addEventListener('keydown', handleKeydown, true);
         document.addEventListener('wheel', blockBackgroundScroll, { passive: false });
         document.addEventListener('touchmove', blockBackgroundScroll, { passive: false });
-        window.addEventListener('resize', positionTour);
+        window.addEventListener('resize', handleTourViewportChange);
         window.addEventListener('scroll', positionTour, true);
         renderStep();
     }
@@ -1108,7 +1213,7 @@ Constraints:
         document.removeEventListener('keydown', handleKeydown, true);
         document.removeEventListener('wheel', blockBackgroundScroll, { passive: false });
         document.removeEventListener('touchmove', blockBackgroundScroll, { passive: false });
-        window.removeEventListener('resize', positionTour);
+        window.removeEventListener('resize', handleTourViewportChange);
         window.removeEventListener('scroll', positionTour, true);
         document.documentElement.style.overflow = previousDocumentOverflow;
         document.body.style.overflow = previousBodyOverflow;
