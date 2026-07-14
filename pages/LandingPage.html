@@ -95,7 +95,7 @@ Constraints:
     <div class="row justify-content-center mb-5">
         <div class="col-12">
 
-            <div id="genai-hub-hero" class="p-4 p-md-5 rounded shadow-sm"
+            <div id="genai-hub-hero" data-tour-target="introduction" class="p-4 p-md-5 rounded shadow-sm"
                  style="
                  background:linear-gradient(135deg,#094685 0%,#0b2442 58%,#172033 100%);
                  color:white;
@@ -114,7 +114,7 @@ Constraints:
                         </h1>
 
                         <p class="lead mb-4" style="max-width:700px;">
-                            Develop the digital skills and confidence to study, work and solve problems in a changing world. Explore practical tools, workflows and challenges, with guidance on Generative AI when it is useful to you.
+                            Develop the digital skills and confidence to succeed at Bath and beyond in a changing world.
                         </p>
 
                         <div class="d-flex flex-column flex-md-row align-items-start mt-4">
@@ -834,6 +834,11 @@ Constraints:
     if (!launcher) { return; }
 
     var steps = [
+        {
+            target: 'introduction',
+            title: 'Welcome to the GenAI Hub',
+            text: 'The GenAI & Digital Skills Hub helps you build practical digital skills and confidence for study, work and everyday challenges. This quick tour shows where to learn, take on challenges, connect with others and find guidance for using generative AI responsibly at Bath.'
+        },
         {
             target: 'navigation',
             title: 'Find your way around',
