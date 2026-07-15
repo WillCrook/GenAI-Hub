@@ -1134,57 +1134,73 @@ const featuredCards = [
 
     {
 
-        tag: "NEW",
+        tag: "ACADEMIC",
 
         colour: "primary",
 
-        title: "AI for Academic Research",
+        title: "Academic Research",
 
-        description: "Learn practical workflows for literature reviews.",
+        description: "Learn practical ways to search, assess and summarise literature with AI.",
 
-        link: "#"
+        link: "",
+
+        ctaLabel: "Resource coming soon",
+
+        available: false
 
     },
 
     {
 
-        tag: "POPULAR",
+        tag: "ESSENTIAL",
 
         colour: "warning",
 
-        title: "Prompt Engineering",
+        title: "Prompting Foundations",
 
-        description: "Learn techniques used by professionals.",
+        description: "Build clearer prompts that help you get useful, reliable responses.",
 
-        link: "#"
+        link: "",
+
+        ctaLabel: "Resource coming soon",
+
+        available: false
 
     },
 
     {
 
-        tag: "LIVE",
+        tag: "STUDY",
 
         colour: "success",
 
-        title: "Weekly Challenge",
+        title: "Revision and Understanding",
 
-        description: "Build an AI study assistant.",
+        description: "Use AI responsibly to test understanding and prepare for assessment.",
 
-        link: "#"
+        link: "",
+
+        ctaLabel: "Resource coming soon",
+
+        available: false
 
     },
 
     {
 
-        tag: "NEW",
+        tag: "CAREERS",
 
         colour: "primary",
 
-        title: "AI Careers Hub",
+        title: "AI for Placements",
 
-        description: "Discover emerging careers.",
+        description: "Develop practical AI skills for applications, interviews and workplace learning.",
 
-        link: "#"
+        link: "",
+
+        ctaLabel: "Resource coming soon",
+
+        available: false
 
     }
 ];
@@ -1227,15 +1243,16 @@ function createCard(card) {
                     </div>
                     <div class="mt-auto pt-3">
 
+                        ${card.available ? `
                         <a href="${card.link}"
-
                         class="btn btn-outline-primary w-100 rounded-pill" data-inner-link-color="#0056b3" data-inner-link-hover-color="#ffffff" style="color:#0056b3;border-color:#0056b3;">
-
                             <div style="color:#0056b3;">
-                                Learn More <i class="fa-solid fa-arrow-right ml-2" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                                ${card.ctaLabel} <i class="fa-solid fa-arrow-right ml-2" style="line-height:1;" aria-hidden="true">&#8203;</i>
                             </div>
-
-                        </a>
+                        </a>` : `
+                        <span class="btn btn-outline-secondary w-100 rounded-pill" aria-disabled="true" style="color:#6c757d;border-color:#6c757d;cursor:default;opacity:.75;">
+                            ${card.ctaLabel}
+                        </span>`}
                     </div>
 
                 </div>
