@@ -212,6 +212,8 @@ Constraints:
                                                         srcset="https://moodle.bath.ac.uk/pluginfile.php/3098418/mod_page/intro/Rocket-static.png">
                                                 <img src="https://moodle.bath.ac.uk/pluginfile.php/3098418/mod_page/intro/Rocket.svg"
                                                     alt=""
+                                                    width="1140"
+                                                    height="1240"
                                                     data-rocket="true"
                                                     style="
                                                     position:relative;
@@ -1263,7 +1265,7 @@ Constraints:
 
         // Starts or stops ambient motion when the OS preference changes.
         function updateHeroMotion() {
-            if (reducedMotionQuery && reducedMotionQuery.matches) {
+            if ((reducedMotionQuery && reducedMotionQuery.matches) || document.hidden) {
                 if (heroFrame !== null) {
                     window.cancelAnimationFrame(heroFrame);
                     heroFrame = null;
@@ -1288,6 +1290,7 @@ Constraints:
         if (reducedMotionQuery && reducedMotionQuery.addEventListener) {
             reducedMotionQuery.addEventListener('change', updateHeroMotion);
         }
+        document.addEventListener('visibilitychange', updateHeroMotion);
     }
 
 })();
@@ -1527,6 +1530,7 @@ function createCard(card) {
     let userPaused = reducedMotion;
     let hoverPaused = false;
     let previousTimestamp = null;
+    let animationFrameId = null;
     let normalisingScroll = false;
     let deferScrollNormalisation = false;
     const autoplayPixelsPerSecond = 48;
@@ -1587,6 +1591,7 @@ function createCard(card) {
         autoplayToggle.classList.toggle('badge-secondary', paused);
         autoplayToggle.style.backgroundColor = paused ? '#6c757d' : '#157347';
         autoplayToggle.style.color = '#ffffff';
+        updateAutoplayLoop();
     }
 
     autoplayToggle.addEventListener('click', () => {
@@ -1648,6 +1653,12 @@ function createCard(card) {
     updateAutoplayControl();
 
     function scrollFeatured(timestamp) {
+        animationFrameId = null;
+        if (isPaused() || document.hidden || window.innerWidth <= 768) {
+            previousTimestamp = null;
+            return;
+        }
+
         if (previousTimestamp === null) {
             previousTimestamp = timestamp;
         }
@@ -1655,17 +1666,25 @@ function createCard(card) {
         const elapsed = timestamp - previousTimestamp;
         previousTimestamp = timestamp;
 
-        if (!isPaused() && window.innerWidth > 768) {
-            scrollSurface.scrollLeft += elapsed / 1000 * autoplayPixelsPerSecond;
-            normaliseScrollPosition();
+        scrollSurface.scrollLeft += elapsed / 1000 * autoplayPixelsPerSecond;
+        normaliseScrollPosition();
+
+        animationFrameId = window.requestAnimationFrame(scrollFeatured);
+    }
+
+    function updateAutoplayLoop() {
+        const shouldAnimate = !isPaused() && !document.hidden && window.innerWidth > 768;
+        if (shouldAnimate && animationFrameId === null && window.requestAnimationFrame) {
+            previousTimestamp = null;
+            animationFrameId = window.requestAnimationFrame(scrollFeatured);
+        } else if (!shouldAnimate && animationFrameId !== null) {
+            window.cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+            previousTimestamp = null;
         }
-
-        window.requestAnimationFrame(scrollFeatured);
     }
 
-    if (window.requestAnimationFrame) {
-        window.requestAnimationFrame(scrollFeatured);
-    }
+    document.addEventListener('visibilitychange', updateAutoplayLoop);
 
     })();
 })();

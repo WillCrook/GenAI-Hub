@@ -1282,17 +1282,6 @@ cards.forEach((card, index) => {
     });
 });
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, { threshold: 0.1 });
-
-cards.forEach(card => observer.observe(card));
-
 })();
 </script>
 
@@ -1300,8 +1289,9 @@ cards.forEach(card => observer.observe(card));
 // Hero core pulse and floating animation
 (function () {
 const core = document.getElementById('core');
-const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reducedMotionQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
 let pulseStart = null;
+let coreFrame = null;
 
 // Updates the core's pulse and vertical position for each animation frame.
 function animateCore(timestamp) {
@@ -1317,12 +1307,24 @@ function animateCore(timestamp) {
         core.style.transform = `translate(-50%, calc(-50% + ${floatY.toFixed(2)}px)) scale(${pulse.toFixed(3)})`;
     }
 
-    window.requestAnimationFrame(animateCore);
+    coreFrame = window.requestAnimationFrame(animateCore);
 }
 
-if (window.requestAnimationFrame && core && !reduceMotion) {
-    window.requestAnimationFrame(animateCore);
+function updateCoreMotion() {
+    if (!window.requestAnimationFrame || !core) return;
+    if (document.hidden || (reducedMotionQuery && reducedMotionQuery.matches)) {
+        if (coreFrame !== null) window.cancelAnimationFrame(coreFrame);
+        coreFrame = null;
+        pulseStart = null;
+        core.style.transform = 'translate(-50%,-50%)';
+        return;
+    }
+    if (coreFrame === null) coreFrame = window.requestAnimationFrame(animateCore);
 }
+
+updateCoreMotion();
+document.addEventListener('visibilitychange', updateCoreMotion);
+if (reducedMotionQuery && reducedMotionQuery.addEventListener) reducedMotionQuery.addEventListener('change', updateCoreMotion);
 
 })();
 

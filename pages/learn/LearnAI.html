@@ -113,6 +113,8 @@ Constraints:
                                     srcset="https://moodle.bath.ac.uk/pluginfile.php/3098410/mod_page/intro/Lightbulb-static.png">
                             <img src="https://moodle.bath.ac.uk/pluginfile.php/3098410/mod_page/intro/Lightbulb.svg"
                                  alt=""
+                                 width="700"
+                                 height="700"
                                  data-lightbulb="true"
                                  style="display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 22px rgba(0,0,0,.18));pointer-events:none;">
                         </picture>
@@ -1047,6 +1049,7 @@ Constraints:
 (() => {
     const bulb = document.getElementById("hero-bulb");
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const desktopQuery = window.matchMedia("(min-width: 992px)");
     let bulbStart = null;
     let bulbFrame = null;
 
@@ -1069,7 +1072,7 @@ Constraints:
             return;
         }
 
-        if (reducedMotionQuery.matches) {
+        if (reducedMotionQuery.matches || !desktopQuery.matches || document.hidden) {
             if (bulbFrame !== null) {
                 window.cancelAnimationFrame(bulbFrame);
                 bulbFrame = null;
@@ -1087,7 +1090,9 @@ Constraints:
     updateBulbMotion();
     if (reducedMotionQuery.addEventListener) {
         reducedMotionQuery.addEventListener("change", updateBulbMotion);
+        desktopQuery.addEventListener("change", updateBulbMotion);
     }
+    document.addEventListener("visibilitychange", updateBulbMotion);
 })();
 
 </script>
@@ -1328,6 +1333,7 @@ function createCard(card) {
     let userPaused = reducedMotion;
     let hoverPaused = false;
     let previousTimestamp = null;
+    let animationFrameId = null;
     let normalisingScroll = false;
     let deferScrollNormalisation = false;
     const autoplayPixelsPerSecond = 48;
@@ -1388,6 +1394,7 @@ function createCard(card) {
         autoplayToggle.classList.toggle('badge-secondary', paused);
         autoplayToggle.style.backgroundColor = paused ? '#6c757d' : '#157347';
         autoplayToggle.style.color = '#ffffff';
+        updateAutoplayLoop();
     }
 
     autoplayToggle.addEventListener('click', () => {
@@ -1449,6 +1456,12 @@ function createCard(card) {
     updateAutoplayControl();
 
     function scrollFeatured(timestamp) {
+        animationFrameId = null;
+        if (isPaused() || document.hidden || window.innerWidth <= 768) {
+            previousTimestamp = null;
+            return;
+        }
+
         if (previousTimestamp === null) {
             previousTimestamp = timestamp;
         }
@@ -1456,17 +1469,25 @@ function createCard(card) {
         const elapsed = timestamp - previousTimestamp;
         previousTimestamp = timestamp;
 
-        if (!isPaused() && window.innerWidth > 768) {
-            scrollSurface.scrollLeft += elapsed / 1000 * autoplayPixelsPerSecond;
-            normaliseScrollPosition();
+        scrollSurface.scrollLeft += elapsed / 1000 * autoplayPixelsPerSecond;
+        normaliseScrollPosition();
+
+        animationFrameId = window.requestAnimationFrame(scrollFeatured);
+    }
+
+    function updateAutoplayLoop() {
+        const shouldAnimate = !isPaused() && !document.hidden && window.innerWidth > 768;
+        if (shouldAnimate && animationFrameId === null && window.requestAnimationFrame) {
+            previousTimestamp = null;
+            animationFrameId = window.requestAnimationFrame(scrollFeatured);
+        } else if (!shouldAnimate && animationFrameId !== null) {
+            window.cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+            previousTimestamp = null;
         }
-
-        window.requestAnimationFrame(scrollFeatured);
     }
 
-    if (window.requestAnimationFrame) {
-        window.requestAnimationFrame(scrollFeatured);
-    }
+    document.addEventListener('visibilitychange', updateAutoplayLoop);
 
     })();
 })();
