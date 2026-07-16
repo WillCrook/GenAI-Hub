@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <title>Prompt Library</title>
+
+    <!--Constraints
+    Generate Moodle 4.x compatible HTML.
+
+Constraints:
+
+- Bootstrap version 4.6 allowed.
+- Inline styles allowed.
+- External JS allowed
+- No `<style>` tags.
+- No custom CSS classes.
+- No `<html>`, `<head>`, or `<body>` tags.
+- Avoid empty spans/icons that may be stripped.
+- Use Font Awesome Icons where needed.
+- Mobile responsive using Bootstrap grid only.
+- Modern style with student learning in mind.
+
+-->
+
+<!-- Copy below for moodle  -->
+
+<a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<nav class="navbar navbar-expand-lg bg-white border-bottom" aria-label="Primary navigation" style="backdrop-filter:blur(12px);">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center font-weight-bold mr-2" href="https://moodle.bath.ac.uk/course/section.php?id=277885" style="font-size:clamp(0.9rem,4vw,1.1rem);text-decoration:none;white-space:normal;max-width:calc(100% - 4rem);">
+            <div style="min-width:0;">
+                <div style="color:#094685;line-height:1.1;">GenAI &amp; Digital Skills Hub</div>
+                <small class="text-muted font-weight-normal" style="color:#4f5962!important;">University of Bath</small>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hubNav" aria-controls="hubNav" aria-expanded="false" aria-label="Toggle navigation" style="min-height:44px;">
+            <i class="fa-solid fa-bars" style="font-size:1.5rem;line-height:1;" aria-hidden="true">&#8203;</i>
+        </button>
+        <div class="collapse navbar-collapse" id="hubNav">
+            <ul class="navbar-nav ml-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967"><div style="color:#0056b3;">Learn AI</div></a></li>
+                <li class="nav-item"><a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969"><div style="color:#0056b3;">Challenges</div></a></li>
+                <li class="nav-item"><a class="nav-link px-3 py-3 font-weight-bold" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" aria-current="page"><div style="color:#094685;">Community</div></a></li>
+                <li class="nav-item"><a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972"><div style="color:#0056b3;">Using AI at Bath</div></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main id="main-content" tabindex="-1" style="overflow-wrap:anywhere;">
+<div class="container-fluid px-3 px-md-4 py-4 py-md-5" style="background:#ffffff;color:#0f172a;">
+    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:linear-gradient(135deg,#094685 0%,#082947 58%,#111827 100%);color:#ffffff;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-4 mb-lg-0">
+                    <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.82rem;">Prompt Library</div>
+                    <h1 class="display-4 font-weight-bold mb-3" style="font-size:clamp(2.25rem,8vw,4rem);line-height:1.05;">Prompts that keep you in control</h1>
+                    <p class="lead mb-4" style="max-width:760px;color:#e6eef8;">Discover practical starting points for study, research, writing, coding, careers and productivity. Adapt every prompt to your task and check the result.</p>
+                    <a href="#featured-prompts" class="btn btn-light btn-lg font-weight-bold px-4 py-3" style="color:#094685;border-radius:10px;">Browse prompts</a>
+                </div>
+                <div class="col-lg-5">
+                    <div class="p-4 shadow" style="background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.22);border-radius:16px;">
+                        <i class="fa-solid fa-book-open mb-3" style="color:#f5c242;font-size:2rem;line-height:1;" aria-hidden="true">&#8203;</i>
+                        <h2 class="h4 font-weight-bold">Use prompts as a conversation</h2>
+                        <p class="mb-0" style="color:#e6eef8;">Add context, question assumptions and ask for evidence. Your judgement remains the most important part.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <nav id="library-navigation" class="p-3 p-md-4 mb-4 mx-auto border shadow-sm" aria-label="Community libraries" style="width:100%;max-width:1140px;border-radius:12px;background:#f8fafc;">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center">
+                <strong class="mr-3 mb-2">Community libraries:</strong>
+                <!-- Add each future Moodle URL as an href and remove aria-disabled when available. -->
+                <a class="btn btn-primary btn-sm mr-2 mb-2" aria-current="page" style="background:#094685;border-color:#094685;">Prompt Library</a>
+                <a class="btn btn-outline-primary btn-sm mr-2 mb-2" aria-disabled="true" data-library-link="workflow-library">Workflow Library</a>
+                <a class="btn btn-outline-primary btn-sm mr-2 mb-2" aria-disabled="true" data-library-link="tool-review-library">Tool Reviews</a>
+                <a class="btn btn-outline-primary btn-sm mr-2 mb-2" aria-disabled="true" data-library-link="community-events">Community Events</a>
+                <a class="btn btn-outline-primary btn-sm mb-2" aria-disabled="true" data-library-link="student-showcase">Student Showcase</a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="p-3 p-md-4 mb-4 mx-auto border" aria-label="Prompt categories" style="width:100%;max-width:1140px;border-radius:12px;background:#ffffff;">
+        <div class="container d-flex flex-wrap">
+            <a href="#study" class="mr-3 mb-2 font-weight-bold" style="color:#094685;">Study</a>
+            <a href="#research" class="mr-3 mb-2 font-weight-bold" style="color:#094685;">Research</a>
+            <a href="#writing" class="mr-3 mb-2 font-weight-bold" style="color:#094685;">Writing</a>
+            <a href="#coding" class="mr-3 mb-2 font-weight-bold" style="color:#094685;">Coding</a>
+            <a href="#careers" class="mr-3 mb-2 font-weight-bold" style="color:#094685;">Careers</a>
+            <a href="#productivity" class="mb-2 font-weight-bold" style="color:#094685;">Productivity</a>
+        </div>
+    </nav>
+
+    <section id="featured-prompts" class="p-4 p-md-5 mb-4 mx-auto border shadow-sm" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
+        <div class="container">
+            <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:0.12em;color:#094685;font-size:0.78rem;">Featured prompts</div>
+            <h2 class="font-weight-bold mb-2">Choose a starting point</h2>
+            <p class="text-muted mb-4" style="color:#4f5962!important;">Each prompt opens a fuller guide. All guides are also available as ordinary page content below.</p>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4" id="study"><article data-resource-card="true" data-category="study" data-tool="approved-ai-assistant" data-difficulty="beginner" class="h-100 p-4 border shadow-sm d-flex flex-column" style="border-radius:12px;border-top:5px solid #f5c242!important;">
+                    <i class="fa-solid fa-graduation-cap mb-3" style="color:#094685;font-size:1.6rem;line-height:1;" aria-hidden="true">&#8203;</i><span class="badge badge-primary align-self-start mb-3">Study</span>
+                    <h3 class="h5 font-weight-bold">Socratic Revision Partner</h3><p class="text-muted">Test understanding one question at a time without being handed the answer immediately.</p><p><strong>Tools:</strong> Any approved assistant<br><strong>Level:</strong> Beginner<br><strong>Use:</strong> Active recall</p>
+                    <a href="#prompt-socratic" class="btn btn-primary mt-auto align-self-start" style="background:#094685;border-color:#094685;" data-resource-popout="true" data-resource-detail="prompt-socratic">View prompt</a>
+                </article></div>
+                <div class="col-md-6 col-lg-4 mb-4" id="research"><article data-resource-card="true" data-category="research" data-tool="source-aware-assistant" data-difficulty="intermediate" class="h-100 p-4 border shadow-sm d-flex flex-column" style="border-radius:12px;border-top:5px solid #f5c242!important;">
+                    <i class="fa-solid fa-magnifying-glass mb-3" style="color:#094685;font-size:1.6rem;line-height:1;" aria-hidden="true">&#8203;</i><span class="badge badge-primary align-self-start mb-3">Research</span>
+                    <h3 class="h5 font-weight-bold">Compare Research Sources</h3><p class="text-muted">Build a checked comparison of claims, evidence, limitations and disagreement.</p><p><strong>Tools:</strong> Source-aware assistant<br><strong>Level:</strong> Intermediate<br><strong>Use:</strong> Literature exploration</p>
+                    <a href="#prompt-sources" class="btn btn-primary mt-auto align-self-start" style="background:#094685;border-color:#094685;" data-resource-popout="true" data-resource-detail="prompt-sources">View prompt</a>
+                </article></div>
+                <div class="col-md-6 col-lg-4 mb-4" id="writing"><article data-resource-card="true" data-category="writing" data-tool="approved-ai-assistant" data-difficulty="beginner" class="h-100 p-4 border shadow-sm d-flex flex-column" style="border-radius:12px;border-top:5px solid #f5c242!important;">
+                    <i class="fa-solid fa-pen-to-square mb-3" style="color:#094685;font-size:1.6rem;line-height:1;" aria-hidden="true">&#8203;</i><span class="badge badge-primary align-self-start mb-3">Writing</span>
+                    <h3 class="h5 font-weight-bold">Structure Feedback Without Rewriting</h3><p class="text-muted">Get focused feedback while preserving your argument and academic voice.</p><p><strong>Tools:</strong> Any approved assistant<br><strong>Level:</strong> Beginner<br><strong>Use:</strong> Draft review</p>
+                    <a href="#prompt-writing" class="btn btn-primary mt-auto align-self-start" style="background:#094685;border-color:#094685;" data-resource-popout="true" data-resource-detail="prompt-writing">View prompt</a>
+                </article></div>
+                <div class="col-md-6 col-lg-4 mb-4" id="coding"><article data-resource-card="true" data-category="coding" data-tool="coding-assistant" data-difficulty="intermediate" class="h-100 p-4 border shadow-sm d-flex flex-column" style="border-radius:12px;border-top:5px solid #f5c242!important;">
+                    <i class="fa-solid fa-code mb-3" style="color:#094685;font-size:1.6rem;line-height:1;" aria-hidden="true">&#8203;</i><span class="badge badge-primary align-self-start mb-3">Coding</span>
+                    <h3 class="h5 font-weight-bold">Explain This Error</h3><p class="text-muted">Understand an error, identify a minimal fix and decide how to test it.</p><p><strong>Tools:</strong> Coding assistant<br><strong>Level:</strong> Intermediate<br><strong>Use:</strong> Debugging</p>
+                    <a href="#prompt-error" class="btn btn-primary mt-auto align-self-start" style="background:#094685;border-color:#094685;" data-resource-popout="true" data-resource-detail="prompt-error">View prompt</a>
+                </article></div>
+                <div class="col-md-6 col-lg-4 mb-4" id="careers"><article data-resource-card="true" data-category="careers" data-tool="approved-ai-assistant" data-difficulty="beginner" class="h-100 p-4 border shadow-sm d-flex flex-column" style="border-radius:12px;border-top:5px solid #f5c242!important;">
+                    <i class="fa-solid fa-briefcase mb-3" style="color:#094685;font-size:1.6rem;line-height:1;" aria-hidden="true">&#8203;</i><span class="badge badge-primary align-self-start mb-3">Careers</span>
+                    <h3 class="h5 font-weight-bold">Tailor Interview Preparation</h3><p class="text-muted">Turn a role description into realistic practice questions and evidence checks.</p><p><strong>Tools:</strong> Any approved assistant<br><strong>Level:</strong> Beginner<br><strong>Use:</strong> Interview practice</p>
+                    <a href="#prompt-interview" class="btn btn-primary mt-auto align-self-start" style="background:#094685;border-color:#094685;" data-resource-popout="true" data-resource-detail="prompt-interview">View prompt</a>
+                </article></div>
+                <div class="col-md-6 col-lg-4 mb-4" id="productivity"><article data-resource-card="true" data-category="productivity" data-tool="approved-ai-assistant" data-difficulty="beginner" class="h-100 p-4 border shadow-sm d-flex flex-column" style="border-radius:12px;border-top:5px solid #f5c242!important;">
+                    <i class="fa-solid fa-calendar-check mb-3" style="color:#094685;font-size:1.6rem;line-height:1;" aria-hidden="true">&#8203;</i><span class="badge badge-primary align-self-start mb-3">Productivity</span>
+                    <h3 class="h5 font-weight-bold">Plan a Realistic Study Week</h3><p class="text-muted">Balance deadlines, fixed commitments, focused work and genuine breaks.</p><p><strong>Tools:</strong> Any approved assistant<br><strong>Level:</strong> Beginner<br><strong>Use:</strong> Weekly planning</p>
+                    <a href="#prompt-week" class="btn btn-primary mt-auto align-self-start" style="background:#094685;border-color:#094685;" data-resource-popout="true" data-resource-detail="prompt-week">View prompt</a>
+                </article></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm" aria-labelledby="prompt-details-heading" style="width:100%;max-width:1140px;border-radius:1rem;background:#ffffff;">
+        <div class="container"><h2 id="prompt-details-heading" class="font-weight-bold mb-4">Prompt details</h2>
+            <article id="prompt-socratic" class="p-4 mb-4 border" style="border-radius:12px;background:#f8fafc;"><h3 class="h4 font-weight-bold">Socratic Revision Partner</h3><pre class="p-3 border" style="white-space:pre-wrap;background:#ffffff;border-radius:10px;color:#0f172a;">Act as a Socratic revision partner. Ask me one short question at a time about [topic], using [my notes or learning outcomes] as context. Wait for my answer, identify one gap kindly, then ask the next question. Do not reveal a full answer until I have attempted it.</pre><p><strong>Customise:</strong> [topic], [notes or learning outcomes], [difficulty].</p><p><strong>Use case:</strong> Active recall after reviewing a topic.</p><p><strong>Follow-up:</strong> “Summarise my three weakest areas and suggest what I should revisit first.”</p><p><strong>Reminder:</strong> Check explanations against your course materials.</p><button type="button" class="btn btn-primary" style="display:none;background:#094685;border-color:#094685;" data-copy-prompt="true">Copy prompt</button><span class="ml-3" role="status" aria-live="polite" data-copy-status="true">Select the prompt manually if copy is unavailable.</span></article>
+            <article id="prompt-sources" class="p-4 mb-4 border" style="border-radius:12px;background:#f8fafc;"><h3 class="h4 font-weight-bold">Compare Research Sources</h3><pre class="p-3 border" style="white-space:pre-wrap;background:#ffffff;border-radius:10px;color:#0f172a;">Compare [source A], [source B] and [source C]. For each, identify the main claim, evidence, method, limitations and publication context. Show agreement and disagreement in a table. Do not invent missing information; mark it as unknown.</pre><p><strong>Customise:</strong> Sources, research question and comparison criteria.</p><p><strong>Use case:</strong> Organising reading before writing your own synthesis.</p><p><strong>Follow-up:</strong> “Which claims must I verify in the original sources?”</p><p><strong>Reminder:</strong> Read and cite the originals, not the generated comparison.</p><button type="button" class="btn btn-primary" style="display:none;background:#094685;border-color:#094685;" data-copy-prompt="true">Copy prompt</button><span class="ml-3" role="status" aria-live="polite" data-copy-status="true">Select the prompt manually if copy is unavailable.</span></article>
+            <article id="prompt-writing" class="p-4 mb-4 border" style="border-radius:12px;background:#f8fafc;"><h3 class="h4 font-weight-bold">Structure Feedback Without Rewriting</h3><pre class="p-3 border" style="white-space:pre-wrap;background:#ffffff;border-radius:10px;color:#0f172a;">Review my draft against [assignment question or purpose]. Identify the strongest point, the biggest gap and three improvements to structure or clarity. Explain what I should change, but do not rewrite the draft or imitate a different voice.</pre><p><strong>Customise:</strong> Draft, task, audience and marking criteria.</p><p><strong>Use case:</strong> Developmental feedback on your own writing.</p><p><strong>Follow-up:</strong> “Turn the improvements into a revision checklist without adding new claims.”</p><p><strong>Reminder:</strong> Retain authorship and follow assessment guidance.</p><button type="button" class="btn btn-primary" style="display:none;background:#094685;border-color:#094685;" data-copy-prompt="true">Copy prompt</button><span class="ml-3" role="status" aria-live="polite" data-copy-status="true">Select the prompt manually if copy is unavailable.</span></article>
+            <article id="prompt-error" class="p-4 mb-4 border" style="border-radius:12px;background:#f8fafc;"><h3 class="h4 font-weight-bold">Explain This Error</h3><pre class="p-3 border" style="white-space:pre-wrap;background:#ffffff;border-radius:10px;color:#0f172a;">Explain this [language or tool] error in plain English: [exact error]. Using only [small relevant code sample], identify the smallest likely fix, explain why it works and suggest one test. Do not rewrite unrelated code.</pre><p><strong>Customise:</strong> Language, exact error, code and expected behaviour.</p><p><strong>Use case:</strong> Understanding a debugging step.</p><p><strong>Follow-up:</strong> “What assumption could make this fix wrong?”</p><p><strong>Reminder:</strong> Remove secrets and test every suggestion yourself.</p><button type="button" class="btn btn-primary" style="display:none;background:#094685;border-color:#094685;" data-copy-prompt="true">Copy prompt</button><span class="ml-3" role="status" aria-live="polite" data-copy-status="true">Select the prompt manually if copy is unavailable.</span></article>
+            <article id="prompt-interview" class="p-4 mb-4 border" style="border-radius:12px;background:#f8fafc;"><h3 class="h4 font-weight-bold">Tailor Interview Preparation</h3><pre class="p-3 border" style="white-space:pre-wrap;background:#ffffff;border-radius:10px;color:#0f172a;">Using this [role description] and my [experience notes], create six realistic interview questions. Ask one at a time, wait for my answer, then give feedback on evidence and clarity. Do not invent experience I have not supplied.</pre><p><strong>Customise:</strong> Role description, experience and interview format.</p><p><strong>Use case:</strong> Practising evidence-based answers.</p><p><strong>Follow-up:</strong> “Which answer needs a stronger example from my real experience?”</p><p><strong>Reminder:</strong> Keep examples truthful and in your own words.</p><button type="button" class="btn btn-primary" style="display:none;background:#094685;border-color:#094685;" data-copy-prompt="true">Copy prompt</button><span class="ml-3" role="status" aria-live="polite" data-copy-status="true">Select the prompt manually if copy is unavailable.</span></article>
+            <article id="prompt-week" class="p-4 border" style="border-radius:12px;background:#f8fafc;"><h3 class="h4 font-weight-bold">Plan a Realistic Study Week</h3><pre class="p-3 border" style="white-space:pre-wrap;background:#ffffff;border-radius:10px;color:#0f172a;">Help me plan a realistic week around [deadlines], [fixed commitments] and [available hours]. Break work into small tasks, include breaks and contingency time, and flag anything unrealistic. Ask before assuming priorities.</pre><p><strong>Customise:</strong> Deadlines, commitments, available time and priorities.</p><p><strong>Use case:</strong> Creating an adjustable weekly plan.</p><p><strong>Follow-up:</strong> “What should I move if one task takes twice as long?”</p><p><strong>Reminder:</strong> Review the plan daily and protect rest time.</p><button type="button" class="btn btn-primary" style="display:none;background:#094685;border-color:#094685;" data-copy-prompt="true">Copy prompt</button><span class="ml-3" role="status" aria-live="polite" data-copy-status="true">Select the prompt manually if copy is unavailable.</span></article>
+        </div>
+    </section>
+
+    <section class="p-4 p-md-5 mx-auto text-center text-white shadow" style="width:100%;max-width:1140px;border-radius:16px;background:linear-gradient(135deg,#094685,#111827);border-top:6px solid #f5c242;">
+        <h2 class="font-weight-bold">Have a prompt worth sharing?</h2><p class="lead mx-auto" style="max-width:720px;color:#e6eef8;">Submission details will be added when the Community library destinations are confirmed.</p><a href="#library-navigation" class="btn btn-light btn-lg rounded-pill font-weight-bold" style="color:#094685;">Return to library navigation</a>
+    </section>
+</div>
+</main>
+
+<script>
+(function () {
+    var triggers = document.querySelectorAll('[data-resource-popout="true"]');
+    var active = null;
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function rectForTarget() { var gap = window.innerWidth < 576 ? 12 : 24; var width = Math.min(960, window.innerWidth - gap * 2); var height = Math.min(800, window.innerHeight - gap * 2); return { left:(window.innerWidth-width)/2, top:(window.innerHeight-height)/2, width:width, height:height }; }
+    function applyRect(element, rect) { element.style.left=rect.left+'px'; element.style.top=rect.top+'px'; element.style.width=rect.width+'px'; element.style.height=rect.height+'px'; }
+    function focusable(container) { return Array.prototype.slice.call(container.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])')); }
+    function animate(dialog, from, to, done) { applyRect(dialog, from); if (reducedMotion.matches || !dialog.animate) { applyRect(dialog,to); done(); return; } var motion=dialog.animate([{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px',borderRadius:'12px'},{left:to.left+'px',top:to.top+'px',width:to.width+'px',height:to.height+'px',borderRadius:'16px'}],{duration:340,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'}); motion.onfinish=function(){applyRect(dialog,to);done();}; }
+    function closePopout(immediate) { if (!active) return; var closing=active; active=null; document.removeEventListener('keydown',trap); closing.backdrop.style.background='rgba(8,41,71,0)'; function finish(){closing.dialog.remove();closing.backdrop.remove();closing.card.style.opacity='';closing.card.style.pointerEvents='';document.body.style.overflow=closing.overflow;closing.trigger.focus();} if(immediate||reducedMotion.matches){finish();return;} animate(closing.dialog,rectForTarget(),closing.start,finish); }
+    function trap(event) { if(!active)return; if(event.key==='Escape'){event.preventDefault();closePopout();return;} if(event.key!=='Tab')return; var items=focusable(active.dialog); if(!items.length)return; if(event.shiftKey&&document.activeElement===items[0]){event.preventDefault();items[items.length-1].focus();}else if(!event.shiftKey&&document.activeElement===items[items.length-1]){event.preventDefault();items[0].focus();} }
+    function bindCopy(scope) { var buttons=scope.querySelectorAll('[data-copy-prompt="true"]'); for(var i=0;i<buttons.length;i+=1){(function(button){button.style.display='inline-block';button.addEventListener('click',function(){var article=button.closest('article');var prompt=article&&article.querySelector('pre');var status=article&&article.querySelector('[data-copy-status="true"]');if(!prompt||!status)return;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(prompt.textContent).then(function(){status.textContent='Prompt copied.';}).catch(function(){status.textContent='Copy failed. Select the prompt manually.';});}else{status.textContent='Clipboard unavailable. Select the prompt manually.';}});})(buttons[i]);} }
+    function openPopout(trigger) { if(active)closePopout(true); var detail=document.getElementById(trigger.getAttribute('data-resource-detail'));if(!detail)return;var card=trigger.closest('[data-resource-card="true"]')||trigger;var source=card.getBoundingClientRect();var start={left:source.left,top:source.top,width:source.width,height:source.height};var backdrop=document.createElement('div');var dialog=document.createElement('div');var header=document.createElement('div');var heading=document.createElement('h2');var close=document.createElement('button');var body=document.createElement('div');var clone=detail.cloneNode(true);clone.removeAttribute('id');backdrop.style.cssText='position:fixed;inset:0;z-index:1040;background:rgba(8,41,71,0);transition:'+(reducedMotion.matches?'none':'background-color .24s ease')+';';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-labelledby','library-popout-title');dialog.style.cssText='position:fixed;z-index:1050;display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#0f172a;border:1px solid #dee2e6;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.28);';header.style.cssText='display:flex;align-items:flex-start;justify-content:space-between;padding:1.25rem;background:linear-gradient(135deg,#094685,#111827);border-top:6px solid #f5c242;color:#fff;';heading.id='library-popout-title';heading.className='h3 font-weight-bold mb-0';heading.textContent=(card.querySelector('h3')||detail.querySelector('h3')).textContent;close.type='button';close.className='btn btn-light rounded-pill font-weight-bold ml-3';close.innerHTML='<i class="fa-solid fa-xmark mr-2" aria-hidden="true">&#8203;</i>Close';body.style.cssText='overflow:auto;min-height:0;padding:1.25rem;';body.appendChild(clone);header.appendChild(heading);header.appendChild(close);dialog.appendChild(header);dialog.appendChild(body);backdrop.addEventListener('click',function(){closePopout();});close.addEventListener('click',function(){closePopout();});document.body.appendChild(backdrop);document.body.appendChild(dialog);var overflow=document.body.style.overflow;document.body.style.overflow='hidden';card.style.opacity='0';card.style.pointerEvents='none';active={backdrop:backdrop,dialog:dialog,card:card,trigger:trigger,start:start,overflow:overflow};document.addEventListener('keydown',trap);bindCopy(dialog);window.requestAnimationFrame(function(){if(!active)return;backdrop.style.background='rgba(8,41,71,.76)';animate(dialog,start,rectForTarget(),function(){close.focus();});}); }
+    for(var i=0;i<triggers.length;i+=1){triggers[i].setAttribute('aria-haspopup','dialog');triggers[i].addEventListener('click',function(event){event.preventDefault();openPopout(this);});}
+    bindCopy(document);
+    window.addEventListener('resize',function(){if(active)applyRect(active.dialog,rectForTarget());});
+})();
+</script>
