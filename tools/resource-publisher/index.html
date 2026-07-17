@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.sheetjs.com; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <title>Excel-to-Moodle Resource Publisher</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to publisher</a>
+
+    <header class="site-header">
+        <div class="shell header-layout">
+            <div>
+                <p class="eyebrow">University of Bath staff tool</p>
+                <h1>Excel-to-Moodle Resource Publisher</h1>
+                <p class="intro">Validate an Excel workbook, preview published resources and download one Moodle-ready <code>resources.json</code> file.</p>
+            </div>
+            <div class="privacy-badge" aria-label="Privacy information">
+                <span class="privacy-icon" aria-hidden="true">✓</span>
+                <span><strong>Local processing</strong><br>Your workbook stays in this browser.</span>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="shell main-layout">
+        <nav class="workflow-nav" aria-label="Publishing stages">
+            <ol>
+                <li class="is-current" data-stage-indicator="upload"><span>1</span> Upload</li>
+                <li data-stage-indicator="validate"><span>2</span> Validate</li>
+                <li data-stage-indicator="preview"><span>3</span> Preview</li>
+                <li data-stage-indicator="export"><span>4</span> Export</li>
+            </ol>
+        </nav>
+
+        <section class="panel" id="upload-stage" aria-labelledby="upload-heading">
+            <div class="section-heading">
+                <div>
+                    <p class="stage-label">Stage 1</p>
+                    <h2 id="upload-heading">Upload workbook</h2>
+                </div>
+                <a class="button button-secondary" href="workbook-template.xlsx" download>Download workbook template</a>
+            </div>
+
+            <p>Choose the completed <code>.xlsx</code> template. The file is read in browser memory and is never uploaded, stored remotely or sent to analytics.</p>
+
+            <div class="drop-zone" id="drop-zone">
+                <label for="workbook-file" class="drop-zone-label">
+                    <span class="drop-zone-icon" aria-hidden="true">⇧</span>
+                    <span class="drop-zone-title">Drop an Excel workbook here</span>
+                    <span class="drop-zone-copy">or choose a file from your device</span>
+                    <span class="button button-primary">Choose .xlsx file</span>
+                </label>
+                <input id="workbook-file" class="visually-hidden" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            </div>
+            <p id="selected-file" class="selected-file" aria-live="polite">No workbook selected.</p>
+            <div id="library-status" class="notice notice-error" role="alert" hidden></div>
+        </section>
+
+        <section class="panel" id="validate-stage" aria-labelledby="validate-heading">
+            <div class="section-heading">
+                <div>
+                    <p class="stage-label">Stage 2</p>
+                    <h2 id="validate-heading">Validate workbook</h2>
+                </div>
+            </div>
+            <div id="validation-empty" class="empty-state">
+                <p>Upload a workbook to check its sheets, headers, references and resource content.</p>
+            </div>
+            <div id="validation-results" hidden>
+                <div id="validation-summary" class="validation-summary" role="status" aria-live="polite"></div>
+                <div id="validation-issues"></div>
+            </div>
+        </section>
+
+        <section class="panel" id="preview-stage" aria-labelledby="preview-heading" hidden>
+            <div class="section-heading preview-heading-layout">
+                <div>
+                    <p class="stage-label">Stage 3</p>
+                    <h2 id="preview-heading">Preview published resources</h2>
+                    <p id="preview-count" class="muted" aria-live="polite"></p>
+                </div>
+                <div class="filters" aria-label="Preview filters">
+                    <div class="field">
+                        <label for="kind-filter">Kind</label>
+                        <select id="kind-filter">
+                            <option value="">All kinds</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="tag-filter">Tag</label>
+                        <select id="tag-filter">
+                            <option value="">All tags</option>
+                            <option value="lifelong">Lifelong</option>
+                            <option value="workplace">Workplace</option>
+                            <option value="academic">Academic</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="resource-grid" class="resource-grid"></div>
+            <div id="preview-empty" class="empty-state" hidden>
+                <p>No published resources match these filters.</p>
+            </div>
+        </section>
+
+        <section class="panel export-panel" id="export-stage" aria-labelledby="export-heading" hidden>
+            <div>
+                <p class="stage-label">Stage 4</p>
+                <h2 id="export-heading">Export resources</h2>
+                <p>Download every published resource in one validated JSON file. Preview filters do not affect the export.</p>
+                <p id="export-summary" class="export-summary"></p>
+            </div>
+            <button class="button button-gold" id="download-json" type="button">Download resources.json</button>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="shell">
+            <p>This is a local browser-based publishing utility. Moodle remains the production host.</p>
+        </div>
+    </footer>
+
+    <dialog id="resource-dialog" class="resource-dialog" aria-labelledby="dialog-title">
+        <div class="dialog-header">
+            <div>
+                <p id="dialog-kind" class="dialog-kind"></p>
+                <h2 id="dialog-title"></h2>
+            </div>
+            <button id="dialog-close" class="dialog-close" type="button" aria-label="Close resource details">×</button>
+        </div>
+        <div id="dialog-content" class="dialog-content"></div>
+    </dialog>
+</body>
+</html>
