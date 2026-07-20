@@ -1336,9 +1336,7 @@ const featuredCards = [
 
     {
 
-        tag: "ACADEMIC",
-
-        colour: "primary",
+        skill: "academic",
 
         title: "Source Sense Challenge",
 
@@ -1354,9 +1352,7 @@ const featuredCards = [
 
     {
 
-        tag: "WORKPLACE",
-
-        colour: "warning",
+        skill: "workplace",
 
         title: "Placement Pitch Challenge",
 
@@ -1372,9 +1368,7 @@ const featuredCards = [
 
     {
 
-        tag: "CREATIVE",
-
-        colour: "success",
+        skill: "lifelong",
 
         title: "Creative Brief Sprint",
 
@@ -1390,9 +1384,7 @@ const featuredCards = [
 
     {
 
-        tag: "PRODUCTIVITY",
-
-        colour: "primary",
+        skill: "workplace",
 
         title: "Workflow Fix Challenge",
 
@@ -1407,6 +1399,12 @@ const featuredCards = [
     }
 ];
 
+const skillColours = {
+    academic: "#15803D",
+    workplace: "#2563EB",
+    lifelong: "#7C3AED"
+};
+
 function createCard(card) {
 
     return `
@@ -1418,9 +1416,9 @@ function createCard(card) {
 
                 style="min-height:380px;">
 
-                <span class="badge badge-${card.colour} rounded-pill align-self-start" style="${card.colour === 'success' ? 'background-color:#157347;color:#ffffff;' : card.colour === 'primary' ? 'background-color:#0056b3;color:#ffffff;' : ''}">
+                <span class="badge rounded-pill align-self-start" style="background-color:${skillColours[card.skill]};color:#ffffff;">
 
-                    ${card.tag}
+                    ${card.skill.toUpperCase()}
 
                 </span>
 

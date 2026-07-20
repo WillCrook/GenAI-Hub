@@ -1139,9 +1139,7 @@ const featuredCards = [
 
     {
 
-        tag: "ACADEMIC",
-
-        colour: "primary",
+        skill: "academic",
 
         title: "Academic Research",
 
@@ -1157,9 +1155,7 @@ const featuredCards = [
 
     {
 
-        tag: "ESSENTIAL",
-
-        colour: "warning",
+        skill: "academic",
 
         title: "Prompting Foundations",
 
@@ -1175,9 +1171,7 @@ const featuredCards = [
 
     {
 
-        tag: "STUDY",
-
-        colour: "success",
+        skill: "academic",
 
         title: "Revision and Understanding",
 
@@ -1193,9 +1187,7 @@ const featuredCards = [
 
     {
 
-        tag: "CAREERS",
-
-        colour: "primary",
+        skill: "workplace",
 
         title: "AI for Placements",
 
@@ -1210,6 +1202,12 @@ const featuredCards = [
     }
 ];
 
+const skillColours = {
+    academic: "#15803D",
+    workplace: "#2563EB",
+    lifelong: "#7C3AED"
+};
+
 function createCard(card) {
 
     return `
@@ -1221,9 +1219,9 @@ function createCard(card) {
 
                 style="min-height:380px;">
 
-                <span class="badge badge-${card.colour} rounded-pill align-self-start" style="${card.colour === 'success' ? 'background-color:#157347;color:#ffffff;' : card.colour === 'primary' ? 'background-color:#0056b3;color:#ffffff;' : ''}">
+                <span class="badge rounded-pill align-self-start" style="background-color:${skillColours[card.skill]};color:#ffffff;">
 
-                    ${card.tag}
+                    ${card.skill.toUpperCase()}
 
                 </span>
 
