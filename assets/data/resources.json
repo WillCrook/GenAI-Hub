@@ -1,0 +1,427 @@
+{
+  "schemaVersion": "1.0",
+  "lastUpdated": "2026-07-21T10:59:44.015Z",
+  "resources": [
+    {
+      "id": "prompt-critical-reading",
+      "type": "prompt",
+      "title": "Critically review a source",
+      "summary": "Use a structured prompt to test the strength of an argument.",
+      "author": {
+        "name": "Dr Amina Shah",
+        "organisation": "University of Bath",
+        "course": "",
+        "yearOfStudy": ""
+      },
+      "datePublished": "2026-06-30",
+      "dateUpdated": "2026-07-17",
+      "librarySection": "learn-ai",
+      "skillAreas": [
+        "academic",
+        "lifelong"
+      ],
+      "tags": [
+        "critical-thinking",
+        "study"
+      ],
+      "featured": true,
+      "published": true,
+      "thumbnail": {
+        "src": "",
+        "alt": ""
+      },
+      "content": {
+        "purpose": "Evaluate claims and evidence",
+        "promptText": "Review the following argument. Identify its central claim, supporting evidence, assumptions, and plausible counterarguments.\n\nArgument: [paste text here]",
+        "platforms": [
+          "ChatGPT",
+          "Microsoft Copilot"
+        ],
+        "modelsTested": [
+          "GPT-5",
+          "o3"
+        ],
+        "reasoningMode": "either",
+        "usageNotes": "Verify important claims against the original source; do not treat the response as authoritative."
+      }
+    },
+    {
+      "id": "workflow-research-question",
+      "type": "workflow",
+      "title": "Develop a research question",
+      "summary": "Move from a broad interest to a focused, testable research question.",
+      "author": {
+        "name": "Learning and Teaching",
+        "organisation": "University of Bath",
+        "course": "",
+        "yearOfStudy": ""
+      },
+      "datePublished": "2026-06-19",
+      "dateUpdated": "2026-07-18",
+      "librarySection": "challenges",
+      "skillAreas": [
+        "academic"
+      ],
+      "tags": [
+        "research",
+        "planning"
+      ],
+      "featured": true,
+      "published": true,
+      "thumbnail": {
+        "src": "",
+        "alt": ""
+      },
+      "content": {
+        "goal": "Produce one focused research question",
+        "steps": [
+          {
+            "stepNumber": 1,
+            "title": "Define the topic",
+            "description": "Write the topic, intended audience, and the decision or problem the research should inform."
+          },
+          {
+            "stepNumber": 2,
+            "title": "Test the scope",
+            "description": "Check whether the question is answerable with the available time, methods, and evidence."
+          },
+          {
+            "stepNumber": 3,
+            "title": "Refine and verify",
+            "description": "Rewrite the question, then ask a tutor or peer to challenge its assumptions."
+          }
+        ],
+        "reflection": "Record what changed and which assumptions still need evidence.",
+        "estimatedTotalMinutes": 25,
+        "complexityScore": 3
+      }
+    },
+    {
+      "id": "tool-microsoft-copilot",
+      "type": "tool",
+      "title": "Microsoft Copilot",
+      "summary": "A concise review of an institutionally available AI assistant.",
+      "author": {
+        "name": "Digital Skills",
+        "organisation": "University of Bath",
+        "course": "",
+        "yearOfStudy": ""
+      },
+      "datePublished": "2026-05-14",
+      "dateUpdated": "2026-07-19",
+      "librarySection": "learn-ai",
+      "skillAreas": [
+        "workplace",
+        "lifelong"
+      ],
+      "tags": [
+        "assistant",
+        "productivity"
+      ],
+      "featured": false,
+      "published": true,
+      "thumbnail": {
+        "src": "",
+        "alt": ""
+      },
+      "content": {
+        "company": "Microsoft",
+        "toolUrl": "https://copilot.microsoft.com/",
+        "rating": 5,
+        "overview": "Useful for drafting, summarising, and exploring ideas when used with appropriate verification.",
+        "strengths": [
+          "Institutional access",
+          "Web search grounding"
+        ],
+        "weaknesses": [
+          "Outputs can be inaccurate",
+          "Features vary by account"
+        ],
+        "pricing": {
+          "model": "institutional",
+          "cost": 0
+        },
+        "platformTypes": [
+          "web",
+          "mobile"
+        ],
+        "accessibilityNotes": "Keyboard access and screen-reader behaviour should be checked for each feature.",
+        "privacyNotes": "Do not enter confidential, personal, or restricted University information unless the approved service terms allow it.",
+        "reviewVerdict": "Useful when the task, data classification, and verification approach are clear."
+      }
+    },
+    {
+      "id": "article-check-ai-output",
+      "type": "article",
+      "title": "A practical AI output checklist",
+      "summary": "A short checklist for reviewing generated content before using or sharing it.",
+      "author": {
+        "name": "GenAI Hub team",
+        "organisation": "University of Bath",
+        "course": "",
+        "yearOfStudy": ""
+      },
+      "datePublished": "2026-04-09",
+      "dateUpdated": "2026-07-16",
+      "librarySection": "learn-ai",
+      "skillAreas": [
+        "academic",
+        "workplace",
+        "lifelong"
+      ],
+      "tags": [
+        "verification",
+        "responsible-use"
+      ],
+      "featured": true,
+      "published": true,
+      "thumbnail": {
+        "src": "",
+        "alt": ""
+      },
+      "content": {
+        "body": "Pause before using the output.\n\nCheck factual claims against reliable sources. Look for missing perspectives, invented references, and over-confident language.\n\nEdit the result so it reflects your own purpose and judgement — especially where context matters.",
+        "readingTimeMinutes": 4,
+        "sourceUrl": "https://www.bath.ac.uk/guides/using-generative-ai-tools/"
+      }
+    },
+    {
+      "id": "video-ai-foundations",
+      "type": "video",
+      "title": "AI foundations in five minutes",
+      "summary": "A brief introduction to generative AI and responsible use.",
+      "author": {
+        "name": "GenAI Hub team",
+        "organisation": "University of Bath",
+        "course": "",
+        "yearOfStudy": ""
+      },
+      "datePublished": "2026-03-05",
+      "dateUpdated": "2026-07-15",
+      "librarySection": "learn-ai",
+      "skillAreas": [
+        "lifelong"
+      ],
+      "tags": [
+        "foundations",
+        "video"
+      ],
+      "featured": false,
+      "published": true,
+      "thumbnail": {
+        "src": "",
+        "alt": ""
+      },
+      "content": {
+        "provider": "Panopto",
+        "videoUrl": "https://uniofbath.cloud.panopto.eu/",
+        "embedUrl": "https://uniofbath.cloud.panopto.eu/",
+        "durationSeconds": 300
+      }
+    },
+    {
+      "id": "download-prompt-planner",
+      "type": "download",
+      "title": "Prompt planning worksheet",
+      "summary": "A reusable worksheet for planning purpose, context, constraints, and checks.",
+      "author": {
+        "name": "Digital Skills",
+        "organisation": "University of Bath",
+        "course": "",
+        "yearOfStudy": ""
+      },
+      "datePublished": "2026-01-20",
+      "dateUpdated": "2026-07-13",
+      "librarySection": "challenges",
+      "skillAreas": [
+        "academic",
+        "workplace"
+      ],
+      "tags": [
+        "worksheet",
+        "planning"
+      ],
+      "featured": false,
+      "published": true,
+      "thumbnail": {
+        "src": "",
+        "alt": ""
+      },
+      "content": {
+        "fileUrl": "https://www.bath.ac.uk/publications/",
+        "fileName": "prompt-planning-worksheet.docx",
+        "fileFormat": "DOCX",
+        "fileSizeBytes": null,
+        "version": "1.0",
+        "description": "Download and adapt the worksheet for your own context."
+      }
+    },
+    {
+      "id": "event-online-clinic",
+      "type": "event",
+      "title": "Online GenAI clinic",
+      "summary": "Bring questions about safe and effective AI use.",
+      "author": {
+        "name": "Digital Skills",
+        "organisation": "University of Bath",
+        "course": "",
+        "yearOfStudy": ""
+      },
+      "datePublished": "2026-06-30",
+      "dateUpdated": "2026-07-20",
+      "librarySection": "community",
+      "skillAreas": [
+        "workplace",
+        "lifelong"
+      ],
+      "tags": [
+        "event",
+        "support"
+      ],
+      "featured": true,
+      "published": true,
+      "thumbnail": {
+        "src": "",
+        "alt": ""
+      },
+      "content": {
+        "host": "Digital Skills",
+        "startDateTime": "2026-09-10T10:00:00+01:00",
+        "endDateTime": "2026-09-10T11:00:00+01:00",
+        "timezone": "Europe/London",
+        "locationType": "online",
+        "location": "",
+        "onlineUrl": "https://teams.microsoft.com/",
+        "description": "An online question-and-answer session.",
+        "capacity": 50,
+        "bookingUrl": "https://www.bath.ac.uk/events/",
+        "bookingRequired": true
+      }
+    },
+    {
+      "id": "event-campus-workshop",
+      "type": "event",
+      "title": "Campus prompt workshop",
+      "summary": "Practise writing and testing prompts with colleagues.",
+      "author": {
+        "name": "Digital Skills",
+        "organisation": "University of Bath",
+        "course": "",
+        "yearOfStudy": ""
+      },
+      "datePublished": "2026-07-01",
+      "dateUpdated": "2026-07-20",
+      "librarySection": "community",
+      "skillAreas": [
+        "academic",
+        "workplace"
+      ],
+      "tags": [
+        "event",
+        "workshop"
+      ],
+      "featured": false,
+      "published": true,
+      "thumbnail": {
+        "src": "",
+        "alt": ""
+      },
+      "content": {
+        "host": "Digital Skills",
+        "startDateTime": "2026-09-12T14:00:00+01:00",
+        "endDateTime": "2026-09-12T16:00:00+01:00",
+        "timezone": "Europe/London",
+        "locationType": "in-person",
+        "location": "University of Bath campus",
+        "onlineUrl": "",
+        "description": "A practical workshop with guided activities.",
+        "capacity": 24,
+        "bookingUrl": "https://www.bath.ac.uk/events/",
+        "bookingRequired": true
+      }
+    },
+    {
+      "id": "event-hybrid-showcase",
+      "type": "event",
+      "title": "Hybrid digital skills showcase",
+      "summary": "See examples from the University community and discuss transferable lessons.",
+      "author": {
+        "name": "GenAI Hub team",
+        "organisation": "University of Bath",
+        "course": "",
+        "yearOfStudy": ""
+      },
+      "datePublished": "2026-07-02",
+      "dateUpdated": "2026-07-20",
+      "librarySection": "community",
+      "skillAreas": [
+        "academic",
+        "workplace",
+        "lifelong"
+      ],
+      "tags": [
+        "event",
+        "showcase"
+      ],
+      "featured": false,
+      "published": true,
+      "thumbnail": {
+        "src": "",
+        "alt": ""
+      },
+      "content": {
+        "host": "GenAI Hub team",
+        "startDateTime": "2026-09-18T13:00:00+01:00",
+        "endDateTime": "2026-09-18T14:30:00+01:00",
+        "timezone": "Europe/London",
+        "locationType": "hybrid",
+        "location": "The Edge, University of Bath",
+        "onlineUrl": "https://teams.microsoft.com/",
+        "description": "Attend on campus or online.",
+        "capacity": 100,
+        "bookingUrl": "https://www.bath.ac.uk/events/",
+        "bookingRequired": false
+      }
+    },
+    {
+      "id": "showcase-accessible-summary",
+      "type": "showcase",
+      "title": "Creating an accessible project summary",
+      "summary": "A student team combined AI assistance with human review to improve a project summary.",
+      "author": {
+        "name": "Maya O’Connor",
+        "organisation": "University of Bath",
+        "course": "BSc Management",
+        "yearOfStudy": "2"
+      },
+      "datePublished": "2026-05-31",
+      "dateUpdated": "2026-07-12",
+      "librarySection": "community",
+      "skillAreas": [
+        "academic",
+        "workplace"
+      ],
+      "tags": [
+        "student",
+        "accessibility"
+      ],
+      "featured": true,
+      "published": true,
+      "thumbnail": {
+        "src": "",
+        "alt": ""
+      },
+      "content": {
+        "problem": "The original summary was too technical for its intended audience.",
+        "approach": "The team mapped audience needs, drafted alternatives, and tested the final wording with people.",
+        "outcome": "The revised summary was clearer while preserving important detail.",
+        "reflection": "AI accelerated alternatives, but audience testing produced the most useful changes.",
+        "toolsUsed": [
+          "Microsoft Copilot",
+          "Word Accessibility Checker"
+        ],
+        "projectUrl": "https://www.bath.ac.uk/campaigns/becoming-a-digitally-enabled-university/"
+      }
+    }
+  ]
+}
