@@ -1,0 +1,1337 @@
+/* Consolidated JSON resource runtime for the GenAI Hub. */
+(function (window, document) {
+    'use strict';
+
+    var hub = window.GenAIHub || {};
+    if (hub.resources) return;
+
+    var runtimeScript = document.currentScript;
+    var DATA_URL = runtimeScript && runtimeScript.getAttribute('data-resource-source')
+        ? runtimeScript.getAttribute('data-resource-source')
+        : 'https://willcrook.github.io/GenAI-Hub/assets/data/resources.json';
+    var SCHEMA_VERSION = '1.1';
+    var RESOURCE_TYPES = ['prompt', 'workflow', 'tool', 'article', 'video', 'link', 'download', 'event', 'showcase'];
+    var LIBRARY_SECTIONS = ['learn-ai', 'challenges', 'community'];
+    var SKILL_AREAS = ['academic', 'workplace', 'lifelong'];
+    var REASONING_MODES = ['standard', 'reasoning', 'either', 'not-applicable'];
+    var PRICING_MODELS = ['free', 'freemium', 'paid', 'institutional', 'unknown'];
+    var PLATFORM_TYPES = ['web', 'desktop', 'mobile', 'browser-extension', 'API'];
+    var LOCATION_TYPES = ['in-person', 'online', 'hybrid'];
+    var SECTION_TYPES = {
+        'learn-ai': ['article', 'video', 'link', 'download'],
+        challenges: ['article', 'video', 'link', 'download'],
+        community: ['prompt', 'workflow', 'tool', 'event', 'showcase']
+    };
+    var ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+    var DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+    var loadedData = null;
+    var resourceIndex = Object.create(null);
+    var inFlightRequest = null;
+
+    function invalid(path, message) {
+        throw new Error('Invalid resource data at ' + path + ': ' + message);
+    }
+
+    function isObject(value) {
+        return value !== null && typeof value === 'object' && !Array.isArray(value);
+    }
+
+    function requireObject(value, path) {
+        if (!isObject(value)) invalid(path, 'expected an object.');
+        return value;
+    }
+
+    function requireString(value, path, allowEmpty) {
+        if (typeof value !== 'string') invalid(path, 'expected a string.');
+        if (!allowEmpty && !value.trim()) invalid(path, 'must not be empty.');
+        return value;
+    }
+
+    function requireBoolean(value, path) {
+        if (typeof value !== 'boolean') invalid(path, 'expected a boolean.');
+        return value;
+    }
+
+    function requireNumberOrNull(value, path, integer) {
+        if (value === null) return value;
+        if (typeof value !== 'number' || !isFinite(value) || value < 0) {
+            invalid(path, 'expected a non-negative number or null.');
+        }
+        if (integer && Math.floor(value) !== value) invalid(path, 'expected a whole number or null.');
+        return value;
+    }
+
+    function requirePositiveIntegerOrNull(value, path) {
+        if (value === null) return value;
+        if (typeof value !== 'number' || !isFinite(value) || Math.floor(value) !== value || value <= 0) {
+            invalid(path, 'expected a positive whole number or null.');
+        }
+        return value;
+    }
+
+    function requireEnum(value, allowed, path) {
+        requireString(value, path, false);
+        if (allowed.indexOf(value) === -1) invalid(path, 'unsupported value "' + value + '".');
+        return value;
+    }
+
+    function requireStringArray(value, path, allowed) {
+        if (!Array.isArray(value)) invalid(path, 'expected an array.');
+        value.forEach(function (item, index) {
+            requireString(item, path + '[' + index + ']', false);
+            if (allowed && allowed.indexOf(item) === -1) {
+                invalid(path + '[' + index + ']', 'unsupported value "' + item + '".');
+            }
+        });
+        return value;
+    }
+
+    function requireDate(value, path) {
+        requireString(value, path, true);
+        if (!value) return value;
+        if (!DATE_PATTERN.test(value)) invalid(path, 'expected a date in YYYY-MM-DD format.');
+        var date = new Date(value + 'T00:00:00Z');
+        if (isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== value) {
+            invalid(path, 'expected a valid calendar date.');
+        }
+        return value;
+    }
+
+    function requireDateTime(value, path) {
+        requireString(value, path, true);
+        if (!value) return value;
+        if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,3})?)?(?:Z|[+-]\d{2}:\d{2})$/.test(value)) {
+            invalid(path, 'expected an ISO 8601 date and time with a timezone.');
+        }
+        if (isNaN(new Date(value).getTime())) invalid(path, 'expected a valid date and time.');
+        return value;
+    }
+
+    function requireUrl(value, path) {
+        requireString(value, path, true);
+        if (!value) return value;
+        try {
+            var parsed = new URL(value);
+            if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+                invalid(path, 'expected an http or https URL.');
+            }
+        } catch (error) {
+            invalid(path, 'expected a valid http or https URL.');
+        }
+        return value;
+    }
+
+    function validateAuthor(author, path) {
+        requireObject(author, path);
+        requireString(author.name, path + '.name', true);
+        requireString(author.organisation, path + '.organisation', true);
+        requireString(author.course, path + '.course', true);
+        requireString(author.yearOfStudy, path + '.yearOfStudy', true);
+    }
+
+    function validateThumbnail(thumbnail, path) {
+        requireObject(thumbnail, path);
+        requireUrl(thumbnail.src, path + '.src');
+        requireString(thumbnail.alt, path + '.alt', true);
+    }
+
+    function validatePrompt(content, path) {
+        requireString(content.purpose, path + '.purpose', true);
+        requireString(content.promptText, path + '.promptText', true);
+        requireStringArray(content.platforms, path + '.platforms');
+        requireStringArray(content.modelsTested, path + '.modelsTested');
+        requireEnum(content.reasoningMode, REASONING_MODES, path + '.reasoningMode');
+        requireString(content.usageNotes, path + '.usageNotes', true);
+    }
+
+    function validateWorkflow(content, path) {
+        requireString(content.goal, path + '.goal', true);
+        if (!Array.isArray(content.steps)) invalid(path + '.steps', 'expected an array.');
+        var stepNumbers = Object.create(null);
+        content.steps.forEach(function (step, index) {
+            var stepPath = path + '.steps[' + index + ']';
+            requireObject(step, stepPath);
+            if (typeof step.stepNumber !== 'number' || !isFinite(step.stepNumber) || step.stepNumber <= 0 || Math.floor(step.stepNumber) !== step.stepNumber) {
+                invalid(stepPath + '.stepNumber', 'expected a positive whole number.');
+            }
+            if (stepNumbers[step.stepNumber]) invalid(stepPath + '.stepNumber', 'must be unique within the workflow.');
+            stepNumbers[step.stepNumber] = true;
+            requireString(step.title, stepPath + '.title', true);
+            requireString(step.description, stepPath + '.description', true);
+        });
+        requireString(content.reflection, path + '.reflection', true);
+        requireNumberOrNull(content.estimatedTotalMinutes, path + '.estimatedTotalMinutes', false);
+        requireNumberOrNull(content.complexityScore, path + '.complexityScore', false);
+    }
+
+    function validateTool(content, path) {
+        requireString(content.company, path + '.company', true);
+        requireUrl(content.toolUrl, path + '.toolUrl');
+        if (typeof content.rating !== 'number' || !isFinite(content.rating) || Math.floor(content.rating) !== content.rating || content.rating < 1 || content.rating > 5) {
+            invalid(path + '.rating', 'expected a whole number from 1 to 5.');
+        }
+        requireString(content.overview, path + '.overview', true);
+        requireStringArray(content.strengths, path + '.strengths');
+        requireStringArray(content.weaknesses, path + '.weaknesses');
+        requireObject(content.pricing, path + '.pricing');
+        requireEnum(content.pricing.model, PRICING_MODELS, path + '.pricing.model');
+        requireNumberOrNull(content.pricing.cost, path + '.pricing.cost', false);
+        requireStringArray(content.platformTypes, path + '.platformTypes', PLATFORM_TYPES);
+        requireString(content.accessibilityNotes, path + '.accessibilityNotes', true);
+        requireString(content.privacyNotes, path + '.privacyNotes', true);
+        requireString(content.reviewVerdict, path + '.reviewVerdict', true);
+    }
+
+    function validateArticle(content, path) {
+        requireString(content.body, path + '.body', true);
+        requireNumberOrNull(content.readingTimeMinutes, path + '.readingTimeMinutes', true);
+        requireUrl(content.sourceUrl, path + '.sourceUrl');
+    }
+
+    function validateVideo(content, path) {
+        requireString(content.provider, path + '.provider', true);
+        requireUrl(content.videoUrl, path + '.videoUrl');
+        requireUrl(content.embedUrl, path + '.embedUrl');
+        requireNumberOrNull(content.durationSeconds, path + '.durationSeconds', true);
+    }
+
+    function validateLink(content, path) {
+        requireUrl(content.url, path + '.url');
+        requireString(content.siteName, path + '.siteName', true);
+        requireString(content.description, path + '.description', true);
+    }
+
+    function validateDownload(content, path) {
+        requireUrl(content.fileUrl, path + '.fileUrl');
+        requireString(content.fileName, path + '.fileName', true);
+        requireString(content.fileFormat, path + '.fileFormat', true);
+        requireNumberOrNull(content.fileSizeBytes, path + '.fileSizeBytes', true);
+        requireString(content.version, path + '.version', true);
+        requireString(content.description, path + '.description', true);
+    }
+
+    function validateEvent(content, path) {
+        requireString(content.host, path + '.host', true);
+        requireDateTime(content.startDateTime, path + '.startDateTime');
+        requireDateTime(content.endDateTime, path + '.endDateTime');
+        if (content.startDateTime && content.endDateTime && new Date(content.endDateTime).getTime() <= new Date(content.startDateTime).getTime()) {
+            invalid(path + '.endDateTime', 'must be later than startDateTime.');
+        }
+        requireString(content.timezone, path + '.timezone', true);
+        requireEnum(content.locationType, LOCATION_TYPES, path + '.locationType');
+        requireString(content.location, path + '.location', true);
+        requireUrl(content.onlineUrl, path + '.onlineUrl');
+        requireString(content.description, path + '.description', true);
+        requireNumberOrNull(content.capacity, path + '.capacity', true);
+        requireUrl(content.bookingUrl, path + '.bookingUrl');
+        requireBoolean(content.bookingRequired, path + '.bookingRequired');
+    }
+
+    function validateShowcase(content, path) {
+        requireString(content.problem, path + '.problem', true);
+        requireString(content.approach, path + '.approach', true);
+        requireString(content.outcome, path + '.outcome', true);
+        requireString(content.reflection, path + '.reflection', true);
+        requireStringArray(content.toolsUsed, path + '.toolsUsed');
+        requireUrl(content.projectUrl, path + '.projectUrl');
+    }
+
+    function validateContent(type, content, path) {
+        requireObject(content, path);
+        if (type === 'prompt') validatePrompt(content, path);
+        else if (type === 'workflow') validateWorkflow(content, path);
+        else if (type === 'tool') validateTool(content, path);
+        else if (type === 'article') validateArticle(content, path);
+        else if (type === 'video') validateVideo(content, path);
+        else if (type === 'link') validateLink(content, path);
+        else if (type === 'download') validateDownload(content, path);
+        else if (type === 'event') validateEvent(content, path);
+        else if (type === 'showcase') validateShowcase(content, path);
+    }
+
+    function validateResource(resource, index, seenIds) {
+        var path = 'resources[' + index + ']';
+        requireObject(resource, path);
+        requireString(resource.id, path + '.id', false);
+        if (!ID_PATTERN.test(resource.id)) invalid(path + '.id', 'expected lowercase letters, numbers and single hyphens.');
+        if (seenIds[resource.id]) invalid(path + '.id', 'duplicate resource id "' + resource.id + '".');
+        seenIds[resource.id] = true;
+        requireEnum(resource.type, RESOURCE_TYPES, path + '.type');
+        requireString(resource.title, path + '.title', false);
+        requireString(resource.summary, path + '.summary', true);
+        validateAuthor(resource.author, path + '.author');
+        requireDate(resource.datePublished, path + '.datePublished');
+        requireDate(resource.dateUpdated, path + '.dateUpdated');
+        requireEnum(resource.librarySection, LIBRARY_SECTIONS, path + '.librarySection');
+        requireStringArray(resource.skillAreas, path + '.skillAreas', SKILL_AREAS);
+        requireStringArray(resource.tags, path + '.tags');
+        requireBoolean(resource.featured, path + '.featured');
+        requireBoolean(resource.published, path + '.published');
+        requirePositiveIntegerOrNull(resource.estimatedMinutes, path + '.estimatedMinutes');
+        if (SECTION_TYPES[resource.librarySection].indexOf(resource.type) === -1) {
+            invalid(path + '.type', 'type "' + resource.type + '" is not allowed in library section "' + resource.librarySection + '".');
+        }
+        validateThumbnail(resource.thumbnail, path + '.thumbnail');
+        validateContent(resource.type, resource.content, path + '.content');
+    }
+
+    function validatePayload(payload) {
+        requireObject(payload, 'payload');
+        if (payload.schemaVersion !== SCHEMA_VERSION) {
+            invalid('schemaVersion', 'expected "' + SCHEMA_VERSION + '".');
+        }
+        requireString(payload.lastUpdated, 'lastUpdated', false);
+        requireDateTime(payload.lastUpdated, 'lastUpdated');
+        if (!Array.isArray(payload.resources)) invalid('resources', 'expected an array.');
+        var seenIds = Object.create(null);
+        payload.resources.forEach(function (resource, index) {
+            validateResource(resource, index, seenIds);
+        });
+        return payload;
+    }
+
+    function deepFreeze(value) {
+        if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
+        Object.keys(value).forEach(function (key) { deepFreeze(value[key]); });
+        return Object.freeze(value);
+    }
+
+    function buildIndex(resources) {
+        resourceIndex = Object.create(null);
+        resources.forEach(function (resource) { resourceIndex[resource.id] = resource; });
+    }
+
+    var loaderStatus = 'idle';
+    var loaderError = null;
+    var requestNumber = 0;
+    var abortController = null;
+
+    function abortError() {
+        var error = new Error('Request superseded');
+        error.name = 'AbortError';
+        return error;
+    }
+
+    function load(force) {
+        if (!force && loadedData) return Promise.resolve(loadedData);
+        if (!force && inFlightRequest) return inFlightRequest;
+        if (typeof window.fetch !== 'function') {
+            loaderStatus = 'error';
+            loaderError = new Error('This browser cannot load the GenAI Hub resource data.');
+            return Promise.reject(loaderError);
+        }
+
+        requestNumber += 1;
+        var activeRequest = requestNumber;
+        if (abortController) abortController.abort();
+        abortController = typeof window.AbortController === 'function' ? new window.AbortController() : null;
+        loaderStatus = 'loading';
+        loaderError = null;
+        inFlightRequest = window.fetch(DATA_URL, {
+            method: 'GET',
+            credentials: 'omit',
+            headers: { Accept: 'application/json' },
+            signal: abortController ? abortController.signal : undefined
+        }).then(function (response) {
+            if (!response.ok) throw new Error('The resource data endpoint returned HTTP ' + response.status + '.');
+            return response.json();
+        }).then(function (payload) {
+            if (activeRequest !== requestNumber) throw abortError();
+            loadedData = deepFreeze(validatePayload(payload));
+            buildIndex(loadedData.resources);
+            loaderStatus = 'ready';
+            inFlightRequest = null;
+            abortController = null;
+            return loadedData;
+        }).catch(function (error) {
+            if (activeRequest !== requestNumber) throw abortError();
+            inFlightRequest = null;
+            abortController = null;
+            if (error.name !== 'AbortError') {
+                loaderStatus = 'error';
+                loaderError = error;
+            }
+            throw error;
+        });
+
+        return inFlightRequest;
+    }
+
+    function normaliseText(value) {
+        var text = String(value || '').toLocaleLowerCase('en-GB');
+        if (text.normalize) text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        return text.replace(/\s+/g, ' ').trim();
+    }
+
+    function matchesTime(resource, buckets) {
+        if (!buckets || !buckets.length) return true;
+        var minutes = resource.estimatedMinutes;
+        if (typeof minutes !== 'number') return false;
+        return buckets.some(function (bucket) {
+            if (bucket === 'under-10') return minutes < 10;
+            if (bucket === '10-30') return minutes >= 10 && minutes <= 30;
+            if (bucket === '31-60') return minutes >= 31 && minutes <= 60;
+            return bucket === 'over-60' && minutes > 60;
+        });
+    }
+
+    function relevance(resource, terms) {
+        if (!terms.length) return 0;
+        var title = normaliseText(resource.title);
+        var summary = normaliseText(resource.summary);
+        var tags = normaliseText(resource.tags.join(' '));
+        var all = normaliseText(JSON.stringify(resource));
+        return terms.reduce(function (score, term) {
+            if (title.indexOf(term) !== -1) score += 8;
+            if (summary.indexOf(term) !== -1) score += 4;
+            if (tags.indexOf(term) !== -1) score += 3;
+            if (all.indexOf(term) !== -1) score += 1;
+            return score;
+        }, 0);
+    }
+
+    function query(criteria) {
+        criteria = criteria || {};
+        var terms = normaliseText(criteria.search).split(' ').filter(Boolean);
+        var types = criteria.types || [];
+        var skills = criteria.skillAreas || [];
+        var indexed = (loadedData ? loadedData.resources : []).map(function (resource, index) {
+            return { resource: resource, index: index, score: relevance(resource, terms) };
+        }).filter(function (entry) {
+            var resource = entry.resource;
+            if (resource.published !== true) return false;
+            if (criteria.librarySection && resource.librarySection !== criteria.librarySection) return false;
+            if (criteria.featuredOnly && resource.featured !== true) return false;
+            if (types.length && types.indexOf(resource.type) === -1) return false;
+            if (skills.length && !skills.some(function (skill) { return resource.skillAreas.indexOf(skill) !== -1; })) return false;
+            if (!matchesTime(resource, criteria.timeBuckets)) return false;
+            return !terms.length || terms.every(function (term) { return normaliseText(JSON.stringify(resource)).indexOf(term) !== -1; });
+        });
+
+        indexed.sort(function (left, right) {
+            if (criteria.sort === 'az') {
+                var byTitle = left.resource.title.localeCompare(right.resource.title, 'en-GB', { sensitivity: 'base' });
+                return byTitle || left.index - right.index;
+            }
+            if (criteria.sort === 'newest') {
+                var byDate = right.resource.datePublished.localeCompare(left.resource.datePublished);
+                return byDate || left.index - right.index;
+            }
+            if (terms.length && right.score !== left.score) return right.score - left.score;
+            if (left.resource.featured !== right.resource.featured) return left.resource.featured ? -1 : 1;
+            var updated = right.resource.dateUpdated.localeCompare(left.resource.dateUpdated);
+            return updated || left.index - right.index;
+        });
+        return Object.freeze(indexed.map(function (entry) { return entry.resource; }));
+    }
+
+    var TYPE_QUERY = {
+        article: 'articles', video: 'videos', link: 'links', download: 'downloads',
+        prompt: 'prompts', workflow: 'workflows', tool: 'tools', event: 'events', showcase: 'showcases'
+    };
+    var QUERY_TYPE = Object.keys(TYPE_QUERY).reduce(function (map, type) {
+        map[TYPE_QUERY[type]] = type;
+        return map;
+    }, {});
+    var TYPE_LABELS = {
+        article: 'Article', video: 'Video', link: 'Link', download: 'Download',
+        prompt: 'Prompt', workflow: 'Workflow', tool: 'Tool review', event: 'Event', showcase: 'Showcase'
+    };
+    var SKILL_LABELS = { academic: 'Academic', workplace: 'Workplace', lifelong: 'Lifelong' };
+    var SKILL_COLOURS = { academic: '#15803D', workplace: '#2563EB', lifelong: '#7C3AED' };
+    var LIBRARY_URLS = {
+        'learn-ai': 'https://moodle.bath.ac.uk/mod/page/view.php?id=1573031',
+        challenges: 'https://moodle.bath.ac.uk/mod/page/view.php?id=1573032',
+        community: 'https://moodle.bath.ac.uk/mod/page/view.php?id=1573033'
+    };
+    var activeDialog = null;
+
+    function element(tag, className, textValue) {
+        var node = document.createElement(tag);
+        if (className) node.className = className;
+        if (textValue !== undefined && textValue !== null) node.textContent = String(textValue);
+        return node;
+    }
+
+    function clear(node) {
+        while (node && node.firstChild) node.removeChild(node.firstChild);
+    }
+
+    function formatDate(value) {
+        if (!value) return '';
+        var date = new Date(value + (value.indexOf('T') === -1 ? 'T00:00:00Z' : ''));
+        if (isNaN(date.getTime())) return '';
+        return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function formatDateTime(value) {
+        if (!value) return 'To be confirmed';
+        var date = new Date(value);
+        if (isNaN(date.getTime())) return 'To be confirmed';
+        return date.toLocaleString('en-GB', {
+            weekday: 'short', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+    }
+
+    function appendBadge(parent, label, colour) {
+        var badge = element('span', 'badge rounded-pill px-2 py-1 mr-2 mb-2', label);
+        badge.style.cssText = 'background:' + colour + ';color:#fff;border:1px solid ' + colour + ';font-size:.72rem;letter-spacing:.03em;line-height:1.2;';
+        parent.appendChild(badge);
+    }
+
+    function appendResourceBadges(parent, resource) {
+        appendBadge(parent, TYPE_LABELS[resource.type], '#094685');
+        resource.skillAreas.forEach(function (skill) { appendBadge(parent, SKILL_LABELS[skill], SKILL_COLOURS[skill]); });
+        if (resource.featured) appendBadge(parent, 'Featured', '#5f4300');
+    }
+
+    function appendThumbnail(parent, resource, compact) {
+        if (!resource.thumbnail.src) return;
+        var image = document.createElement('img');
+        image.src = resource.thumbnail.src;
+        image.alt = resource.thumbnail.alt;
+        image.loading = 'lazy';
+        image.className = 'img-fluid w-100';
+        image.style.cssText = compact
+            ? 'height:140px;object-fit:cover;border-radius:.5rem;'
+            : 'max-height:360px;object-fit:cover;border-radius:12px;';
+        parent.appendChild(image);
+    }
+
+    function appendCardContents(container, resource) {
+        var badges = element('div', 'd-flex flex-wrap align-items-start mb-1');
+        appendResourceBadges(badges, resource);
+        container.appendChild(badges);
+        container.appendChild(element('h3', 'h5 font-weight-bold mt-2 mb-2', resource.title));
+        if (resource.summary) {
+            var summary = element('p', 'text-muted mb-3', resource.summary);
+            summary.style.color = '#4f5962';
+            container.appendChild(summary);
+        }
+        var media = element('div', 'mt-auto mb-3');
+        appendThumbnail(media, resource, true);
+        if (media.childNodes.length) container.appendChild(media);
+        var byline = resource.author.name || resource.author.organisation;
+        var cardDate = formatDate(resource.datePublished);
+        if (byline || cardDate) {
+            var meta = element('p', 'small font-weight-bold mb-0 mt-auto', [byline, cardDate].filter(Boolean).join(' · '));
+            meta.style.color = '#5f4300';
+            container.appendChild(meta);
+        }
+        var action = element('span', 'font-weight-bold d-inline-flex align-items-center mt-3', 'View details →');
+        action.style.color = '#094685';
+        container.appendChild(action);
+    }
+
+    function makeCardButton(resource, clone) {
+        var button = element('button', 'btn text-left w-100 h-100 p-3 d-flex flex-column');
+        button.type = 'button';
+        button.setAttribute('data-resource-open', resource.id);
+        button.setAttribute('aria-label', 'Open ' + resource.title);
+        button.style.cssText = 'background:#fff;color:#0f172a;border:0;border-radius:1rem;white-space:normal;';
+        if (clone) {
+            button.tabIndex = -1;
+            button.setAttribute('aria-hidden', 'true');
+            button.setAttribute('data-resource-clone', 'true');
+        }
+        appendCardContents(button, resource);
+        return button;
+    }
+
+    function createCarouselCard(resource, clone) {
+        var card = element('div', 'card shadow rounded mr-4');
+        card.style.cssText = 'width:300px;min-height:380px;flex-shrink:0;border:1px solid #94a3b8;border-radius:1rem;overflow:hidden;';
+        card.setAttribute('data-resource-id', resource.id);
+        if (clone) {
+            card.setAttribute('data-resource-clone', 'true');
+            card.setAttribute('aria-hidden', 'true');
+        }
+        card.appendChild(makeCardButton(resource, clone));
+        return card;
+    }
+
+    function createLibraryCard(resource) {
+        var column = element('div', 'col-12 col-md-6 col-xl-4 mb-4');
+        var article = element('article', 'card h-100 shadow-sm');
+        article.style.cssText = 'border:1px solid #cbd5e1;border-radius:12px;overflow:hidden;';
+        article.setAttribute('data-resource-id', resource.id);
+        article.appendChild(makeCardButton(resource, false));
+        column.appendChild(article);
+        return column;
+    }
+
+    function panel(title) {
+        var section = element('section', 'p-3 p-md-4 mb-3 border');
+        section.style.cssText = 'background:#f8fafc;border-radius:12px;border-color:#d8e2ee!important;';
+        var heading = element('h3', 'h6 font-weight-bold mb-3', title);
+        heading.style.color = '#094685';
+        section.appendChild(heading);
+        return section;
+    }
+
+    function appendText(target, value) {
+        if (!value) return;
+        String(value).split(/\n\s*\n/).forEach(function (paragraph) {
+            var p = element('p', 'mb-3', paragraph.trim());
+            p.style.whiteSpace = 'pre-wrap';
+            target.appendChild(p);
+        });
+    }
+
+    function appendKeyValue(target, label, value) {
+        if (value === undefined || value === null || value === '') return;
+        var row = element('div', 'mb-3');
+        row.appendChild(element('strong', 'd-block mb-1', label));
+        var text = element('span', 'text-muted', value);
+        text.style.color = '#4f5962';
+        row.appendChild(text);
+        target.appendChild(row);
+    }
+
+    function appendList(target, values) {
+        if (!values || !values.length) return;
+        var list = element('ul', 'mb-0 pl-3');
+        values.forEach(function (value) { list.appendChild(element('li', 'mb-2', value)); });
+        target.appendChild(list);
+    }
+
+    function externalAction(label, href, download) {
+        if (!href) return null;
+        var link = element('a', 'btn btn-primary rounded-pill font-weight-bold mr-2 mb-2', label);
+        link.href = href;
+        link.style.cssText = 'background:#094685;border-color:#094685;white-space:normal;';
+        if (download) link.setAttribute('download', '');
+        return link;
+    }
+
+    function appendMetadata(target, resource) {
+        var metadata = panel('Metadata');
+        appendKeyValue(metadata, 'Author', resource.author.name || resource.author.organisation);
+        appendKeyValue(metadata, 'Published', formatDate(resource.datePublished));
+        appendKeyValue(metadata, 'Estimated time', resource.estimatedMinutes ? resource.estimatedMinutes + ' minutes' : 'Not specified');
+        appendKeyValue(metadata, 'Tags', resource.tags.join(', '));
+        target.appendChild(metadata);
+    }
+
+    function copyText(value, status) {
+        function done(message) { status.textContent = message; }
+        if (window.navigator.clipboard && window.navigator.clipboard.writeText) {
+            window.navigator.clipboard.writeText(value).then(function () { done('Prompt copied.'); }, function () { done('Copy failed. Select the prompt manually.'); });
+            return;
+        }
+        var area = document.createElement('textarea');
+        area.value = value;
+        area.setAttribute('readonly', 'readonly');
+        area.style.cssText = 'position:fixed;left:-9999px;top:0;';
+        document.body.appendChild(area);
+        area.select();
+        try { document.execCommand('copy'); done('Prompt copied.'); }
+        catch (error) { done('Copy failed. Select the prompt manually.'); }
+        document.body.removeChild(area);
+    }
+
+    function makeIframe(url, title) {
+        try {
+            var parsed = new URL(url);
+            if (parsed.protocol !== 'https:') return null;
+        } catch (error) { return null; }
+        var wrapper = element('div', 'mb-3');
+        wrapper.style.cssText = 'position:relative;width:100%;padding-top:56.25%;background:#e8eef5;border-radius:12px;overflow:hidden;';
+        var frame = document.createElement('iframe');
+        frame.src = url;
+        frame.title = title;
+        frame.loading = 'lazy';
+        frame.referrerPolicy = 'no-referrer';
+        frame.setAttribute('sandbox', 'allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts');
+        frame.setAttribute('allow', 'fullscreen; autoplay; encrypted-media; picture-in-picture');
+        frame.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+        wrapper.appendChild(frame);
+        return wrapper;
+    }
+
+    function renderArticle(resource, body, actions) {
+        appendThumbnail(body, resource, false);
+        var content = panel('Article');
+        appendText(content, resource.content.body);
+        body.appendChild(content);
+        var source = externalAction('View original source', resource.content.sourceUrl);
+        if (source) actions.appendChild(source);
+    }
+
+    function renderVideo(resource, body, actions) {
+        var frame = makeIframe(resource.content.embedUrl, resource.title + ' video');
+        if (frame) body.appendChild(frame);
+        var details = panel('Video details');
+        appendKeyValue(details, 'Provider', resource.content.provider);
+        appendKeyValue(details, 'Duration', resource.content.durationSeconds === null ? '' : Math.ceil(resource.content.durationSeconds / 60) + ' minutes');
+        body.appendChild(details);
+        var view = externalAction('Open video', resource.content.videoUrl);
+        if (view) actions.appendChild(view);
+    }
+
+    function renderLink(resource, body, actions) {
+        var frame = makeIframe(resource.content.url, resource.title + ' website preview');
+        if (frame) body.appendChild(frame);
+        var details = panel('External resource');
+        appendText(details, resource.content.description);
+        appendKeyValue(details, 'Website', resource.content.siteName);
+        var warning = element('p', 'small text-muted mb-0', 'If the preview is blocked by the external website, use View resource instead.');
+        warning.style.color = '#4f5962';
+        details.appendChild(warning);
+        body.appendChild(details);
+        var view = externalAction('View resource', resource.content.url);
+        if (view) actions.appendChild(view);
+    }
+
+    function renderDownload(resource, body, actions) {
+        appendThumbnail(body, resource, false);
+        var details = panel('Download details');
+        appendText(details, resource.content.description);
+        appendKeyValue(details, 'File', resource.content.fileName);
+        appendKeyValue(details, 'Format', resource.content.fileFormat);
+        appendKeyValue(details, 'Version', resource.content.version);
+        appendKeyValue(details, 'File size', resource.content.fileSizeBytes === null ? '' : resource.content.fileSizeBytes + ' bytes');
+        body.appendChild(details);
+        var download = externalAction('Download', resource.content.fileUrl, true);
+        if (download) actions.appendChild(download);
+    }
+
+    function renderPrompt(resource, body, actions) {
+        var purpose = panel('Purpose');
+        appendText(purpose, resource.content.purpose);
+        body.appendChild(purpose);
+        var promptPanel = panel('Prompt');
+        var promptText = element('pre', 'p-3 mb-3', resource.content.promptText);
+        promptText.style.cssText = 'white-space:pre-wrap;overflow:auto;background:#fff;border:1px solid #dee2e6;border-radius:10px;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9rem;';
+        promptPanel.appendChild(promptText);
+        var copy = element('button', 'btn btn-primary rounded-pill font-weight-bold', 'Copy prompt');
+        copy.type = 'button';
+        copy.style.cssText = 'background:#094685;border-color:#094685;';
+        var status = element('span', 'ml-3 font-weight-bold');
+        status.setAttribute('role', 'status');
+        status.setAttribute('aria-live', 'polite');
+        copy.addEventListener('click', function () { copyText(resource.content.promptText, status); });
+        promptPanel.appendChild(copy);
+        promptPanel.appendChild(status);
+        body.appendChild(promptPanel);
+        var setup = panel('Prompt setup');
+        appendKeyValue(setup, 'Platforms', resource.content.platforms.join(', '));
+        appendKeyValue(setup, 'Models tested', resource.content.modelsTested.join(', '));
+        appendKeyValue(setup, 'Reasoning mode', resource.content.reasoningMode);
+        appendKeyValue(setup, 'Usage notes', resource.content.usageNotes);
+        body.appendChild(setup);
+    }
+
+    function renderWorkflow(resource, body) {
+        var goal = panel('Goal');
+        appendText(goal, resource.content.goal);
+        body.appendChild(goal);
+        var stepsPanel = panel('Workflow steps');
+        var steps = element('ol', 'mb-0 pl-3');
+        resource.content.steps.slice().sort(function (a, b) { return a.stepNumber - b.stepNumber; }).forEach(function (step) {
+            var item = element('li', 'mb-3');
+            item.appendChild(element('strong', 'd-block', step.title || 'Step ' + step.stepNumber));
+            item.appendChild(element('span', 'text-muted', step.description));
+            steps.appendChild(item);
+        });
+        stepsPanel.appendChild(steps);
+        body.appendChild(stepsPanel);
+        var reflection = panel('Reflection');
+        appendText(reflection, resource.content.reflection);
+        appendKeyValue(reflection, 'Estimated workflow time', resource.content.estimatedTotalMinutes === null ? '' : resource.content.estimatedTotalMinutes + ' minutes');
+        appendKeyValue(reflection, 'Complexity', resource.content.complexityScore === null ? '' : resource.content.complexityScore + '/10');
+        body.appendChild(reflection);
+    }
+
+    function renderTool(resource, body, actions) {
+        var overview = panel(resource.content.company || 'Tool review');
+        appendKeyValue(overview, 'Rating', resource.content.rating + ' out of 5 stars');
+        appendText(overview, resource.content.overview);
+        appendKeyValue(overview, 'Review verdict', resource.content.reviewVerdict);
+        body.appendChild(overview);
+        var strengths = panel('Best for');
+        appendList(strengths, resource.content.strengths);
+        body.appendChild(strengths);
+        var limits = panel('Limitations and checking');
+        appendList(limits, resource.content.weaknesses);
+        appendKeyValue(limits, 'Accessibility', resource.content.accessibilityNotes);
+        appendKeyValue(limits, 'Privacy', resource.content.privacyNotes);
+        body.appendChild(limits);
+        var pricing = resource.content.pricing.model;
+        if (resource.content.pricing.cost !== null) pricing += ' · ' + resource.content.pricing.cost;
+        var metadata = panel('Tool metadata');
+        appendKeyValue(metadata, 'Pricing', pricing);
+        appendKeyValue(metadata, 'Platforms', resource.content.platformTypes.join(', '));
+        body.appendChild(metadata);
+        var visit = externalAction('Visit tool', resource.content.toolUrl);
+        if (visit) actions.appendChild(visit);
+    }
+
+    function eventDuration(content) {
+        if (!content.startDateTime || !content.endDateTime) return '';
+        var minutes = Math.round((new Date(content.endDateTime).getTime() - new Date(content.startDateTime).getTime()) / 60000);
+        return minutes > 0 ? minutes + ' minutes' : '';
+    }
+
+    function renderEvent(resource, body, actions) {
+        var details = panel('Event details');
+        appendKeyValue(details, 'Host', resource.content.host);
+        appendKeyValue(details, 'Starts', formatDateTime(resource.content.startDateTime));
+        appendKeyValue(details, 'Length', eventDuration(resource.content));
+        appendKeyValue(details, 'Format', resource.content.locationType);
+        appendKeyValue(details, 'Location', resource.content.location || (resource.content.locationType === 'online' ? 'Online' : 'To be confirmed'));
+        appendText(details, resource.content.description);
+        appendKeyValue(details, 'Capacity', resource.content.capacity === null ? '' : resource.content.capacity + ' places');
+        body.appendChild(details);
+        var booking = externalAction(resource.content.bookingRequired ? 'Book' : 'View event', resource.content.bookingUrl || resource.content.onlineUrl);
+        if (booking) actions.appendChild(booking);
+    }
+
+    function renderShowcase(resource, body, actions) {
+        appendThumbnail(body, resource, false);
+        var story = panel('Project story');
+        appendKeyValue(story, 'Problem', resource.content.problem);
+        appendKeyValue(story, 'Approach', resource.content.approach);
+        appendKeyValue(story, 'Outcome', resource.content.outcome);
+        appendKeyValue(story, 'Reflection', resource.content.reflection);
+        body.appendChild(story);
+        var tools = panel('Tools used');
+        appendList(tools, resource.content.toolsUsed);
+        body.appendChild(tools);
+        var view = externalAction('View project', resource.content.projectUrl);
+        if (view) actions.appendChild(view);
+    }
+
+    function makeBrowseUrl(resource, source) {
+        var root = source && source.closest ? source.closest('[data-resource-view]') : null;
+        var base = root && root.getAttribute('data-resource-library-url');
+        if (!base) base = LIBRARY_URLS[resource.librarySection];
+        try {
+            var url = new URL(base, window.location.href);
+            url.searchParams.set('type', TYPE_QUERY[resource.type]);
+            if (resource.skillAreas.length) url.searchParams.set('skill', resource.skillAreas[0]);
+            else url.searchParams.delete('skill');
+            return url.href;
+        } catch (error) { return ''; }
+    }
+
+    function renderResourceDetails(resource, body, actions) {
+        if (resource.type === 'article') renderArticle(resource, body, actions);
+        else if (resource.type === 'video') renderVideo(resource, body, actions);
+        else if (resource.type === 'link') renderLink(resource, body, actions);
+        else if (resource.type === 'download') renderDownload(resource, body, actions);
+        else if (resource.type === 'prompt') renderPrompt(resource, body, actions);
+        else if (resource.type === 'workflow') renderWorkflow(resource, body);
+        else if (resource.type === 'tool') renderTool(resource, body, actions);
+        else if (resource.type === 'event') renderEvent(resource, body, actions);
+        else renderShowcase(resource, body, actions);
+    }
+
+    function focusable(container) {
+        return Array.prototype.slice.call(container.querySelectorAll('a[href],button:not([disabled]),iframe,[tabindex]:not([tabindex="-1"])'));
+    }
+
+    function closeDialog() {
+        if (!activeDialog) return;
+        var closing = activeDialog;
+        activeDialog = null;
+        document.removeEventListener('keydown', handleDialogKeydown);
+        document.body.style.overflow = closing.bodyOverflow;
+        if (closing.dialog.parentNode) closing.dialog.parentNode.removeChild(closing.dialog);
+        if (closing.backdrop.parentNode) closing.backdrop.parentNode.removeChild(closing.backdrop);
+        if (closing.trigger && closing.trigger.focus) closing.trigger.focus();
+    }
+
+    function handleDialogKeydown(event) {
+        if (!activeDialog) return;
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            closeDialog();
+            return;
+        }
+        if (event.key !== 'Tab') return;
+        var nodes = focusable(activeDialog.dialog);
+        if (!nodes.length) return;
+        var first = nodes[0];
+        var last = nodes[nodes.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    }
+
+    function openDialog(resource, trigger) {
+        closeDialog();
+        var backdrop = element('div');
+        backdrop.setAttribute('data-resource-popout-backdrop', 'true');
+        backdrop.style.cssText = 'position:fixed;inset:0;z-index:1040;background:rgba(8,41,71,.78);';
+        var dialog = element('div');
+        dialog.setAttribute('role', 'dialog');
+        dialog.setAttribute('aria-modal', 'true');
+        dialog.setAttribute('aria-labelledby', 'resource-popout-title');
+        dialog.setAttribute('data-resource-popout', resource.type);
+        dialog.style.cssText = 'position:fixed;z-index:1050;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;width:calc(100% - 24px);max-width:960px;height:calc(100% - 24px);max-height:800px;overflow:hidden;background:#fff;color:#0f172a;border:1px solid #dee2e6;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.28);';
+
+        var header = element('div', 'd-flex align-items-start justify-content-between p-3 p-md-4');
+        header.style.cssText = 'gap:1rem;background:linear-gradient(135deg,#094685,#111827);border-top:6px solid #f5c242;color:#fff;';
+        var headingWrap = element('div');
+        var badges = element('div', 'd-flex flex-wrap mb-1');
+        appendResourceBadges(badges, resource);
+        headingWrap.appendChild(badges);
+        var heading = element('h2', 'h3 font-weight-bold mb-1', resource.title);
+        heading.id = 'resource-popout-title';
+        headingWrap.appendChild(heading);
+        var dialogByline = resource.author.name || resource.author.organisation;
+        var dialogDate = formatDate(resource.datePublished);
+        if (dialogByline || dialogDate) {
+            var byline = element('p', 'mb-0', [dialogByline, dialogDate].filter(Boolean).join(' · '));
+            byline.style.color = '#e6eef8';
+            headingWrap.appendChild(byline);
+        }
+        var close = element('button', 'btn btn-light rounded-pill font-weight-bold px-3 py-2', 'Close ×');
+        close.type = 'button';
+        close.setAttribute('data-resource-popout-close', 'true');
+        close.addEventListener('click', closeDialog);
+        header.appendChild(headingWrap);
+        header.appendChild(close);
+
+        var scroller = element('div', 'p-3 p-md-4');
+        scroller.style.cssText = 'overflow:auto;min-height:0;';
+        if (resource.summary) {
+            var summary = element('p', 'lead mb-4', resource.summary);
+            summary.style.cssText = 'color:#4f5962;font-size:1.05rem;line-height:1.55;';
+            scroller.appendChild(summary);
+        }
+        var content = element('div');
+        var actions = element('div', 'd-flex flex-wrap align-items-center mt-4');
+        renderResourceDetails(resource, content, actions);
+        appendMetadata(content, resource);
+        var browse = externalAction('Browse more like this', makeBrowseUrl(resource, trigger));
+        if (browse) actions.appendChild(browse);
+        content.appendChild(actions);
+        scroller.appendChild(content);
+        dialog.appendChild(header);
+        dialog.appendChild(scroller);
+
+        backdrop.addEventListener('click', closeDialog);
+        document.body.appendChild(backdrop);
+        document.body.appendChild(dialog);
+        activeDialog = { backdrop: backdrop, dialog: dialog, trigger: trigger, bodyOverflow: document.body.style.overflow };
+        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', handleDialogKeydown);
+        close.focus();
+    }
+
+    document.addEventListener('click', function (event) {
+        var trigger = event.target.closest ? event.target.closest('[data-resource-open]') : null;
+        if (!trigger) return;
+        var resource = resourceIndex[trigger.getAttribute('data-resource-open')];
+        if (!resource) return;
+        event.preventDefault();
+        openDialog(resource, trigger);
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        var trigger = event.target.closest ? event.target.closest('[data-resource-open]') : null;
+        if (!trigger || /^(BUTTON|A)$/.test(trigger.tagName)) return;
+        event.preventDefault();
+        var resource = resourceIndex[trigger.getAttribute('data-resource-open')];
+        if (resource) openDialog(resource, trigger);
+    });
+
+    function validValues(values, allowed) {
+        return values.filter(function (value, index) { return allowed.indexOf(value) !== -1 && values.indexOf(value) === index; });
+    }
+
+    function readLibraryState(root) {
+        var url = new URL(window.location.href);
+        var section = root.getAttribute('data-resource-section');
+        var allowedTypes = SECTION_TYPES[section];
+        var types = validValues(url.searchParams.getAll('type').map(function (value) { return QUERY_TYPE[value] || ''; }), allowedTypes);
+        var skills = validValues(url.searchParams.getAll('skill'), SKILL_AREAS);
+        var sort = url.searchParams.get('sort');
+        return {
+            query: url.searchParams.get('q') || '',
+            skills: skills,
+            featured: url.searchParams.get('featured') === '1',
+            types: types,
+            times: validValues(url.searchParams.getAll('time'), ['under-10', '10-30', '31-60', 'over-60']),
+            sort: ['relevant', 'newest', 'az'].indexOf(sort) === -1 ? 'relevant' : sort,
+            visible: Math.max(1, parseInt(root.getAttribute('data-resource-page-size'), 10) || 9)
+        };
+    }
+
+    function writeLibraryState(state) {
+        try {
+            var url = new URL(window.location.href);
+            ['type', 'skill', 'featured', 'time', 'q', 'sort'].forEach(function (key) { url.searchParams.delete(key); });
+            state.types.forEach(function (type) { url.searchParams.append('type', TYPE_QUERY[type]); });
+            state.skills.forEach(function (skill) { url.searchParams.append('skill', skill); });
+            if (state.featured) url.searchParams.set('featured', '1');
+            state.times.forEach(function (time) { url.searchParams.append('time', time); });
+            if (state.query) url.searchParams.set('q', state.query);
+            if (state.sort !== 'relevant') url.searchParams.set('sort', state.sort);
+            window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+        } catch (error) {
+            if (window.console && console.warn) console.warn('GenAI Hub could not update library filters.', error);
+        }
+    }
+
+    function setPressed(button, active) {
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        button.classList.toggle('btn-primary', active);
+        button.classList.toggle('btn-outline-primary', !active);
+        if (active) {
+            button.style.backgroundColor = '#094685';
+            button.style.borderColor = '#094685';
+        } else {
+            button.style.backgroundColor = '';
+            button.style.borderColor = '';
+        }
+    }
+
+    function syncLibraryControls(root, state) {
+        var search = root.querySelector('[data-resource-search]');
+        if (search && search.value !== state.query) search.value = state.query;
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-skill]'), function (button) {
+            var value = button.getAttribute('data-resource-skill');
+            setPressed(button, value === 'featured' ? state.featured : state.skills.indexOf(value) !== -1);
+        });
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-skill-checkbox]'), function (control) {
+            control.checked = state.skills.indexOf(control.getAttribute('data-resource-skill-checkbox')) !== -1;
+        });
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-type]'), function (control) {
+            var active = state.types.indexOf(control.getAttribute('data-resource-type')) !== -1;
+            if (control.type === 'checkbox') control.checked = active;
+            else setPressed(control, control.getAttribute('data-resource-type') === 'all' ? state.types.length === 0 : active);
+        });
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-time]'), function (control) {
+            control.checked = state.times.indexOf(control.getAttribute('data-resource-time')) !== -1;
+        });
+        var sort = root.querySelector('[data-resource-sort]');
+        if (sort) sort.value = state.sort;
+    }
+
+    function showLibraryStatus(root, name, message) {
+        ['loading', 'error', 'empty'].forEach(function (status) {
+            var node = root.querySelector('[data-resource-' + status + ']');
+            if (node) node.hidden = status !== name;
+        });
+        var results = root.querySelector('[data-resource-target="results"]') || root.querySelector('[data-resource-results]');
+        if (results) results.hidden = name === 'loading' || name === 'error';
+        if (name === 'error') {
+            var errorMessage = root.querySelector('[data-resource-error-message]');
+            if (errorMessage) errorMessage.textContent = message || 'The resource library is currently unavailable.';
+        }
+    }
+
+    function renderLibrary(root) {
+        var state = root._resourceLibraryState;
+        var resources = query({
+            librarySection: root.getAttribute('data-resource-section'),
+            featuredOnly: state.featured,
+            types: state.types,
+            skillAreas: state.skills,
+            timeBuckets: state.times,
+            search: state.query,
+            sort: state.sort
+        });
+        var results = root.querySelector('[data-resource-target="results"]') || root.querySelector('[data-resource-results]');
+        var count = root.querySelector('[data-resource-count]');
+        var loadMore = root.querySelector('[data-resource-load-more]');
+        if (count) count.textContent = resources.length + (resources.length === 1 ? ' resource' : ' resources');
+        clear(results);
+        resources.slice(0, state.visible).forEach(function (resource) { results.appendChild(createLibraryCard(resource)); });
+        showLibraryStatus(root, resources.length ? '' : 'empty');
+        results.hidden = !resources.length;
+        if (loadMore) {
+            loadMore.hidden = state.visible >= resources.length;
+            loadMore.setAttribute('aria-label', 'Load more resources, ' + Math.max(0, resources.length - state.visible) + ' remaining');
+        }
+        syncLibraryControls(root, state);
+        writeLibraryState(state);
+    }
+
+    function bindLibrary(root) {
+        var state = root._resourceLibraryState;
+        var search = root.querySelector('[data-resource-search]');
+        var form = root.querySelector('[data-resource-search-form]');
+        var timer;
+        function changed() {
+            state.visible = parseInt(root.getAttribute('data-resource-page-size'), 10) || 9;
+            renderLibrary(root);
+        }
+        if (search) {
+            search.disabled = false;
+            search.addEventListener('input', function () {
+                window.clearTimeout(timer);
+                timer = window.setTimeout(function () { state.query = search.value.trim(); changed(); }, 150);
+            });
+        }
+        if (form) {
+            var submit = form.querySelector('button[type="submit"]');
+            if (submit) submit.disabled = false;
+            form.addEventListener('submit', function (event) { event.preventDefault(); state.query = search.value.trim(); changed(); });
+        }
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-skill]'), function (button) {
+            button.disabled = false;
+            button.addEventListener('click', function () {
+                var value = button.getAttribute('data-resource-skill');
+                if (value === 'featured') {
+                    state.featured = !state.featured;
+                    state.skills = [];
+                } else {
+                    state.skills = state.skills.length === 1 && state.skills[0] === value ? [] : [value];
+                    state.featured = false;
+                }
+                changed();
+            });
+        });
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-skill-checkbox]'), function (control) {
+            control.disabled = false;
+            control.addEventListener('change', function () {
+                var value = control.getAttribute('data-resource-skill-checkbox');
+                if (control.checked) state.skills.push(value);
+                else state.skills = state.skills.filter(function (skill) { return skill !== value; });
+                state.featured = false;
+                changed();
+            });
+        });
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-type]'), function (control) {
+            control.disabled = false;
+            var eventName = control.type === 'checkbox' ? 'change' : 'click';
+            control.addEventListener(eventName, function () {
+                var value = control.getAttribute('data-resource-type');
+                if (root.getAttribute('data-resource-section') === 'community') {
+                    state.types = value === 'all' ? [] : [value];
+                } else if (control.checked) state.types.push(value);
+                else state.types = state.types.filter(function (type) { return type !== value; });
+                changed();
+            });
+        });
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-time]'), function (control) {
+            control.disabled = false;
+            control.addEventListener('change', function () {
+                var value = control.getAttribute('data-resource-time');
+                if (control.checked) state.times.push(value);
+                else state.times = state.times.filter(function (time) { return time !== value; });
+                changed();
+            });
+        });
+        var sort = root.querySelector('[data-resource-sort]');
+        if (sort) {
+            sort.disabled = false;
+            sort.addEventListener('change', function () { state.sort = sort.value; changed(); });
+        }
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-reset]'), function (button) {
+            button.disabled = false;
+            button.addEventListener('click', function () {
+                state.query = ''; state.skills = []; state.featured = false; state.types = []; state.times = []; state.sort = 'relevant';
+                changed();
+            });
+        });
+        var loadMore = root.querySelector('[data-resource-load-more]');
+        if (loadMore) loadMore.addEventListener('click', function () { state.visible += parseInt(root.getAttribute('data-resource-page-size'), 10) || 9; renderLibrary(root); });
+        var retry = root.querySelector('[data-resource-retry]');
+        if (retry) retry.addEventListener('click', function () { mountLibrary(root, true); });
+    }
+
+    function mountLibrary(root, retry) {
+        if (!root._resourceLibraryState) {
+            root._resourceLibraryState = readLibraryState(root);
+            bindLibrary(root);
+        }
+        root.setAttribute('aria-busy', 'true');
+        showLibraryStatus(root, 'loading');
+        (retry ? resourcesApi.reload() : resourcesApi.ready).then(function () {
+            root.setAttribute('aria-busy', 'false');
+            renderLibrary(root);
+        }, function (error) {
+            if (error.name === 'AbortError') return;
+            root.setAttribute('aria-busy', 'false');
+            showLibraryStatus(root, 'error', error.message);
+        });
+    }
+
+    function showViewError(root, message, retryHandler) {
+        var target = root.querySelector('[data-resource-target="featured"]') || root.querySelector('[data-resource-featured-track]') || root.querySelector('[data-resource-view-status]') || root;
+        clear(target);
+        var alert = element('div', 'alert alert-danger m-3', message || 'Resources are currently unavailable.');
+        var retry = element('button', 'btn btn-outline-danger ml-3', 'Retry');
+        retry.type = 'button';
+        retry.addEventListener('click', retryHandler);
+        alert.appendChild(retry);
+        target.appendChild(alert);
+    }
+
+    function renderFeatured(root) {
+        var section = root.getAttribute('data-resource-section');
+        var resources = query({ librarySection: section, featuredOnly: true, sort: 'relevant' });
+        var track = root.querySelector('[data-resource-target="featured"]') || root.querySelector('[data-resource-featured-track]');
+        if (!track) return;
+        clear(track);
+        if (!resources.length) {
+            var empty = element('div', 'alert alert-info mb-0', 'No featured resources are available yet.');
+            track.appendChild(empty);
+            return;
+        }
+        var minimum = Math.max(resources.length, Math.ceil((Math.max(window.innerWidth, 320) + 324) / 324));
+        var canonical = [];
+        for (var i = 0; i < minimum; i += 1) canonical.push(resources[i % resources.length]);
+        canonical.forEach(function (resource, index) { track.appendChild(createCarouselCard(resource, index >= resources.length)); });
+        canonical.forEach(function (resource) { track.appendChild(createCarouselCard(resource, true)); });
+    }
+
+    function mountFeatured(root, retry) {
+        root.setAttribute('aria-busy', 'true');
+        (retry ? resourcesApi.reload() : resourcesApi.ready).then(function () {
+            root.setAttribute('aria-busy', 'false');
+            renderFeatured(root);
+        }, function (error) {
+            if (error.name === 'AbortError') return;
+            root.setAttribute('aria-busy', 'false');
+            showViewError(root, error.message, function () { mountFeatured(root, true); });
+        });
+    }
+
+    function communitySlots(section, type) {
+        var slots = Array.prototype.slice.call(section.querySelectorAll('[data-hover-card="true"]'));
+        if (type === 'event') {
+            var lead = section.querySelector('.row > .col-lg-4 > a');
+            if (lead && slots.indexOf(lead) === -1) slots.unshift(lead);
+        }
+        return slots;
+    }
+
+    function renderIntoSlot(slot, resource) {
+        slot.hidden = false;
+        slot.setAttribute('data-resource-open', resource.id);
+        slot.setAttribute('data-resource-id', resource.id);
+        slot.setAttribute('aria-label', 'Open ' + resource.title);
+        slot.classList.add('p-4');
+        if (slot.tagName === 'A') slot.setAttribute('href', makeBrowseUrl(resource, slot));
+        else {
+            slot.setAttribute('role', 'button');
+            slot.setAttribute('tabindex', '0');
+        }
+        clear(slot);
+        appendCardContents(slot, resource);
+    }
+
+    function renderCommunityLanding(root) {
+        var mappings = [
+            { id: 'student-showcase', type: 'showcase' },
+            { id: 'prompt-library', type: 'prompt' },
+            { id: 'workflow-library', type: 'workflow' },
+            { id: 'tool-reviews', type: 'tool' },
+            { id: 'community-events', type: 'event' }
+        ];
+        mappings.forEach(function (mapping) {
+            var section = root.querySelector('[data-resource-target="' + mapping.type + '"]') || root.querySelector('#' + mapping.id);
+            if (!section) return;
+            var resources = query({ librarySection: 'community', types: [mapping.type], sort: 'relevant' });
+            var slots = communitySlots(section, mapping.type);
+            slots.forEach(function (slot, index) {
+                if (resources[index]) renderIntoSlot(slot, resources[index]);
+                else slot.hidden = true;
+            });
+            var existing = section.querySelector('[data-resource-view-status]');
+            if (!resources.length && !existing) {
+                existing = element('div', 'alert alert-info', 'No ' + TYPE_QUERY[mapping.type] + ' are available yet.');
+                existing.setAttribute('data-resource-view-status', 'true');
+                section.querySelector('.container').appendChild(existing);
+            } else if (existing) existing.hidden = resources.length > 0;
+        });
+    }
+
+    function configureLibraryLinks(root) {
+        var base = root.getAttribute('data-resource-library-url');
+        if (!base) return;
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-library-link]'), function (link) {
+            var filter = link.getAttribute('data-resource-library-link');
+            try {
+                var url = new URL(base, window.location.href);
+                if (Object.keys(QUERY_TYPE).indexOf(filter) !== -1) url.searchParams.set('type', filter);
+                else if (filter === 'featured') url.searchParams.set('featured', '1');
+                link.href = url.href;
+            } catch (error) {
+                if (window.console && console.warn) console.warn('GenAI Hub could not configure a resource library link.', error);
+            }
+        });
+    }
+
+    function mountCommunityLanding(root, retry) {
+        root.setAttribute('aria-busy', 'true');
+        (retry ? resourcesApi.reload() : resourcesApi.ready).then(function () {
+            root.setAttribute('aria-busy', 'false');
+            renderCommunityLanding(root);
+        }, function (error) {
+            if (error.name === 'AbortError') return;
+            root.setAttribute('aria-busy', 'false');
+            var status = root.querySelector('[data-resource-view-status]');
+            if (!status) {
+                status = element('div', 'container alert alert-danger my-4');
+                status.setAttribute('data-resource-view-status', 'true');
+                root.insertBefore(status, root.firstChild);
+            }
+            clear(status);
+            status.appendChild(document.createTextNode(error.message || 'Community resources are currently unavailable.'));
+            var retryButton = element('button', 'btn btn-outline-danger ml-3', 'Retry');
+            retryButton.type = 'button';
+            retryButton.addEventListener('click', function () { mountCommunityLanding(root, true); });
+            status.appendChild(retryButton);
+        });
+    }
+
+    function mountView(root) {
+        if (root._genaiResourcesMounted) return;
+        root._genaiResourcesMounted = true;
+        configureLibraryLinks(root);
+        var view = root.getAttribute('data-resource-view');
+        if (view === 'library') mountLibrary(root, false);
+        else if (view === 'featured') mountFeatured(root, false);
+        else if (view === 'community-landing') mountCommunityLanding(root, false);
+    }
+
+    var resourcesApi = {
+        ready: null,
+        load: load,
+        reload: function () {
+            loadedData = null;
+            resourceIndex = Object.create(null);
+            return load(true);
+        },
+        query: query,
+        getById: function (id) {
+            return typeof id === 'string' && resourceIndex[id] ? resourceIndex[id] : null;
+        },
+        getState: function () {
+            return Object.freeze({
+                status: loaderStatus,
+                resources: loadedData ? loadedData.resources : Object.freeze([]),
+                error: loaderError
+            });
+        }
+    };
+    hub.resources = resourcesApi;
+    window.GenAIHub = hub;
+
+    resourcesApi.ready = load();
+    resourcesApi.ready.catch(function (error) {
+        if (error.name !== 'AbortError' && window.console && console.error) {
+            console.error('GenAI Hub resource loading failed.', error);
+        }
+    });
+
+    function boot() {
+        var roots = document.querySelectorAll('[data-resource-view]');
+        for (var i = 0; i < roots.length; i += 1) mountView(roots[i]);
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+    else boot();
+})(window, document);

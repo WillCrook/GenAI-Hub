@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "lastUpdated": "2026-07-21T10:59:44.015Z",
   "resources": [
     {
@@ -15,7 +15,7 @@
       },
       "datePublished": "2026-06-30",
       "dateUpdated": "2026-07-17",
-      "librarySection": "learn-ai",
+      "librarySection": "community",
       "skillAreas": [
         "academic",
         "lifelong"
@@ -26,6 +26,7 @@
       ],
       "featured": true,
       "published": true,
+      "estimatedMinutes": null,
       "thumbnail": {
         "src": "",
         "alt": ""
@@ -58,7 +59,7 @@
       },
       "datePublished": "2026-06-19",
       "dateUpdated": "2026-07-18",
-      "librarySection": "challenges",
+      "librarySection": "community",
       "skillAreas": [
         "academic"
       ],
@@ -68,6 +69,7 @@
       ],
       "featured": true,
       "published": true,
+      "estimatedMinutes": 25,
       "thumbnail": {
         "src": "",
         "alt": ""
@@ -109,7 +111,7 @@
       },
       "datePublished": "2026-05-14",
       "dateUpdated": "2026-07-19",
-      "librarySection": "learn-ai",
+      "librarySection": "community",
       "skillAreas": [
         "workplace",
         "lifelong"
@@ -120,6 +122,7 @@
       ],
       "featured": false,
       "published": true,
+      "estimatedMinutes": null,
       "thumbnail": {
         "src": "",
         "alt": ""
@@ -175,6 +178,7 @@
       ],
       "featured": true,
       "published": true,
+      "estimatedMinutes": 4,
       "thumbnail": {
         "src": "",
         "alt": ""
@@ -208,6 +212,7 @@
       ],
       "featured": false,
       "published": true,
+      "estimatedMinutes": 5,
       "thumbnail": {
         "src": "",
         "alt": ""
@@ -243,6 +248,7 @@
       ],
       "featured": false,
       "published": true,
+      "estimatedMinutes": null,
       "thumbnail": {
         "src": "",
         "alt": ""
@@ -280,6 +286,7 @@
       ],
       "featured": true,
       "published": true,
+      "estimatedMinutes": 60,
       "thumbnail": {
         "src": "",
         "alt": ""
@@ -322,6 +329,7 @@
       ],
       "featured": false,
       "published": true,
+      "estimatedMinutes": 120,
       "thumbnail": {
         "src": "",
         "alt": ""
@@ -365,6 +373,7 @@
       ],
       "featured": false,
       "published": true,
+      "estimatedMinutes": 90,
       "thumbnail": {
         "src": "",
         "alt": ""
@@ -407,6 +416,7 @@
       ],
       "featured": true,
       "published": true,
+      "estimatedMinutes": null,
       "thumbnail": {
         "src": "",
         "alt": ""
