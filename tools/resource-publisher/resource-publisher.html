@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GenAI Hub Resource Publisher</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body style="margin:0;background:#f4f7fa;color:#172033;line-height:1.55;">
+<!--
+Resource Publisher workbook contract (schema 1.0)
+Required sheets: Prompts, Workflows, Workflow Steps, Tools, Articles, Videos, Links,
+Downloads, Events, Showcases, Validation Lists, Settings.
+Multi-value cells use the Settings separator (default |).
+Workflow Steps are joined to Workflows by workflow_id and sorted by step_number.
+-->
+<div id="resource-publisher" style="min-width:280px;">
+  <a class="sr-only sr-only-focusable" href="#publisher-main" style="position:fixed;top:.5rem;left:.5rem;z-index:1060;padding:.7rem 1rem;background:#fff;color:#094685;font-weight:700;outline:3px solid #f5c242;">Skip to publisher</a>
+  <header style="padding:3rem 0 4rem;border-bottom:6px solid #f5c242;background:linear-gradient(135deg,#094685,#082947);color:#fff;">
+    <div class="container">
+      <div class="row align-items-end">
+        <div class="col-12 col-lg-8">
+          <p class="text-uppercase font-weight-bold mb-2" style="color:#f5c242;font-size:.78rem;letter-spacing:.11em;">University of Bath staff tool</p>
+          <h1 class="mb-3">Excel-to-JSON Resource Publisher</h1>
+          <p class="mb-0" style="max-width:760px;color:#e8f0f8;font-size:1.1rem;">Validate the GenAI Hub workbook, review every resource and download one Moodle-ready <code style="padding:.08em .3em;border-radius:4px;background:#e8eef5;color:#082947;">resources.json</code> file.</p>
+        </div>
+        <div class="col-12 col-lg-4 mt-3 mt-lg-0">
+          <div class="rounded p-3" style="border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.1);"><strong><i class="fa-solid fa-shield-halved mr-2" aria-hidden="true">&#8203;</i>Local processing</strong><br>Your workbook is never uploaded.</div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="publisher-main" class="container pb-5" style="padding-top:2rem;">
+    <section class="card shadow mb-4" style="margin-top:-3.2rem;border-radius:14px;">
+      <div class="card-body p-4">
+        <p class="text-uppercase font-weight-bold mb-2" style="color:#094685;font-size:.78rem;letter-spacing:.11em;">1. Upload</p>
+        <h2 class="h3" style="color:#082947;">Choose the resource workbook</h2>
+        <p>Only <code>.xlsx</code> files are accepted. Processing happens in this browser.</p>
+        <div id="publisher-drop-zone" class="rounded text-center p-4" style="border:2px dashed #94a9bd;background:#f8fbfd;">
+          <label for="publisher-file" class="mb-0" style="cursor:pointer;">
+            <span class="d-block font-weight-bold mb-2" style="font-size:1.15rem;color:#082947;"><i class="fa-solid fa-file-excel mr-2" aria-hidden="true">&#8203;</i>Drop the workbook here or choose a file</span>
+            <span class="btn btn-primary">Choose .xlsx file</span>
+          </label>
+          <input id="publisher-file" class="form-control-file mt-3" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </div>
+        <p id="publisher-file-name" class="font-weight-bold text-muted mt-3 mb-0">No workbook selected.</p>
+        <div id="publisher-library-error" class="alert alert-danger mt-3 mb-0" role="alert" hidden></div>
+        <div id="publisher-status" class="mt-3" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="card shadow-sm mb-4" aria-labelledby="validation-title" style="border-radius:14px;">
+      <div class="card-body p-4">
+        <p class="text-uppercase font-weight-bold mb-2" style="color:#094685;font-size:.78rem;letter-spacing:.11em;">2. Validate</p>
+        <h2 id="validation-title" class="h3" style="color:#082947;">Validation report</h2>
+        <div id="publisher-empty" class="rounded text-center text-muted p-4" style="border:1px dashed #94a9bd;">Upload a workbook to begin.</div>
+        <div id="publisher-results" hidden>
+          <div id="publisher-counts" class="row mt-3" aria-live="polite"></div>
+          <details id="publisher-errors" class="mt-3" open><summary class="font-weight-bold" style="cursor:pointer;"></summary><div class="mt-2"></div></details>
+          <details id="publisher-warnings" class="mt-3"><summary class="font-weight-bold" style="cursor:pointer;"></summary><div class="mt-2"></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section id="publisher-preview" class="card shadow-sm mb-4" aria-labelledby="preview-title" style="border-radius:14px;" hidden>
+      <div class="card-body p-4">
+        <div class="row align-items-end">
+          <div class="col-12 col-md-8"><p class="text-uppercase font-weight-bold mb-2" style="color:#094685;font-size:.78rem;letter-spacing:.11em;">3. Preview</p><h2 id="preview-title" class="h3 mb-1" style="color:#082947;">Parsed resources</h2><p id="publisher-preview-summary" class="text-muted"></p></div>
+          <div class="col-12 col-md-4"><label class="font-weight-bold" for="publisher-type-filter">Resource type</label><select id="publisher-type-filter" class="form-control"><option value="">All types</option></select></div>
+        </div>
+        <div id="publisher-cards" class="row mt-3"></div>
+      </div>
+    </section>
+
+    <section id="publisher-export" class="card shadow-sm text-white" aria-labelledby="export-title" style="border-top:6px solid #f5c242;border-radius:14px;background:linear-gradient(135deg,#094685,#082947);" hidden>
+      <div class="card-body p-4">
+        <div class="row align-items-center"><div class="col-12 col-lg-8"><p class="text-uppercase font-weight-bold mb-2" style="color:#f5c242;font-size:.78rem;letter-spacing:.11em;">4. Export</p><h2 id="export-title" class="h3" style="color:#f5c242;">Download JSON</h2><p id="publisher-export-summary" class="mb-3 mb-lg-0"></p></div><div class="col-12 col-lg-4 text-lg-right"><button id="publisher-download" class="btn btn-warning font-weight-bold" type="button" disabled><i class="fa-solid fa-download mr-2" aria-hidden="true">&#8203;</i>Download JSON</button></div></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var SHARED = ['id','title','summary','author_name','author_organisation','author_course','author_year_of_study','date_published','date_updated','library_section','skill_areas','tags','featured','published','thumbnail_src','thumbnail_alt'];
+  var DEFINITIONS = [
+    {sheet:'Prompts',type:'prompt',extra:['purpose','prompt_text','platforms','models_tested','reasoning_mode','usage_notes']},
+    {sheet:'Workflows',type:'workflow',extra:['goal','reflection','estimated_total_minutes','complexity_score']},
+    {sheet:'Tools',type:'tool',extra:['company','tool_url','rating','overview','strengths','weaknesses','pricing_model','cost','platform_types','accessibility_notes','privacy_notes','review_verdict']},
+    {sheet:'Articles',type:'article',extra:['body','reading_time_minutes','source_url']},
+    {sheet:'Videos',type:'video',extra:['provider','video_url','embed_url','duration_seconds']},
+    {sheet:'Links',type:'link',extra:['url','site_name','description']},
+    {sheet:'Downloads',type:'download',extra:['file_url','file_name','file_format','file_size_bytes','version','description']},
+    {sheet:'Events',type:'event',extra:['host','start_date_time','end_date_time','timezone','location_type','location','online_url','description','capacity','booking_url','booking_required']},
+    {sheet:'Showcases',type:'showcase',extra:['problem','approach','outcome','reflection','tools_used','project_url']}
+  ];
+  var STEP_HEADERS = ['workflow_id','step_number','title','description'];
+  var LIST_HEADERS = ['library_sections','skill_areas','boolean_values','reasoning_modes','pricing_models','platform_types','location_types','ratings'];
+  var SETTINGS_HEADERS = ['key','value'];
+  var ALLOWED = {
+    library_section:['learn-ai','challenges','community'], skill_areas:['academic','workplace','lifelong'],
+    reasoning_mode:['standard','reasoning','either','not-applicable'], pricing_model:['free','freemium','paid','institutional','unknown'],
+    platform_types:['web','desktop','mobile','browser-extension','API'], location_type:['in-person','online','hybrid']
+  };
+  var MULTI = ['skill_areas','tags','platforms','models_tested','strengths','weaknesses','platform_types','tools_used'];
+  var URL_FIELDS = ['thumbnail_src','tool_url','source_url','video_url','embed_url','url','file_url','online_url','booking_url','project_url'];
+  var NON_NEGATIVE = ['estimated_total_minutes','complexity_score','cost','reading_time_minutes','duration_seconds','file_size_bytes','capacity'];
+  var INTEGER_FIELDS = ['rating','reading_time_minutes','duration_seconds','file_size_bytes','capacity'];
+  var ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+  var state = {resources:[],issues:[],settings:{},payload:null};
+  var ui = {};
+
+  function start() {
+    ['file','file-name','drop-zone','library-error','status','empty','results','counts','errors','warnings','preview','preview-summary','type-filter','cards','export','export-summary','download'].forEach(function (name) { ui[name] = document.getElementById('publisher-' + name); });
+    if (!window.XLSX) {
+      ui['library-error'].textContent = 'The Excel reader could not be loaded from the SheetJS CDN. Check the network connection and Moodle content-security settings, then reload this page.';
+      ui['library-error'].hidden = false; ui.file.disabled = true; return;
+    }
+    ui.file.addEventListener('change', function () { if (ui.file.files[0]) handleFile(ui.file.files[0]); });
+    ['dragenter','dragover'].forEach(function (name) { ui['drop-zone'].addEventListener(name, function (event) { event.preventDefault(); ui['drop-zone'].style.borderColor = '#094685'; ui['drop-zone'].style.background = '#e8f0f8'; }); });
+    ['dragleave','drop'].forEach(function (name) { ui['drop-zone'].addEventListener(name, function (event) { event.preventDefault(); ui['drop-zone'].style.borderColor = '#94a9bd'; ui['drop-zone'].style.background = '#f8fbfd'; }); });
+    ui['drop-zone'].addEventListener('drop', function (event) { var file = event.dataTransfer && event.dataTransfer.files[0]; if (file) handleFile(file); });
+    ui['type-filter'].addEventListener('change', renderPreview);
+    ui.download.addEventListener('click', downloadJson);
+    document.addEventListener('keydown', function (event) { if (event.key === 'Tab') document.body.classList.add('publisher-keyboard'); });
+    document.getElementById('resource-publisher').addEventListener('focusin', function (event) { if (event.target.matches('a,button,input,select,summary')) event.target.style.outline='3px solid #f5c242'; });
+    document.getElementById('resource-publisher').addEventListener('focusout', function (event) { if (event.target.matches('a,button,input,select,summary')) event.target.style.outline=''; });
+  }
+
+  function handleFile(file) {
+    reset();
+    ui['file-name'].textContent = file.name;
+    if (!/\.xlsx$/i.test(file.name)) { fatal('Choose an .xlsx workbook.'); return; }
+    status('Reading and validating ' + file.name + '…', 'info');
+    file.arrayBuffer().then(function (bytes) {
+      var workbook;
+      try { workbook = window.XLSX.read(bytes, {type:'array',raw:true,cellDates:true}); }
+      catch (error) { fatal('The workbook could not be read. It may be damaged or may not be a valid .xlsx file.'); return; }
+      try { processWorkbook(workbook); }
+      catch (error) { console.error(error); fatal('The workbook was read, but could not be processed safely. Check its structure and try again.'); }
+    }).catch(function () { fatal('The selected file could not be read by this browser.'); });
+  }
+
+  function reset() { state={resources:[],issues:[],settings:{},payload:null}; clear(ui.counts); clear(ui.cards); ui.empty.hidden=false; ui.results.hidden=true; ui.preview.hidden=true; ui.export.hidden=true; ui.download.disabled=true; }
+  function fatal(message) { addIssue('error','Workbook',1,'', '',message); renderAll(); status(message,'danger'); }
+  function status(message, kind) { ui.status.className='alert alert-' + kind + ' mt-3 mb-0'; ui.status.textContent=message; }
+
+  function processWorkbook(workbook) {
+    validateWorkbookStructure(workbook);
+    state.settings = parseSettings(workbook);
+    if ((state.settings.schema_version || '1.0') !== '1.0') addIssue('error','Settings',2,'value','','schema_version must be 1.0.');
+    var separator = state.settings.multi_value_separator || '|';
+    var seen = Object.create(null);
+    DEFINITIONS.forEach(function (definition) {
+      rowsFor(workbook,definition.sheet,SHARED.concat(definition.extra)).forEach(function (row) {
+        var id=text(row.values.id); if (!id) return;
+        if (!ID_RE.test(id)) addIssue('error',definition.sheet,row.number,'id',id,'ID must use lowercase letters, numbers and single hyphens.');
+        if (seen[id]) addIssue('error',definition.sheet,row.number,'id',id,'ID duplicates ' + seen[id] + '. IDs must be unique across every resource sheet.'); else seen[id]=definition.sheet + ' row ' + row.number;
+        validateRow(row,definition,separator,id);
+        state.resources.push(buildResource(row,definition,separator));
+      });
+    });
+    attachWorkflowSteps(workbook);
+    state.payload={schemaVersion:'1.0',lastUpdated:'',resources:state.resources};
+    renderAll();
+    var errors=state.issues.filter(function (issue) { return issue.severity==='error'; }).length;
+    status(errors ? 'Validation finished with ' + errors + ' blocking error' + (errors===1?'':'s') + '.' : 'Validation complete. The JSON is ready to download.', errors?'danger':'success');
+  }
+
+  function validateWorkbookStructure(workbook) {
+    var required=DEFINITIONS.map(function (d) { return d.sheet; }).concat(['Workflow Steps','Validation Lists','Settings']);
+    required.forEach(function (sheet) { if (!workbook.Sheets[sheet]) addIssue('error',sheet,1,'','','Required sheet is missing.'); });
+    DEFINITIONS.forEach(function (d) { checkHeaders(workbook,d.sheet,SHARED.concat(d.extra)); });
+    checkHeaders(workbook,'Workflow Steps',STEP_HEADERS); checkHeaders(workbook,'Validation Lists',LIST_HEADERS); checkHeaders(workbook,'Settings',SETTINGS_HEADERS);
+  }
+
+  function checkHeaders(workbook,sheetName,expected) {
+    if (!workbook.Sheets[sheetName]) return;
+    var matrix=window.XLSX.utils.sheet_to_json(workbook.Sheets[sheetName],{header:1,raw:true,defval:''});
+    var headers=(matrix[0]||[]).map(text), counts=Object.create(null);
+    headers.forEach(function (header) { if (header) counts[header]=(counts[header]||0)+1; });
+    expected.forEach(function (header) { if (headers.indexOf(header)===-1) addIssue('error',sheetName,1,header,'','Required column is missing.'); });
+    Object.keys(counts).forEach(function (header) { if (counts[header]>1) addIssue('error',sheetName,1,header,'','Column name is duplicated.'); });
+  }
+
+  function rowsFor(workbook,sheetName,expected) {
+    if (!workbook.Sheets[sheetName]) return [];
+    var matrix=window.XLSX.utils.sheet_to_json(workbook.Sheets[sheetName],{header:1,raw:true,defval:''});
+    var headers=(matrix.shift()||[]).map(text);
+    return matrix.map(function (cells,index) { var values={}; expected.forEach(function (key) { var position=headers.indexOf(key); values[key]=position<0?'':cells[position]; }); return {sheet:sheetName,number:index+2,values:values}; });
+  }
+
+  function parseSettings(workbook) {
+    var result={}, required=['schema_version','site_name','output_filename','multi_value_separator','default_timezone'];
+    rowsFor(workbook,'Settings',SETTINGS_HEADERS).forEach(function (row) { var key=text(row.values.key); if (!key) return; if (Object.prototype.hasOwnProperty.call(result,key)) addIssue('error','Settings',row.number,'key',key,'Setting key is duplicated.'); result[key]=text(row.values.value); });
+    required.forEach(function (key) { if (!Object.prototype.hasOwnProperty.call(result,key)) addIssue('error','Settings',1,'key',key,'Required setting is missing: ' + key + '.'); });
+    return result;
+  }
+
+  function validateRow(row,definition,separator,id) {
+    var v=row.values;
+    if (!text(v.title)) addIssue('error',row.sheet,row.number,'title',id,'Title is required.');
+    if (!text(v.summary)) addIssue('warning',row.sheet,row.number,'summary',id,'Summary is missing.');
+    if (!text(v.date_updated)) addIssue('warning',row.sheet,row.number,'date_updated',id,'Updated date is missing.');
+    if (text(v.thumbnail_src) && !text(v.thumbnail_alt)) addIssue('warning',row.sheet,row.number,'thumbnail_alt',id,'Thumbnail alternative text is missing.');
+    checkAllowed(row,'library_section',ALLOWED.library_section,id,false,separator);
+    checkAllowed(row,'skill_areas',ALLOWED.skill_areas,id,true,separator);
+    ['featured','published'].forEach(function (field) { if (parseBoolean(v[field])===null) addIssue('error',row.sheet,row.number,field,id,'Enter TRUE or FALSE.'); });
+    ['date_published','date_updated'].forEach(function (field) { if (text(v[field]) && !parseDate(v[field],false)) addIssue('error',row.sheet,row.number,field,id,'Enter a valid date.'); });
+    URL_FIELDS.forEach(function (field) { if (Object.prototype.hasOwnProperty.call(v,field) && text(v[field]) && !parseUrl(v[field])) addIssue('error',row.sheet,row.number,field,id,'Enter a valid http or https URL.'); });
+    NON_NEGATIVE.forEach(function (field) { if (!Object.prototype.hasOwnProperty.call(v,field) || text(v[field])==='') return; var number=parseNumber(v[field]); if (number===null || number<0) addIssue('error',row.sheet,row.number,field,id,'Enter a non-negative number.'); else if (INTEGER_FIELDS.indexOf(field)!==-1 && !Number.isInteger(number)) addIssue('error',row.sheet,row.number,field,id,'Enter a whole number.'); });
+    if (definition.type==='prompt') checkAllowed(row,'reasoning_mode',ALLOWED.reasoning_mode,id,false,separator);
+    if (definition.type==='tool') { checkAllowed(row,'pricing_model',ALLOWED.pricing_model,id,false,separator); checkAllowed(row,'platform_types',ALLOWED.platform_types,id,true,separator); var rating=parseNumber(v.rating); if (rating===null || !Number.isInteger(rating) || rating<1 || rating>5) addIssue('error',row.sheet,row.number,'rating',id,'Rating must be a whole number from 1 to 5.'); if (!text(v.privacy_notes)) addIssue('warning',row.sheet,row.number,'privacy_notes',id,'Privacy notes are missing.'); }
+    if (definition.type==='event') { checkAllowed(row,'location_type',ALLOWED.location_type,id,false,separator); if (text(v.booking_required) && parseBoolean(v.booking_required)===null) addIssue('error',row.sheet,row.number,'booking_required',id,'Enter TRUE or FALSE.'); if (!text(v.capacity)) addIssue('warning',row.sheet,row.number,'capacity',id,'Event capacity is blank.'); var start=parseDate(v.start_date_time,true), end=parseDate(v.end_date_time,true); if (text(v.start_date_time)&&!start) addIssue('error',row.sheet,row.number,'start_date_time',id,'Enter a valid date and time.'); if (text(v.end_date_time)&&!end) addIssue('error',row.sheet,row.number,'end_date_time',id,'Enter a valid date and time.'); if (start&&end&&new Date(end).getTime()<=new Date(start).getTime()) addIssue('error',row.sheet,row.number,'end_date_time',id,'End date and time must be later than the start.'); }
+  }
+
+  function checkAllowed(row,field,allowed,id,multiple,separator) {
+    var values=multiple?parseMultiValue(row.values[field],separator):[text(row.values[field])];
+    if (!multiple && !values[0]) { addIssue('error',row.sheet,row.number,field,id,'A value is required.'); return; }
+    values.forEach(function (value) { if (value && allowed.indexOf(value)===-1) addIssue('error',row.sheet,row.number,field,id,'Unknown value: ' + value + '.'); });
+  }
+
+  function normaliseSharedFields(row,definition,separator) {
+    var v=row.values;
+    return {id:text(v.id),type:definition.type,title:text(v.title),summary:text(v.summary),author:{name:text(v.author_name),organisation:text(v.author_organisation),course:text(v.author_course),yearOfStudy:text(v.author_year_of_study)},datePublished:parseDate(v.date_published,false)||'',dateUpdated:parseDate(v.date_updated,false)||'',librarySection:text(v.library_section),skillAreas:parseMultiValue(v.skill_areas,separator),tags:parseMultiValue(v.tags,separator),featured:parseBoolean(v.featured)===true,published:parseBoolean(v.published)!==false,thumbnail:{src:text(v.thumbnail_src),alt:text(v.thumbnail_alt)},content:{},_source:{sheet:row.sheet,row:row.number}};
+  }
+
+  function buildResource(row,d,s) { var r=normaliseSharedFields(row,d,s),v=row.values; if(d.type==='prompt')r.content=buildPrompt(v,s); if(d.type==='workflow')r.content=buildWorkflow(v); if(d.type==='tool')r.content=buildTool(v,s); if(d.type==='article')r.content=buildArticle(v); if(d.type==='video')r.content=buildVideo(v); if(d.type==='link')r.content=buildLink(v); if(d.type==='download')r.content=buildDownload(v); if(d.type==='event')r.content=buildEvent(v); if(d.type==='showcase')r.content=buildShowcase(v,s); return r; }
+  function buildPrompt(v,s){return{purpose:text(v.purpose),promptText:text(v.prompt_text),platforms:parseMultiValue(v.platforms,s),modelsTested:parseMultiValue(v.models_tested,s),reasoningMode:text(v.reasoning_mode),usageNotes:text(v.usage_notes)}}
+  function buildWorkflow(v){return{goal:text(v.goal),steps:[],reflection:text(v.reflection),estimatedTotalMinutes:parseNumber(v.estimated_total_minutes),complexityScore:parseNumber(v.complexity_score)}}
+  function buildTool(v,s){return{company:text(v.company),toolUrl:text(v.tool_url),rating:parseNumber(v.rating),overview:text(v.overview),strengths:parseMultiValue(v.strengths,s),weaknesses:parseMultiValue(v.weaknesses,s),pricing:{model:text(v.pricing_model),cost:parseNumber(v.cost)},platformTypes:parseMultiValue(v.platform_types,s),accessibilityNotes:text(v.accessibility_notes),privacyNotes:text(v.privacy_notes),reviewVerdict:text(v.review_verdict)}}
+  function buildArticle(v){return{body:text(v.body),readingTimeMinutes:parseNumber(v.reading_time_minutes),sourceUrl:text(v.source_url)}}
+  function buildVideo(v){return{provider:text(v.provider),videoUrl:text(v.video_url),embedUrl:text(v.embed_url),durationSeconds:parseNumber(v.duration_seconds)}}
+  function buildLink(v){return{url:text(v.url),siteName:text(v.site_name),description:text(v.description)}}
+  function buildDownload(v){return{fileUrl:text(v.file_url),fileName:text(v.file_name),fileFormat:text(v.file_format),fileSizeBytes:parseNumber(v.file_size_bytes),version:text(v.version),description:text(v.description)}}
+  function buildEvent(v){return{host:text(v.host),startDateTime:parseDate(v.start_date_time,true)||'',endDateTime:parseDate(v.end_date_time,true)||'',timezone:text(v.timezone),locationType:text(v.location_type),location:text(v.location),onlineUrl:text(v.online_url),description:text(v.description),capacity:parseNumber(v.capacity),bookingUrl:text(v.booking_url),bookingRequired:parseBoolean(v.booking_required)===true}}
+  function buildShowcase(v,s){return{problem:text(v.problem),approach:text(v.approach),outcome:text(v.outcome),reflection:text(v.reflection),toolsUsed:parseMultiValue(v.tools_used,s),projectUrl:text(v.project_url)}}
+
+  function attachWorkflowSteps(workbook) {
+    var workflows=Object.create(null),numbers=Object.create(null);
+    state.resources.filter(function(r){return r.type==='workflow';}).forEach(function(r){workflows[r.id]=r;numbers[r.id]=Object.create(null);});
+    rowsFor(workbook,'Workflow Steps',STEP_HEADERS).forEach(function(row){var v=row.values,id=text(v.workflow_id),has=id||text(v.step_number)||text(v.title)||text(v.description);if(!has)return;if(!id){addIssue('error','Workflow Steps',row.number,'workflow_id','','Workflow ID is required for every step.');return;}if(!workflows[id]){addIssue('error','Workflow Steps',row.number,'workflow_id',id,'Step refers to a workflow that does not exist.');return;}var n=parseNumber(v.step_number);if(n===null||!Number.isInteger(n)||n<=0){addIssue('error','Workflow Steps',row.number,'step_number',id,'Step number must be a positive whole number.');return;}if(numbers[id][n]){addIssue('error','Workflow Steps',row.number,'step_number',id,'Step number is duplicated for this workflow.');return;}numbers[id][n]=true;workflows[id].content.steps.push({stepNumber:n,title:text(v.title),description:text(v.description)});});
+    Object.keys(workflows).forEach(function(id){workflows[id].content.steps.sort(function(a,b){return a.stepNumber-b.stepNumber;});});
+  }
+
+  function parseBoolean(value){if(value===true||value===1)return true;if(value===false||value===0)return false;var v=text(value).toLowerCase();if(v==='true')return true;if(v==='false')return false;return null;}
+  function parseNumber(value){if(value===null||value===undefined||text(value)==='')return null;var n=typeof value==='number'?value:Number(text(value));return Number.isFinite(n)?n:null;}
+  function parseDate(value,withTime){if(value instanceof Date&&!isNaN(value.getTime()))return withTime?value.toISOString():value.toISOString().slice(0,10);if(typeof value==='number'){var parts=window.XLSX.SSF.parse_date_code(value);if(!parts)return null;var d=new Date(Date.UTC(parts.y,parts.m-1,parts.d,parts.H||0,parts.M||0,Math.floor(parts.S||0)));return withTime?d.toISOString():d.toISOString().slice(0,10);}var raw=text(value);if(!raw)return null;if(!withTime){var match=/^(\d{4})-(\d{2})-(\d{2})$/.exec(raw);if(!match)return null;var date=new Date(Date.UTC(Number(match[1]),Number(match[2])-1,Number(match[3])));if(date.getUTCFullYear()!==Number(match[1])||date.getUTCMonth()!==Number(match[2])-1||date.getUTCDate()!==Number(match[3]))return null;return raw;}if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,3})?)?(?:Z|[+-]\d{2}:\d{2})$/.test(raw))return null;var parsed=new Date(raw);if(isNaN(parsed.getTime()))return null;return raw;}
+  function parseMultiValue(value,separator){var seen=Object.create(null);return text(value).split(separator||'|').map(function(v){return v.trim();}).filter(function(v){if(!v||seen[v])return false;seen[v]=true;return true;});}
+  function parseUrl(value){try{var u=new URL(text(value));return u.protocol==='http:'||u.protocol==='https:';}catch(e){return false;}}
+  function text(value){if(value===null||value===undefined)return'';return String(value).trim();}
+  function addIssue(severity,sheet,row,column,id,message){state.issues.push({severity:severity,sheet:sheet,row:row,column:column,resourceId:id,message:message});}
+
+  function renderAll(){ui.empty.hidden=true;ui.results.hidden=false;renderCounts();renderIssues('error',ui.errors);renderIssues('warning',ui.warnings);populateFilter();renderPreview();var errors=state.issues.some(function(i){return i.severity==='error';}),published=state.resources.filter(function(r){return r.published;}),excluded=state.resources.length-published.length;ui.preview.hidden=!state.resources.length;ui.export.hidden=!state.resources.length;ui.download.disabled=errors||!state.resources.length;ui['export-summary'].textContent=errors?'Resolve every error before downloading.':published.length+' published resource'+(published.length===1?'':'s')+' will be included; '+excluded+' unpublished resource'+(excluded===1?' is':'s are')+' excluded.';}
+  function renderCounts(){clear(ui.counts);DEFINITIONS.forEach(function(d){var count=state.resources.filter(function(r){return r.type===d.type;}).length;var col=element('div','col-6 col-md-4 col-lg-3 mb-2');var box=element('div','border rounded p-2 h-100');box.appendChild(element('strong','d-block',String(count)));box.appendChild(document.createTextNode(d.sheet));col.appendChild(box);ui.counts.appendChild(col);});}
+  function renderIssues(severity,container){var issues=state.issues.filter(function(i){return i.severity===severity;}),summary=container.querySelector('summary'),body=container.querySelector('div');summary.textContent=(severity==='error'?'Errors':'Warnings')+' ('+issues.length+')';clear(body);if(!issues.length){body.appendChild(element('p','text-muted','None.'));return;}var list=element('ul','list-group');issues.forEach(function(i){var item=element('li','list-group-item');item.appendChild(element('strong','d-block',i.sheet+' — row '+i.row+(i.column?' — '+i.column:'')));item.appendChild(document.createTextNode((i.resourceId?'['+i.resourceId+'] ':'')+i.message));list.appendChild(item);});body.appendChild(list);}
+  function populateFilter(){var current=ui['type-filter'].value;while(ui['type-filter'].options.length>1)ui['type-filter'].remove(1);DEFINITIONS.forEach(function(d){if(state.resources.some(function(r){return r.type===d.type;})){var option=document.createElement('option');option.value=d.type;option.textContent=d.sheet;ui['type-filter'].appendChild(option);}});ui['type-filter'].value=current;}
+  function renderPreview(){clear(ui.cards);var type=ui['type-filter'].value,resources=state.resources.filter(function(r){return !type||r.type===type;});ui['preview-summary'].textContent=resources.length+' of '+state.resources.length+' resources shown.';resources.forEach(function(r){var col=element('div','col-12 col-md-6 col-lg-4 mb-3'),card=element('article','card h-100 shadow-sm'),body=element('div','card-body');body.appendChild(element('p','text-uppercase font-weight-bold small mb-1',r.type));body.appendChild(element('h3','h5',r.title||'(Untitled resource)'));body.appendChild(element('p','text-muted',r.summary||'No summary supplied.'));var badge=element('span','badge '+(r.published?'badge-success':'badge-secondary'),r.published?'Published':'Unpublished');body.appendChild(badge);if(r.featured)body.appendChild(element('span','badge badge-warning ml-2','Featured'));card.appendChild(body);col.appendChild(card);ui.cards.appendChild(col);});}
+  function downloadJson(){if(ui.download.disabled||!state.payload)return;var payload={schemaVersion:'1.0',lastUpdated:new Date().toISOString(),resources:state.resources.filter(function(r){return r.published;}).map(function(r){var copy={};Object.keys(r).forEach(function(k){if(k!=='_source')copy[k]=r[k];});return copy;})};var filename=text(state.settings.output_filename)||'resources.json';if(!/\.json$/i.test(filename))filename+='.json';filename=filename.replace(/[\\/:*?"<>|]/g,'-');var blob=new Blob([JSON.stringify(payload,null,2)+'\n'],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.setAttribute('h'+'ref',url);link.setAttribute('download',filename);document.body.appendChild(link);link.click();link.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);status(filename+' downloaded successfully.','success');}
+  function element(tag,className,value){var node=document.createElement(tag);if(className)node.className=className;if(value!==undefined)node.textContent=value;return node;}
+  function clear(node){while(node.firstChild)node.removeChild(node.firstChild);}
+  start();
+}());
+</script>
+</body>
+</html>
