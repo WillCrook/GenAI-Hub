@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <title>Learn AI Resource Library | GenAI &amp; Digital Skills Hub</title>
+
+    <!--Constraints
+    Generate Moodle 4.x compatible HTML.
+
+Constraints:
+
+- Bootstrap version 4.6 allowed.
+- Inline styles allowed.
+- No `<style>` tags.
+- No custom CSS classes.
+- No `<html>`, `<head>`, or `<body>` tags in the Moodle fragment.
+- Avoid empty spans/icons that may be stripped.
+- Use Font Awesome Icons where needed.
+- Mobile responsive using Bootstrap grid only.
+- Modern style with student learning in mind.
+
+-->
+
+<!-- COPY BELOW FOR MOODLE -->
+<a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<nav class="navbar navbar-expand-lg bg-white border-bottom" aria-label="Primary navigation" style="backdrop-filter:blur(12px);">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center font-weight-bold mr-2" href="https://moodle.bath.ac.uk/course/section.php?id=277885" style="font-size:clamp(0.9rem,4vw,1.1rem);text-decoration:none;white-space:normal;max-width:calc(100% - 4rem);">
+            <div style="min-width:0;">
+                <div style="color:#094685;line-height:1.1;">GenAI &amp; Digital Skills Hub</div>
+                <small class="text-muted font-weight-normal" style="color:#4f5962!important;">University of Bath</small>
+            </div>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#learnLibraryHubNav" aria-controls="learnLibraryHubNav" aria-expanded="false" aria-label="Toggle navigation" style="min-height:44px;">
+            <i class="fa-solid fa-bars" style="font-size:1.5rem;line-height:1;" aria-hidden="true">&#8203;</i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="learnLibraryHubNav">
+            <ul class="navbar-nav ml-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link px-3 py-3 font-weight-bold" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967" aria-current="page" style="color:#094685;">
+                        <div style="color:#094685;">Learn AI</div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567969">
+                        <div style="color:#0056b3;">Challenges</div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971">
+                        <div style="color:#0056b3;">Community</div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 py-3" href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567972">
+                        <div style="color:#0056b3;">Using AI at Bath</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main id="main-content" tabindex="-1" style="overflow-wrap:anywhere;">
+    <div class="container-fluid px-3 px-md-4 py-4 py-md-5" style="background:#ffffff;color:#172033;">
+        <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:linear-gradient(135deg,#0b4f87 0%,#123f70 58%,#173653 100%);color:#ffffff;" aria-labelledby="learn-library-heading">
+            <div class="container">
+                <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.82rem;">Learn AI resources</div>
+                <h1 id="learn-library-heading" class="display-4 font-weight-bold mb-3" style="font-size:clamp(2.25rem,8vw,4rem);line-height:1.05;">Learn AI Resource Library</h1>
+                <p class="lead mb-4" style="max-width:760px;color:rgba(255,255,255,.88);">A dedicated place for practical resources that build AI and digital skills for study, work and lifelong learning.</p>
+
+                <p id="learn-library-controls-note" class="mb-3" style="max-width:820px;color:#ffffff;">Search, filters and sorting are unavailable until resources are added.</p>
+
+                <form role="search" style="max-width:820px;">
+                    <label for="learn-library-search" class="font-weight-bold">Search learning resources</label>
+                    <div class="input-group input-group-lg">
+                        <input id="learn-library-search" type="search" class="form-control" placeholder="Search learning resources" autocomplete="off" aria-describedby="learn-library-controls-note" disabled style="border-radius:10px 0 0 10px;min-height:50px;">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-light font-weight-bold" aria-describedby="learn-library-controls-note" disabled style="color:#094685;border-radius:0 10px 10px 0;">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="p-3 p-md-4 mb-4 mx-auto border shadow-sm" style="width:100%;max-width:1140px;border-radius:12px;background:#ffffff;" aria-labelledby="learn-resource-type-heading">
+            <div class="container">
+                <h2 id="learn-resource-type-heading" class="h5 font-weight-bold mb-2">Resource type</h2>
+                <p class="small text-muted mb-3" style="color:#4f5962!important;">These groupings will help you browse resources as they are added.</p>
+                <!-- Provisional resource-type labels: keep this as one editable list. -->
+                <div class="d-flex flex-wrap" role="group" aria-label="Filter by resource type" aria-describedby="learn-library-controls-note">
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" disabled>Popular</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" disabled>Lifelong</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" disabled>Academic</button>
+                    <button type="button" class="btn btn-outline-primary mb-2" disabled>Workplace</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="row mx-auto" style="width:100%;max-width:1140px;">
+            <aside class="col-lg-3 mb-4" aria-labelledby="learn-library-filters-heading">
+                <div class="p-3 p-md-4 border shadow-sm h-100" style="border-radius:12px;background:#f8fafc;">
+                    <h2 id="learn-library-filters-heading" class="h5 font-weight-bold mb-3">Filters</h2>
+
+                    <fieldset class="mb-4" aria-describedby="learn-library-controls-note" disabled>
+                        <legend class="h6 font-weight-bold">Estimated time</legend>
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="learn-time-under-10" disabled>
+                            <label class="custom-control-label" for="learn-time-under-10">Under 10 minutes</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="learn-time-10-30" disabled>
+                            <label class="custom-control-label" for="learn-time-10-30">10–30 minutes</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="learn-time-30-60" disabled>
+                            <label class="custom-control-label" for="learn-time-30-60">30–60 minutes</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="learn-time-over-60" disabled>
+                            <label class="custom-control-label" for="learn-time-over-60">More than 60 minutes</label>
+                        </div>
+                    </fieldset>
+
+                    <button type="button" class="btn btn-outline-secondary btn-block" aria-describedby="learn-library-controls-note" disabled>Reset filters</button>
+                </div>
+            </aside>
+
+            <section class="col-lg-9" aria-labelledby="learn-resource-results-heading">
+                <div class="d-flex flex-column flex-sm-row align-items-sm-end justify-content-between mb-3">
+                    <div class="mb-3 mb-sm-0">
+                        <h2 id="learn-resource-results-heading" class="h4 font-weight-bold mb-1">Resources</h2>
+                        <p class="mb-0" role="status" aria-live="polite" aria-atomic="true">0 resources</p>
+                    </div>
+                    <div style="width:100%;max-width:220px;">
+                        <label for="learn-library-sort" class="font-weight-bold">Sort by</label>
+                        <select id="learn-library-sort" class="form-control" aria-describedby="learn-library-controls-note" disabled>
+                            <option>Most relevant</option>
+                            <option>Newest</option>
+                            <option>A–Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="learn-library-results" class="p-4 p-md-5 mb-4 border text-center" style="border-radius:12px;background:#f8fafc;border-color:#cbd5e1!important;">
+                    <h3 class="h5 font-weight-bold mb-2">Resources will be added here soon.</h3>
+                    <p class="mb-0 text-muted" style="color:#4f5962!important;">No resources are available yet. Please check back soon.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
