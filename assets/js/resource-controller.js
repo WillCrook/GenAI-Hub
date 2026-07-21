@@ -167,8 +167,8 @@
     function validateTool(content, path) {
         requireString(content.company, path + '.company', true);
         requireUrl(content.toolUrl, path + '.toolUrl');
-        if (typeof content.rating !== 'number' || !isFinite(content.rating) || Math.floor(content.rating) !== content.rating || content.rating < 1 || content.rating > 5) {
-            invalid(path + '.rating', 'expected a whole number from 1 to 5.');
+        if (typeof content.rating !== 'number' || !isFinite(content.rating) || Math.round(content.rating * 10) !== content.rating * 10 || content.rating < 1 || content.rating > 5) {
+            invalid(path + '.rating', 'expected a number from 1 to 5 with no more than one decimal place.');
         }
         requireString(content.overview, path + '.overview', true);
         requireStringArray(content.strengths, path + '.strengths');
@@ -264,6 +264,12 @@
         requireDate(resource.dateUpdated, path + '.dateUpdated');
         requireEnum(resource.librarySection, LIBRARY_SECTIONS, path + '.librarySection');
         requireStringArray(resource.skillAreas, path + '.skillAreas', SKILL_AREAS);
+        if (resource.type === 'tool' && resource.skillAreas.length !== 0) {
+            invalid(path + '.skillAreas', 'tool reviews must not have a skill area.');
+        }
+        if (resource.type !== 'tool' && resource.skillAreas.length !== 1) {
+            invalid(path + '.skillAreas', 'expected exactly one skill area.');
+        }
         requireStringArray(resource.tags, path + '.tags');
         requireBoolean(resource.featured, path + '.featured');
         requireBoolean(resource.published, path + '.published');
@@ -473,16 +479,31 @@
         });
     }
 
+    function formatRating(value) {
+        return Number(value).toFixed(1).replace(/\.0$/, '') + '/5';
+    }
+
     function appendBadge(parent, label, colour) {
         var badge = element('span', 'badge rounded-pill px-2 py-1 mr-2 mb-2', label);
         badge.style.cssText = 'background:' + colour + ';color:#fff;border:1px solid ' + colour + ';font-size:.72rem;letter-spacing:.03em;line-height:1.2;';
         parent.appendChild(badge);
     }
 
-    function appendResourceBadges(parent, resource) {
+    function appendSkillBadge(parent, resource) {
+        if (resource.type === 'tool' || !resource.skillAreas.length) return;
+        var skill = resource.skillAreas[0];
+        appendBadge(parent, SKILL_LABELS[skill], SKILL_COLOURS[skill]);
+    }
+
+    function appendDialogBadges(parent, resource) {
         appendBadge(parent, TYPE_LABELS[resource.type], '#094685');
-        resource.skillAreas.forEach(function (skill) { appendBadge(parent, SKILL_LABELS[skill], SKILL_COLOURS[skill]); });
+        appendSkillBadge(parent, resource);
         if (resource.featured) appendBadge(parent, 'Featured', '#5f4300');
+    }
+
+    function appendLibraryBadges(parent, resource) {
+        appendDialogBadges(parent, resource);
+        resource.tags.forEach(function (tag) { appendBadge(parent, tag, '#475569'); });
     }
 
     function appendThumbnail(parent, resource, compact) {
@@ -498,9 +519,10 @@
         parent.appendChild(image);
     }
 
-    function appendCardContents(container, resource) {
+    function appendCardContents(container, resource, badgeMode) {
         var badges = element('div', 'd-flex flex-wrap align-items-start mb-1');
-        appendResourceBadges(badges, resource);
+        if (badgeMode === 'library') appendLibraryBadges(badges, resource);
+        else appendSkillBadge(badges, resource);
         container.appendChild(badges);
         container.appendChild(element('h3', 'h5 font-weight-bold mt-2 mb-2', resource.title));
         if (resource.summary) {
@@ -523,7 +545,7 @@
         container.appendChild(action);
     }
 
-    function makeCardButton(resource, clone) {
+    function makeCardButton(resource, clone, badgeMode) {
         var button = element('button', 'btn text-left w-100 h-100 p-3 d-flex flex-column');
         button.type = 'button';
         button.setAttribute('data-resource-open', resource.id);
@@ -534,7 +556,7 @@
             button.setAttribute('aria-hidden', 'true');
             button.setAttribute('data-resource-clone', 'true');
         }
-        appendCardContents(button, resource);
+        appendCardContents(button, resource, badgeMode);
         return button;
     }
 
@@ -546,7 +568,25 @@
             card.setAttribute('data-resource-clone', 'true');
             card.setAttribute('aria-hidden', 'true');
         }
-        card.appendChild(makeCardButton(resource, clone));
+        card.appendChild(makeCardButton(resource, clone, 'landing'));
+        return card;
+    }
+
+    function createCarouselPlaceholder(index, clone) {
+        var card = element('div', 'card shadow rounded mr-4');
+        card.style.cssText = 'width:300px;min-height:380px;flex-shrink:0;border:1px dashed #94a3b8;border-radius:1rem;overflow:hidden;background:#f8fafc;';
+        card.setAttribute('data-resource-placeholder', String(index + 1));
+        if (clone) {
+            card.setAttribute('data-resource-clone', 'true');
+            card.setAttribute('aria-hidden', 'true');
+        }
+        var content = element('div', 'h-100 p-4 d-flex flex-column align-items-center justify-content-center text-center');
+        content.style.minHeight = '380px';
+        content.appendChild(element('h3', 'h5 font-weight-bold mb-2', 'Coming soon'));
+        var note = element('p', 'text-muted mb-0', 'A new featured resource will appear here.');
+        note.style.color = '#4f5962';
+        content.appendChild(note);
+        card.appendChild(content);
         return card;
     }
 
@@ -555,7 +595,7 @@
         var article = element('article', 'card h-100 shadow-sm');
         article.style.cssText = 'border:1px solid #cbd5e1;border-radius:12px;overflow:hidden;';
         article.setAttribute('data-resource-id', resource.id);
-        article.appendChild(makeCardButton(resource, false));
+        article.appendChild(makeCardButton(resource, false, 'library'));
         column.appendChild(article);
         return column;
     }
@@ -745,7 +785,7 @@
 
     function renderTool(resource, body, actions) {
         var overview = panel(resource.content.company || 'Tool review');
-        appendKeyValue(overview, 'Rating', resource.content.rating + ' out of 5 stars');
+        appendKeyValue(overview, 'Rating', formatRating(resource.content.rating) + ' student rating');
         appendText(overview, resource.content.overview);
         appendKeyValue(overview, 'Review verdict', resource.content.reviewVerdict);
         body.appendChild(overview);
@@ -879,7 +919,7 @@
         header.style.cssText = 'gap:1rem;background:linear-gradient(135deg,#094685,#111827);border-top:6px solid #f5c242;color:#fff;';
         var headingWrap = element('div');
         var badges = element('div', 'd-flex flex-wrap mb-1');
-        appendResourceBadges(badges, resource);
+        appendDialogBadges(badges, resource);
         headingWrap.appendChild(badges);
         var heading = element('h2', 'h3 font-weight-bold mb-1', resource.title);
         heading.id = 'resource-popout-title';
@@ -1174,16 +1214,14 @@
         var track = root.querySelector('[data-resource-target="featured"]') || root.querySelector('[data-resource-featured-track]');
         if (!track) return;
         clear(track);
-        if (!resources.length) {
-            var empty = element('div', 'alert alert-info mb-0', 'No featured resources are available yet.');
-            track.appendChild(empty);
-            return;
-        }
-        var minimum = Math.max(resources.length, Math.ceil((Math.max(window.innerWidth, 320) + 324) / 324));
-        var canonical = [];
-        for (var i = 0; i < minimum; i += 1) canonical.push(resources[i % resources.length]);
-        canonical.forEach(function (resource, index) { track.appendChild(createCarouselCard(resource, index >= resources.length)); });
-        canonical.forEach(function (resource) { track.appendChild(createCarouselCard(resource, true)); });
+        var canonical = resources.map(function (resource) { return { resource: resource }; });
+        for (var i = 0; i < 7; i += 1) canonical.push({ placeholder: i });
+        canonical.forEach(function (item) {
+            track.appendChild(item.resource ? createCarouselCard(item.resource, false) : createCarouselPlaceholder(item.placeholder, false));
+        });
+        canonical.forEach(function (item) {
+            track.appendChild(item.resource ? createCarouselCard(item.resource, true) : createCarouselPlaceholder(item.placeholder, true));
+        });
     }
 
     function mountFeatured(root, retry) {
@@ -1207,22 +1245,340 @@
         return slots;
     }
 
-    function renderIntoSlot(slot, resource) {
+    var COMMUNITY_ACTIONS = {
+        showcase: 'View Work',
+        prompt: 'Use Prompt',
+        workflow: 'View Workflow',
+        tool: 'Read Review',
+        event: 'View Event'
+    };
+
+    function restoreCommunitySlot(slot) {
+        if (!slot._resourceOriginalAppearance) {
+            slot._resourceOriginalAppearance = {
+                className: slot.className,
+                style: slot.getAttribute('style'),
+                href: slot.getAttribute('href'),
+                role: slot.getAttribute('role'),
+                tabIndex: slot.getAttribute('tabindex'),
+                ariaLabel: slot.getAttribute('aria-label')
+            };
+        }
+        var original = slot._resourceOriginalAppearance;
+        slot.className = original.className;
+        if (original.style === null) slot.removeAttribute('style');
+        else slot.setAttribute('style', original.style);
+        if (original.href === null) slot.removeAttribute('href');
+        else slot.setAttribute('href', original.href);
+        if (original.role === null) slot.removeAttribute('role');
+        else slot.setAttribute('role', original.role);
+        if (original.tabIndex === null) slot.removeAttribute('tabindex');
+        else slot.setAttribute('tabindex', original.tabIndex);
+        if (original.ariaLabel === null) slot.removeAttribute('aria-label');
+        else slot.setAttribute('aria-label', original.ariaLabel);
+        slot.removeAttribute('data-resource-open');
+        slot.removeAttribute('data-resource-id');
+        slot.removeAttribute('data-resource-placeholder');
+        slot.removeAttribute('aria-disabled');
+        slot.hidden = false;
+        clear(slot);
+    }
+
+    function communityAction(label, colour) {
+        var action = element('span', 'font-weight-bold mt-auto pt-3 d-inline-flex align-items-center');
+        action.style.cssText = 'color:' + (colour || '#094685') + ';font-size:1.05rem;line-height:1.1;';
+        action.appendChild(document.createTextNode(label + ' '));
+        var icon = element('i', 'fa-solid fa-arrow-up-right-from-square ml-1', '\u200B');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.style.cssText = 'line-height:1;font-size:1.05rem;vertical-align:-0.18em;';
+        action.appendChild(icon);
+        return action;
+    }
+
+    function communitySkill(resource, marginClass) {
+        if (resource.type === 'tool' || !resource.skillAreas.length) return null;
+        var skill = resource.skillAreas[0];
+        var badge = element('span', 'badge rounded-pill px-2 py-1 ' + (marginClass || 'mb-3'), SKILL_LABELS[skill]);
+        badge.style.cssText = 'background:' + SKILL_COLOURS[skill] + ';color:#fff;border:1px solid ' + SKILL_COLOURS[skill] + ';font-size:.72rem;letter-spacing:.03em;line-height:1.2;';
+        return badge;
+    }
+
+    function appendCommunitySummary(parent, value, dark) {
+        if (!value) return;
+        var summary = element('p', 'mb-3', value);
+        summary.style.color = dark ? '#e6eef8' : '#4f5962';
+        parent.appendChild(summary);
+    }
+
+    function appendCommunityAuthor(parent, resource, prefix) {
+        var author = resource.author.name || resource.author.organisation;
+        if (!author) return;
+        var line = element('small', 'font-weight-bold d-block mb-1', (prefix || 'By') + ' ' + author);
+        line.style.color = '#5f4300';
+        parent.appendChild(line);
+    }
+
+    function appendCompactMetadata(parent, label, values) {
+        if (!values || !values.length) return;
+        var heading = element('div', 'small text-uppercase font-weight-bold mb-1', label);
+        heading.style.cssText = 'color:#5f4300;letter-spacing:.08em;';
+        parent.appendChild(heading);
+        var value = element('div', 'text-muted mb-2', values.join(' · '));
+        value.style.cssText = 'color:#4f5962!important;font-size:.9rem;line-height:1.4;';
+        parent.appendChild(value);
+    }
+
+    function activateCommunitySlot(slot, resource) {
         slot.hidden = false;
         slot.setAttribute('data-resource-open', resource.id);
         slot.setAttribute('data-resource-id', resource.id);
         slot.setAttribute('aria-label', 'Open ' + resource.title);
-        slot.classList.add('p-4');
         if (slot.tagName === 'A') slot.setAttribute('href', makeBrowseUrl(resource, slot));
         else {
             slot.setAttribute('role', 'button');
             slot.setAttribute('tabindex', '0');
         }
-        clear(slot);
-        appendCardContents(slot, resource);
+    }
+
+    function renderShowcaseLandingCard(slot, resource, featured) {
+        if (featured) {
+            var heading = element('div', 'p-4 pb-2');
+            var skill = communitySkill(resource, 'mb-2');
+            if (skill) heading.appendChild(skill);
+            heading.appendChild(element('h3', 'h4 font-weight-bold mb-0', resource.title));
+            slot.appendChild(heading);
+            if (resource.thumbnail.src) {
+                var imageWrap = element('div', 'px-4');
+                appendThumbnail(imageWrap, resource, true);
+                slot.appendChild(imageWrap);
+            }
+            var body = element('div', 'p-4 pt-2 d-flex flex-column flex-fill');
+            appendCommunitySummary(body, resource.summary, false);
+            appendCompactMetadata(body, 'Technologies used', resource.content.toolsUsed);
+            appendCompactMetadata(body, 'Outcome', resource.content.outcome ? [resource.content.outcome] : []);
+            appendCommunityAuthor(body, resource, 'Project by');
+            body.appendChild(communityAction(COMMUNITY_ACTIONS.showcase));
+            slot.appendChild(body);
+            return;
+        }
+        var wrapper = element('div', 'd-flex flex-column align-items-start w-100 h-100');
+        var badge = communitySkill(resource);
+        if (badge) wrapper.appendChild(badge);
+        wrapper.appendChild(element('h4', 'h5 font-weight-bold', resource.title));
+        appendCommunitySummary(wrapper, resource.summary, false);
+        appendCommunityAuthor(wrapper, resource, 'Project by');
+        wrapper.appendChild(communityAction(COMMUNITY_ACTIONS.showcase));
+        slot.appendChild(wrapper);
+    }
+
+    function renderPromptLandingCard(slot, resource, featured) {
+        var wrapper = element('div', featured ? 'p-4 d-flex flex-column h-100' : 'd-flex flex-column align-items-start w-100 h-100');
+        var badge = communitySkill(resource);
+        if (badge) wrapper.appendChild(badge);
+        wrapper.appendChild(element(featured ? 'h3' : 'h4', featured ? 'h4 font-weight-bold' : 'h5 font-weight-bold', resource.title));
+        appendCommunitySummary(wrapper, resource.summary || resource.content.purpose, false);
+        appendCompactMetadata(wrapper, 'Platforms', resource.content.platforms);
+        appendCompactMetadata(wrapper, 'Models tested', resource.content.modelsTested);
+        wrapper.appendChild(communityAction(COMMUNITY_ACTIONS.prompt));
+        slot.appendChild(wrapper);
+    }
+
+    function renderWorkflowLandingCard(slot, resource) {
+        var wrapper = element('div', 'd-flex flex-column align-items-start w-100 h-100');
+        var heading = element('div', 'd-flex flex-column flex-sm-row justify-content-between align-items-sm-start mb-3 w-100');
+        heading.appendChild(element('h3', 'h4 font-weight-bold mb-0', resource.title));
+        var badge = communitySkill(resource, 'mt-3 mt-sm-0 ml-sm-3 align-self-start');
+        if (badge) heading.appendChild(badge);
+        wrapper.appendChild(heading);
+        var steps = element('div', 'row text-center align-items-center w-100');
+        resource.content.steps.slice(0, 3).forEach(function (step, index) {
+            if (index) {
+                var arrow = element('div', 'col-12 col-md-auto mb-3 px-md-1 font-weight-bold');
+                arrow.style.cssText = 'color:#094685;font-size:1.35rem;line-height:1;min-width:30px;';
+                arrow.setAttribute('role', 'img');
+                arrow.setAttribute('aria-label', 'Next step');
+                var across = element('span', 'd-none d-md-inline', '→');
+                across.setAttribute('aria-hidden', 'true');
+                var down = element('span', 'd-md-none', '↓');
+                down.setAttribute('aria-hidden', 'true');
+                arrow.appendChild(across);
+                arrow.appendChild(down);
+                steps.appendChild(arrow);
+            }
+            var column = element('div', 'col-12 col-md mb-3 px-md-2');
+            var box = element('div', 'py-2 px-3 border font-weight-bold', step.title || 'Step ' + step.stepNumber);
+            box.style.cssText = 'background:' + (index === 1 ? '#fff8df' : '#f8fafc') + ';border-radius:10px;min-height:44px;display:flex;align-items:center;justify-content:center;white-space:normal;';
+            column.appendChild(box);
+            steps.appendChild(column);
+        });
+        wrapper.appendChild(steps);
+        wrapper.appendChild(communityAction(COMMUNITY_ACTIONS.workflow));
+        slot.appendChild(wrapper);
+    }
+
+    function renderToolLandingCard(slot, resource, featured) {
+        if (featured) {
+            var row = element('div', 'row no-gutters align-items-stretch w-100');
+            var lead = element('div', 'col-lg-5 text-white p-4 p-lg-5');
+            lead.style.cssText = 'background:linear-gradient(145deg,#094685,#111827);border-top:6px solid #f5c242;';
+            var label = element('div', 'text-uppercase font-weight-bold mb-3', 'Tool review');
+            label.style.cssText = 'letter-spacing:.12em;color:#f5c242;font-size:.78rem;';
+            lead.appendChild(label);
+            lead.appendChild(element('h3', 'font-weight-bold mb-1', resource.title));
+            var score = element('div', 'font-weight-bold mb-4', '★ ' + formatRating(resource.content.rating) + ' student rating');
+            score.style.color = '#fde68a';
+            lead.appendChild(score);
+            appendCommunitySummary(lead, resource.summary || resource.content.overview, true);
+            var details = element('div', 'col-lg-7 p-4 p-lg-5 d-flex flex-column');
+            details.appendChild(element('h4', 'font-weight-bold mb-3', 'Best for'));
+            var strengths = element('div', 'row');
+            resource.content.strengths.slice(0, 4).forEach(function (value) {
+                var column = element('div', 'col-sm-6 mb-3');
+                var box = element('div', 'p-3 border h-100', '✓ ' + value);
+                box.style.cssText = 'background:#f8fafc;border-radius:10px;';
+                column.appendChild(box);
+                strengths.appendChild(column);
+            });
+            details.appendChild(strengths);
+            details.appendChild(communityAction(COMMUNITY_ACTIONS.tool));
+            row.appendChild(lead);
+            row.appendChild(details);
+            slot.appendChild(row);
+            return;
+        }
+        var wrapper = element('div', 'd-flex flex-column align-items-start w-100 h-100');
+        var heading = element('div', 'd-flex flex-column flex-sm-row justify-content-between align-items-sm-start mb-3 w-100');
+        heading.appendChild(element('h4', 'h5 font-weight-bold mb-0', resource.title));
+        var rating = element('div', 'font-weight-bold mt-2 mt-sm-0 ml-sm-3', formatRating(resource.content.rating));
+        rating.style.color = '#094685';
+        heading.appendChild(rating);
+        wrapper.appendChild(heading);
+        appendCommunitySummary(wrapper, resource.summary || resource.content.overview, false);
+        wrapper.appendChild(communityAction(COMMUNITY_ACTIONS.tool));
+        slot.appendChild(wrapper);
+    }
+
+    function twoDigits(value) {
+        return value < 10 ? '0' + value : String(value);
+    }
+
+    function startLandingCountdown(root, target, resource) {
+        function update() {
+            var start = new Date(resource.content.startDateTime).getTime();
+            var end = new Date(resource.content.endDateTime || resource.content.startDateTime).getTime();
+            var now = Date.now();
+            if (!isFinite(start)) {
+                target.textContent = 'Date to be confirmed';
+                return;
+            }
+            if (isFinite(end) && now >= end) {
+                target.textContent = 'Event has ended';
+                return;
+            }
+            if (now >= start) {
+                target.textContent = 'Happening now';
+                return;
+            }
+            var remaining = start - now;
+            var days = Math.floor(remaining / 86400000);
+            var hours = Math.floor((remaining % 86400000) / 3600000);
+            var minutes = Math.floor((remaining % 3600000) / 60000);
+            var seconds = Math.floor((remaining % 60000) / 1000);
+            target.textContent = days + 'd ' + twoDigits(hours) + 'h ' + twoDigits(minutes) + 'm ' + twoDigits(seconds) + 's';
+        }
+        update();
+        var timer = window.setInterval(update, 1000);
+        root._resourceCountdownTimers.push(timer);
+    }
+
+    function renderEventLandingCard(root, slot, resource, featured) {
+        if (featured) {
+            var wrapper = element('div');
+            wrapper.style.color = '#fff';
+            var label = element('div', 'text-uppercase mb-3', 'Next up');
+            label.style.cssText = 'letter-spacing:.12em;color:#f5c242;font-size:.78rem;';
+            wrapper.appendChild(label);
+            var badge = communitySkill(resource);
+            if (badge) wrapper.appendChild(badge);
+            wrapper.appendChild(element('h3', 'font-weight-bold', resource.title));
+            appendCommunitySummary(wrapper, resource.summary || resource.content.description, true);
+            var countdown = element('div', 'mb-3');
+            countdown.setAttribute('aria-live', 'polite');
+            countdown.setAttribute('aria-atomic', 'true');
+            var countdownLabel = element('div', 'text-uppercase font-weight-bold mb-1', 'Event starts in');
+            countdownLabel.style.cssText = 'letter-spacing:.08em;color:#fde68a;font-size:.72rem;';
+            var value = element('div', 'font-weight-bold');
+            value.style.cssText = 'font-size:1.15rem;color:#fff;';
+            countdown.appendChild(countdownLabel);
+            countdown.appendChild(value);
+            wrapper.appendChild(countdown);
+            startLandingCountdown(root, value, resource);
+            wrapper.appendChild(communityAction(COMMUNITY_ACTIONS.event, '#fde68a'));
+            slot.appendChild(wrapper);
+            return;
+        }
+        var content = element('div', 'd-flex flex-column align-items-start w-100 h-100');
+        var skill = communitySkill(resource);
+        if (skill) content.appendChild(skill);
+        content.appendChild(element('h4', 'h5 font-weight-bold', resource.title));
+        appendCommunitySummary(content, resource.summary || resource.content.description, false);
+        if (resource.content.startDateTime) {
+            var date = element('small', 'font-weight-bold', formatDateTime(resource.content.startDateTime));
+            date.style.color = '#5f4300';
+            content.appendChild(date);
+        }
+        content.appendChild(communityAction(COMMUNITY_ACTIONS.event));
+        slot.appendChild(content);
+    }
+
+    function renderCommunityPlaceholder(slot, type, featured) {
+        slot.setAttribute('data-resource-placeholder', 'true');
+        slot.removeAttribute('href');
+        slot.removeAttribute('role');
+        slot.setAttribute('aria-disabled', 'true');
+        slot.setAttribute('tabindex', '-1');
+        slot.style.cursor = 'default';
+        slot.style.pointerEvents = 'none';
+        var needsPadding = !slot.classList.contains('p-4') && !slot.classList.contains('p-lg-5');
+        var wrapper = element('div', (needsPadding ? 'p-4 ' : '') + 'd-flex flex-column align-items-center justify-content-center text-center w-100 h-100');
+        wrapper.style.minHeight = featured && type === 'tool' ? '180px' : '140px';
+        var heading = element('h3', 'h5 font-weight-bold mb-0', 'Coming soon');
+        if (type === 'event' && featured) heading.style.color = '#fff';
+        wrapper.appendChild(heading);
+        slot.appendChild(wrapper);
+    }
+
+    function renderIntoSlot(root, slot, resource, type, index) {
+        restoreCommunitySlot(slot);
+        var featured = index === 0;
+        if (!resource) {
+            renderCommunityPlaceholder(slot, type, featured);
+            return;
+        }
+        activateCommunitySlot(slot, resource);
+        if (type === 'showcase') renderShowcaseLandingCard(slot, resource, featured);
+        else if (type === 'prompt') renderPromptLandingCard(slot, resource, featured);
+        else if (type === 'workflow') renderWorkflowLandingCard(slot, resource);
+        else if (type === 'tool') renderToolLandingCard(slot, resource, featured);
+        else renderEventLandingCard(root, slot, resource, featured);
+    }
+
+    function orderCommunityResources(type, resources) {
+        if (type !== 'event') return resources;
+        var now = Date.now();
+        return resources.slice().sort(function (left, right) {
+            var leftStart = new Date(left.content.startDateTime).getTime();
+            var rightStart = new Date(right.content.startDateTime).getTime();
+            var leftFuture = new Date(left.content.endDateTime || left.content.startDateTime).getTime() >= now;
+            var rightFuture = new Date(right.content.endDateTime || right.content.startDateTime).getTime() >= now;
+            if (leftFuture !== rightFuture) return leftFuture ? -1 : 1;
+            return leftFuture ? leftStart - rightStart : rightStart - leftStart;
+        });
     }
 
     function renderCommunityLanding(root) {
+        (root._resourceCountdownTimers || []).forEach(function (timer) { window.clearInterval(timer); });
+        root._resourceCountdownTimers = [];
         var mappings = [
             { id: 'student-showcase', type: 'showcase' },
             { id: 'prompt-library', type: 'prompt' },
@@ -1233,18 +1589,13 @@
         mappings.forEach(function (mapping) {
             var section = root.querySelector('[data-resource-target="' + mapping.type + '"]') || root.querySelector('#' + mapping.id);
             if (!section) return;
-            var resources = query({ librarySection: 'community', types: [mapping.type], sort: 'relevant' });
+            var resources = orderCommunityResources(mapping.type, query({ librarySection: 'community', types: [mapping.type], sort: 'relevant' }));
             var slots = communitySlots(section, mapping.type);
             slots.forEach(function (slot, index) {
-                if (resources[index]) renderIntoSlot(slot, resources[index]);
-                else slot.hidden = true;
+                renderIntoSlot(root, slot, resources[index] || null, mapping.type, index);
             });
             var existing = section.querySelector('[data-resource-view-status]');
-            if (!resources.length && !existing) {
-                existing = element('div', 'alert alert-info', 'No ' + TYPE_QUERY[mapping.type] + ' are available yet.');
-                existing.setAttribute('data-resource-view-status', 'true');
-                section.querySelector('.container').appendChild(existing);
-            } else if (existing) existing.hidden = resources.length > 0;
+            if (existing) existing.hidden = true;
         });
     }
 

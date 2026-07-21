@@ -17,8 +17,7 @@
       "dateUpdated": "2026-07-17",
       "librarySection": "community",
       "skillAreas": [
-        "academic",
-        "lifelong"
+        "academic"
       ],
       "tags": [
         "critical-thinking",
@@ -112,10 +111,7 @@
       "datePublished": "2026-05-14",
       "dateUpdated": "2026-07-19",
       "librarySection": "community",
-      "skillAreas": [
-        "workplace",
-        "lifelong"
-      ],
+      "skillAreas": [],
       "tags": [
         "assistant",
         "productivity"
@@ -130,7 +126,7 @@
       "content": {
         "company": "Microsoft",
         "toolUrl": "https://copilot.microsoft.com/",
-        "rating": 5,
+        "rating": 4.5,
         "overview": "Useful for drafting, summarising, and exploring ideas when used with appropriate verification.",
         "strengths": [
           "Institutional access",
@@ -168,9 +164,7 @@
       "dateUpdated": "2026-07-16",
       "librarySection": "learn-ai",
       "skillAreas": [
-        "academic",
-        "workplace",
-        "lifelong"
+        "academic"
       ],
       "tags": [
         "verification",
@@ -239,8 +233,7 @@
       "dateUpdated": "2026-07-13",
       "librarySection": "challenges",
       "skillAreas": [
-        "academic",
-        "workplace"
+        "academic"
       ],
       "tags": [
         "worksheet",
@@ -277,8 +270,7 @@
       "dateUpdated": "2026-07-20",
       "librarySection": "community",
       "skillAreas": [
-        "workplace",
-        "lifelong"
+        "workplace"
       ],
       "tags": [
         "event",
@@ -320,8 +312,7 @@
       "dateUpdated": "2026-07-20",
       "librarySection": "community",
       "skillAreas": [
-        "academic",
-        "workplace"
+        "academic"
       ],
       "tags": [
         "event",
@@ -363,9 +354,7 @@
       "dateUpdated": "2026-07-20",
       "librarySection": "community",
       "skillAreas": [
-        "academic",
-        "workplace",
-        "lifelong"
+        "academic"
       ],
       "tags": [
         "event",
@@ -407,8 +396,7 @@
       "dateUpdated": "2026-07-12",
       "librarySection": "community",
       "skillAreas": [
-        "academic",
-        "workplace"
+        "academic"
       ],
       "tags": [
         "student",
