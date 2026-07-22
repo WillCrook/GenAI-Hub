@@ -5,3 +5,10 @@ Build-Components/
 maintenance/
 .DS_Store
 tests/
+!tests/
+tests/*
+!tests/playwright.config.js
+!tests/resource-controller.spec.js
+documentation/
+tests/
+outputs/
