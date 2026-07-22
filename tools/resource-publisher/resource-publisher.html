@@ -88,7 +88,24 @@ Workflow Steps are joined to Workflows by workflow_id and sorted by step_number.
   </main>
 </div>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
-<script src="https://moodle.bath.ac.uk/pluginfile.php/3108097/mod_resource/content/1/resource-publisher.js"></script>
+<script>
+  (function () {
+
+    var protocol = "https://";
+    var host = "moodle.bath.ac.uk";
+    var path =
+        "/pluginfile.php/" +
+        "3108097/" +
+        "/mod_resource/" +
+        "content/" +
+        "1/" +
+        "resource-publisher.js";
+    var script = document.createElement("script");
+    script.src = protocol + host + path + "?t=" + Date.now();
+    document.head.appendChild(script);
+
+})();
+</script>
 <!-- Copy above for Moodle -->
 </body>
 </html>
