@@ -1366,6 +1366,34 @@
         parent.appendChild(value);
     }
 
+    function appendShowcaseMedia(parent, resource) {
+        var mediaWrap = element('div', 'px-4');
+        if (resource.thumbnail.src) {
+            var image = document.createElement('img');
+            image.src = resource.thumbnail.src;
+            image.alt = resource.thumbnail.alt || ('Project image for ' + resource.title);
+            image.loading = 'lazy';
+            image.className = 'img-fluid w-100';
+            image.style.cssText = 'height:180px;object-fit:cover;border-radius:10px;';
+            mediaWrap.appendChild(image);
+        } else {
+            var placeholder = element('div', 'd-flex flex-column align-items-center justify-content-center text-center p-4');
+            placeholder.setAttribute('role', 'img');
+            placeholder.setAttribute('aria-label', 'Project image coming soon for ' + resource.title);
+            placeholder.style.cssText = 'height:180px;background:#f4f7fb;border:2px dashed #9fbfdd;border-radius:10px;color:#094685;';
+            var icon = element('i', 'fa-regular fa-image mb-3', '\u200B');
+            icon.setAttribute('aria-hidden', 'true');
+            icon.style.cssText = 'font-size:2rem;line-height:1;color:#f5c242;';
+            placeholder.appendChild(icon);
+            placeholder.appendChild(element('strong', 'd-block mb-1', 'Project image coming soon'));
+            var note = element('small', 'd-block', 'No image has been provided yet.');
+            note.style.color = '#4f5962';
+            placeholder.appendChild(note);
+            mediaWrap.appendChild(placeholder);
+        }
+        parent.appendChild(mediaWrap);
+    }
+
     function activateCommunitySlot(slot, resource) {
         slot.hidden = false;
         slot.setAttribute('data-resource-open', resource.id);
@@ -1385,15 +1413,9 @@
             if (skill) heading.appendChild(skill);
             heading.appendChild(element('h3', 'h4 font-weight-bold mb-0', resource.title));
             slot.appendChild(heading);
-            if (resource.thumbnail.src) {
-                var imageWrap = element('div', 'px-4');
-                appendThumbnail(imageWrap, resource, true);
-                slot.appendChild(imageWrap);
-            }
+            appendShowcaseMedia(slot, resource);
             var body = element('div', 'p-4 pt-2 d-flex flex-column flex-fill');
             appendCommunitySummary(body, resource.summary, false);
-            appendCompactMetadata(body, 'Technologies used', resource.content.toolsUsed);
-            appendCompactMetadata(body, 'Outcome', resource.content.outcome ? [resource.content.outcome] : []);
             appendCommunityAuthor(body, resource, 'Project by');
             body.appendChild(communityAction(COMMUNITY_ACTIONS.showcase));
             slot.appendChild(body);
@@ -1409,14 +1431,11 @@
         slot.appendChild(wrapper);
     }
 
-    function renderPromptLandingCard(slot, resource, featured) {
-        var wrapper = element('div', featured ? 'p-4 d-flex flex-column h-100' : 'd-flex flex-column align-items-start w-100 h-100');
+    function renderPromptLandingCard(slot, resource) {
+        var wrapper = element('div', 'd-flex flex-column align-items-start w-100 h-100');
         var badge = communitySkill(resource);
         if (badge) wrapper.appendChild(badge);
-        wrapper.appendChild(element(featured ? 'h3' : 'h4', featured ? 'h4 font-weight-bold' : 'h5 font-weight-bold', resource.title));
-        appendCommunitySummary(wrapper, resource.summary || resource.content.purpose, false);
-        appendCompactMetadata(wrapper, 'Platforms', resource.content.platforms);
-        appendCompactMetadata(wrapper, 'Models tested', resource.content.modelsTested);
+        wrapper.appendChild(element('h3', 'h5 font-weight-bold', resource.title));
         wrapper.appendChild(communityAction(COMMUNITY_ACTIONS.prompt));
         slot.appendChild(wrapper);
     }
@@ -1424,15 +1443,18 @@
     function renderWorkflowLandingCard(slot, resource) {
         var wrapper = element('div', 'd-flex flex-column align-items-start w-100 h-100');
         var heading = element('div', 'd-flex flex-column flex-sm-row justify-content-between align-items-sm-start mb-3 w-100');
-        heading.appendChild(element('h3', 'h4 font-weight-bold mb-0', resource.title));
+        var headingCopy = element('div', 'pr-sm-4');
+        headingCopy.appendChild(element('h3', 'h4 font-weight-bold mb-2', resource.title));
+        appendCommunitySummary(headingCopy, resource.summary || resource.content.goal, false);
+        heading.appendChild(headingCopy);
         var badge = communitySkill(resource, 'mt-3 mt-sm-0 ml-sm-3 align-self-start');
         if (badge) heading.appendChild(badge);
         wrapper.appendChild(heading);
-        var steps = element('div', 'row text-center align-items-center w-100');
+        var steps = element('div', 'row align-items-stretch w-100');
         resource.content.steps.slice(0, 3).forEach(function (step, index) {
             if (index) {
-                var arrow = element('div', 'col-12 col-md-auto mb-3 px-md-1 font-weight-bold');
-                arrow.style.cssText = 'color:#094685;font-size:1.35rem;line-height:1;min-width:30px;';
+                var arrow = element('div', 'col-12 col-md-auto mb-3 px-md-1 d-flex align-items-center justify-content-center font-weight-bold');
+                arrow.style.cssText = 'color:#094685;font-size:1.5rem;line-height:1;min-width:34px;';
                 arrow.setAttribute('role', 'img');
                 arrow.setAttribute('aria-label', 'Next step');
                 var across = element('span', 'd-none d-md-inline', '→');
@@ -1444,8 +1466,17 @@
                 steps.appendChild(arrow);
             }
             var column = element('div', 'col-12 col-md mb-3 px-md-2');
-            var box = element('div', 'py-2 px-3 border font-weight-bold', step.title || 'Step ' + step.stepNumber);
-            box.style.cssText = 'background:' + (index === 1 ? '#fff8df' : '#f8fafc') + ';border-radius:10px;min-height:44px;display:flex;align-items:center;justify-content:center;white-space:normal;';
+            var box = element('div', 'p-3 border h-100');
+            box.style.cssText = 'background:' + (index === 1 ? '#fff8df' : '#f8fafc') + ';border-color:' + (index === 1 ? '#f5c242' : '#dee2e6') + '!important;border-radius:12px;min-height:150px;';
+            var number = element('span', 'd-inline-flex align-items-center justify-content-center rounded-circle font-weight-bold mb-3', String(step.stepNumber || index + 1));
+            number.style.cssText = 'width:34px;height:34px;background:#094685;color:#f5c242;';
+            box.appendChild(number);
+            box.appendChild(element('div', 'font-weight-bold mb-2', step.title || 'Step ' + (index + 1)));
+            if (step.description) {
+                var description = element('p', 'text-muted mb-0', step.description);
+                description.style.color = '#4f5962';
+                box.appendChild(description);
+            }
             column.appendChild(box);
             steps.appendChild(column);
         });
@@ -1459,26 +1490,57 @@
             var row = element('div', 'row no-gutters align-items-stretch w-100');
             var lead = element('div', 'col-lg-5 text-white p-4 p-lg-5');
             lead.style.cssText = 'background:linear-gradient(145deg,#094685,#111827);border-top:6px solid #f5c242;';
-            var label = element('div', 'text-uppercase font-weight-bold mb-3', 'Tool review');
+            var label = element('div', 'text-uppercase font-weight-bold mb-3', 'Community favourite tool');
             label.style.cssText = 'letter-spacing:.12em;color:#f5c242;font-size:.78rem;';
             lead.appendChild(label);
-            lead.appendChild(element('h3', 'font-weight-bold mb-1', resource.title));
-            var score = element('div', 'font-weight-bold mb-4', '★ ' + formatRating(resource.content.rating) + ' student rating');
+            var identity = element('div', 'd-flex align-items-center mb-4');
+            var tile = element('div', 'd-flex align-items-center justify-content-center mr-3 overflow-hidden');
+            tile.style.cssText = 'width:70px;height:70px;min-width:70px;background:rgba(255,255,255,.14);font-size:2rem;color:#f5c242;border-radius:12px;';
+            if (resource.thumbnail.src) {
+                var logo = document.createElement('img');
+                logo.src = resource.thumbnail.src;
+                logo.alt = resource.thumbnail.alt || (resource.title + ' logo');
+                logo.loading = 'lazy';
+                logo.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                tile.appendChild(logo);
+            } else {
+                var toolIcon = element('i', 'fa-solid fa-screwdriver-wrench', '\u200B');
+                toolIcon.setAttribute('aria-hidden', 'true');
+                toolIcon.style.lineHeight = '1';
+                tile.appendChild(toolIcon);
+            }
+            var identityCopy = element('div');
+            identityCopy.appendChild(element('h3', 'font-weight-bold mb-1', resource.title));
+            var score = element('div', 'font-weight-bold', '★ ' + formatRating(resource.content.rating) + ' student rating');
             score.style.color = '#fde68a';
-            lead.appendChild(score);
-            appendCommunitySummary(lead, resource.summary || resource.content.overview, true);
+            identityCopy.appendChild(score);
+            identity.appendChild(tile);
+            identity.appendChild(identityCopy);
+            lead.appendChild(identity);
+            var leadSummary = element('p', 'lead mb-4', resource.summary || resource.content.overview);
+            leadSummary.style.color = '#e6eef8';
+            lead.appendChild(leadSummary);
             var details = element('div', 'col-lg-7 p-4 p-lg-5 d-flex flex-column');
-            details.appendChild(element('h4', 'font-weight-bold mb-3', 'Best for'));
+            details.appendChild(element('h4', 'font-weight-bold mb-2', 'Best for'));
+            if (resource.content.overview) {
+                var overview = element('p', 'text-muted', resource.content.overview);
+                overview.style.color = '#4f5962';
+                details.appendChild(overview);
+            }
             var strengths = element('div', 'row');
             resource.content.strengths.slice(0, 4).forEach(function (value) {
                 var column = element('div', 'col-sm-6 mb-3');
-                var box = element('div', 'p-3 border h-100', '✓ ' + value);
+                var box = element('div', 'p-3 border h-100 d-flex align-items-start');
                 box.style.cssText = 'background:#f8fafc;border-radius:10px;';
+                var check = element('i', 'fa-solid fa-circle-check mr-2 mt-1', '\u200B');
+                check.setAttribute('aria-hidden', 'true');
+                check.style.cssText = 'line-height:1;color:#157347;';
+                box.appendChild(check);
+                box.appendChild(document.createTextNode(value));
                 column.appendChild(box);
                 strengths.appendChild(column);
             });
             details.appendChild(strengths);
-            details.appendChild(communityAction(COMMUNITY_ACTIONS.tool));
             row.appendChild(lead);
             row.appendChild(details);
             slot.appendChild(row);
@@ -1602,6 +1664,15 @@
     }
 
     function orderCommunityResources(type, resources) {
+        if (type === 'tool') {
+            return resources.slice().sort(function (left, right) {
+                var byRating = right.content.rating - left.content.rating;
+                if (byRating) return byRating;
+                var byUpdated = right.dateUpdated.localeCompare(left.dateUpdated);
+                if (byUpdated) return byUpdated;
+                return left.title.localeCompare(right.title, 'en-GB', { sensitivity: 'base' });
+            });
+        }
         if (type !== 'event') return resources;
         var now = Date.now();
         return resources.slice().sort(function (left, right) {
@@ -1620,17 +1691,23 @@
         var mappings = [
             { id: 'student-showcase', type: 'showcase' },
             { id: 'prompt-library', type: 'prompt' },
-            { id: 'workflow-library', type: 'workflow' },
+            { id: 'workflow-library', type: 'workflow', featuredOnly: true },
             { id: 'tool-reviews', type: 'tool' },
             { id: 'community-events', type: 'event' }
         ];
         mappings.forEach(function (mapping) {
             var section = root.querySelector('[data-resource-target="' + mapping.type + '"]') || root.querySelector('#' + mapping.id);
             if (!section) return;
-            var resources = orderCommunityResources(mapping.type, query({ librarySection: 'community', types: [mapping.type], sort: 'relevant' }));
+            var resources = orderCommunityResources(mapping.type, query({
+                librarySection: 'community',
+                types: [mapping.type],
+                featuredOnly: mapping.featuredOnly === true,
+                sort: 'relevant'
+            }));
             var slots = communitySlots(section, mapping.type);
             slots.forEach(function (slot, index) {
-                renderIntoSlot(root, slot, resources[index] || null, mapping.type, index);
+                var resourceIndex = mapping.type === 'tool' && index > 0 ? index - 1 : index;
+                renderIntoSlot(root, slot, resources[resourceIndex] || null, mapping.type, index);
             });
             var existing = section.querySelector('[data-resource-view-status]');
             if (existing) existing.hidden = true;
