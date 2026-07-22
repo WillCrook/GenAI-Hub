@@ -323,7 +323,6 @@
 
     function appendLibraryBadges(parent, resource) {
         appendDialogBadges(parent, resource);
-        resource.tags.forEach(function (tag) { appendBadge(parent, tag, '#475569'); });
     }
 
     function appendThumbnail(parent, resource, compact) {
