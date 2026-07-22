@@ -13,17 +13,11 @@
     var RESOURCE_TYPES = ['prompt', 'workflow', 'tool', 'article', 'video', 'link', 'download', 'event', 'showcase'];
     var LIBRARY_SECTIONS = ['learn-ai', 'challenges', 'community'];
     var SKILL_AREAS = ['academic', 'workplace', 'lifelong'];
-    var REASONING_MODES = ['standard', 'reasoning', 'either', 'not-applicable'];
-    var PRICING_MODELS = ['free', 'freemium', 'paid', 'institutional', 'unknown'];
-    var PLATFORM_TYPES = ['web', 'desktop', 'mobile', 'browser-extension', 'API'];
-    var LOCATION_TYPES = ['in-person', 'online', 'hybrid'];
     var SECTION_TYPES = {
         'learn-ai': ['article', 'video', 'link', 'download'],
         challenges: ['article', 'video', 'link', 'download'],
         community: ['prompt', 'workflow', 'tool', 'event', 'showcase']
     };
-    var ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-    var DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
     var loadedData = null;
     var resourceIndex = Object.create(null);
     var inFlightRequest = null;
@@ -36,264 +30,90 @@
         return value !== null && typeof value === 'object' && !Array.isArray(value);
     }
 
-    function requireObject(value, path) {
-        if (!isObject(value)) invalid(path, 'expected an object.');
-        return value;
-    }
-
-    function requireString(value, path, allowEmpty) {
-        if (typeof value !== 'string') invalid(path, 'expected a string.');
-        if (!allowEmpty && !value.trim()) invalid(path, 'must not be empty.');
-        return value;
-    }
-
-    function requireBoolean(value, path) {
-        if (typeof value !== 'boolean') invalid(path, 'expected a boolean.');
-        return value;
-    }
-
-    function requireNumberOrNull(value, path, integer) {
-        if (value === null) return value;
-        if (typeof value !== 'number' || !isFinite(value) || value < 0) {
-            invalid(path, 'expected a non-negative number or null.');
-        }
-        if (integer && Math.floor(value) !== value) invalid(path, 'expected a whole number or null.');
-        return value;
-    }
-
-    function requirePositiveIntegerOrNull(value, path) {
-        if (value === null) return value;
-        if (typeof value !== 'number' || !isFinite(value) || Math.floor(value) !== value || value <= 0) {
-            invalid(path, 'expected a positive whole number or null.');
-        }
-        return value;
-    }
-
-    function requireEnum(value, allowed, path) {
-        requireString(value, path, false);
-        if (allowed.indexOf(value) === -1) invalid(path, 'unsupported value "' + value + '".');
-        return value;
-    }
-
-    function requireStringArray(value, path, allowed) {
-        if (!Array.isArray(value)) invalid(path, 'expected an array.');
-        value.forEach(function (item, index) {
-            requireString(item, path + '[' + index + ']', false);
-            if (allowed && allowed.indexOf(item) === -1) {
-                invalid(path + '[' + index + ']', 'unsupported value "' + item + '".');
-            }
+    function isStringArray(value, allowed) {
+        return Array.isArray(value) && value.every(function (item) {
+            return typeof item === 'string' && (!allowed || allowed.indexOf(item) !== -1);
         });
-        return value;
     }
 
-    function requireDate(value, path) {
-        requireString(value, path, true);
-        if (!value) return value;
-        if (!DATE_PATTERN.test(value)) invalid(path, 'expected a date in YYYY-MM-DD format.');
-        var date = new Date(value + 'T00:00:00Z');
-        if (isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== value) {
-            invalid(path, 'expected a valid calendar date.');
-        }
-        return value;
-    }
-
-    function requireDateTime(value, path) {
-        requireString(value, path, true);
-        if (!value) return value;
-        if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,3})?)?(?:Z|[+-]\d{2}:\d{2})$/.test(value)) {
-            invalid(path, 'expected an ISO 8601 date and time with a timezone.');
-        }
-        if (isNaN(new Date(value).getTime())) invalid(path, 'expected a valid date and time.');
-        return value;
-    }
-
-    function requireUrl(value, path) {
-        requireString(value, path, true);
-        if (!value) return value;
+    function isSafeHttpUrl(value) {
+        if (value === '') return true;
+        if (typeof value !== 'string') return false;
         try {
             var parsed = new URL(value);
-            if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
-                invalid(path, 'expected an http or https URL.');
-            }
+            return parsed.protocol === 'http:' || parsed.protocol === 'https:';
         } catch (error) {
-            invalid(path, 'expected a valid http or https URL.');
+            return false;
         }
-        return value;
     }
 
-    function validateAuthor(author, path) {
-        requireObject(author, path);
-        requireString(author.name, path + '.name', true);
-        requireString(author.organisation, path + '.organisation', true);
-        requireString(author.course, path + '.course', true);
-        requireString(author.yearOfStudy, path + '.yearOfStudy', true);
-    }
-
-    function validateThumbnail(thumbnail, path) {
-        requireObject(thumbnail, path);
-        requireUrl(thumbnail.src, path + '.src');
-        requireString(thumbnail.alt, path + '.alt', true);
-    }
-
-    function validatePrompt(content, path) {
-        requireString(content.purpose, path + '.purpose', true);
-        requireString(content.promptText, path + '.promptText', true);
-        requireStringArray(content.platforms, path + '.platforms');
-        requireStringArray(content.modelsTested, path + '.modelsTested');
-        requireEnum(content.reasoningMode, REASONING_MODES, path + '.reasoningMode');
-        requireString(content.usageNotes, path + '.usageNotes', true);
-    }
-
-    function validateWorkflow(content, path) {
-        requireString(content.goal, path + '.goal', true);
-        if (!Array.isArray(content.steps)) invalid(path + '.steps', 'expected an array.');
-        var stepNumbers = Object.create(null);
-        content.steps.forEach(function (step, index) {
-            var stepPath = path + '.steps[' + index + ']';
-            requireObject(step, stepPath);
-            if (typeof step.stepNumber !== 'number' || !isFinite(step.stepNumber) || step.stepNumber <= 0 || Math.floor(step.stepNumber) !== step.stepNumber) {
-                invalid(stepPath + '.stepNumber', 'expected a positive whole number.');
+    function contentSafetyIssue(type, content) {
+        if (!isObject(content)) return 'content must be an object.';
+        if (type === 'prompt' && (!isStringArray(content.platforms) || !isStringArray(content.modelsTested))) {
+            return 'prompt platform and model lists must be arrays of strings.';
+        }
+        if (type === 'workflow') {
+            if (!Array.isArray(content.steps) || !content.steps.every(isObject)) return 'workflow steps must be an array of objects.';
+        }
+        if (type === 'tool') {
+            if (!isStringArray(content.strengths) || !isStringArray(content.weaknesses) || !isStringArray(content.platformTypes) || !isObject(content.pricing)) {
+                return 'tool list fields and pricing must use the expected containers.';
             }
-            if (stepNumbers[step.stepNumber]) invalid(stepPath + '.stepNumber', 'must be unique within the workflow.');
-            stepNumbers[step.stepNumber] = true;
-            requireString(step.title, stepPath + '.title', true);
-            requireString(step.description, stepPath + '.description', true);
-        });
-        requireString(content.reflection, path + '.reflection', true);
-        requireNumberOrNull(content.estimatedTotalMinutes, path + '.estimatedTotalMinutes', false);
-        requireNumberOrNull(content.complexityScore, path + '.complexityScore', false);
-    }
-
-    function validateTool(content, path) {
-        requireString(content.company, path + '.company', true);
-        requireUrl(content.toolUrl, path + '.toolUrl');
-        if (typeof content.rating !== 'number' || !isFinite(content.rating) || Math.round(content.rating * 10) !== content.rating * 10 || content.rating < 1 || content.rating > 5) {
-            invalid(path + '.rating', 'expected a number from 1 to 5 with no more than one decimal place.');
+            if (!isSafeHttpUrl(content.toolUrl)) return 'toolUrl must be an http or https URL.';
         }
-        requireString(content.overview, path + '.overview', true);
-        requireStringArray(content.strengths, path + '.strengths');
-        requireStringArray(content.weaknesses, path + '.weaknesses');
-        requireObject(content.pricing, path + '.pricing');
-        requireEnum(content.pricing.model, PRICING_MODELS, path + '.pricing.model');
-        requireNumberOrNull(content.pricing.cost, path + '.pricing.cost', false);
-        requireStringArray(content.platformTypes, path + '.platformTypes', PLATFORM_TYPES);
-        requireString(content.accessibilityNotes, path + '.accessibilityNotes', true);
-        requireString(content.privacyNotes, path + '.privacyNotes', true);
-        requireString(content.reviewVerdict, path + '.reviewVerdict', true);
-    }
-
-    function validateArticle(content, path) {
-        requireString(content.body, path + '.body', true);
-        requireNumberOrNull(content.readingTimeMinutes, path + '.readingTimeMinutes', true);
-        requireUrl(content.sourceUrl, path + '.sourceUrl');
-    }
-
-    function validateVideo(content, path) {
-        requireString(content.provider, path + '.provider', true);
-        requireUrl(content.videoUrl, path + '.videoUrl');
-        requireUrl(content.embedUrl, path + '.embedUrl');
-        requireNumberOrNull(content.durationSeconds, path + '.durationSeconds', true);
-    }
-
-    function validateLink(content, path) {
-        requireUrl(content.url, path + '.url');
-        requireString(content.siteName, path + '.siteName', true);
-        requireString(content.description, path + '.description', true);
-    }
-
-    function validateDownload(content, path) {
-        requireUrl(content.fileUrl, path + '.fileUrl');
-        requireString(content.fileName, path + '.fileName', true);
-        requireString(content.fileFormat, path + '.fileFormat', true);
-        requireNumberOrNull(content.fileSizeBytes, path + '.fileSizeBytes', true);
-        requireString(content.version, path + '.version', true);
-        requireString(content.description, path + '.description', true);
-    }
-
-    function validateEvent(content, path) {
-        requireString(content.host, path + '.host', true);
-        requireDateTime(content.startDateTime, path + '.startDateTime');
-        requireDateTime(content.endDateTime, path + '.endDateTime');
-        if (content.startDateTime && content.endDateTime && new Date(content.endDateTime).getTime() <= new Date(content.startDateTime).getTime()) {
-            invalid(path + '.endDateTime', 'must be later than startDateTime.');
+        if (type === 'article' && !isSafeHttpUrl(content.sourceUrl)) return 'sourceUrl must be an http or https URL.';
+        if (type === 'video' && (!isSafeHttpUrl(content.videoUrl) || !isSafeHttpUrl(content.embedUrl))) return 'video URLs must use http or https.';
+        if (type === 'link' && !isSafeHttpUrl(content.url)) return 'url must be an http or https URL.';
+        if (type === 'download' && !isSafeHttpUrl(content.fileUrl)) return 'fileUrl must be an http or https URL.';
+        if (type === 'event' && (!isSafeHttpUrl(content.onlineUrl) || !isSafeHttpUrl(content.bookingUrl))) return 'event URLs must use http or https.';
+        if (type === 'showcase') {
+            if (!isStringArray(content.toolsUsed)) return 'toolsUsed must be an array of strings.';
+            if (!isSafeHttpUrl(content.projectUrl)) return 'projectUrl must be an http or https URL.';
         }
-        requireString(content.timezone, path + '.timezone', true);
-        requireEnum(content.locationType, LOCATION_TYPES, path + '.locationType');
-        requireString(content.location, path + '.location', true);
-        requireUrl(content.onlineUrl, path + '.onlineUrl');
-        requireString(content.description, path + '.description', true);
-        requireNumberOrNull(content.capacity, path + '.capacity', true);
-        requireUrl(content.bookingUrl, path + '.bookingUrl');
-        requireBoolean(content.bookingRequired, path + '.bookingRequired');
+        return '';
     }
 
-    function validateShowcase(content, path) {
-        requireString(content.problem, path + '.problem', true);
-        requireString(content.approach, path + '.approach', true);
-        requireString(content.outcome, path + '.outcome', true);
-        requireString(content.reflection, path + '.reflection', true);
-        requireStringArray(content.toolsUsed, path + '.toolsUsed');
-        requireUrl(content.projectUrl, path + '.projectUrl');
-    }
-
-    function validateContent(type, content, path) {
-        requireObject(content, path);
-        if (type === 'prompt') validatePrompt(content, path);
-        else if (type === 'workflow') validateWorkflow(content, path);
-        else if (type === 'tool') validateTool(content, path);
-        else if (type === 'article') validateArticle(content, path);
-        else if (type === 'video') validateVideo(content, path);
-        else if (type === 'link') validateLink(content, path);
-        else if (type === 'download') validateDownload(content, path);
-        else if (type === 'event') validateEvent(content, path);
-        else if (type === 'showcase') validateShowcase(content, path);
-    }
-
-    function validateResource(resource, index, seenIds) {
-        var path = 'resources[' + index + ']';
-        requireObject(resource, path);
-        requireString(resource.id, path + '.id', false);
-        if (!ID_PATTERN.test(resource.id)) invalid(path + '.id', 'expected lowercase letters, numbers and single hyphens.');
-        if (seenIds[resource.id]) invalid(path + '.id', 'duplicate resource id "' + resource.id + '".');
+    function runtimeResourceIssue(resource, seenIds) {
+        if (!isObject(resource)) return 'expected an object.';
+        if (typeof resource.id !== 'string' || !resource.id.trim()) return 'id must be a non-empty string.';
+        if (seenIds[resource.id]) return 'duplicate resource id "' + resource.id + '".';
+        if (RESOURCE_TYPES.indexOf(resource.type) === -1) return 'type is not supported by the renderer.';
+        if (typeof resource.title !== 'string' || typeof resource.summary !== 'string') return 'title and summary must be strings.';
+        if (typeof resource.datePublished !== 'string' || typeof resource.dateUpdated !== 'string') return 'date fields must be strings.';
+        if (LIBRARY_SECTIONS.indexOf(resource.librarySection) === -1) return 'librarySection is not supported.';
+        if (!isStringArray(resource.skillAreas, SKILL_AREAS) || !isStringArray(resource.tags)) return 'skillAreas and tags must be arrays of supported strings.';
+        if (typeof resource.featured !== 'boolean' || typeof resource.published !== 'boolean') return 'featured and published must be booleans.';
+        if (resource.estimatedMinutes !== null && (typeof resource.estimatedMinutes !== 'number' || !isFinite(resource.estimatedMinutes))) return 'estimatedMinutes must be a finite number or null.';
+        if (!isObject(resource.author)) return 'author must be an object.';
+        if (['name', 'organisation', 'course', 'yearOfStudy'].some(function (field) { return typeof resource.author[field] !== 'string'; })) return 'author fields must be strings.';
+        if (!isObject(resource.thumbnail) || typeof resource.thumbnail.src !== 'string' || typeof resource.thumbnail.alt !== 'string') return 'thumbnail must contain string src and alt fields.';
+        if (!isSafeHttpUrl(resource.thumbnail.src)) return 'thumbnail.src must be an http or https URL.';
+        var contentIssue = contentSafetyIssue(resource.type, resource.content);
+        if (contentIssue) return contentIssue;
         seenIds[resource.id] = true;
-        requireEnum(resource.type, RESOURCE_TYPES, path + '.type');
-        requireString(resource.title, path + '.title', false);
-        requireString(resource.summary, path + '.summary', true);
-        validateAuthor(resource.author, path + '.author');
-        requireDate(resource.datePublished, path + '.datePublished');
-        requireDate(resource.dateUpdated, path + '.dateUpdated');
-        requireEnum(resource.librarySection, LIBRARY_SECTIONS, path + '.librarySection');
-        requireStringArray(resource.skillAreas, path + '.skillAreas', SKILL_AREAS);
-        if (resource.type === 'tool' && resource.skillAreas.length !== 0) {
-            invalid(path + '.skillAreas', 'tool reviews must not have a skill area.');
-        }
-        if (resource.type !== 'tool' && resource.skillAreas.length !== 1) {
-            invalid(path + '.skillAreas', 'expected exactly one skill area.');
-        }
-        requireStringArray(resource.tags, path + '.tags');
-        requireBoolean(resource.featured, path + '.featured');
-        requireBoolean(resource.published, path + '.published');
-        requirePositiveIntegerOrNull(resource.estimatedMinutes, path + '.estimatedMinutes');
-        if (SECTION_TYPES[resource.librarySection].indexOf(resource.type) === -1) {
-            invalid(path + '.type', 'type "' + resource.type + '" is not allowed in library section "' + resource.librarySection + '".');
-        }
-        validateThumbnail(resource.thumbnail, path + '.thumbnail');
-        validateContent(resource.type, resource.content, path + '.content');
+        return '';
+    }
+
+    function warnSkippedResource(resource, index, message) {
+        if (!window.console || !console.warn) return;
+        var id = isObject(resource) && typeof resource.id === 'string' && resource.id ? ' ("' + resource.id + '")' : '';
+        console.warn('GenAI Hub skipped malformed resource at resources[' + index + ']' + id + ': ' + message);
     }
 
     function validatePayload(payload) {
-        requireObject(payload, 'payload');
-        if (payload.schemaVersion !== SCHEMA_VERSION) {
-            invalid('schemaVersion', 'expected "' + SCHEMA_VERSION + '".');
-        }
-        requireString(payload.lastUpdated, 'lastUpdated', false);
-        requireDateTime(payload.lastUpdated, 'lastUpdated');
+        if (!isObject(payload)) invalid('payload', 'expected an object.');
+        if (payload.schemaVersion !== SCHEMA_VERSION) invalid('schemaVersion', 'expected "' + SCHEMA_VERSION + '".');
+        if (typeof payload.lastUpdated !== 'string' || !payload.lastUpdated.trim()) invalid('lastUpdated', 'expected a non-empty string.');
         if (!Array.isArray(payload.resources)) invalid('resources', 'expected an array.');
         var seenIds = Object.create(null);
-        payload.resources.forEach(function (resource, index) {
-            validateResource(resource, index, seenIds);
+        var resources = payload.resources.filter(function (resource, index) {
+            var issue = runtimeResourceIssue(resource, seenIds);
+            if (!issue) return true;
+            warnSkippedResource(resource, index, issue);
+            return false;
         });
-        return payload;
+        if (payload.resources.length && !resources.length) invalid('resources', 'no usable resource records remain after defensive checks.');
+        return { schemaVersion: payload.schemaVersion, lastUpdated: payload.lastUpdated, resources: resources };
     }
 
     function deepFreeze(value) {
