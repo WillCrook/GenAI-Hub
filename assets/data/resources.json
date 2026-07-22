@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "lastUpdated": "2026-07-22T13:11:45.477Z",
+  "lastUpdated": "2026-07-22T14:06:48.926Z",
   "resources": [
     {
       "id": "prompt-critical-reading",
@@ -240,11 +240,11 @@
         "worksheet",
         "planning"
       ],
-      "featured": false,
+      "featured": true,
       "published": true,
       "estimatedMinutes": null,
       "thumbnail": {
-        "src": "",
+        "src": "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fen.wikiversity.org%2Fwiki%2FArtificial_intelligence&ved=0CBYQjRxqFwoTCOCfvaa35pUDFQAAAAAdAAAAABBS&opi=89978449",
         "alt": ""
       },
       "content": {
