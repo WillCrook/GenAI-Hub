@@ -483,9 +483,9 @@
         return Number(value).toFixed(1).replace(/\.0$/, '') + '/5';
     }
 
-    function appendBadge(parent, label, colour) {
+    function appendBadge(parent, label, colour, textColour, borderColour) {
         var badge = element('span', 'badge rounded-pill px-2 py-1 mr-2 mb-2', label);
-        badge.style.cssText = 'background:' + colour + ';color:#fff;border:1px solid ' + colour + ';font-size:.72rem;letter-spacing:.03em;line-height:1.2;';
+        badge.style.cssText = 'background:' + colour + ';color:' + (textColour || '#fff') + ';border:1px solid ' + (borderColour || colour) + ';font-size:.72rem;letter-spacing:.03em;line-height:1.2;';
         parent.appendChild(badge);
     }
 
@@ -496,9 +496,9 @@
     }
 
     function appendDialogBadges(parent, resource) {
-        appendBadge(parent, TYPE_LABELS[resource.type], '#094685');
+        appendBadge(parent, TYPE_LABELS[resource.type], '#e6eef8', '#094685', '#b8cee3');
         appendSkillBadge(parent, resource);
-        if (resource.featured) appendBadge(parent, 'Featured', '#5f4300');
+        if (resource.featured) appendBadge(parent, 'Featured', '#f5c242', '#0b2442');
     }
 
     function appendLibraryBadges(parent, resource) {
@@ -635,6 +635,73 @@
         target.appendChild(list);
     }
 
+    function sentenceCase(value) {
+        if (!value) return '';
+        var text = String(value).replace(/-/g, ' ');
+        if (text.toUpperCase() === 'API') return 'API';
+        return text.charAt(0).toUpperCase() + text.slice(1);
+    }
+
+    function formatMinutes(value) {
+        return typeof value === 'number' && isFinite(value) ? value + (value === 1 ? ' minute' : ' minutes') : '';
+    }
+
+    function formatFileSize(value) {
+        if (typeof value !== 'number' || !isFinite(value) || value < 0) return '';
+        if (value < 1024) return value + (value === 1 ? ' byte' : ' bytes');
+        var units = ['KB', 'MB', 'GB', 'TB'];
+        var size = value / 1024;
+        var index = 0;
+        while (size >= 1024 && index < units.length - 1) {
+            size /= 1024;
+            index += 1;
+        }
+        return (size >= 10 ? Math.round(size) : Math.round(size * 10) / 10) + ' ' + units[index];
+    }
+
+    function appendFactGrid(target, title, facts) {
+        var visible = facts.filter(function (fact) {
+            return fact.value !== undefined && fact.value !== null && fact.value !== '';
+        });
+        if (!visible.length) return;
+        var section = panel(title);
+        var row = element('div', 'row mb-n3');
+        visible.forEach(function (fact) {
+            var column = element('div', 'col-12 col-sm-6 col-lg-4 mb-3');
+            column.appendChild(element('strong', 'd-block mb-1', fact.label));
+            var value = element('span', 'text-muted', fact.value);
+            value.style.color = '#4f5962';
+            column.appendChild(value);
+            row.appendChild(column);
+        });
+        section.appendChild(row);
+        target.appendChild(section);
+    }
+
+    function appendPills(target, values) {
+        if (!values || !values.length) return;
+        var list = element('div', 'd-flex flex-wrap mb-n2');
+        values.forEach(function (value) {
+            var pill = element('span', 'badge rounded-pill px-3 py-2 mr-2 mb-2', value);
+            pill.style.cssText = 'background:#e6eef8;color:#094685;border:1px solid #b8cee3;font-size:.78rem;white-space:normal;';
+            list.appendChild(pill);
+        });
+        target.appendChild(list);
+    }
+
+    function appendTopics(target, resource) {
+        var exclusions = [resource.type, TYPE_LABELS[resource.type]].concat(resource.skillAreas || []).map(normaliseText);
+        var topics = resource.tags.filter(function (tag, index) {
+            var normalised = normaliseText(tag);
+            return normalised && exclusions.indexOf(normalised) === -1
+                && resource.tags.map(normaliseText).indexOf(normalised) === index;
+        }).map(function (tag) { return sentenceCase(tag); });
+        if (!topics.length) return;
+        var section = panel('Topics');
+        appendPills(section, topics);
+        target.appendChild(section);
+    }
+
     function externalAction(label, href, download) {
         if (!href) return null;
         var link = element('a', 'btn btn-primary rounded-pill font-weight-bold mr-2 mb-2', label);
@@ -642,15 +709,6 @@
         link.style.cssText = 'background:#094685;border-color:#094685;white-space:normal;';
         if (download) link.setAttribute('download', '');
         return link;
-    }
-
-    function appendMetadata(target, resource) {
-        var metadata = panel('Metadata');
-        appendKeyValue(metadata, 'Author', resource.author.name || resource.author.organisation);
-        appendKeyValue(metadata, 'Published', formatDate(resource.datePublished));
-        appendKeyValue(metadata, 'Estimated time', resource.estimatedMinutes ? resource.estimatedMinutes + ' minutes' : 'Not specified');
-        appendKeyValue(metadata, 'Tags', resource.tags.join(', '));
-        target.appendChild(metadata);
     }
 
     function copyText(value, status) {
@@ -691,9 +749,14 @@
 
     function renderArticle(resource, body, actions) {
         appendThumbnail(body, resource, false);
-        var content = panel('Article');
-        appendText(content, resource.content.body);
-        body.appendChild(content);
+        appendFactGrid(body, 'At a glance', [
+            { label: 'Reading time', value: formatMinutes(resource.content.readingTimeMinutes !== null ? resource.content.readingTimeMinutes : resource.estimatedMinutes) }
+        ]);
+        if (resource.content.body) {
+            var content = panel('Article');
+            appendText(content, resource.content.body);
+            body.appendChild(content);
+        }
         var source = externalAction('View original source', resource.content.sourceUrl);
         if (source) actions.appendChild(source);
     }
@@ -701,10 +764,10 @@
     function renderVideo(resource, body, actions) {
         var frame = makeIframe(resource.content.embedUrl, resource.title + ' video');
         if (frame) body.appendChild(frame);
-        var details = panel('Video details');
-        appendKeyValue(details, 'Provider', resource.content.provider);
-        appendKeyValue(details, 'Duration', resource.content.durationSeconds === null ? '' : Math.ceil(resource.content.durationSeconds / 60) + ' minutes');
-        body.appendChild(details);
+        appendFactGrid(body, 'Video details', [
+            { label: 'Provider', value: resource.content.provider },
+            { label: 'Duration', value: formatMinutes(resource.content.durationSeconds === null ? resource.estimatedMinutes : Math.ceil(resource.content.durationSeconds / 60)) }
+        ]);
         var view = externalAction('Open video', resource.content.videoUrl);
         if (view) actions.appendChild(view);
     }
@@ -712,97 +775,163 @@
     function renderLink(resource, body, actions) {
         var frame = makeIframe(resource.content.url, resource.title + ' website preview');
         if (frame) body.appendChild(frame);
-        var details = panel('External resource');
-        appendText(details, resource.content.description);
-        appendKeyValue(details, 'Website', resource.content.siteName);
-        var warning = element('p', 'small text-muted mb-0', 'If the preview is blocked by the external website, use View resource instead.');
-        warning.style.color = '#4f5962';
-        details.appendChild(warning);
-        body.appendChild(details);
+        if (resource.content.description || resource.content.siteName || frame) {
+            var details = panel('External resource');
+            appendText(details, resource.content.description);
+            appendKeyValue(details, 'Website', resource.content.siteName);
+            if (frame) {
+                var warning = element('p', 'small text-muted mb-0', 'If the preview is blocked by the external website, use View resource instead.');
+                warning.style.color = '#4f5962';
+                details.appendChild(warning);
+            }
+            body.appendChild(details);
+        }
+        appendFactGrid(body, 'At a glance', [
+            { label: 'Estimated time', value: formatMinutes(resource.estimatedMinutes) }
+        ]);
         var view = externalAction('View resource', resource.content.url);
         if (view) actions.appendChild(view);
     }
 
     function renderDownload(resource, body, actions) {
         appendThumbnail(body, resource, false);
-        var details = panel('Download details');
-        appendText(details, resource.content.description);
-        appendKeyValue(details, 'File', resource.content.fileName);
-        appendKeyValue(details, 'Format', resource.content.fileFormat);
-        appendKeyValue(details, 'Version', resource.content.version);
-        appendKeyValue(details, 'File size', resource.content.fileSizeBytes === null ? '' : resource.content.fileSizeBytes + ' bytes');
-        body.appendChild(details);
+        if (resource.content.description) {
+            var description = panel('About this download');
+            appendText(description, resource.content.description);
+            body.appendChild(description);
+        }
+        appendFactGrid(body, 'Download details', [
+            { label: 'File', value: resource.content.fileName },
+            { label: 'Format', value: resource.content.fileFormat },
+            { label: 'Version', value: resource.content.version },
+            { label: 'File size', value: formatFileSize(resource.content.fileSizeBytes) },
+            { label: 'Estimated time', value: formatMinutes(resource.estimatedMinutes) }
+        ]);
         var download = externalAction('Download', resource.content.fileUrl, true);
         if (download) actions.appendChild(download);
     }
 
     function renderPrompt(resource, body, actions) {
-        var purpose = panel('Purpose');
-        appendText(purpose, resource.content.purpose);
-        body.appendChild(purpose);
-        var promptPanel = panel('Prompt');
-        var promptText = element('pre', 'p-3 mb-3', resource.content.promptText);
-        promptText.style.cssText = 'white-space:pre-wrap;overflow:auto;background:#fff;border:1px solid #dee2e6;border-radius:10px;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9rem;';
-        promptPanel.appendChild(promptText);
-        var copy = element('button', 'btn btn-primary rounded-pill font-weight-bold', 'Copy prompt');
-        copy.type = 'button';
-        copy.style.cssText = 'background:#094685;border-color:#094685;';
-        var status = element('span', 'ml-3 font-weight-bold');
-        status.setAttribute('role', 'status');
-        status.setAttribute('aria-live', 'polite');
-        copy.addEventListener('click', function () { copyText(resource.content.promptText, status); });
-        promptPanel.appendChild(copy);
-        promptPanel.appendChild(status);
-        body.appendChild(promptPanel);
-        var setup = panel('Prompt setup');
-        appendKeyValue(setup, 'Platforms', resource.content.platforms.join(', '));
-        appendKeyValue(setup, 'Models tested', resource.content.modelsTested.join(', '));
-        appendKeyValue(setup, 'Reasoning mode', resource.content.reasoningMode);
-        appendKeyValue(setup, 'Usage notes', resource.content.usageNotes);
-        body.appendChild(setup);
+        if (resource.content.purpose) {
+            var purpose = panel('Purpose');
+            appendText(purpose, resource.content.purpose);
+            body.appendChild(purpose);
+        }
+        if (resource.content.promptText) {
+            var promptPanel = panel('Prompt');
+            var promptText = element('pre', 'p-3 mb-3', resource.content.promptText);
+            promptText.style.cssText = 'white-space:pre-wrap;overflow:auto;background:#fff;border:1px solid #dee2e6;border-radius:10px;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9rem;';
+            promptPanel.appendChild(promptText);
+            var copy = element('button', 'btn btn-primary rounded-pill font-weight-bold', 'Copy prompt');
+            copy.type = 'button';
+            copy.style.cssText = 'background:#094685;border-color:#094685;';
+            var status = element('span', 'ml-3 font-weight-bold');
+            status.setAttribute('role', 'status');
+            status.setAttribute('aria-live', 'polite');
+            copy.addEventListener('click', function () { copyText(resource.content.promptText, status); });
+            promptPanel.appendChild(copy);
+            promptPanel.appendChild(status);
+            body.appendChild(promptPanel);
+        }
+        appendFactGrid(body, 'Prompt setup', [
+            { label: 'Platforms', value: resource.content.platforms.join(', ') },
+            { label: 'Models tested', value: resource.content.modelsTested.join(', ') },
+            { label: 'Reasoning mode', value: resource.content.reasoningMode === 'either' ? 'Standard or reasoning' : sentenceCase(resource.content.reasoningMode) },
+            { label: 'Estimated time', value: formatMinutes(resource.estimatedMinutes) }
+        ]);
+        if (resource.content.usageNotes) {
+            var guidance = panel('Use it well');
+            appendText(guidance, resource.content.usageNotes);
+            body.appendChild(guidance);
+        }
     }
 
     function renderWorkflow(resource, body) {
-        var goal = panel('Goal');
-        appendText(goal, resource.content.goal);
-        body.appendChild(goal);
-        var stepsPanel = panel('Workflow steps');
-        var steps = element('ol', 'mb-0 pl-3');
-        resource.content.steps.slice().sort(function (a, b) { return a.stepNumber - b.stepNumber; }).forEach(function (step) {
-            var item = element('li', 'mb-3');
-            item.appendChild(element('strong', 'd-block', step.title || 'Step ' + step.stepNumber));
-            item.appendChild(element('span', 'text-muted', step.description));
-            steps.appendChild(item);
-        });
-        stepsPanel.appendChild(steps);
-        body.appendChild(stepsPanel);
-        var reflection = panel('Reflection');
-        appendText(reflection, resource.content.reflection);
-        appendKeyValue(reflection, 'Estimated workflow time', resource.content.estimatedTotalMinutes === null ? '' : resource.content.estimatedTotalMinutes + ' minutes');
-        appendKeyValue(reflection, 'Complexity', resource.content.complexityScore === null ? '' : resource.content.complexityScore + '/10');
-        body.appendChild(reflection);
+        if (resource.content.goal) {
+            var goal = panel('Goal');
+            appendText(goal, resource.content.goal);
+            body.appendChild(goal);
+        }
+        appendFactGrid(body, 'Workflow overview', [
+            { label: 'Estimated time', value: formatMinutes(resource.content.estimatedTotalMinutes !== null ? resource.content.estimatedTotalMinutes : resource.estimatedMinutes) },
+            { label: 'Complexity', value: resource.content.complexityScore === null ? '' : resource.content.complexityScore + '/10' }
+        ]);
+        if (resource.content.steps.length) {
+            var stepsPanel = panel('Workflow steps');
+            var steps = element('ol', 'list-unstyled mb-0');
+            resource.content.steps.slice().sort(function (a, b) { return a.stepNumber - b.stepNumber; }).forEach(function (step) {
+                var item = element('li', 'd-flex align-items-start mb-3');
+                var number = element('span', 'd-inline-flex align-items-center justify-content-center flex-shrink-0 mr-3 font-weight-bold', step.stepNumber);
+                number.style.cssText = 'width:2rem;height:2rem;border-radius:50%;background:#094685;color:#fff;line-height:1;';
+                var copy = element('div');
+                copy.appendChild(element('strong', 'd-block mb-1', step.title || 'Step ' + step.stepNumber));
+                var description = element('span', 'text-muted', step.description);
+                description.style.color = '#4f5962';
+                copy.appendChild(description);
+                item.appendChild(number);
+                item.appendChild(copy);
+                steps.appendChild(item);
+            });
+            stepsPanel.appendChild(steps);
+            body.appendChild(stepsPanel);
+        }
+        if (resource.content.reflection) {
+            var reflection = panel('Reflect and check');
+            appendText(reflection, resource.content.reflection);
+            body.appendChild(reflection);
+        }
     }
 
     function renderTool(resource, body, actions) {
         var overview = panel(resource.content.company || 'Tool review');
-        appendKeyValue(overview, 'Rating', formatRating(resource.content.rating) + ' student rating');
+        var rating = element('div', 'd-inline-flex align-items-center rounded-pill px-3 py-2 mb-3 font-weight-bold', '★ ' + formatRating(resource.content.rating) + ' student rating');
+        rating.style.cssText = 'background:#fff8df;color:#5f4300;border:1px solid #f5c242;';
+        overview.appendChild(rating);
         appendText(overview, resource.content.overview);
-        appendKeyValue(overview, 'Review verdict', resource.content.reviewVerdict);
+        if (resource.content.reviewVerdict) {
+            var verdict = element('div', 'p-3 mt-2 font-weight-bold', resource.content.reviewVerdict);
+            verdict.style.cssText = 'background:#e6eef8;color:#094685;border-left:4px solid #094685;border-radius:0 10px 10px 0;';
+            overview.appendChild(verdict);
+        }
         body.appendChild(overview);
-        var strengths = panel('Best for');
-        appendList(strengths, resource.content.strengths);
-        body.appendChild(strengths);
-        var limits = panel('Limitations and checking');
-        appendList(limits, resource.content.weaknesses);
-        appendKeyValue(limits, 'Accessibility', resource.content.accessibilityNotes);
-        appendKeyValue(limits, 'Privacy', resource.content.privacyNotes);
-        body.appendChild(limits);
-        var pricing = resource.content.pricing.model;
-        if (resource.content.pricing.cost !== null) pricing += ' · ' + resource.content.pricing.cost;
-        var metadata = panel('Tool metadata');
-        appendKeyValue(metadata, 'Pricing', pricing);
-        appendKeyValue(metadata, 'Platforms', resource.content.platformTypes.join(', '));
-        body.appendChild(metadata);
+        var pricing = resource.content.pricing.model === 'institutional' ? 'Institutional access' : sentenceCase(resource.content.pricing.model);
+        if (resource.content.pricing.cost !== null && resource.content.pricing.cost > 0) pricing += ' · ' + resource.content.pricing.cost;
+        var repeatedAccessFacts = [pricing].concat(resource.content.platformTypes.map(sentenceCase)).map(normaliseText);
+        var strengthsValues = resource.content.strengths.filter(function (value) {
+            return repeatedAccessFacts.indexOf(normaliseText(value)) === -1;
+        });
+        var hasStrengths = strengthsValues.length > 0;
+        var hasLimits = resource.content.weaknesses.length > 0;
+        var comparisonColumnClass = hasStrengths && hasLimits ? 'col-12 col-lg-6 d-flex' : 'col-12 d-flex';
+        var comparison = element('div', 'row');
+        if (hasStrengths) {
+            var strengthsColumn = element('div', comparisonColumnClass);
+            var strengths = panel('Best for');
+            strengths.className += ' w-100';
+            appendList(strengths, strengthsValues);
+            strengthsColumn.appendChild(strengths);
+            comparison.appendChild(strengthsColumn);
+        }
+        if (hasLimits) {
+            var limitsColumn = element('div', comparisonColumnClass);
+            var limits = panel('Limitations and checking');
+            limits.className += ' w-100';
+            appendList(limits, resource.content.weaknesses);
+            limitsColumn.appendChild(limits);
+            comparison.appendChild(limitsColumn);
+        }
+        if (comparison.childNodes.length) body.appendChild(comparison);
+        appendFactGrid(body, 'Access and availability', [
+            { label: 'Pricing', value: pricing },
+            { label: 'Platforms', value: resource.content.platformTypes.map(sentenceCase).join(', ') },
+            { label: 'Review time', value: formatMinutes(resource.estimatedMinutes) }
+        ]);
+        if (resource.content.accessibilityNotes || resource.content.privacyNotes) {
+            var responsibleUse = panel('Responsible use');
+            appendKeyValue(responsibleUse, 'Accessibility', resource.content.accessibilityNotes);
+            appendKeyValue(responsibleUse, 'Privacy', resource.content.privacyNotes);
+            body.appendChild(responsibleUse);
+        }
         var visit = externalAction('Visit tool', resource.content.toolUrl);
         if (visit) actions.appendChild(visit);
     }
@@ -814,30 +943,80 @@
     }
 
     function renderEvent(resource, body, actions) {
-        var details = panel('Event details');
-        appendKeyValue(details, 'Host', resource.content.host);
-        appendKeyValue(details, 'Starts', formatDateTime(resource.content.startDateTime));
-        appendKeyValue(details, 'Length', eventDuration(resource.content));
-        appendKeyValue(details, 'Format', resource.content.locationType);
-        appendKeyValue(details, 'Location', resource.content.location || (resource.content.locationType === 'online' ? 'Online' : 'To be confirmed'));
-        appendText(details, resource.content.description);
-        appendKeyValue(details, 'Capacity', resource.content.capacity === null ? '' : resource.content.capacity + ' places');
-        body.appendChild(details);
+        if (resource.content.description) {
+            var description = panel('About this event');
+            appendText(description, resource.content.description);
+            body.appendChild(description);
+        }
+        var authorNames = [resource.author.name, resource.author.organisation].map(normaliseText);
+        appendFactGrid(body, 'Event details', [
+            { label: 'Host', value: authorNames.indexOf(normaliseText(resource.content.host)) === -1 ? resource.content.host : '' },
+            { label: 'Starts', value: resource.content.startDateTime ? formatDateTime(resource.content.startDateTime) : '' },
+            { label: 'Length', value: eventDuration(resource.content) },
+            { label: 'Format', value: sentenceCase(resource.content.locationType) },
+            { label: 'Location', value: resource.content.location || (resource.content.locationType === 'online' ? 'Online' : '') },
+            { label: 'Capacity', value: resource.content.capacity === null ? '' : resource.content.capacity + ' places' }
+        ]);
         var booking = externalAction(resource.content.bookingRequired ? 'Book' : 'View event', resource.content.bookingUrl || resource.content.onlineUrl);
-        if (booking) actions.appendChild(booking);
+        if (booking) {
+            var bookingRow = element('div', 'd-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between p-3 mb-3 border');
+            bookingRow.style.cssText = 'background:#fff8df;border-color:#f5c242!important;border-radius:12px;';
+            var bookingCopy = element('div', 'mr-sm-3 mb-3 mb-sm-0');
+            bookingCopy.appendChild(element('strong', 'd-block mb-1', resource.content.bookingRequired ? 'Reserve your place' : 'Event access'));
+            var bookingNote = element('span', 'text-muted', resource.content.bookingRequired ? 'Booking is required for this event.' : 'See the event page for joining details.');
+            bookingNote.style.color = '#4f5962';
+            bookingCopy.appendChild(bookingNote);
+            booking.style.marginBottom = '0';
+            bookingRow.appendChild(bookingCopy);
+            bookingRow.appendChild(booking);
+            body.appendChild(bookingRow);
+        }
     }
 
     function renderShowcase(resource, body, actions) {
         appendThumbnail(body, resource, false);
-        var story = panel('Project story');
-        appendKeyValue(story, 'Problem', resource.content.problem);
-        appendKeyValue(story, 'Approach', resource.content.approach);
-        appendKeyValue(story, 'Outcome', resource.content.outcome);
-        appendKeyValue(story, 'Reflection', resource.content.reflection);
-        body.appendChild(story);
-        var tools = panel('Tools used');
-        appendList(tools, resource.content.toolsUsed);
-        body.appendChild(tools);
+        appendFactGrid(body, 'Project contributor', [
+            { label: 'Course', value: resource.author.course },
+            { label: 'Year of study', value: resource.author.yearOfStudy ? 'Year ' + resource.author.yearOfStudy : '' },
+            { label: 'Estimated time', value: formatMinutes(resource.estimatedMinutes) }
+        ]);
+        var stages = [
+            { title: 'Problem', value: resource.content.problem },
+            { title: 'Approach', value: resource.content.approach },
+            { title: 'Outcome', value: resource.content.outcome }
+        ].filter(function (stage) { return stage.value; });
+        if (stages.length) {
+            var story = element('section', 'mb-3');
+            story.appendChild(element('h3', 'h6 font-weight-bold mb-3', 'Project story'));
+            var row = element('div', 'row');
+            stages.forEach(function (stage, index) {
+                var column = element('div', 'col-12 col-lg-4 mb-3 d-flex');
+                var card = element('div', 'p-3 p-md-4 border w-100');
+                card.style.cssText = 'background:' + (index === 1 ? '#fff8df' : '#f8fafc') + ';border-color:#d8e2ee!important;border-radius:12px;';
+                var stageNumber = index + 1;
+                var number = element('div', 'small text-uppercase font-weight-bold mb-2', stageNumber < 10 ? '0' + stageNumber : String(stageNumber));
+                number.style.cssText = 'color:#5f4300;letter-spacing:.08em;';
+                card.appendChild(number);
+                var heading = element('h4', 'h6 font-weight-bold mb-2', stage.title);
+                heading.style.color = '#094685';
+                card.appendChild(heading);
+                appendText(card, stage.value);
+                column.appendChild(card);
+                row.appendChild(column);
+            });
+            story.appendChild(row);
+            body.appendChild(story);
+        }
+        if (resource.content.toolsUsed.length) {
+            var tools = panel('Tools used');
+            appendPills(tools, resource.content.toolsUsed);
+            body.appendChild(tools);
+        }
+        if (resource.content.reflection) {
+            var reflection = panel('Reflection');
+            appendText(reflection, resource.content.reflection);
+            body.appendChild(reflection);
+        }
         var view = externalAction('View project', resource.content.projectUrl);
         if (view) actions.appendChild(view);
     }
@@ -926,8 +1105,10 @@
         headingWrap.appendChild(heading);
         var dialogByline = resource.author.name || resource.author.organisation;
         var dialogDate = formatDate(resource.datePublished);
-        if (dialogByline || dialogDate) {
-            var byline = element('p', 'mb-0', [dialogByline, dialogDate].filter(Boolean).join(' · '));
+        var bylineParts = [dialogByline];
+        bylineParts.push(dialogDate);
+        if (bylineParts.filter(Boolean).length) {
+            var byline = element('p', 'mb-0', bylineParts.filter(Boolean).join(' · '));
             byline.style.color = '#e6eef8';
             headingWrap.appendChild(byline);
         }
@@ -948,7 +1129,7 @@
         var content = element('div');
         var actions = element('div', 'd-flex flex-wrap align-items-center mt-4');
         renderResourceDetails(resource, content, actions);
-        appendMetadata(content, resource);
+        appendTopics(content, resource);
         var browse = externalAction('Browse more like this', makeBrowseUrl(resource, trigger));
         if (browse) actions.appendChild(browse);
         content.appendChild(actions);
