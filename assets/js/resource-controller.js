@@ -9,7 +9,10 @@
     var DATA_URL = runtimeScript && runtimeScript.getAttribute('data-resource-source')
         ? runtimeScript.getAttribute('data-resource-source')
         : '';
-    var DATA_SOURCE_PAGE_URL = 'https://moodle.bath.ac.uk/mod/page/view.php?id=1573286';
+    var DEV_MODE = true;
+    var DATA_SOURCE_PAGE_URL = DEV_MODE
+        ? 'https://willcrook.github.io/GenAI-Hub/assets/data/resources.json'
+        : 'https://moodle.bath.ac.uk/mod/page/view.php?id=1573286';
     var SCHEMA_VERSION = '1.1';
     var RESOURCE_TYPES = ['prompt', 'workflow', 'tool', 'article', 'video', 'link', 'download', 'event', 'showcase'];
     var LIBRARY_SECTIONS = ['learn-ai', 'challenges', 'community'];
@@ -141,6 +144,7 @@
 
     function resolveDataUrl(signal) {
         if (DATA_URL) return Promise.resolve(DATA_URL);
+        if (DEV_MODE) return Promise.resolve(DATA_SOURCE_PAGE_URL);
         if (typeof window.DOMParser !== 'function') {
             return Promise.reject(new Error('This browser cannot read the GenAI Hub resource data source page.'));
         }
