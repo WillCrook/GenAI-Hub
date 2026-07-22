@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.2",
   "lastUpdated": "2026-07-22T14:06:48.926Z",
   "resources": [
     {
@@ -24,6 +24,7 @@
         "study"
       ],
       "featured": true,
+      "mainCarousel": true,
       "published": true,
       "estimatedMinutes": null,
       "thumbnail": {
@@ -67,6 +68,7 @@
         "planning"
       ],
       "featured": true,
+      "mainCarousel": true,
       "published": true,
       "estimatedMinutes": 25,
       "thumbnail": {
@@ -117,6 +119,7 @@
         "productivity"
       ],
       "featured": false,
+      "mainCarousel": true,
       "published": true,
       "estimatedMinutes": null,
       "thumbnail": {
@@ -172,6 +175,7 @@
         "responsible-use"
       ],
       "featured": true,
+      "mainCarousel": true,
       "published": true,
       "estimatedMinutes": 4,
       "thumbnail": {
@@ -206,6 +210,7 @@
         "video"
       ],
       "featured": false,
+      "mainCarousel": true,
       "published": true,
       "estimatedMinutes": 5,
       "thumbnail": {
@@ -241,6 +246,7 @@
         "planning"
       ],
       "featured": true,
+      "mainCarousel": true,
       "published": true,
       "estimatedMinutes": null,
       "thumbnail": {
@@ -278,6 +284,7 @@
         "support"
       ],
       "featured": true,
+      "mainCarousel": true,
       "published": true,
       "estimatedMinutes": 60,
       "thumbnail": {
@@ -320,6 +327,7 @@
         "workshop"
       ],
       "featured": false,
+      "mainCarousel": true,
       "published": true,
       "estimatedMinutes": 120,
       "thumbnail": {
@@ -362,6 +370,7 @@
         "showcase"
       ],
       "featured": false,
+      "mainCarousel": true,
       "published": true,
       "estimatedMinutes": 90,
       "thumbnail": {
@@ -404,6 +413,7 @@
         "accessibility"
       ],
       "featured": true,
+      "mainCarousel": true,
       "published": true,
       "estimatedMinutes": null,
       "thumbnail": {
