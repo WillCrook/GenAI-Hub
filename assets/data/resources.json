@@ -138,7 +138,7 @@
           "Features vary by account"
         ],
         "pricing": {
-          "model": "institutional",
+          "model": "university-provided",
           "cost": 0
         },
         "platformTypes": [

@@ -716,7 +716,7 @@
             overview.appendChild(verdict);
         }
         body.appendChild(overview);
-        var pricing = resource.content.pricing.model === 'institutional' ? 'Institutional access' : sentenceCase(resource.content.pricing.model);
+        var pricing = sentenceCase(resource.content.pricing.model);
         if (resource.content.pricing.cost !== null && resource.content.pricing.cost > 0) pricing += ' · ' + resource.content.pricing.cost;
         var repeatedAccessFacts = [pricing].concat(resource.content.platformTypes.map(sentenceCase)).map(normaliseText);
         var strengthsValues = resource.content.strengths.filter(function (value) {

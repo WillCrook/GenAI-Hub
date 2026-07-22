@@ -19,7 +19,7 @@
   var SETTINGS_HEADERS = ['key','value'];
   var ALLOWED = {
     library_section:['learn-ai','challenges','community'], skill_areas:['academic','workplace','lifelong'],
-    reasoning_mode:['standard','reasoning','either','not-applicable'], pricing_model:['free','freemium','paid','institutional','unknown'],
+    reasoning_mode:['standard','reasoning','either','not-applicable'], pricing_model:['free','freemium','paid','university-provided','unknown'],
     platform_types:['web','desktop','mobile','browser-extension','API'], location_type:['in-person','online','hybrid']
   };
   var LIST_VALUES = {
