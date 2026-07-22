@@ -13,7 +13,7 @@
     var DATA_SOURCE_PAGE_URL = DEV_MODE
         ? 'https://willcrook.github.io/GenAI-Hub/assets/data/resources.json'
         : 'https://moodle.bath.ac.uk/mod/page/view.php?id=1573286';
-    var SCHEMA_VERSION = '1.1';
+    var SCHEMA_VERSION = '1.2';
     var RESOURCE_TYPES = ['prompt', 'workflow', 'tool', 'article', 'video', 'link', 'download', 'event', 'showcase'];
     var LIBRARY_SECTIONS = ['learn-ai', 'challenges', 'community'];
     var SKILL_AREAS = ['academic', 'workplace', 'lifelong'];
@@ -86,7 +86,7 @@
         if (typeof resource.datePublished !== 'string' || typeof resource.dateUpdated !== 'string') return 'date fields must be strings.';
         if (LIBRARY_SECTIONS.indexOf(resource.librarySection) === -1) return 'librarySection is not supported.';
         if (!isStringArray(resource.skillAreas, SKILL_AREAS) || !isStringArray(resource.tags)) return 'skillAreas and tags must be arrays of supported strings.';
-        if (typeof resource.featured !== 'boolean' || typeof resource.published !== 'boolean') return 'featured and published must be booleans.';
+        if (typeof resource.featured !== 'boolean' || typeof resource.mainCarousel !== 'boolean' || typeof resource.published !== 'boolean') return 'featured, mainCarousel and published must be booleans.';
         if (resource.estimatedMinutes !== null && (typeof resource.estimatedMinutes !== 'number' || !isFinite(resource.estimatedMinutes))) return 'estimatedMinutes must be a finite number or null.';
         if (!isObject(resource.author)) return 'author must be an object.';
         if (['name', 'organisation', 'course', 'yearOfStudy'].some(function (field) { return typeof resource.author[field] !== 'string'; })) return 'author fields must be strings.';
@@ -284,6 +284,7 @@
             if (resource.published !== true) return false;
             if (criteria.librarySection && resource.librarySection !== criteria.librarySection) return false;
             if (criteria.featuredOnly && resource.featured !== true) return false;
+            if (criteria.mainCarouselOnly && resource.mainCarousel !== true) return false;
             if (types.length && types.indexOf(resource.type) === -1) return false;
             if (skills.length && !skills.some(function (skill) { return resource.skillAreas.indexOf(skill) !== -1; })) return false;
             if (tags.length && !tags.some(function (tag) { return resourceTags.indexOf(tag) !== -1; })) return false;
@@ -299,6 +300,13 @@
             if (criteria.sort === 'newest') {
                 var byDate = right.resource.datePublished.localeCompare(left.resource.datePublished);
                 return byDate || left.index - right.index;
+            }
+            if (criteria.sort === 'updated') {
+                var byUpdated = right.resource.dateUpdated.localeCompare(left.resource.dateUpdated);
+                if (byUpdated) return byUpdated;
+                var byPublished = right.resource.datePublished.localeCompare(left.resource.datePublished);
+                if (byPublished) return byPublished;
+                return left.resource.id.localeCompare(right.resource.id, 'en-GB', { sensitivity: 'base' });
             }
             if (terms.length && right.score !== left.score) return right.score - left.score;
             if (left.resource.featured !== right.resource.featured) return left.resource.featured ? -1 : 1;
@@ -395,6 +403,22 @@
         parent.appendChild(image);
     }
 
+    function createProjectImagePlaceholder(resource) {
+        var placeholder = element('div', 'd-flex flex-column align-items-center justify-content-center text-center p-4');
+        placeholder.setAttribute('role', 'img');
+        placeholder.setAttribute('aria-label', 'Project image coming soon for ' + resource.title);
+        placeholder.style.cssText = 'height:180px;background:#f4f7fb;border:2px dashed #9fbfdd;border-radius:10px;color:#094685;';
+        var icon = element('i', 'fa-regular fa-image mb-3', '\u200B');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.style.cssText = 'font-size:2rem;line-height:1;color:#f5c242;';
+        placeholder.appendChild(icon);
+        placeholder.appendChild(element('strong', 'd-block mb-1', 'Project image coming soon'));
+        var note = element('small', 'd-block', 'No image has been provided yet.');
+        note.style.color = '#4f5962';
+        placeholder.appendChild(note);
+        return placeholder;
+    }
+
     function appendCardContents(container, resource, badgeMode) {
         var badges = element('div', 'd-flex flex-wrap align-items-start mb-1');
         if (badgeMode === 'library') appendLibraryBadges(badges, resource);
@@ -408,6 +432,7 @@
         }
         var media = element('div', 'mt-auto mb-3');
         appendThumbnail(media, resource, true);
+        if (badgeMode === 'landing' && !media.childNodes.length) media.appendChild(createProjectImagePlaceholder(resource));
         if (media.childNodes.length) container.appendChild(media);
         var byline = resource.author.name || resource.author.organisation;
         var cardDate = formatDate(resource.datePublished);
@@ -464,6 +489,122 @@
         content.appendChild(note);
         card.appendChild(content);
         return card;
+    }
+
+    var MAIN_CAROUSEL_BASE_COLOURS = {
+        academic: '#15803D',
+        workplace: '#2563EB',
+        lifelong: '#7C3AED',
+        unclassified: '#094685'
+    };
+    var MAIN_CAROUSEL_TYPES = {
+        article: { tint: 0.06, icon: 'fa-solid fa-file-lines' },
+        link: { tint: 0.07, icon: 'fa-solid fa-link' },
+        video: { tint: 0.08, icon: 'fa-solid fa-circle-play' },
+        download: { tint: 0.10, icon: 'fa-solid fa-file-arrow-down' },
+        tool: { tint: 0.11, icon: 'fa-solid fa-screwdriver-wrench' },
+        prompt: { tint: 0.12, icon: 'fa-regular fa-keyboard' },
+        workflow: { tint: 0.14, icon: 'fa-solid fa-list-check' },
+        event: { tint: 0.16, icon: 'fa-solid fa-calendar-days' },
+        showcase: { tint: 0.18, icon: 'fa-solid fa-star' }
+    };
+
+    function rgbaFromHex(hex, alpha) {
+        var value = hex.replace('#', '');
+        var red = parseInt(value.slice(0, 2), 16);
+        var green = parseInt(value.slice(2, 4), 16);
+        var blue = parseInt(value.slice(4, 6), 16);
+        return 'rgba(' + red + ',' + green + ',' + blue + ',' + alpha.toFixed(2) + ')';
+    }
+
+    function clampCarouselText(node, lines) {
+        node.style.display = '-webkit-box';
+        node.style.webkitBoxOrient = 'vertical';
+        node.style.webkitLineClamp = String(lines);
+        node.style.overflow = 'hidden';
+    }
+
+    function createLandingCarouselCard(resource) {
+        var typeStyle = MAIN_CAROUSEL_TYPES[resource.type];
+        var skill = resource.skillAreas.length ? resource.skillAreas[0] : 'unclassified';
+        var base = MAIN_CAROUSEL_BASE_COLOURS[skill] || MAIN_CAROUSEL_BASE_COLOURS.unclassified;
+        var outer = element('div', 'col-8 col-md-3 px-1');
+        outer.setAttribute('data-hub-bottom-card', resource.id);
+        outer.setAttribute('data-resource-id', resource.id);
+
+        var panel = element('div', 'position-relative overflow-hidden shadow-sm d-flex flex-column');
+        panel.style.cssText = 'height:190px;min-height:190px;padding:1rem;background:' + rgbaFromHex(base, typeStyle.tint) + ';border:1px solid ' + rgbaFromHex(base, Math.min(0.40, typeStyle.tint + 0.18)) + ';';
+
+        var action = element('a', 'position-absolute');
+        action.href = makeBrowseUrl(resource, null);
+        action.setAttribute('data-resource-open', resource.id);
+        action.setAttribute('aria-label', 'Open ' + resource.title);
+        action.style.cssText = 'inset:0;z-index:2;';
+        action.appendChild(element('span', 'sr-only', 'Open ' + resource.title));
+        panel.appendChild(action);
+
+        var iconTile = element('div', 'd-flex align-items-center justify-content-center');
+        iconTile.style.cssText = 'width:52px;height:52px;border-radius:50%;background:' + rgbaFromHex(base, Math.min(0.30, typeStyle.tint + 0.10)) + ';color:' + base + ';font-size:1.55rem;';
+        var icon = element('i', typeStyle.icon, '\u200B');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.style.lineHeight = '1';
+        iconTile.appendChild(icon);
+        panel.appendChild(iconTile);
+
+        var copy = element('div', 'mt-auto');
+        var title = element('h4', 'font-weight-bold mb-1', resource.title);
+        title.style.cssText = 'font-size:clamp(1rem,1.2vw,1.25rem);color:' + base + ';';
+        clampCarouselText(title, 2);
+        copy.appendChild(title);
+        var summary = element('p', 'mb-0', resource.summary || 'Open this resource to find out more.');
+        summary.style.cssText = 'font-size:.9rem;color:#3f4b59;';
+        clampCarouselText(summary, 2);
+        copy.appendChild(summary);
+        panel.appendChild(copy);
+        outer.appendChild(panel);
+        return outer;
+    }
+
+    function createLandingCarouselPlaceholder(index) {
+        var outer = element('div', 'col-8 col-md-3 px-1');
+        outer.setAttribute('data-hub-bottom-card', 'placeholder-' + (index + 1));
+        outer.setAttribute('data-resource-placeholder', String(index + 1));
+        outer.setAttribute('aria-disabled', 'true');
+        var panel = element('div', 'position-relative overflow-hidden shadow-sm d-flex flex-column');
+        panel.style.cssText = 'height:190px;min-height:190px;padding:1rem;background:#F8FAFC;border:1px solid #CBD5E1;';
+        var iconTile = element('div', 'd-flex align-items-center justify-content-center');
+        iconTile.style.cssText = 'width:52px;height:52px;border-radius:50%;background:#E2E8F0;color:#64748B;font-size:1.55rem;';
+        var icon = element('i', 'fa-regular fa-clock', '\u200B');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.style.lineHeight = '1';
+        iconTile.appendChild(icon);
+        panel.appendChild(iconTile);
+        var copy = element('div', 'mt-auto');
+        var title = element('h4', 'font-weight-bold mb-1', 'Coming soon');
+        title.style.cssText = 'font-size:clamp(1rem,1.2vw,1.25rem);color:#475569;';
+        copy.appendChild(title);
+        var summary = element('p', 'mb-0', 'A new featured resource will appear here.');
+        summary.style.cssText = 'font-size:.9rem;color:#3f4b59;';
+        clampCarouselText(summary, 2);
+        copy.appendChild(summary);
+        panel.appendChild(copy);
+        outer.appendChild(panel);
+        return outer;
+    }
+
+    function createLandingCarouselDot(index) {
+        var button = element('button');
+        button.type = 'button';
+        button.setAttribute('data-hub-dot', String(index));
+        button.setAttribute('aria-label', 'Show carousel state ' + (index + 1));
+        button.style.cssText = 'position:relative;width:44px;height:44px;min-width:44px;padding:0;margin:0;border:0;background:transparent;overflow:visible;font-size:0;line-height:0;';
+        var progress = element('span');
+        progress.setAttribute('data-hub-progress', String(index));
+        progress.setAttribute('aria-hidden', 'true');
+        progress.style.cssText = 'position:absolute;left:50%;top:50%;display:block;width:10px;height:10px;border-radius:999px;background:#657184;transform:translate(-50%,-50%);transition:width 260ms ease,background 260ms ease;';
+        progress.textContent = '\u00A0';
+        button.appendChild(progress);
+        return button;
     }
 
     function createLibraryCard(resource) {
@@ -1328,6 +1469,52 @@
         });
     }
 
+    function renderLandingCarousel(root) {
+        var resources = query({ mainCarouselOnly: true, sort: 'updated' });
+        var bottomTrack = root.querySelector('#genaiHubBottomTrack');
+        var dotTrack = root.querySelector('[data-hub-dot-track]');
+        if (!bottomTrack || !dotTrack) throw new Error('The Landing Page carousel structure is incomplete.');
+        clear(bottomTrack);
+        resources.forEach(function (resource) { bottomTrack.appendChild(createLandingCarouselCard(resource)); });
+        var placeholderCount = Math.max(0, 10 - resources.length);
+        for (var i = 0; i < placeholderCount; i += 1) bottomTrack.appendChild(createLandingCarouselPlaceholder(i));
+        var stateCount = resources.length + placeholderCount;
+        clear(dotTrack);
+        for (var dotIndex = 0; dotIndex < stateCount; dotIndex += 1) dotTrack.appendChild(createLandingCarouselDot(dotIndex));
+        var status = root.querySelector('[data-hub-status]');
+        if (status) status.textContent = 'Showing carousel state 1 of ' + stateCount;
+        root.setAttribute('data-main-carousel-resources', String(resources.length));
+        root.setAttribute('data-main-carousel-placeholders', String(placeholderCount));
+    }
+
+    function dispatchLandingCarouselReady(root, loaded) {
+        var event;
+        if (typeof window.CustomEvent === 'function') event = new window.CustomEvent('genaihub:landing-carousel-ready', { detail: { loaded: loaded } });
+        else {
+            event = document.createEvent('CustomEvent');
+            event.initCustomEvent('genaihub:landing-carousel-ready', false, false, { loaded: loaded });
+        }
+        root.dispatchEvent(event);
+    }
+
+    function mountLandingCarousel(root, retry) {
+        root.setAttribute('aria-busy', 'true');
+        (retry ? resourcesApi.reload() : resourcesApi.ready).then(function () {
+            root.setAttribute('aria-busy', 'false');
+            try {
+                renderLandingCarousel(root);
+                dispatchLandingCarouselReady(root, true);
+            } catch (error) {
+                if (window.console && console.error) console.error('GenAI Hub could not populate the Landing Page carousel.', error);
+                dispatchLandingCarouselReady(root, false);
+            }
+        }, function (error) {
+            if (error.name === 'AbortError') return;
+            root.setAttribute('aria-busy', 'false');
+            dispatchLandingCarouselReady(root, false);
+        });
+    }
+
     function communitySlots(section, type) {
         var slots = Array.prototype.slice.call(section.querySelectorAll('[data-hover-card="true"]'));
         if (type === 'event') {
@@ -1431,19 +1618,7 @@
             image.style.cssText = 'height:180px;object-fit:cover;border-radius:10px;';
             mediaWrap.appendChild(image);
         } else {
-            var placeholder = element('div', 'd-flex flex-column align-items-center justify-content-center text-center p-4');
-            placeholder.setAttribute('role', 'img');
-            placeholder.setAttribute('aria-label', 'Project image coming soon for ' + resource.title);
-            placeholder.style.cssText = 'height:180px;background:#f4f7fb;border:2px dashed #9fbfdd;border-radius:10px;color:#094685;';
-            var icon = element('i', 'fa-regular fa-image mb-3', '\u200B');
-            icon.setAttribute('aria-hidden', 'true');
-            icon.style.cssText = 'font-size:2rem;line-height:1;color:#f5c242;';
-            placeholder.appendChild(icon);
-            placeholder.appendChild(element('strong', 'd-block mb-1', 'Project image coming soon'));
-            var note = element('small', 'd-block', 'No image has been provided yet.');
-            note.style.color = '#4f5962';
-            placeholder.appendChild(note);
-            mediaWrap.appendChild(placeholder);
+            mediaWrap.appendChild(createProjectImagePlaceholder(resource));
         }
         parent.appendChild(mediaWrap);
     }
@@ -1810,6 +1985,7 @@
         if (view === 'library') mountLibrary(root, false);
         else if (view === 'featured') mountFeatured(root, false);
         else if (view === 'community-landing') mountCommunityLanding(root, false);
+        else if (view === 'landing-carousel') mountLandingCarousel(root, false);
     }
 
     var resourcesApi = {
