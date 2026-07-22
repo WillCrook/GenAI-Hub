@@ -61,8 +61,7 @@ Constraints:
 </nav>
 
 <main id="main-content" tabindex="-1" style="overflow-wrap:anywhere;">
-    <!-- Set data-resource-source to the published unified JSON endpoint when it is available. -->
-    <div class="container-fluid px-3 px-md-4 py-4 py-md-5" style="background:#ffffff;color:#0f172a;" data-resource-library-root="true" data-resource-source="" data-resource-page-size="9" aria-busy="true">
+    <div class="container-fluid px-3 px-md-4 py-4 py-md-5" style="background:#ffffff;color:#0f172a;" data-resource-library-root="true" data-resource-view="library" data-resource-section="community" data-resource-library-url="https://moodle.bath.ac.uk/mod/page/view.php?id=1573033" data-resource-page-size="9" aria-busy="true">
         <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:linear-gradient(135deg,#094685 0%,#082947 58%,#111827 100%);color:#ffffff;" aria-labelledby="resource-library-heading">
             <div class="container">
                 <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.82rem;">Community resources</div>
@@ -85,31 +84,31 @@ Constraints:
                 <h2 id="resource-type-heading" class="h5 font-weight-bold mb-3">Resource type</h2>
                 <div class="d-flex flex-wrap" role="group" aria-label="Filter by resource type" data-resource-type-controls="true">
                     <button type="button" class="btn btn-primary mr-2 mb-2" data-resource-type="all" data-resource-type-label="All" aria-pressed="true" style="background:#094685;border-color:#094685;">✓ All</button>
-                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-type="prompts" data-resource-type-label="Prompts" aria-pressed="false">Prompts</button>
-                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-type="workflows" data-resource-type-label="Workflows" aria-pressed="false">Workflows</button>
-                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-type="tools" data-resource-type-label="Tools" aria-pressed="false">Tools</button>
-                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-type="events" data-resource-type-label="Events" aria-pressed="false">Events</button>
-                    <button type="button" class="btn btn-outline-primary mb-2" data-resource-type="showcases" data-resource-type-label="Showcases" aria-pressed="false">Showcases</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-type="prompt" data-resource-type-label="Prompts" aria-pressed="false">Prompts</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-type="workflow" data-resource-type-label="Workflows" aria-pressed="false">Workflows</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-type="tool" data-resource-type-label="Tools" aria-pressed="false">Tools</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-type="event" data-resource-type-label="Events" aria-pressed="false">Events</button>
+                    <button type="button" class="btn btn-outline-primary mb-2" data-resource-type="showcase" data-resource-type-label="Showcases" aria-pressed="false">Showcases</button>
                 </div>
             </div>
         </section>
 
         <div class="row mx-auto" style="width:100%;max-width:1140px;">
             <aside class="col-lg-3 mb-4" aria-labelledby="resource-category-heading">
-                <div class="p-3 p-md-4 border shadow-sm h-100" style="border-radius:12px;background:#f8fafc;">
+                <div class="p-3 p-md-4 border shadow-sm" style="border-radius:12px;background:#f8fafc;">
                     <fieldset class="mb-4">
                         <legend id="resource-category-heading" class="h5 font-weight-bold">Filters</legend>
                         <p class="small text-muted" style="color:#4f5962!important;">Choose any categories that apply.</p>
                         <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="resource-category-lifelong" value="lifelong" data-resource-category="true">
+                            <input type="checkbox" class="custom-control-input" id="resource-category-lifelong" value="lifelong" data-resource-skill-checkbox="lifelong">
                             <label class="custom-control-label" for="resource-category-lifelong">Lifelong</label>
                         </div>
                         <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="resource-category-academic" value="academic" data-resource-category="true">
+                            <input type="checkbox" class="custom-control-input" id="resource-category-academic" value="academic" data-resource-skill-checkbox="academic">
                             <label class="custom-control-label" for="resource-category-academic">Academic</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="resource-category-workplace" value="workplace" data-resource-category="true">
+                            <input type="checkbox" class="custom-control-input" id="resource-category-workplace" value="workplace" data-resource-skill-checkbox="workplace">
                             <label class="custom-control-label" for="resource-category-workplace">Workplace</label>
                         </div>
                     </fieldset>
@@ -142,7 +141,7 @@ Constraints:
                     <p>No resources match your current search and filters.</p>
                     <button type="button" class="btn btn-outline-secondary" data-resource-reset="true">Reset filters</button>
                 </div>
-                <div class="row" hidden data-resource-results="true"></div>
+                <div class="row" hidden data-resource-results="true" data-resource-target="results"></div>
                 <div class="text-center mt-2 mb-4">
                     <button type="button" class="btn btn-primary btn-lg" hidden data-resource-load-more="true" style="background:#094685;border-color:#094685;">Load more</button>
                 </div>
@@ -151,5 +150,4 @@ Constraints:
     </div>
 </main>
 
-<script src="https://willcrook.github.io/GenAI-Hub/assets/js/resource-loader.js"></script>
-<script src="https://willcrook.github.io/GenAI-Hub/assets/js/community-library-controller.js"></script>
+<script src="https://willcrook.github.io/GenAI-Hub/assets/js/resource-controller.js"></script>

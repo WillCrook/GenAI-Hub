@@ -78,19 +78,19 @@ Constraints:
 </nav>
 
 <main id="main-content" tabindex="-1" style="overflow-wrap:anywhere;">
-    <div class="container-fluid px-3 px-md-4 py-4 py-md-5" style="background:#ffffff;color:#172033;">
+    <div class="container-fluid px-3 px-md-4 py-4 py-md-5" style="background:#ffffff;color:#172033;" data-resource-view="library" data-resource-section="learn-ai" data-resource-library-url="https://moodle.bath.ac.uk/mod/page/view.php?id=1573031" data-resource-page-size="9" aria-busy="true">
         <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:linear-gradient(135deg,#0b4f87 0%,#123f70 58%,#173653 100%);color:#ffffff;" aria-labelledby="learn-library-heading">
             <div class="container">
                 <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.82rem;">Learn AI resources</div>
                 <h1 id="learn-library-heading" class="display-4 font-weight-bold mb-3" style="font-size:clamp(2.25rem,8vw,4rem);line-height:1.05;">Learn AI Resource Library</h1>
                 <p class="lead mb-4" style="max-width:760px;color:rgba(255,255,255,.88);">A dedicated place for practical resources that build AI and digital skills for study, work and lifelong learning.</p>
 
-                <p id="learn-library-controls-note" class="mb-3" style="max-width:820px;color:#ffffff;">Search, filters and sorting are unavailable until resources are added.</p>
+                <p id="learn-library-controls-note" class="mb-3" style="max-width:820px;color:#ffffff;">Search and filter practical resources by learning area, media type and estimated time.</p>
 
-                <form role="search" style="max-width:820px;">
+                <form role="search" data-resource-search-form="true" style="max-width:820px;">
                     <label for="learn-library-search" class="font-weight-bold">Search learning resources</label>
                     <div class="input-group input-group-lg">
-                        <input id="learn-library-search" type="search" class="form-control" placeholder="Search learning resources" autocomplete="off" aria-describedby="learn-library-controls-note" disabled style="border-radius:10px 0 0 10px;min-height:50px;">
+                        <input id="learn-library-search" type="search" class="form-control" placeholder="Search learning resources" autocomplete="off" aria-describedby="learn-library-controls-note" data-resource-search="true" disabled style="border-radius:10px 0 0 10px;min-height:50px;">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-light font-weight-bold" aria-describedby="learn-library-controls-note" disabled style="color:#094685;border-radius:0 10px 10px 0;">Search</button>
                         </div>
@@ -101,44 +101,56 @@ Constraints:
 
         <section class="p-3 p-md-4 mb-4 mx-auto border shadow-sm" style="width:100%;max-width:1140px;border-radius:12px;background:#ffffff;" aria-labelledby="learn-resource-type-heading">
             <div class="container">
-                <h2 id="learn-resource-type-heading" class="h5 font-weight-bold mb-2">Resource type</h2>
-                <p class="small text-muted mb-3" style="color:#4f5962!important;">These groupings will help you browse resources as they are added.</p>
-                <!-- Provisional resource-type labels: keep this as one editable list. -->
+                <h2 id="learn-resource-type-heading" class="h5 font-weight-bold mb-2">Learning area</h2>
+                <p class="small text-muted mb-3" style="color:#4f5962!important;">Choose one area or see editorially featured resources.</p>
                 <div class="d-flex flex-wrap" role="group" aria-label="Filter by resource type" aria-describedby="learn-library-controls-note">
-                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" disabled>Popular</button>
-                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" disabled>Lifelong</button>
-                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" disabled>Academic</button>
-                    <button type="button" class="btn btn-outline-primary mb-2" disabled>Workplace</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-skill="featured" aria-pressed="false" disabled>Featured</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-skill="lifelong" aria-pressed="false" disabled>Lifelong</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-skill="academic" aria-pressed="false" disabled>Academic</button>
+                    <button type="button" class="btn btn-outline-primary mb-2" data-resource-skill="workplace" aria-pressed="false" disabled>Workplace</button>
                 </div>
             </div>
         </section>
 
         <div class="row mx-auto" style="width:100%;max-width:1140px;">
             <aside class="col-lg-3 mb-4" aria-labelledby="learn-library-filters-heading">
-                <div class="p-3 p-md-4 border shadow-sm h-100" style="border-radius:12px;background:#f8fafc;">
+                <div class="p-3 p-md-4 border shadow-sm" style="border-radius:12px;background:#f8fafc;">
                     <h2 id="learn-library-filters-heading" class="h5 font-weight-bold mb-3">Filters</h2>
 
-                    <fieldset class="mb-4" aria-describedby="learn-library-controls-note" disabled>
+                    <div class="alert alert-info mb-4" data-resource-tag-summary="true" role="status" aria-live="polite" aria-atomic="true" hidden>
+                        <p class="mb-2" data-resource-tag-label="true">Filtering by topic tag.</p>
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-resource-tag-reset="true" disabled>Clear topic filter</button>
+                    </div>
+
+                    <fieldset class="mb-4" aria-describedby="learn-library-controls-note">
+                        <legend class="h6 font-weight-bold">Media type</legend>
+                        <div class="custom-control custom-checkbox mb-3"><input type="checkbox" class="custom-control-input" id="learn-type-article" data-resource-type="article" disabled><label class="custom-control-label" for="learn-type-article">Articles</label></div>
+                        <div class="custom-control custom-checkbox mb-3"><input type="checkbox" class="custom-control-input" id="learn-type-video" data-resource-type="video" disabled><label class="custom-control-label" for="learn-type-video">Videos</label></div>
+                        <div class="custom-control custom-checkbox mb-3"><input type="checkbox" class="custom-control-input" id="learn-type-link" data-resource-type="link" disabled><label class="custom-control-label" for="learn-type-link">Links</label></div>
+                        <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="learn-type-download" data-resource-type="download" disabled><label class="custom-control-label" for="learn-type-download">Downloads</label></div>
+                    </fieldset>
+
+                    <fieldset class="mb-4" aria-describedby="learn-library-controls-note">
                         <legend class="h6 font-weight-bold">Estimated time</legend>
                         <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="learn-time-under-10" disabled>
+                            <input type="checkbox" class="custom-control-input" id="learn-time-under-10" data-resource-time="under-10" disabled>
                             <label class="custom-control-label" for="learn-time-under-10">Under 10 minutes</label>
                         </div>
                         <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="learn-time-10-30" disabled>
+                            <input type="checkbox" class="custom-control-input" id="learn-time-10-30" data-resource-time="10-30" disabled>
                             <label class="custom-control-label" for="learn-time-10-30">10–30 minutes</label>
                         </div>
                         <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="learn-time-30-60" disabled>
-                            <label class="custom-control-label" for="learn-time-30-60">30–60 minutes</label>
+                            <input type="checkbox" class="custom-control-input" id="learn-time-30-60" data-resource-time="31-60" disabled>
+                            <label class="custom-control-label" for="learn-time-30-60">31–60 minutes</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="learn-time-over-60" disabled>
+                            <input type="checkbox" class="custom-control-input" id="learn-time-over-60" data-resource-time="over-60" disabled>
                             <label class="custom-control-label" for="learn-time-over-60">More than 60 minutes</label>
                         </div>
                     </fieldset>
 
-                    <button type="button" class="btn btn-outline-secondary btn-block" aria-describedby="learn-library-controls-note" disabled>Reset filters</button>
+                    <button type="button" class="btn btn-outline-secondary btn-block" data-resource-reset="true" aria-describedby="learn-library-controls-note" disabled>Reset filters</button>
                 </div>
             </aside>
 
@@ -146,26 +158,26 @@ Constraints:
                 <div class="d-flex flex-column flex-sm-row align-items-sm-end justify-content-between mb-3">
                     <div class="mb-3 mb-sm-0">
                         <h2 id="learn-resource-results-heading" class="h4 font-weight-bold mb-1">Resources</h2>
-                        <p class="mb-0" role="status" aria-live="polite" aria-atomic="true">0 resources</p>
+                        <p class="mb-0" role="status" aria-live="polite" aria-atomic="true" data-resource-count="true">Loading resources…</p>
                     </div>
                     <div style="width:100%;max-width:220px;">
                         <label for="learn-library-sort" class="font-weight-bold">Sort by</label>
-                        <select id="learn-library-sort" class="form-control" aria-describedby="learn-library-controls-note" disabled>
-                            <option>Most relevant</option>
-                            <option>Newest</option>
-                            <option>A–Z</option>
+                        <select id="learn-library-sort" class="form-control" data-resource-sort="true" aria-describedby="learn-library-controls-note" disabled>
+                            <option value="relevant">Most relevant</option>
+                            <option value="newest">Newest</option>
+                            <option value="az">A–Z</option>
                         </select>
                     </div>
                 </div>
 
-                <div id="learn-library-results" class="p-4 p-md-5 mb-4 border text-center" style="border-radius:12px;background:#f8fafc;border-color:#cbd5e1!important;">
-                    <h3 class="h5 font-weight-bold mb-2">Resources will be added here soon.</h3>
-                    <p class="mb-0 text-muted" style="color:#4f5962!important;">No resources are available yet. Please check back soon.</p>
-                </div>
+                <div class="alert alert-info" data-resource-loading="true">Loading resources…</div>
+                <div class="alert alert-danger" data-resource-error="true" hidden><p data-resource-error-message="true">The Learn AI library is currently unavailable.</p><button type="button" class="btn btn-outline-danger" data-resource-retry="true">Retry</button></div>
+                <div class="alert alert-warning" data-resource-empty="true" hidden><p>No resources match the selected filters.</p><button type="button" class="btn btn-outline-secondary" data-resource-reset="true">Reset filters</button></div>
+                <div id="learn-library-results" class="row" data-resource-results="true" data-resource-target="results" hidden></div>
+                <div class="text-center mb-4"><button type="button" class="btn btn-primary btn-lg" data-resource-load-more="true" hidden style="background:#094685;border-color:#094685;">Load more</button></div>
             </section>
         </div>
     </div>
 </main>
 
-<script src="https://willcrook.github.io/GenAI-Hub/assets/js/resource-loader.js"></script>
-<script src="https://willcrook.github.io/GenAI-Hub/assets/js/learn-ai-library-controller.js"></script>
+<script src="https://willcrook.github.io/GenAI-Hub/assets/js/resource-controller.js"></script>

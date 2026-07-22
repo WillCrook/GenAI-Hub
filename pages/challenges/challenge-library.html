@@ -76,17 +76,17 @@
 </nav>
 
 <main id="main-content" tabindex="-1" style="overflow-wrap:anywhere;">
-    <div class="container-fluid px-3 px-md-4 py-4 py-md-5" style="background:#ffffff;color:#172033;" data-challenge-library-root="true">
+    <div class="container-fluid px-3 px-md-4 py-4 py-md-5" style="background:#ffffff;color:#172033;" data-challenge-library-root="true" data-resource-view="library" data-resource-section="challenges" data-resource-library-url="https://moodle.bath.ac.uk/mod/page/view.php?id=1573032" data-resource-page-size="9" aria-busy="true">
         <section class="p-4 p-md-5 mb-4 mx-auto border shadow-sm overflow-hidden" style="width:100%;max-width:1140px;border-radius:1rem;background:radial-gradient(circle at 82% 18%,rgba(95,168,216,0.22),rgba(11,36,66,0) 32%),radial-gradient(circle at 18% 12%,rgba(245,194,66,0.15),rgba(11,36,66,0) 35%),linear-gradient(150deg,#094685 0%,#0b2442 56%,#172033 100%);color:#ffffff;" aria-labelledby="challenge-library-heading">
             <div class="container">
                 <div class="text-uppercase font-weight-bold mb-3" style="letter-spacing:0.12em;color:#f5c242;font-size:0.82rem;">Practical AI and digital-skills challenges</div>
                 <h1 id="challenge-library-heading" class="display-4 font-weight-bold mb-3" style="font-size:clamp(2.25rem,8vw,4rem);line-height:1.05;">Challenges Resource Library</h1>
                 <p class="lead mb-3" style="max-width:780px;color:#e6eef8;">Explore practical challenges you can start, complete and revisit. Selected challenges invite completed work for showcase consideration.</p>
 
-                <form role="search" style="max-width:820px;">
+                <form role="search" data-resource-search-form="true" style="max-width:820px;">
                     <label for="challenge-library-search" class="font-weight-bold">Search challenges</label>
                     <div class="input-group input-group-lg">
-                        <input id="challenge-library-search" type="search" class="form-control" placeholder="Search challenges" autocomplete="off" aria-describedby="challenge-library-availability" disabled style="border-radius:10px 0 0 10px;min-height:50px;">
+                        <input id="challenge-library-search" type="search" class="form-control" placeholder="Search challenges" autocomplete="off" aria-describedby="challenge-library-availability" data-resource-search="true" disabled style="border-radius:10px 0 0 10px;min-height:50px;">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-light font-weight-bold" aria-describedby="challenge-library-availability" disabled style="color:#094685;border-radius:0 10px 10px 0;">Search</button>
                         </div>
@@ -97,44 +97,52 @@
 
         <section class="p-3 p-md-4 mb-4 mx-auto border shadow-sm" style="width:100%;max-width:1140px;border-radius:12px;background:#ffffff;" aria-labelledby="challenge-type-heading">
             <div class="container">
-                <h2 id="challenge-type-heading" class="h5 font-weight-bold mb-3">Challenge type</h2>
+                <h2 id="challenge-type-heading" class="h5 font-weight-bold mb-3">Challenge area</h2>
                 <div class="d-flex flex-wrap" role="group" aria-label="Filter by challenge type">
-                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" aria-describedby="challenge-library-availability" disabled>Lifelong</button>
-                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" aria-describedby="challenge-library-availability" disabled>Academic</button>
-                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" aria-describedby="challenge-library-availability" disabled>Workplace</button>
-                    <button type="button" class="btn btn-outline-primary mb-2" aria-describedby="challenge-library-availability" disabled>Popular</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-skill="featured" aria-pressed="false" aria-describedby="challenge-library-availability" disabled>Featured</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-skill="lifelong" aria-pressed="false" aria-describedby="challenge-library-availability" disabled>Lifelong</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 mb-2" data-resource-skill="academic" aria-pressed="false" aria-describedby="challenge-library-availability" disabled>Academic</button>
+                    <button type="button" class="btn btn-outline-primary mb-2" data-resource-skill="workplace" aria-pressed="false" aria-describedby="challenge-library-availability" disabled>Workplace</button>
                 </div>
             </div>
         </section>
 
         <div class="row mx-auto" style="width:100%;max-width:1140px;">
             <aside class="col-lg-3 mb-4" aria-labelledby="challenge-filters-heading">
-                <div class="p-3 p-md-4 border shadow-sm h-100" style="border-radius:12px;background:#f8fafc;">
+                <div class="p-3 p-md-4 border shadow-sm" style="border-radius:12px;background:#f8fafc;">
                     <h2 id="challenge-filters-heading" class="h5 font-weight-bold mb-2">Filters</h2>
-                    <p class="small text-muted mb-4" style="color:#4f5962!important;">Browse challenges by estimated time.</p>
+                    <p class="small text-muted mb-4" style="color:#4f5962!important;">Browse challenges by media type and estimated time.</p>
 
-                    <fieldset class="mb-4" disabled aria-describedby="challenge-library-availability">
+                    <fieldset class="mb-4" aria-describedby="challenge-library-availability">
+                        <legend class="h6 font-weight-bold mb-3">Media type</legend>
+                        <div class="custom-control custom-checkbox mb-3"><input type="checkbox" class="custom-control-input" id="challenge-type-article" data-resource-type="article" disabled><label class="custom-control-label" for="challenge-type-article">Articles</label></div>
+                        <div class="custom-control custom-checkbox mb-3"><input type="checkbox" class="custom-control-input" id="challenge-type-video" data-resource-type="video" disabled><label class="custom-control-label" for="challenge-type-video">Videos</label></div>
+                        <div class="custom-control custom-checkbox mb-3"><input type="checkbox" class="custom-control-input" id="challenge-type-link" data-resource-type="link" disabled><label class="custom-control-label" for="challenge-type-link">Links</label></div>
+                        <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="challenge-type-download" data-resource-type="download" disabled><label class="custom-control-label" for="challenge-type-download">Downloads</label></div>
+                    </fieldset>
+
+                    <fieldset class="mb-4" aria-describedby="challenge-library-availability">
                         <legend class="h6 font-weight-bold mb-3">Estimated time</legend>
 
                         <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="challenge-time-under-10" disabled>
+                            <input type="checkbox" class="custom-control-input" id="challenge-time-under-10" data-resource-time="under-10" disabled>
                             <label class="custom-control-label" for="challenge-time-under-10">Under 10 minutes</label>
                         </div>
                         <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="challenge-time-10-30" disabled>
+                            <input type="checkbox" class="custom-control-input" id="challenge-time-10-30" data-resource-time="10-30" disabled>
                             <label class="custom-control-label" for="challenge-time-10-30">10–30 minutes</label>
                         </div>
                         <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="challenge-time-30-60" disabled>
-                            <label class="custom-control-label" for="challenge-time-30-60">30–60 minutes</label>
+                            <input type="checkbox" class="custom-control-input" id="challenge-time-30-60" data-resource-time="31-60" disabled>
+                            <label class="custom-control-label" for="challenge-time-30-60">31–60 minutes</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="challenge-time-over-60" disabled>
+                            <input type="checkbox" class="custom-control-input" id="challenge-time-over-60" data-resource-time="over-60" disabled>
                             <label class="custom-control-label" for="challenge-time-over-60">More than 60 minutes</label>
                         </div>
                     </fieldset>
 
-                    <button type="button" class="btn btn-outline-secondary btn-block" aria-describedby="challenge-library-availability" disabled>Reset filters</button>
+                    <button type="button" class="btn btn-outline-secondary btn-block" data-resource-reset="true" aria-describedby="challenge-library-availability" disabled>Reset filters</button>
                 </div>
             </aside>
 
@@ -142,27 +150,27 @@
                 <div class="d-flex flex-column flex-sm-row align-items-sm-end justify-content-between mb-3">
                     <div class="mb-3 mb-sm-0">
                         <h2 id="challenge-results-heading" class="h4 font-weight-bold mb-1">Challenges</h2>
-                        <p class="mb-0 text-muted" style="color:#4f5962!important;">Explore practical challenges from across the collection.</p>
+                        <p class="mb-0 text-muted" role="status" aria-live="polite" aria-atomic="true" data-resource-count="true" style="color:#4f5962!important;">Loading resources…</p>
                     </div>
 
                     <div style="width:100%;max-width:260px;">
                         <label for="challenge-library-sort" class="font-weight-bold">Sort by</label>
-                        <select id="challenge-library-sort" class="form-control" aria-describedby="challenge-library-availability" disabled>
-                            <option>Recommended</option>
+                        <select id="challenge-library-sort" class="form-control" data-resource-sort="true" aria-describedby="challenge-library-availability" disabled>
+                            <option value="relevant">Recommended</option>
+                            <option value="newest">Newest</option>
+                            <option value="az">A–Z</option>
                         </select>
                     </div>
                 </div>
 
-                <div data-challenge-results="true">
-                    <div class="alert alert-info p-4 p-md-5 text-center" style="border-radius:12px;border-color:#b8daff;background:#f0f8ff;color:#172033;">
-                        <h3 class="h5 font-weight-bold mb-3">No challenges to show.</h3>
-                        <p class="mb-0">This collection brings together practical AI and digital-skills challenges for hands-on learning.</p>
-                    </div>
-                </div>
+                <div class="alert alert-info" data-resource-loading="true">Loading resources…</div>
+                <div class="alert alert-danger" data-resource-error="true" hidden><p data-resource-error-message="true">The Challenges library is currently unavailable.</p><button type="button" class="btn btn-outline-danger" data-resource-retry="true">Retry</button></div>
+                <div class="alert alert-warning" data-resource-empty="true" hidden><p>No challenges match the selected filters.</p><button type="button" class="btn btn-outline-secondary" data-resource-reset="true">Reset filters</button></div>
+                <div class="row" data-challenge-results="true" data-resource-results="true" data-resource-target="results" hidden></div>
+                <div class="text-center mb-4"><button type="button" class="btn btn-primary btn-lg" data-resource-load-more="true" hidden style="background:#094685;border-color:#094685;">Load more</button></div>
             </section>
         </div>
     </div>
 </main>
 
-<script src="https://willcrook.github.io/GenAI-Hub/assets/js/resource-loader.js"></script>
-<script src="https://willcrook.github.io/GenAI-Hub/assets/js/challenges-library-controller.js"></script>
+<script src="https://willcrook.github.io/GenAI-Hub/assets/js/resource-controller.js"></script>
