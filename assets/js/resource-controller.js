@@ -8,7 +8,8 @@
     var runtimeScript = document.currentScript;
     var DATA_URL = runtimeScript && runtimeScript.getAttribute('data-resource-source')
         ? runtimeScript.getAttribute('data-resource-source')
-        : 'https://willcrook.github.io/GenAI-Hub/assets/data/resources.json';
+        : '';
+    var DATA_SOURCE_PAGE_URL = 'https://moodle.bath.ac.uk/mod/page/view.php?id=1573286';
     var SCHEMA_VERSION = '1.1';
     var RESOURCE_TYPES = ['prompt', 'workflow', 'tool', 'article', 'video', 'link', 'download', 'event', 'showcase'];
     var LIBRARY_SECTIONS = ['learn-ai', 'challenges', 'community'];
@@ -138,6 +139,51 @@
         return error;
     }
 
+    function resolveDataUrl(signal) {
+        if (DATA_URL) return Promise.resolve(DATA_URL);
+        if (typeof window.DOMParser !== 'function') {
+            return Promise.reject(new Error('This browser cannot read the GenAI Hub resource data source page.'));
+        }
+
+        return window.fetch(DATA_SOURCE_PAGE_URL, {
+            method: 'GET',
+            credentials: 'same-origin',
+            headers: { Accept: 'text/html' },
+            signal: signal
+        }).then(function (response) {
+            if (!response.ok) throw new Error('The resource data source page returned HTTP ' + response.status + '.');
+            return response.text().then(function (html) {
+                return {
+                    html: html,
+                    baseUrl: response.url || DATA_SOURCE_PAGE_URL
+                };
+            });
+        }).then(function (sourcePage) {
+            var sourceDocument = new window.DOMParser().parseFromString(sourcePage.html, 'text/html');
+            var sourceElement = sourceDocument.querySelector('#resource-json-url');
+            if (!sourceElement) {
+                throw new Error('The resource data source page does not contain #resource-json-url.');
+            }
+
+            var sourceLink = sourceElement.querySelector('a[href]');
+            var candidate = sourceLink
+                ? sourceLink.getAttribute('href')
+                : sourceElement.textContent;
+            candidate = typeof candidate === 'string' ? candidate.trim() : '';
+            if (!candidate) {
+                throw new Error('The resource data source page does not contain a resource JSON URL.');
+            }
+
+            try {
+                var resolved = new URL(candidate, sourcePage.baseUrl);
+                if (resolved.protocol !== 'http:' && resolved.protocol !== 'https:') throw new Error('Unsafe URL protocol');
+                return resolved.href;
+            } catch (error) {
+                throw new Error('The resource data source page must contain a valid http or https URL.');
+            }
+        });
+    }
+
     function load(force) {
         if (!force && loadedData) return Promise.resolve(loadedData);
         if (!force && inFlightRequest) return inFlightRequest;
@@ -153,11 +199,15 @@
         abortController = typeof window.AbortController === 'function' ? new window.AbortController() : null;
         loaderStatus = 'loading';
         loaderError = null;
-        inFlightRequest = window.fetch(DATA_URL, {
-            method: 'GET',
-            credentials: 'omit',
-            headers: { Accept: 'application/json' },
-            signal: abortController ? abortController.signal : undefined
+        var signal = abortController ? abortController.signal : undefined;
+        inFlightRequest = resolveDataUrl(signal).then(function (dataUrl) {
+            if (activeRequest !== requestNumber) throw abortError();
+            return window.fetch(dataUrl, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: { Accept: 'application/json' },
+                signal: signal
+            });
         }).then(function (response) {
             if (!response.ok) throw new Error('The resource data endpoint returned HTTP ' + response.status + '.');
             return response.json();
