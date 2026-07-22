@@ -1528,7 +1528,7 @@
         showcase: 'View Work',
         prompt: 'Use Prompt',
         workflow: 'View Workflow',
-        tool: 'Read Review',
+        tool: 'View Review',
         event: 'View Event'
     };
 
@@ -1766,6 +1766,7 @@
                 strengths.appendChild(column);
             });
             details.appendChild(strengths);
+            details.appendChild(communityAction(COMMUNITY_ACTIONS.tool));
             row.appendChild(lead);
             row.appendChild(details);
             slot.appendChild(row);
