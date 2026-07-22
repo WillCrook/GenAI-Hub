@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "lastUpdated": "2026-07-21T10:59:44.015Z",
+  "lastUpdated": "2026-07-22T13:11:45.477Z",
   "resources": [
     {
       "id": "prompt-critical-reading",
@@ -129,8 +129,9 @@
         "rating": 4.5,
         "overview": "Useful for drafting, summarising, and exploring ideas when used with appropriate verification.",
         "strengths": [
-          "Institutional access",
-          "Web search grounding"
+          "University Provided",
+          "Web search grounding",
+          "Integration with Office Tools"
         ],
         "weaknesses": [
           "Outputs can be inaccurate",
