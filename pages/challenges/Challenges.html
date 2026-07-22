@@ -1341,75 +1341,8 @@ Constraints:
 </script>
 
 <script>
-// Featured-card generation and scrolling carousel
+// Featured carousel scrolling and autoplay
 (function () {
-const featuredCards = [];
-
-const skillColours = {
-    academic: "#15803D",
-    workplace: "#2563EB",
-    lifelong: "#7C3AED"
-};
-
-function createCard(card) {
-
-    return `
-
-        <div class="card shadow rounded mr-4"
-        style="width:300px;flex-shrink:0;border:1px solid #94a3b8;border-radius:1rem;">
-
-            <div class="card-body p-3 d-flex flex-column"
-
-                style="min-height:380px;">
-
-                <span class="badge rounded-pill align-self-start" style="background-color:${skillColours[card.skill]};color:#ffffff;">
-
-                    ${card.skill.toUpperCase()}
-
-                </span>
-
-                <h3 class="h5 font-weight-bold mt-3">
-
-                    ${card.title}
-
-                </h3>
-
-                <p class="text-muted mb-0" style="color:#4f5962!important;">
-
-                    ${card.description}
-
-                </p>
-
-                <div class="mt-auto">
-                    <div class="rounded mb-3 d-flex align-items-center justify-content-center"
-
-                        style="height:140px;background:#f1f5f9;font-size:14px;color:#526173;border-radius:0.5rem;">
-
-                            Image Placeholder
-                    </div>
-                    <div class="mt-auto pt-3">
-
-                        ${card.available ? `
-                        <a href="${card.link}"
-                        class="btn btn-outline-primary w-100 rounded-pill" data-inner-link-color="#0056b3" data-inner-link-hover-color="#ffffff" style="color:#0056b3;border-color:#0056b3;">
-                            <div style="color:#0056b3;">
-                                ${card.ctaLabel} <i class="fa-solid fa-arrow-right ml-2" style="line-height:1;" aria-hidden="true">&#8203;</i>
-                            </div>
-                        </a>` : `
-                        <span class="btn btn-outline-secondary w-100 rounded-pill" aria-disabled="true" style="color:#6c757d;border-color:#6c757d;cursor:default;opacity:.75;">
-                            ${card.ctaLabel}
-                        </span>`}
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-    `;
-
-}
-
 (function() {
 
     const track = document.getElementById('featured-track');
@@ -1424,19 +1357,6 @@ function createCard(card) {
     if (existingController && typeof existingController.destroy === 'function') {
         existingController.destroy();
     }
-
-    let html = '';
-
-    featuredCards.forEach(card => {
-        html += createCard(card);
-    });
-    //Duplicate for
-    featuredCards.forEach(card => {
-        html += createCard(card);
-    });
-    
-
-    track.innerHTML = html;
 
     let scrollSurface = track.parentNode;
     if (!scrollSurface || !scrollSurface.hasAttribute('data-featured-scroll-surface')) {
