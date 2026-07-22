@@ -10,5 +10,4 @@ tests/*
 !tests/playwright.config.js
 !tests/resource-controller.spec.js
 documentation/
-tests/
 outputs/

@@ -9,11 +9,12 @@
 </head>
 <body style="margin:0;background:#f4f7fa;color:#172033;line-height:1.55;">
 <!--
-Resource Publisher workbook contract (schema 1.1)
+Resource Publisher workbook contract (schema 1.2)
 Required sheets: Prompts, Workflows, Workflow Steps, Tools, Articles, Videos, Links,
 Downloads, Events, Showcases, Validation Lists, Settings.
 Multi-value cells use the Settings separator (default |).
 Each non-tool resource has exactly one skill area; tool reviews leave skill_areas blank.
+Set main_carousel to TRUE to include a published resource in the Landing Page carousel.
 Tool ratings accept one decimal place from 1 to 5.
 Workflow Steps are joined to Workflows by workflow_id and sorted by step_number.
 -->
@@ -39,7 +40,7 @@ Workflow Steps are joined to Workflows by workflow_id and sorted by step_number.
       <div class="card-body p-4">
         <p class="text-uppercase font-weight-bold mb-2" style="color:#094685;font-size:.78rem;letter-spacing:.11em;">1. Upload</p>
         <h2 class="h3" style="color:#082947;">Choose the resource workbook</h2>
-        <p>Only <code>.xlsx</code> files are accepted. Processing happens in this browser. Give each non-tool resource one skill area; leave the Tool Reviews skill area blank.</p>
+        <p>Only <code>.xlsx</code> files are accepted. Processing happens in this browser. Give each non-tool resource one skill area; leave the Tool Reviews skill area blank. Set <code>main_carousel</code> to <code>TRUE</code> for resources that should appear in the Landing Page carousel.</p>
         <div id="publisher-drop-zone" class="rounded text-center p-4" style="border:2px dashed #94a9bd;background:#f8fbfd;">
           <label for="publisher-file" class="mb-0" style="cursor:pointer;">
             <span class="d-block font-weight-bold mb-2" style="font-size:1.15rem;color:#082947;"><i class="fa-solid fa-file-excel mr-2" aria-hidden="true">&#8203;</i>Drop the workbook here or choose a file</span>

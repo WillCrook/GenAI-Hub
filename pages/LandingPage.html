@@ -273,7 +273,7 @@ Constraints:
 
 <!-- GenAI Carousel -->
 
-    <div id="genaiHubCarousel" class="p-4" role="region" aria-roledescription="carousel" aria-label="GenAI Hub featured resources" data-tour-target="featured" tabindex="-1">
+    <div id="genaiHubCarousel" class="p-4" role="region" aria-roledescription="carousel" aria-label="GenAI Hub featured resources" data-tour-target="featured" data-resource-view="landing-carousel" tabindex="-1">
         <div class="d-flex flex-column-reverse flex-md-row justify-content-between align-items-md-center mb-3">
             
             <h2 class="font-weight-bold mb-0">
@@ -364,14 +364,14 @@ Constraints:
                 <div class="col-11 col-md-6 px-1" data-hub-top-card="toolkit">
                     <div class="position-relative overflow-hidden shadow-sm" style="height:clamp(340px,30vw,460px); min-height:360px; background:linear-gradient(135deg,#4c1d95 0%,#6d28d9 44%,#ede9fe 100%); border-radius:0;">
                         <div class="position-absolute d-flex align-items-center justify-content-center" data-hub-decoration="true" style="top:1.5rem; right:2rem; width:clamp(100px,14vw,180px); height:clamp(100px,14vw,180px); color:rgba(255,255,255,.92); font-size:clamp(4rem,7vw,7rem); line-height:1; opacity:.82; pointer-events:none;">
-                            <i class="fa-solid fa-wand-magic-sparkles" style="line-height:1;" aria-hidden="true">&#8203;</i>
+                            <i class="fa-solid fa-calendar-days" style="line-height:1;" aria-hidden="true">&#8203;</i>
                         </div>
                         <div class="position-absolute px-4 px-md-5 pb-4 pb-md-5" data-hub-content="true" style="left:0; bottom:0; color:white; width:100%; padding-top:5rem; background:linear-gradient(0deg,rgba(11,25,43,.96) 0%,rgba(11,25,43,.82) 64%,transparent 100%);">
-                            <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:.12em; color:#ddd6fe; font-size:.78rem;">Prompt craft</div>
-                            <h3 class="font-weight-bold mb-3" style="font-size:clamp(2.1rem,5.3vw,5rem); line-height:.95;">Improve your<br>AI outputs</h3>
+                            <div class="text-uppercase font-weight-bold mb-2" style="letter-spacing:.12em; color:#ddd6fe; font-size:.78rem;">Community events</div>
+                            <h3 class="font-weight-bold mb-3" style="font-size:clamp(2.1rem,5.3vw,5rem); line-height:.95;">Workshops &amp;<br>meetups</h3>
                             <div class="d-flex align-items-center flex-wrap">
-                                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567967" class="btn btn-light rounded-pill font-weight-bold px-4 mr-3 mb-2" style="color:#4c1d95;">Open AI learning toolkit</a>
-                                <p class="mb-2" style="font-size:clamp(.9rem,1.15vw,1.2rem); max-width:620px;">Plan, question, verify and refine AI-supported academic work.</p>
+                                <a href="https://moodle.bath.ac.uk/mod/page/view.php?id=1567971" class="btn btn-light rounded-pill font-weight-bold px-4 mr-3 mb-2" style="color:#4c1d95;">Explore events</a>
+                                <p class="mb-2" style="font-size:clamp(.9rem,1.15vw,1.2rem); max-width:620px;">Discover clinics, workshops and meetups where Bath students can learn and share.</p>
                             </div>
                         </div>
                     </div>
@@ -1341,12 +1341,20 @@ if (reducedMotionQuery && reducedMotionQuery.addEventListener) reducedMotionQuer
 
 </script>
 
+<script src="https://willcrook.github.io/GenAI-Hub/assets/js/resource-controller.js"></script>
+
 <!-- Carousel JS -->
 <script>
 // Accessible dual-track resource carousel
 (function () {
     var root = document.getElementById('genaiHubCarousel');
     if (!root) { return; }
+
+    var carouselInitialised = false;
+
+    function initialiseCarousel() {
+    if (carouselInitialised) { return; }
+    carouselInitialised = true;
 
     var topViewport = document.getElementById('genaiHubTopViewport');
     var topTrack = document.getElementById('genaiHubTopTrack');
@@ -1382,6 +1390,7 @@ if (reducedMotionQuery && reducedMotionQuery.addEventListener) reducedMotionQuer
     var pointerStartX = 0;
     var pointerStartY = 0;
     var pointerId = null;
+    var pointerCaptured = false;
     var suppressSwipeClick = false;
 
     for (var originalIndex = 0; originalIndex < topCards.length; originalIndex++) {
@@ -1712,20 +1721,30 @@ if (reducedMotionQuery && reducedMotionQuery.addEventListener) reducedMotionQuer
             pointerId = event.pointerId;
             pointerStartX = event.clientX;
             pointerStartY = event.clientY;
-            if (viewport.setPointerCapture) { viewport.setPointerCapture(event.pointerId); }
+            pointerCaptured = false;
+        });
+        viewport.addEventListener('pointermove', function (event) {
+            if (event.pointerId !== pointerId || pointerCaptured) { return; }
+            var deltaX = event.clientX - pointerStartX;
+            var deltaY = event.clientY - pointerStartY;
+            if (Math.abs(deltaX) >= 8 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15 && viewport.setPointerCapture) {
+                viewport.setPointerCapture(event.pointerId);
+                pointerCaptured = true;
+            }
         });
         viewport.addEventListener('pointerup', function (event) {
             if (event.pointerId !== pointerId) { return; }
             var deltaX = event.clientX - pointerStartX;
             var deltaY = event.clientY - pointerStartY;
             pointerId = null;
+            pointerCaptured = false;
             if (Math.abs(deltaX) >= 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
                 suppressSwipeClick = true;
                 moveState(deltaX < 0 ? 1 : -1, false);
                 window.setTimeout(function () { suppressSwipeClick = false; }, 0);
             }
         });
-        viewport.addEventListener('pointercancel', function () { pointerId = null; });
+        viewport.addEventListener('pointercancel', function () { pointerId = null; pointerCaptured = false; });
         viewport.addEventListener('wheel', function (event) {
             if (wheelLocked || Math.abs(event.deltaX) < 18 || Math.abs(event.deltaX) <= Math.abs(event.deltaY)) { return; }
             event.preventDefault();
@@ -1846,5 +1865,15 @@ if (reducedMotionQuery && reducedMotionQuery.addEventListener) reducedMotionQuer
         window.requestAnimationFrame(function () { setTransitions(true); });
     });
     setPaused(paused);
+    }
+
+    root.addEventListener('genaihub:landing-carousel-ready', initialiseCarousel, { once: true });
+
+    function initialiseStaticFallback() {
+        if (!window.GenAIHub || !window.GenAIHub.resources) initialiseCarousel();
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialiseStaticFallback);
+    else initialiseStaticFallback();
 })();
 </script>
