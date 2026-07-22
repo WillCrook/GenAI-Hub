@@ -1436,6 +1436,7 @@
         var badge = communitySkill(resource);
         if (badge) wrapper.appendChild(badge);
         wrapper.appendChild(element('h3', 'h5 font-weight-bold', resource.title));
+        appendCommunitySummary(wrapper, resource.summary, false);
         wrapper.appendChild(communityAction(COMMUNITY_ACTIONS.prompt));
         slot.appendChild(wrapper);
     }
@@ -1467,16 +1468,11 @@
             }
             var column = element('div', 'col-12 col-md mb-3 px-md-2');
             var box = element('div', 'p-3 border h-100');
-            box.style.cssText = 'background:' + (index === 1 ? '#fff8df' : '#f8fafc') + ';border-color:' + (index === 1 ? '#f5c242' : '#dee2e6') + '!important;border-radius:12px;min-height:150px;';
+            box.style.cssText = 'background:' + (index === 1 ? '#fff8df' : '#f8fafc') + ';border-color:' + (index === 1 ? '#f5c242' : '#dee2e6') + '!important;border-radius:12px;min-height:110px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;';
             var number = element('span', 'd-inline-flex align-items-center justify-content-center rounded-circle font-weight-bold mb-3', String(step.stepNumber || index + 1));
             number.style.cssText = 'width:34px;height:34px;background:#094685;color:#f5c242;';
             box.appendChild(number);
-            box.appendChild(element('div', 'font-weight-bold mb-2', step.title || 'Step ' + (index + 1)));
-            if (step.description) {
-                var description = element('p', 'text-muted mb-0', step.description);
-                description.style.color = '#4f5962';
-                box.appendChild(description);
-            }
+            box.appendChild(element('div', 'font-weight-bold mb-0', step.title || 'Step ' + (index + 1)));
             column.appendChild(box);
             steps.appendChild(column);
         });
@@ -1706,8 +1702,7 @@
             }));
             var slots = communitySlots(section, mapping.type);
             slots.forEach(function (slot, index) {
-                var resourceIndex = mapping.type === 'tool' && index > 0 ? index - 1 : index;
-                renderIntoSlot(root, slot, resources[resourceIndex] || null, mapping.type, index);
+                renderIntoSlot(root, slot, resources[index] || null, mapping.type, index);
             });
             var existing = section.querySelector('[data-resource-view-status]');
             if (existing) existing.hidden = true;
