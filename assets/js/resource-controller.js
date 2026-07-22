@@ -221,15 +221,18 @@
         var terms = normaliseText(criteria.search).split(' ').filter(Boolean);
         var types = criteria.types || [];
         var skills = criteria.skillAreas || [];
+        var tags = (criteria.tags || []).map(normaliseText).filter(Boolean);
         var indexed = (loadedData ? loadedData.resources : []).map(function (resource, index) {
             return { resource: resource, index: index, score: relevance(resource, terms) };
         }).filter(function (entry) {
             var resource = entry.resource;
+            var resourceTags = resource.tags.map(normaliseText);
             if (resource.published !== true) return false;
             if (criteria.librarySection && resource.librarySection !== criteria.librarySection) return false;
             if (criteria.featuredOnly && resource.featured !== true) return false;
             if (types.length && types.indexOf(resource.type) === -1) return false;
             if (skills.length && !skills.some(function (skill) { return resource.skillAreas.indexOf(skill) !== -1; })) return false;
+            if (tags.length && !tags.some(function (tag) { return resourceTags.indexOf(tag) !== -1; })) return false;
             if (!matchesTime(resource, criteria.timeBuckets)) return false;
             return !terms.length || terms.every(function (term) { return normaliseText(JSON.stringify(resource)).indexOf(term) !== -1; });
         });
@@ -987,16 +990,28 @@
         return values.filter(function (value, index) { return allowed.indexOf(value) !== -1 && values.indexOf(value) === index; });
     }
 
+    function normaliseTags(values) {
+        return values.map(normaliseText).filter(function (value, index, tags) {
+            return value && tags.indexOf(value) === index;
+        });
+    }
+
+    function tagLabel(value) {
+        return value.replace(/[-_]+/g, ' ').replace(/\b\w/g, function (letter) { return letter.toLocaleUpperCase('en-GB'); });
+    }
+
     function readLibraryState(root) {
         var url = new URL(window.location.href);
         var section = root.getAttribute('data-resource-section');
         var allowedTypes = SECTION_TYPES[section];
         var types = validValues(url.searchParams.getAll('type').map(function (value) { return QUERY_TYPE[value] || ''; }), allowedTypes);
         var skills = validValues(url.searchParams.getAll('skill'), SKILL_AREAS);
+        var tags = normaliseTags(url.searchParams.getAll('tag'));
         var sort = url.searchParams.get('sort');
         return {
             query: url.searchParams.get('q') || '',
             skills: skills,
+            tags: tags,
             featured: url.searchParams.get('featured') === '1',
             types: types,
             times: validValues(url.searchParams.getAll('time'), ['under-10', '10-30', '31-60', 'over-60']),
@@ -1008,9 +1023,10 @@
     function writeLibraryState(state) {
         try {
             var url = new URL(window.location.href);
-            ['type', 'skill', 'featured', 'time', 'q', 'sort'].forEach(function (key) { url.searchParams.delete(key); });
+            ['type', 'skill', 'tag', 'featured', 'time', 'q', 'sort'].forEach(function (key) { url.searchParams.delete(key); });
             state.types.forEach(function (type) { url.searchParams.append('type', TYPE_QUERY[type]); });
             state.skills.forEach(function (skill) { url.searchParams.append('skill', skill); });
+            state.tags.forEach(function (tag) { url.searchParams.append('tag', tag); });
             if (state.featured) url.searchParams.set('featured', '1');
             state.times.forEach(function (time) { url.searchParams.append('time', time); });
             if (state.query) url.searchParams.set('q', state.query);
@@ -1034,6 +1050,20 @@
         }
     }
 
+    function syncTagSummary(root, state) {
+        var summary = root.querySelector('[data-resource-tag-summary]');
+        if (!summary) return;
+        var hasTags = state.tags.length > 0;
+        var label = summary.querySelector('[data-resource-tag-label]');
+        var reset = summary.querySelector('[data-resource-tag-reset]');
+        summary.hidden = !hasTags;
+        if (label && hasTags) {
+            label.textContent = (state.tags.length === 1 ? 'Filtering by topic tag: ' : 'Filtering by topic tags: ')
+                + state.tags.map(tagLabel).join(', ');
+        }
+        if (reset) reset.disabled = !hasTags;
+    }
+
     function syncLibraryControls(root, state) {
         var search = root.querySelector('[data-resource-search]');
         if (search && search.value !== state.query) search.value = state.query;
@@ -1054,6 +1084,7 @@
         });
         var sort = root.querySelector('[data-resource-sort]');
         if (sort) sort.value = state.sort;
+        syncTagSummary(root, state);
     }
 
     function showLibraryStatus(root, name, message) {
@@ -1076,6 +1107,7 @@
             featuredOnly: state.featured,
             types: state.types,
             skillAreas: state.skills,
+            tags: state.tags,
             timeBuckets: state.times,
             search: state.query,
             sort: state.sort
@@ -1170,7 +1202,13 @@
         Array.prototype.forEach.call(root.querySelectorAll('[data-resource-reset]'), function (button) {
             button.disabled = false;
             button.addEventListener('click', function () {
-                state.query = ''; state.skills = []; state.featured = false; state.types = []; state.times = []; state.sort = 'relevant';
+                state.query = ''; state.skills = []; state.tags = []; state.featured = false; state.types = []; state.times = []; state.sort = 'relevant';
+                changed();
+            });
+        });
+        Array.prototype.forEach.call(root.querySelectorAll('[data-resource-tag-reset]'), function (button) {
+            button.addEventListener('click', function () {
+                state.tags = [];
                 changed();
             });
         });
