@@ -15,7 +15,7 @@ const pages = [
   'pages/challenges/challenge-library.html',
   'pages/community/community-library.html'
 ];
-const runtimeUrl = 'https://willcrook.github.io/GenAI-Hub/assets/js/resource-controller.js';
+const runtimeUrl = 'https://moodle.bath.ac.uk/pluginfile.php/3108242/mod_resource/content/1/resource-controller.js';
 const dataUrl = 'https://willcrook.github.io/GenAI-Hub/assets/data/resources.json';
 
 function pageSource(relativePath) {
@@ -186,7 +186,7 @@ async function openPublisher(page, workbook) {
 test('all seven pages use one consolidated resource dependency and obsolete controllers are removed', () => {
   for (const relativePath of pages) {
     const source = fs.readFileSync(path.join(repoRoot, relativePath), 'utf8');
-    expect((source.match(/<script[^>]+src="[^"]*assets\/js\/resource-controller\.js"[^>]*><\/script>/g) || []).length, relativePath).toBe(1);
+    expect(source.split(runtimeUrl).length - 1, relativePath).toBe(1);
     expect(source).not.toMatch(/resource-loader|(?:learn-ai|challenges|community)-(?:featured|library)-controller/);
   }
   for (const name of ['resource-loader.js','learn-ai-featured-controller.js','learn-ai-library-controller.js','challenges-featured-controller.js','challenges-library-controller.js','community-featured-controller.js','community-library-controller.js']) {

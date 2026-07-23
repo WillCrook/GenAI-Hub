@@ -9,7 +9,7 @@
     var DATA_URL = runtimeScript && runtimeScript.getAttribute('data-resource-source')
         ? runtimeScript.getAttribute('data-resource-source')
         : '';
-    var DEV_MODE = true;
+    var DEV_MODE = false;
     var DATA_SOURCE_PAGE_URL = DEV_MODE
         ? 'https://willcrook.github.io/GenAI-Hub/assets/data/resources.json'
         : 'https://moodle.bath.ac.uk/mod/page/view.php?id=1573286';
