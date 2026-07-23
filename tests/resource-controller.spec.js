@@ -235,7 +235,9 @@ test('resource surfaces contain no hard-coded cards before the controller loads'
     text: slot.textContent.trim(),
     href: slot.hasAttribute('href')
   }));
-  expect(slotStates.concat(featuredEventState).every(slot => slot.children === 0 && slot.text === '' && slot.href === false)).toBe(true);
+  const allSlotStates = slotStates.concat(featuredEventState);
+  expect(allSlotStates.every(slot => slot.children === 1 && slot.text === 'Loading community resource')).toBe(true);
+  expect(allSlotStates.filter(slot => slot.href).length).toBe(21);
 });
 
 test('public API loads once and enforces library queries', async ({ page }) => {
@@ -635,6 +637,11 @@ test('Community restores type-specific cards, fills unused slots and runs the re
   await expect(page.locator('#prompt-library')).toContainText('Use Prompt');
   await expect(page.locator('#workflow-library')).toContainText('View Workflow');
   await expect(page.locator('#community-events')).toContainText('View Event');
+  await expect(page.locator('#prompt-library > .container > .row > .col-sm-6').first().locator('[data-resource-id]')).toHaveCount(1);
+  await expect(page.locator('#workflow-library [data-resource-placeholder]')).toHaveCount(2);
+  await expect(page.locator('#tool-reviews > .container > [data-resource-id]')).toHaveCount(1);
+  await expect(page.locator('#community-events [data-resource-id]')).toHaveCount(3);
+  await expect(page.locator('#community-events [data-resource-placeholder]')).toHaveCount(2);
   await expect(page.locator('#tool-reviews [data-resource-open] .badge')).toHaveCount(0);
   await expect(page.locator('#tool-reviews [data-resource-open]')).toContainText('4.5/5');
   const toolReviewCard = page.locator('#tool-reviews [data-resource-open]').first();
