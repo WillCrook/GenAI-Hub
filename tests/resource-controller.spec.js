@@ -459,6 +459,8 @@ test('Landing Page carousel sorts selected resources, fills to ten and has no up
     const expectedStates = Math.max(10, count);
     await expect(page.locator('[data-hub-bottom-original-index]')).toHaveCount(expectedStates);
     await expect(page.locator('[data-hub-dot]')).toHaveCount(expectedStates);
+    await expect(page.locator('[data-hub-prev]')).toHaveCount(1);
+    await expect(page.locator('[data-hub-next]')).toHaveCount(1);
     await expect(page.locator('[data-hub-original-index]')).toHaveCount(5);
     expect(await page.locator('#genaiHubCarousel').getAttribute('data-main-carousel-resources')).toBe(String(count));
     expect(await page.locator('#genaiHubCarousel').getAttribute('data-main-carousel-placeholders')).toBe(String(Math.max(0, 10 - count)));
@@ -512,6 +514,81 @@ test('Landing Page carousel sorts selected resources, fills to ten and has no up
   await expect(page.locator('[data-hub-dot="2"]')).toHaveAttribute('aria-current', 'true');
 });
 
+test('Landing Page carousel arrows navigate, wrap and retain accessible focus styling', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await openPage(page, 'pages/LandingPage.html', { payload: payloadWithCarouselCount(12) });
+
+  const previous = page.locator('[data-hub-prev]');
+  const next = page.locator('[data-hub-next]');
+  await expect(previous).toHaveAttribute('aria-label', 'Show previous carousel state');
+  await expect(next).toHaveAttribute('aria-label', 'Show next carousel state');
+
+  const buttonSizes = await page.locator('[data-hub-prev], [data-hub-next]').evaluateAll(buttons => buttons.map(button => {
+    const rect = button.getBoundingClientRect();
+    return { width: rect.width, height: rect.height };
+  }));
+  expect(buttonSizes.every(size => size.width >= 44 && size.height >= 44)).toBe(true);
+
+  await next.click();
+  await expect(page.locator('[data-hub-dot="1"]')).toHaveAttribute('aria-current', 'true');
+  await previous.click();
+  await expect(page.locator('[data-hub-dot="0"]')).toHaveAttribute('aria-current', 'true');
+  await previous.click();
+  await expect(page.locator('[data-hub-dot="11"]')).toHaveAttribute('aria-current', 'true');
+  await next.click();
+  await expect(page.locator('[data-hub-dot="0"]')).toHaveAttribute('aria-current', 'true');
+
+  await page.locator('#genaiHubCarousel').focus();
+  await page.keyboard.press('Tab');
+  await next.focus();
+  await expect(next).toBeFocused();
+  expect(await next.evaluate(button => parseFloat(getComputedStyle(button).outlineWidth))).toBeGreaterThanOrEqual(3);
+});
+
+test('Landing Page carousel controls remain contained and keep the active dot visible', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  for (const width of [320, 390, 1280]) {
+    await page.setViewportSize({ width, height: 900 });
+    await openPage(page, 'pages/LandingPage.html', { payload: payloadWithCarouselCount(12) });
+    const next = page.locator('[data-hub-next]');
+    for (let step = 0; step < 8; step += 1) await next.click();
+    await page.waitForTimeout(320);
+
+    const metrics = await page.locator('#genaiHubCarousel').evaluate(root => {
+      const bounds = element => {
+        const rect = element.getBoundingClientRect();
+        return { left: rect.left, right: rect.right, width: rect.width, height: rect.height };
+      };
+      const previous = bounds(root.querySelector('[data-hub-prev]'));
+      const dots = bounds(root.querySelector('[data-hub-dot-viewport]'));
+      const nextButton = bounds(root.querySelector('[data-hub-next]'));
+      const activeDot = bounds(root.querySelector('[data-hub-dot][aria-current="true"]'));
+      const pause = bounds(root.querySelector('[data-hub-pause]'));
+      return {
+        documentWidth: document.documentElement.scrollWidth,
+        viewportWidth: document.documentElement.clientWidth,
+        previous,
+        dots,
+        next: nextButton,
+        activeDot,
+        pause,
+        mobile: window.innerWidth < 768
+      };
+    });
+
+    expect(metrics.documentWidth).toBeLessThanOrEqual(metrics.viewportWidth);
+    expect(metrics.previous.right).toBeLessThanOrEqual(metrics.dots.left + 0.5);
+    expect(metrics.dots.right).toBeLessThanOrEqual(metrics.next.left + 0.5);
+    expect(metrics.activeDot.left).toBeGreaterThanOrEqual(metrics.dots.left - 0.5);
+    expect(metrics.activeDot.right).toBeLessThanOrEqual(metrics.dots.right + 0.5);
+    expect(metrics.dots.width).toBeLessThanOrEqual(220);
+    if (metrics.mobile) {
+      expect(metrics.next.right).toBeLessThanOrEqual(metrics.pause.left + 0.5);
+      expect(metrics.dots.width).toBeLessThan(220);
+    }
+  }
+});
+
 test('Landing Page carousel autoplay can be paused and resumed', async ({ page }) => {
   test.setTimeout(60000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
@@ -537,6 +614,8 @@ test('Landing Page keeps its ten-card static fallback when resource loading fail
   await openPage(page, 'pages/LandingPage.html', { endpoint: route => route.fulfill({ status: 503, contentType: 'application/json', body: '{}' }) });
   await expect(page.locator('[data-hub-bottom-original-index]')).toHaveCount(10);
   await expect(page.locator('[data-hub-dot]')).toHaveCount(10);
+  await page.locator('[data-hub-next]').click();
+  await expect(page.locator('[data-hub-dot="1"]')).toHaveAttribute('aria-current', 'true');
   await expect(page.locator('#genaiHubCarousel')).not.toHaveAttribute('data-main-carousel-resources', /.+/);
 });
 
@@ -544,7 +623,7 @@ test('Community restores type-specific cards, fills unused slots and runs the re
   await openPage(page, 'pages/community/Community.html');
   await expect(page.locator('[data-resource-target] [data-resource-id]')).toHaveCount(7);
   await expect(page.locator('[data-resource-target] [data-resource-placeholder]')).toHaveCount(19);
-  const communityActionCount = payload.resources.filter(resource => resource.librarySection === 'community' && resource.type !== 'tool').length;
+  const communityActionCount = payload.resources.filter(resource => resource.librarySection === 'community').length;
   await expect(page.locator('[data-resource-open] .fa-arrow-up-right-from-square')).toHaveCount(communityActionCount);
   await expect(page.locator('#student-showcase')).toContainText('View Work');
   await expect(page.locator('#prompt-library')).toContainText('Use Prompt');
@@ -552,6 +631,12 @@ test('Community restores type-specific cards, fills unused slots and runs the re
   await expect(page.locator('#community-events')).toContainText('View Event');
   await expect(page.locator('#tool-reviews [data-resource-open] .badge')).toHaveCount(0);
   await expect(page.locator('#tool-reviews [data-resource-open]')).toContainText('4.5/5');
+  const toolReviewCard = page.locator('#tool-reviews [data-resource-open]').first();
+  await expect(toolReviewCard).toContainText('View Review');
+  await expect(toolReviewCard.locator('.fa-arrow-up-right-from-square')).toHaveCount(1);
+  await toolReviewCard.click();
+  await expect(page.locator('[role="dialog"][data-resource-popout="tool"]')).toBeVisible();
+  await page.locator('[data-resource-popout-close]').click();
   await expect(page.locator('body')).not.toContainText('AI Study Coach Prototype');
   await expect(page.locator('body')).not.toContainText('Socratic Revision Partner');
   await expect(page.locator('body')).not.toContainText('NotebookLM');
