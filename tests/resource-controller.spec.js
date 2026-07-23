@@ -15,8 +15,9 @@ const pages = [
   'pages/challenges/challenge-library.html',
   'pages/community/community-library.html'
 ];
-const runtimeUrl = 'https://moodle.bath.ac.uk/pluginfile.php/3108242/mod_resource/content/1/resource-controller.js';
+const runtimeUrl = 'https://moodle.bath.ac.uk/pluginfile.php/3108242/mod_resource/content/2/resource-controller.js';
 const dataUrl = 'https://willcrook.github.io/GenAI-Hub/assets/data/resources.json';
+const dataSourcePageUrl = 'https://moodle.bath.ac.uk/mod/page/view.php?id=1573286';
 
 function pageSource(relativePath) {
   return fs.readFileSync(path.join(repoRoot, relativePath), 'utf8')
@@ -145,8 +146,13 @@ async function openPage(page, relativePath, options = {}) {
   let requests = 0;
   await page.unroute('http://hub.test/controller.js');
   await page.unroute(dataUrl);
+  await page.unroute(dataSourcePageUrl);
   await page.unroute('http://hub.test/page*');
   await page.route('http://hub.test/controller.js', route => route.fulfill({ contentType: 'application/javascript', body: controllerSource }));
+  await page.route(dataSourcePageUrl, route => route.fulfill({
+    contentType: 'text/html',
+    body: '<p id="resource-json-url"><a href="' + dataUrl + '">Resource data</a></p>'
+  }));
   await page.route(dataUrl, route => {
     requests += 1;
     if (options.endpoint) return options.endpoint(route, requests);
